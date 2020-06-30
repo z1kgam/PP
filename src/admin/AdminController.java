@@ -1,6 +1,7 @@
 package admin;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.MemberBean;
 import member.MemberDAO;
+import noticeboard.NoticeboardBean;
+import noticeboard.NoticeboardDAO;
 
 
 @WebServlet("/admin/*")
@@ -53,9 +56,9 @@ public class AdminController extends HttpServlet{
 				
 				
 				nextPage = "/admins/adminMain.jsp";
-			
-			//회원정보 전체 조회 메소드
-			} else if(action.equals("/MemberMan.do")) {
+				
+			//회원정보 전체 조회
+			} else if(action.equals("/MemberModify.do")) {
 				
 				//회원 아이디 검색값 받아오기
 				String search = "";
@@ -117,9 +120,10 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("blocklast", blocklast);
 				request.setAttribute("totalPage", totalPage);
 				
-				nextPage = "/admins/adminManager.jsp";
+				nextPage = "/admins/adminModify.jsp";
 				System.out.println(action);
-				
+			
+			//회원 삭제 요청 (관리자 페이지)
 			} else if(action.equals("/MemberDel.do")) {
 				
 				String[] id = request.getParameterValues("check"); //getParameterValues는 배열값을 받아올때 사용한다 .
@@ -144,29 +148,9 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("memberInfo", adminBean);
 				request.setAttribute("nowpage", nowpage);
 				nextPage = "/admins/adminView.jsp";
-				
+			
+			//회원 정보 수정 관리 요청
 			} else if(action.equals("/MemberUpdate.do")) {
-				
-//				String id = request.getParameter("id");
-//				String password = request.getParameter("password");
-//				String name = request.getParameter("name");
-//				String phone = request.getParameter("phone");
-//				String email = request.getParameter("email");
-//				int point = Integer.parseInt(request.getParameter("point"));
-//				int status = Integer.parseInt(request.getParameter("status"));
-//				int admin = Integer.parseInt(request.getParameter("admin"));
-//				
-//				System.out.println(id);
-//				System.out.println(password);
-//				System.out.println(name);
-//				System.out.println(phone);
-//				System.out.println(email);
-//				System.out.println(point);
-//				System.out.println(status);
-//				System.out.println(admin);
-				
-				
-				
 				
 				MemberBean memberInfo = new MemberBean();
 				int result = 0;
@@ -182,19 +166,11 @@ public class AdminController extends HttpServlet{
 				
 				result = adminDAO.MemberUpdate(memberInfo);
 				
-				
-				
-				
-				System.out.println("왔다아" );
-				
-				nextPage= "/admin/MemberMan.do";
+				nextPage= "/admin/MemberModify.do";
 			} else if(action.equals("/MemberDelete.do")) {
 				int result = 0;
-				
 				String id = request.getParameter("id");
 				result = adminDAO.MemberDelete(id);
-				
-				
 				
 				nextPage= "/admin/MemberMan.do";
 				
@@ -222,13 +198,84 @@ public class AdminController extends HttpServlet{
 			} else if(action.equals("/CustomerMan.do")) {
 				
 				nextPage = "/admins/CustomerManager.jsp";
-				
+			
+			//문의 답변 페이지 이동
 			} else if(action.equals("/Answer.do")) {
 				
 				nextPage = "/admins/Answer.jsp";
+				
+			//회원관리 페이지 이동	
+			} else if (action.equals("/MemberMan.do")) {
+				
+				nextPage = "/admins/adminManager.jsp";
+			} else if (action.equals("/MemberJoinCount.do")) {
+				
+				nextPage = "/admins/MemberJoinCount.jsp";
+			
+			//관리자 페이지 고객센터 관리 페이지 이동 
+			} else if (action.equals("/InformationMain.do")) {
+				
+				NoticeboardDAO noticeDAO = new NoticeboardDAO();
+				
+				String n_cate = request.getParameter("n_cate");
+				String n_title = request.getParameter("n_title");
+				String n_date = request.getParameter("n_date");
+
+				int total = noticeDAO.getAllNotice();
+				System.out.println(total);
+
+				if(n_cate != null)total = noticeDAO.getAllnotice(n_cate);
+				System.out.println(total);			
+				
+				int pageSize = 5;
+				int nowPage = 1;
+				if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+				
+				int pageFirst = (nowPage-1) * pageSize;
+				int totalPage = total/pageSize + (total%pageSize==0?0:1);
+				int blockSize = 10;
+				int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+				int blockLast = blockFirst + blockSize -1;
+				
+				if(blockLast>totalPage) blockLast=totalPage;
+				
+				List<NoticeboardBean> noticeList = noticeDAO.noticeList(pageFirst, pageSize);
+				
+				if(n_cate != null)noticeList = noticeDAO.noticeList(n_cate, pageFirst, pageSize);
+					request.setAttribute("noticeList", noticeList);
+					request.setAttribute("blockSize", blockSize);
+					request.setAttribute("blockFirst", blockFirst);
+					request.setAttribute("blockLast", blockLast);
+					request.setAttribute("totalPage", totalPage);
+					request.setAttribute("nowPage", nowPage);
+					request.setAttribute("n_cate", n_cate);
+					
+					System.out.println(n_cate);
+				
+				nextPage = "/admins/informationMain.jsp";
+				
+			//관리자 페이지 공지사항 관리 이동 	
+			} else if(action.equals("/informationwrite.do")) {
+				
+					nextPage = "/admins/informationwrite.jsp";
+					
+			//관리자 페이지 글 작성
+			} else if(action.equals("/insertWrite.do")) {
+			NoticeboardBean noticebean = new NoticeboardBean();
+			NoticeboardDAO noticeDAO = new NoticeboardDAO();
+			
+			String n_cate = request.getParameter("n_cate");
+			String n_title = request.getParameter("n_title");
+			String n_content = request.getParameter("n_content");
+			
+			noticebean.setN_cate(n_cate);
+			noticebean.setN_title(n_title);
+			noticebean.setN_content(n_content);
+			noticebean.setN_date(new Timestamp(System.currentTimeMillis()));
+			
+			noticeDAO.insertNoticeboard(noticebean);
+			nextPage = "/admin/InformationMain.do";	
 			}
-			
-			
 			//디스패치 방식으로 포워딩 (재요청)
 			request.getRequestDispatcher(nextPage).forward(request, response);
 		

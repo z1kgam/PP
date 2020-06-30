@@ -10,7 +10,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<c:if test="${id !='admin'}">
+<c:if test="${is_admin != 1}">
 	<script>
 	window.location.href = '${contextPath}/index/index.jsp';
 	</script>
@@ -43,8 +43,8 @@
         <div class="row">
           <div class="col-lg-8 ftco-animate">
    			<div align="center"><h2 class="mb-3">고객 센터 관리 페이지</h2></div>
-            
-            
+            <br><br>
+            <input type="button" onclick="location.href='${contextPath}/admin/InformationMain.do'" value="공지 사항 관리" class="btn btn-primary py-3 px-5">
             <input type="button" onclick="Answer()" value="문의 내역 답변 관리" class="btn btn-primary py-3 px-5">
             <input type="button" onclick="Answer()" value="신고 내역 관리" class="btn btn-primary py-3 px-5">
             
@@ -57,23 +57,11 @@
           <div class="col-lg-4 sidebar ftco-animate">
             <div class="sidebar-box">
             
-              <!-- 검색창 -->
-              <form action="#" class="search-form" method="post">
-                <div class="form-group">
-                	<div class="icon">
-	                  <span class="icon-search"></span>
-	                </div>
-                  <input type="text" class="form-control" name="search" placeholder="Type a keyword and hit enter">
-                </div>
-                <input type="submit" value="검색">
-              </form>
-              <!-- 검색창 -->
-              
               <!-- 사이드 네비 창 -->
             <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h3 class="heading-2">관리자 목 록</h3>
-                <li><a href="${contextPath}/admin/MemberMan.do">전체 회원 관리 <span>(12)</span></a></li>
+                <li><a href="${contextPath}/admin/MemberMan.do">회원 관리<span>(12)</span></a></li>
                 <li><a href="${contextPath}/admin/ProductMan.do">공연 상품 관리 <span>(22)</span></a></li>
                 <li><a href="${contextPath}/admin/EventMan.do">이벤트 관리 <span>(37)</span></a></li>
                 <li><a href="${contextPath}/admin/CustomerMan.do">고객 센터 관리 <span>(42)</span></a></li>

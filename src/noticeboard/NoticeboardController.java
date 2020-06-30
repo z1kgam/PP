@@ -91,6 +91,11 @@ public class NoticeboardController extends HttpServlet{
 			
 		//공지사항 글 작성 페이지로 이동
 		}else if(action.equals("/noticeForm.do")) {	
+			
+			String check = request.getParameter("check");
+			
+			request.setAttribute("check", check);
+			
 			nextPage = "/center/center_write.jsp";
 		
 		//공지사항 글 추가	
