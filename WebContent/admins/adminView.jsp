@@ -9,11 +9,11 @@
 %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:if test="${id !='admin'}">
+<c:if test="${is_admin != 1}">
 	<script>
 	window.location.href = '${contextPath}/index/index.jsp';
 	</script>
-</c:if>   
+</c:if> 
     
 <!DOCTYPE html>
 <html>
@@ -39,7 +39,7 @@
 	
 	//목록 리스트 이동 
 	function list3(f) {
-		window.location.href = '${contextPath}/admin/MemberMan.do?nowpage=1';
+		window.location.href = '${contextPath}/admin/MemberModify.do?nowpage=1';
 	}
 	
 	</script>
