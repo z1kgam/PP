@@ -37,7 +37,7 @@
 						<td>No.</td>
 						<td>공연명</td>
 						<td>공연날짜</td>
-						<td>공연시간</td>
+						<td>시작시간</td>
 						<td>잔여좌석</td>
 						<td>좌석수</td>
 						<td>공연장</td>
@@ -54,7 +54,7 @@
 							<td>${seat-reserved}</td>
 							<td>${det.seat}</td>
 							<td>${det.place}</td>
-							<td><input type="button" value="에약하기" 
+							<td><input type="button" value="예매하러가기" 
 							onclick="location.href='${contextPath}/Proser/prepare.do?num=${Bean.num}&detailnum=${det.pronum}'"></td>
 						</tr>
 					</c:forEach>
