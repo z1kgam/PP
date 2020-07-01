@@ -146,7 +146,7 @@ public class ProductServlet extends HttpServlet {
 				productService.insert(productBean);
 
 				PrintWriter pw = response.getWriter();
-				pw.print("<script>" + "  alert('제품이 추가했습니다.');" + " location.href='" + request.getContextPath()
+				pw.print("<script>" + "  alert('제품을 추가했습니다.');" + " location.href='" + request.getContextPath()
 						+ "/Proser/imcontact.do';" + "</script>");
 
 				return;
@@ -259,6 +259,7 @@ public class ProductServlet extends HttpServlet {
 				nextPage = "/Proser/content.do?num="+pronum;
 				
 			}else if(action.equals("/replydelete.do")) {
+				
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
 				
@@ -266,6 +267,7 @@ public class ProductServlet extends HttpServlet {
 				
 				nextPage = "/Proser/content.do?num="+pronum;
 			}else if(action.equals("/alldelete.do")) {
+				
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
 				
@@ -273,6 +275,7 @@ public class ProductServlet extends HttpServlet {
 				productService.deleteReply(replynum);
 				
 				nextPage = "/Proser/content.do?num="+pronum;
+				
 			}else if(action.equals("/updatereply.do")) {
 				int pronum = Integer.parseInt(request.getParameter("pnum"));
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
