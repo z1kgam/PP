@@ -41,6 +41,7 @@ public class faqBoardController extends HttpServlet{
 		
 		int checkPage = 0;
 		//요청 URL중 2단계 요청 주소를 알아내온다
+
 		String action = request.getPathInfo(); 
 		System.out.println("action : " + action);
 		faqDao faqDao = new faqDao();
