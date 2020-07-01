@@ -52,6 +52,7 @@ public class ProductServlet extends HttpServlet {
 
 		String action = request.getPathInfo();
 		System.out.println(action);
+		int checkPage = 0;
 		try {
 
 			if (action.equals("/imcontact.do")) {
@@ -91,7 +92,7 @@ public class ProductServlet extends HttpServlet {
 			} else if (action.equals("/write.do")) {
 				nextPage = "/product/write.jsp";
 			} else if (action.equals("/writePro.do")) {
-				String realFolder = request.getServletContext().getRealPath("concert");
+				String realFolder = request.getServletContext().getRealPath("consert");
 				int max = 100 * 1024 * 1024;
 
 				MultipartRequest multi = new MultipartRequest(request, realFolder, max, "UTF-8",
@@ -247,7 +248,7 @@ public class ProductServlet extends HttpServlet {
 				int parentsnum = Integer.parseInt(request.getParameter("parentsnum"));
 				String id = request.getParameter("id");
 				String content = request.getParameter("content");
-				
+				checkPage = 1;
 				vo = new ReplyVO();
 				vo.setProductnum(pronum);
 				vo.setParentsnum(parentsnum);
@@ -285,8 +286,11 @@ public class ProductServlet extends HttpServlet {
 				
 				nextPage = "/Proser/content.do?num="+pronum;
 			}
-			request.getRequestDispatcher(nextPage).forward(request, response);
-
+			if(checkPage == 0) {
+				request.getRequestDispatcher(nextPage).forward(request, response);
+			}else {
+				response.sendRedirect(request.getContextPath()+nextPage);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

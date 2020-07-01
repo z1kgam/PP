@@ -119,4 +119,6 @@ public class MyPageController extends HttpServlet{
 			response.sendRedirect(request.getContextPath()+nextPage);
 		}
 	}
+	
+	
 }
