@@ -123,7 +123,7 @@ public class ProductServlet extends HttpServlet {
 				int price = Integer.parseInt(multi.getParameter("price"));
 				Date startdate = Date.valueOf(multi.getParameter("startdate"));
 				Date enddate = Date.valueOf(multi.getParameter("enddate"));
-
+				int qty = Integer.parseInt(request.getParameter("qty"));
 				String image = "";
 				String content = "";
 				if (saveFiles != null) {
@@ -146,7 +146,7 @@ public class ProductServlet extends HttpServlet {
 				productBean.setEnddate(enddate);
 				productBean.setImage(image);
 				productBean.setContent(content);
-
+				productBean.setQty(qty);
 				productService.insert(productBean);
 
 				PrintWriter pw = response.getWriter();
@@ -247,7 +247,7 @@ public class ProductServlet extends HttpServlet {
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + " location.href='" + request.getContextPath() + "/Proser/imcontact.do';"
 						+ "</script>");
-
+				request.setAttribute("detailBean", Bean);
 				return;
 
 			}else if(action.equals("/reply.do")){
