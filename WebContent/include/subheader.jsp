@@ -143,21 +143,14 @@ function time_format(s) {
 			          <li class="nav-item active"><a href="${contextPath}" class="nav-link" style="font-size: 18px; font-family:나눔고딕">메인</a></li>
 			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공연&상품 페이지</a></li>
 			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 18px; font-family:나눔고딕">###</a></li>
-			          <li class="nav-item"><a href="classes.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
-			     <c:if test="${id == 'admin'}">     
+			          <li class="nav-item"><a href="${contextPath}/classes.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
+			     <c:if test="${is_admin == 1}">     
 			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">관리자 페이지</a></li>
 			     </c:if> 
-			          <li class="nav-item"><a href="blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">예매하기</a></li>
+			          <li class="nav-item"><a href="${contextPath}/blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">예매하기</a></li>
 			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공지사항</a></li>
 			     <c:if test="${id==null}">
 			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">로그인</a></li>
-			     </c:if>
-			     <c:if test="${id!=null}">
-			     	  <li class="nav-item"><a href="${contextPath}/member/pwCheckForm.do" class="nav-link">마이페이지</a></li>
-			          <li class="nav-item"><a href="${contextPath}/member/logout.do" class="nav-link">로그아웃</a></li>
-			     </c:if>
-			     <c:if test="${id=='admin'}">
-			     	  <li class="nav-item"><a href="${contextPath}/member/adminPage.do" class="nav-link">관리자 페이지</a></li>
 			     </c:if>   
 			        </ul>
 			      </div>

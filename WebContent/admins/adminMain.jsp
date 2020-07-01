@@ -8,11 +8,11 @@
 %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:if test="${id !='admin'}">
+<c:if test="${is_admin != 1}">
 	<script>
 	window.location.href = '${contextPath}/index/index.jsp';
 	</script>
-</c:if>    
+</c:if>  
 <!DOCTYPE html>
 <html>
   <head>
@@ -51,7 +51,7 @@
             <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h3 class="heading-2">관리자 목 록</h3>
-                <li><a href="${contextPath}/admin/MemberMan.do">전체 회원 관리 <span>(12)</span></a></li>
+                <li><a href="${contextPath}/admin/MemberMan.do">회원 관리<span>(12)</span></a></li>
                 <li><a href="${contextPath}/admin/ProductMan.do">공연 상품 관리 <span>(22)</span></a></li>
                 <li><a href="${contextPath}/admin/EventMan.do">이벤트 관리 <span>(37)</span></a></li>
                 <li><a href="${contextPath}/admin/EventMan.do">고객 센터 관리 <span>(42)</span></a></li>

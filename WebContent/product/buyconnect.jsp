@@ -2,6 +2,8 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
@@ -40,7 +42,40 @@
 
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	
-	<script src="../js/content.js"></script>  
+	<script src="../js/content.js"></script>
+	
+	<script type="text/javascript">
+		function getValue() {
+			var count = Number(document.getElementById("count").value);
+			var price = Number(${PBean.price});
+			var Max = price*count;
+			
+			var print = Max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
+			document.getElementById("totalprice").value = Max;
+			$("#total").text(print);
+		}
+	</script>
+	<style type="text/css">
+		#table{
+			margin-left: 200px;
+			width: 600px;
+			min-height:800px;
+			text-align: center;
+			font-size: 16px;
+		}
+		
+		#count{
+			vertical-align: middle;
+			text-align-last: center;
+			width: 80px;
+		}
+		#submit{
+			width: 150px;
+			height: 40px;
+			margin-left: 650px;
+		}
+	
+	</style>  
 
 </head>
   <body>
@@ -65,79 +100,72 @@
 				<div>
 					<div class="row">
 						<div class="col-md-12 d-flex ftco-animate">
-							<div
-								class="blog-entry blog-entry-2 justify-content-end d-md-flex w-100">
-								<a href="blog-single.jsp" class="block-20"
-									style="background-image: url('../consert/${Bean.image}'); width: 250px; height: 350px; margin-right: 100px; margin-bottom: 150px;">
-								</a>
-								<div class="text pl-md-4 ml-md-2 pt-4"
-									style="margin-right: 100px;">
-									<div class="meta">
-										<div>
-											<a href="#">단독 판매</a>
-										</div>
-
-									</div>
-									<h3 class="heading mt-2">
-										<a href="#">${Bean.name}</a>
-									</h3>
-									<table style="width: 700px;">
-
+							<div class="blog-entry blog-entry-2 justify-content-end d-md-flex w-100">
+								<form action="${contextPath}/Order/order.do">
+									<input type="hidden" name="id" value="id">
+									<input type="hidden" name="num" value="${DBean.pronum}">
+									<table border="1" id="table">
 										<tr>
-											<td>공연시간</td>
-											<td><fmt:formatDate value="${Bean.startdate}" /> ~ <fmt:formatDate
-													value="${Bean.enddate}" /></td>
-											<td>관람시간</td>
-											<td>${Bean.minute}분</td>
+											<td>콘서트명</td>
+											<td>${PBean.name}</td>
 										</tr>
 										<tr>
-
-											<td>관람등급</td>
-											<td>${Bean.cla}</td>
+											<td>포스터</td>
+											<td><img src="../consert/${PBean.image}"></td>
+										</tr>
+										<tr>
 											<td>장르</td>
-											<td>${Bean.genre}</td>
+											<td>${PBean.genre}</td>
+										</tr>
+										<tr>
+											<td>관람등급</td>
+											<td>${PBean.cla}</td>
+										</tr>
+										<tr>
+											<td>관람시간</td>
+											<td>${PBean.minute}분</td>
+										</tr>
+										<tr>
+											<td>공연장</td>
+											<td>${DBean.place}</td>
+										</tr>
+										<tr>
+											<td>공연날짜</td>
+											<td><fmt:formatDate value="${DBean.date}" type="date" dateStyle="full" /></td>
+										</tr>
+										<tr>
+											<td>시작시간</td>
+											<td>${fn:split(DBean.time,':')[0]}시 ${fn:split(DBean.time,':')[1]}분</td>
 										</tr>
 										<tr>
 											<td>가격</td>
-											<td><fmt:formatNumber value="${Bean.price}" pattern="#,###" />원</td>
-											<td></td>
-											<td></td>
+											<td><fmt:formatNumber value="${PBean.price}" pattern="#,###" />원</td>
 										</tr>
 										<tr>
-											<td>좋아요<span><ion-icon name="heart" size="large"></ion-icon>${requestScope.likeCount}</span></td>
-											<td>${requestScope.likeCount}</td>
-											<td></td>
-											<td></td>
-										</tr>
-
+											<td>예매수</td>
+											<td>
+												<select id="count" name="count" onchange="getValue()">
+													<option>1</option>
+													<option>2</option>
+													<option>3</option>
+													<option>4</option>
+												</select>
+											</td>
+										<tr>
+										<tr>
+											<td>총가격</td>
+											<td id="total"><fmt:formatNumber value="${PBean.price}" pattern="#,###" />원</td>
+										<tr>
 									</table>
-									<p style="margin-top: 70px;">
-										<a href="${contextPath}/Proser/details.do?num=${Bean.num}" class="btn btn-outline-primary">상세등록</a> 
-										<a href="${contextPath}/Proser/delete.do?num=${Bean.num}&path=consert&image=${Bean.image}&content=${Bean.content}" class="btn btn-outline-primary">삭제하기</a>
-										<a href="${contextPath}/Proser/imcontact.do" class="btn btn-outline-primary">목록보기</a>
-									</p>
-								</div>
+									<input type="submit" value="예매하기" id="submit">
+									<input type="hidden" name="totalprice" value="${PBean.price}">
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
-	<section>
-		<nav style="width: 1500px; height:60px; padding-bottom: 25px; margin-left: auto;margin-right: auto;">
-			<ul style="	list-style:none; font-family: verdana,Geneba,sans-serif;">
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="explanation()">상세정보</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="reply()">관람후기</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="review()">공연장정보</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="trybuy()">티켓예매</a></li>
-			</ul>
-		</nav>
-		<hr style="width: 1500px; margin: auto;">
-		<div class="detail" id="explanation"><jsp:include page="../proinc/explanation.jsp" /></div>
-		<div class="detail" id="reply" style="display: none;"><jsp:include page="../proinc/reply.jsp" /></div>
-		<div class="detail" id="review" style="display: none;"><jsp:include page="../proinc/review.jsp" /></div>
-		<div class="detail" id="trybuy" style="display: none;"><jsp:include page="../proinc/trybuy.jsp" /></div>
 	</section>
 
 	<jsp:include page="../include/footer.jsp" />    

@@ -57,8 +57,9 @@ public class MyPageController extends HttpServlet{
 		System.out.println(action);
 		int check = 0;
 		if(action.equals("/mypageForm.do")) { //마이페이지폼 이동
-			System.out.println("왔다");
+			
 			nextPage="/mypage/mypage.jsp";
+			
 			/* check = 1; */
 		}else if(action.equals("/likelistForm.do")) { //좋아요 목록
 			
@@ -118,4 +119,6 @@ public class MyPageController extends HttpServlet{
 			response.sendRedirect(request.getContextPath()+nextPage);
 		}
 	}
+	
+	
 }
