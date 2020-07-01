@@ -40,7 +40,7 @@
     </section>
     <section>
     	<div class="col-md-6 ftco-animate py-md-5">
-			<form action="${contextPath}/admin/insertWrite.do" class="center_writeForm" method="post">
+			<form action="${contextPath}/admin/ANoticewrite.do" class="center_writeForm" method="post">
               	<div class="form-group">
                 	<input type="text" name="n_title" class="form-control" placeholder="제목">
               	</div>
@@ -57,7 +57,7 @@
               	</div>
               	<div class="form-group">
                 	<input type="submit" value="작성하기"  class="btn btn-primary py-3 px-5">
-                	<input type="button" value="취소" class="btn btn-primary py-3 px-5" onclick="backToList(this.form);">
+                	<input type="button" value="취소" class="btn btn-primary py-3 px-5" onclick="location.href='${contextPath}/admin/ANoticeMain.do'">
 				</div>
 			</form>
  		</div>

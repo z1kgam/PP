@@ -46,9 +46,9 @@
 				<form action="#" name=f method="post">
 				<select onchange="location.href=this.value" name="n_cate">
 					<option>항목을 선택하세요</option>
-					<option value="${contextPath}/admin/InformationMain.do?n_cate=서비스 소식">서비스 소식</option>
-					<option value="${contextPath}/admin/InformationMain.do?n_cate=서비스 점검">서비스 점검</option>
-					<option value="${contextPath}/admin/InformationMain.do?n_cate=안내">안내</option>
+					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 소식">서비스 소식</option>
+					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 점검">서비스 점검</option>
+					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=안내">안내</option>
 				</select>
 				</form>
 			</div>
@@ -79,7 +79,7 @@
 			   						<tr>
 				   						<td>${notice.n_cate}</td>
 				   						<td>
-											<a href="${contextPath}/admin/viewNotice.do?n_num=${notice.n_num}">
+											<a href="${contextPath}/admin/AviewNotice.do?n_num=${notice.n_num}">
 												${notice.n_title}
 											</a>   						
 										</td>
@@ -95,7 +95,7 @@
 				</div>
 			</div>
 			<!--테이블  -->
-			<input type="button" onclick="location.href='${contextPath}/admin/informationwrite.do?'" value="공지 사항 작성" class="btn btn-primary py-3 px-5">
+			<input type="button" onclick="location.href='${contextPath}/admin/ANoticeWritep.do?'" value="공지 사항 작성" class="btn btn-primary py-3 px-5">
 			<input type="button" onclick="location.href='${contextPath}/admin/CustomerMan.do?'" value="고객 센터 관리 페이지" class="btn btn-primary py-3 px-5">
 			<div align="center">
 			<!--페이징 -->

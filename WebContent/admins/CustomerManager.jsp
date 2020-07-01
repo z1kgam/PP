@@ -44,7 +44,7 @@
           <div class="col-lg-8 ftco-animate">
    			<div align="center"><h2 class="mb-3">고객 센터 관리 페이지</h2></div>
             <br><br>
-            <input type="button" onclick="location.href='${contextPath}/admin/InformationMain.do'" value="공지 사항 관리" class="btn btn-primary py-3 px-5">
+            <input type="button" onclick="location.href='${contextPath}/admin/ANoticeMain.do'" value="공지 사항 관리" class="btn btn-primary py-3 px-5">
             <input type="button" onclick="Answer()" value="문의 내역 답변 관리" class="btn btn-primary py-3 px-5">
             
             

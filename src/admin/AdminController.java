@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import member.MemberBean;
 import member.MemberDAO;
@@ -51,7 +50,7 @@ public class AdminController extends HttpServlet{
 			//요청 URL중 2단계 요청 주소를 알아내온다
 			String action = request.getPathInfo();  //  /listArticles.do 
 			System.out.println("action : " + action);
-			
+			int checkPage =0;
 			List<AdminBean> articlesList = null;
 			
 			if(action.equals("/adminPage.do")) { 
@@ -215,7 +214,7 @@ public class AdminController extends HttpServlet{
 				nextPage = "/admins/MemberJoinCount.jsp";
 			
 			//관리자 페이지 고객센터 관리 페이지 이동 
-			} else if (action.equals("/InformationMain.do")) {
+			} else if (action.equals("/ANoticeMain.do")) {
 				
 				
 				String n_cate = request.getParameter("n_cate");
@@ -253,43 +252,108 @@ public class AdminController extends HttpServlet{
 					
 					System.out.println(n_cate);
 				
-				nextPage = "/admins/informationMain.jsp";
+				nextPage = "/admins/ANoticeMain.jsp";
 				
-			//관리자 페이지 공지사항 관리 이동 	
-			} else if(action.equals("/informationwrite.do")) {
+			//관리자 페이지 공지사항 작성페이지 이동	
+			} else if(action.equals("/ANoticeWritep.do")) {
 				
-					nextPage = "/admins/informationwrite.jsp";
+					nextPage = "/admins/ANoticeWritep.jsp";
 					
-			//관리자 페이지 글 작성
-			} else if(action.equals("/insertWrite.do")) {
+			//관리자 페이지 글 추가
+			} else if(action.equals("/ANoticewrite.do")) {
 			
-			String n_cate = request.getParameter("n_cate");
-			String n_title = request.getParameter("n_title");
-			String n_content = request.getParameter("n_content");
-			
-			noticebean.setN_cate(n_cate);
-			noticebean.setN_title(n_title);
-			noticebean.setN_content(n_content);
-			noticebean.setN_date(new Timestamp(System.currentTimeMillis()));
-			
-			noticeDAO.insertNoticeboard(noticebean);
-			nextPage = "/admin/InformationMain.do";	
+				String n_cate = request.getParameter("n_cate");
+				String n_title = request.getParameter("n_title");
+				String n_content = request.getParameter("n_content");
+				checkPage = 1;
+				noticebean.setN_cate(n_cate);
+				noticebean.setN_title(n_title);
+				noticebean.setN_content(n_content);
+				noticebean.setN_date(new Timestamp(System.currentTimeMillis()));
+				
+				noticeDAO.insertNoticeboard(noticebean);
+				
+				nextPage = "/admin/ANoticeMain.do";
 			
 			//관리자 페이지 공지 글 상세보기
-			} else if(action.equals("/viewNotice.do")) {
+			} else if(action.equals("/AviewNotice.do")) {
 				
 				String n_num = request.getParameter("n_num");
 				
 				noticebean = noticeDAO.viewNotice(Integer.parseInt(n_num));
 				request.setAttribute("notice", noticebean);
 				
-				nextPage = "/admins/adminviewNotice.jsp";
+				nextPage = "/admins/AviewNotice.jsp";
 				
+			//관리자 페이지 글 수정 페이지 이동
+			} else if(action.equals("/AmodNoticePage.do")) {
+				String n_num = request.getParameter("n_num");
+				noticebean = noticeDAO.viewNotice(Integer.parseInt(n_num));
+				request.setAttribute("notice", noticebean);
+				
+				nextPage = "/admins/AmodNotice.jsp";
+				
+			//관리자 페이지 공지사항 글 수정	
+			} else if(action.equals("/AmodNotice.do")) {
+				
+				int n_num = Integer.parseInt(request.getParameter("n_num"));
+				System.out.println(n_num);
+				
+				String n_title = request.getParameter("n_title");
+				System.out.println(n_title);
+				
+				String n_cate = request.getParameter("n_cate");
+				System.out.println(n_cate);	
+				
+				String n_content = request.getParameter("n_content");
+				System.out.println(n_content);
+				
+				NoticeboardBean NoticeVO = new NoticeboardBean();
+				
+				NoticeVO.setN_num(n_num);
+				NoticeVO.setN_title(n_title);
+				NoticeVO.setN_cate(n_cate);
+				NoticeVO.setN_content(n_content);
+				
+				int result = noticeDAO.modNotice(NoticeVO);
+				
+				System.out.println(result);
+				
+//				if(result == 0) { // 수정실패
+//					PrintWriter pw = response.getWriter();
+//					pw.print("<script>");
+//					pw.print("alert('수정실패 !')");
+//					pw.print("history.go(-1);");
+//					pw.print("</script>");
+//				}else { // 수정성공
+//					
+//					PrintWriter pw = response.getWriter();
+//					pw.print("<script>");
+//					pw.print("alert('수정성공 !')");
+//					pw.print("</script>");
+//				}
+//				
+				nextPage = "/admin/ANoticeMain.do";
+			
+			//관리자 페이지 공지사항 글 삭제
+			} else if(action.equals("/AdeleteNotice.do")) {
+				
+				int n_num = Integer.parseInt(request.getParameter("n_num")); 
+				System.out.println(n_num);
+				noticeDAO.deleteNoticeboard(n_num);
+				
+				nextPage = "/admin/ANoticeMain.do";
 				
 			}
+			
+			
 			//디스패치 방식으로 포워딩 (재요청)
-			request.getRequestDispatcher(nextPage).forward(request, response);
-		
+			if(checkPage == 0) {
+				request.getRequestDispatcher(nextPage).forward(request, response);
+			}else {
+				response.sendRedirect(request.getContextPath()+nextPage);
+			}
+			
 		}// doHandle END
 		
 				

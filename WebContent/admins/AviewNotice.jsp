@@ -26,7 +26,7 @@
     </section>
     <section>
     	<div class="col-md-6 ftco-animate py-md-5">
-			<form method="post" action="${contextPath}/notice/modNoticePage.do?n_num=${notice.n_num}" name="modNotice">
+			<form method="post" action="${contextPath}/admin/AmodNoticePage.do?n_num=${notice.n_num}" name="modNotice">
             	<div class="form-group">
               		<input type="hidden" name="n_num" value="${notice.n_num}">
                 	<label>제목 : ${notice.n_title}</label>
@@ -42,9 +42,10 @@
               	</div>
              	
         		<input type=submit value="수정하기">
- 				<a href="${contextPath}/notice/deleteNotice.do?n_num=${notice.n_num}">
+ 				<a href="${contextPath}/admin/AdeleteNotice.do?n_num=${notice.n_num}">
  					<input type="button" value="삭제하기">
  				</a>
+ 				<a href="${contextPath}/admin/ANoticeMain.do"><input type="button" value="메인으로"></form>
 			</form>
 		</div>
 	</section>
