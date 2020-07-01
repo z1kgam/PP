@@ -16,9 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import member.LikeDAO;
 
 @SuppressWarnings("serial")
 @WebServlet("/Proser/*")
@@ -153,17 +156,21 @@ public class ProductServlet extends HttpServlet {
 				return;
 
 			} else if (action.equals("/content.do")) {
-
+				HttpSession session = request.getSession();
 				int num = Integer.parseInt(request.getParameter("num"));
 				//int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-
+				String id = (String)session.getAttribute("id");
 				productBean = productService.getBoard(num);
 				List<ReplyVO> list = productService.getreply(num);
 				List<DetailBean> detail = productService.getdetail(num);
-
+				LikeDAO likeDAO = new LikeDAO();
+				boolean checkZ = likeDAO.checkLike(num, id);
+				int likeCount = likeDAO.getProductTotalLike(num);
 				request.setAttribute("Bean", productBean);
 				request.setAttribute("List", list);
 				request.setAttribute("detail", detail);
+				request.setAttribute("likeCount", likeCount);
+				request.setAttribute("checkZ", checkZ);
 				//request.setAttribute("pageNum", pageNum);
 
 				nextPage = "/product/content.jsp";

@@ -30,7 +30,7 @@ public class LikeDAO {
 	}
 	
 	// 사용자와 게시글
-	public int getTotal(int n_num, String id) {
+	public int getTotal(int num, String id) {
 		int count = 0;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -38,9 +38,9 @@ public class LikeDAO {
 		String sql="";
 		try {
 			con=getConnection();
-			sql="SELECT count(*) FROM likeboard WHERE n_num = ? and id = ?";
+			sql="SELECT count(*) FROM likeboard WHERE num = ? and id = ?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, n_num);
+			pstmt.setInt(1, num);
 			pstmt.setString(2, id);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
@@ -79,7 +79,7 @@ public class LikeDAO {
 			while(rs.next()) {
 				LikeBean likeBean = new LikeBean();
 				likeBean.setId(rs.getString("id"));
-				likeBean.setN_num(rs.getInt("n_num"));
+				likeBean.setNum(rs.getInt("num"));
 				likeBean.setLikenum(rs.getInt("likenum"));
 				likeList.add(likeBean);
 				
@@ -99,16 +99,16 @@ public class LikeDAO {
 	}
 	
 	//찜하기
-	public void addLike(int n_num, String id) {
+	public void addLike(int num, String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql="";
 		try {
 			con=getConnection();
-			sql="INSERT INTO likeboard(n_num, id) VALUES (?, ?)";
+			sql="INSERT INTO likeboard(num, id) VALUES (?, ?)";
 			pstmt=con.prepareStatement(sql);
 			
-			pstmt.setInt(1, n_num);			
+			pstmt.setInt(1, num);			
 			pstmt.setString(2, id);
 			
 			pstmt.executeUpdate();
@@ -127,7 +127,7 @@ public class LikeDAO {
 	} // addLike END
 	
 	//좋아요 판별
-	public boolean checkLike(int n_num, String id) {
+	public boolean checkLike(int num, String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -135,9 +135,9 @@ public class LikeDAO {
 		boolean result= false;	
 		try {
 			con=getConnection();
-			sql="SELECT * FROM likeboard where n_num = ? and id = ?";
+			sql="SELECT * FROM likeboard where num = ? and id = ?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, n_num);
+			pstmt.setInt(1, num);
 			pstmt.setString(2, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) result = true;
@@ -156,15 +156,15 @@ public class LikeDAO {
 	} // checkLike END
 	
 	//이미 좋아요 된상태(true)라면 ? 좋아요를 삭제함
-	public void delLike(int n_num, String id) {
+	public void delLike(int num, String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql="";
 		try {
 			con = getConnection();
-			sql = "DELETE FROM likeboard WHERE n_num = ? and id = ?";
+			sql = "DELETE FROM likeboard WHERE num = ? and id = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, n_num);
+			pstmt.setInt(1, num);
 			pstmt.setString(2, id);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -182,7 +182,7 @@ public class LikeDAO {
 	
 	
 	//해당 게시글의 총 좋아요 개수
-	public int getProductTotalLike(int n_num) {
+	public int getProductTotalLike(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs =  null;
@@ -190,9 +190,9 @@ public class LikeDAO {
 		int likeCount = 0;
 		try {
 			con=getConnection();
-			sql = "SELECT count(*) FROM likeboard where n_num = ?";
+			sql = "SELECT count(*) FROM likeboard where num = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, n_num);
+			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				likeCount = rs.getInt(1);

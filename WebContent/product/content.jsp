@@ -104,8 +104,8 @@
 											<td></td>
 										</tr>
 										<tr>
-											<td>좋아요<span><ion-icon name="heart" size="large"></ion-icon>${requestScope.likeCount}</span></td>
-											<td>${requestScope.likeCount}</td>
+											<td>좋아요<span class="icon icon-heart"></span></td>
+											<td>${requestScope.likeCount}</td> 
 											<td></td>
 											<td></td>
 										</tr>
@@ -115,6 +115,16 @@
 										<a href="${contextPath}/Proser/details.do?num=${Bean.num}" class="btn btn-outline-primary">상세등록</a> 
 										<a href="${contextPath}/Proser/delete.do?num=${Bean.num}&path=consert&image=${Bean.image}&content=${Bean.content}" class="btn btn-outline-primary">삭제하기</a>
 										<a href="${contextPath}/Proser/imcontact.do" class="btn btn-outline-primary">목록보기</a>
+									<c:if test="${sessionScope.id != null}">
+										<c:choose>
+											<c:when test="${requestScope.checkZ == 'false'}">
+												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}" class="btn btn-outline-primary">찜하기</a>
+											</c:when>
+											<c:when test="${requestScope.checkZ == 'true'}">
+												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}" class="btn btn-outline-primary">찜취소</a>
+											</c:when>
+										</c:choose>
+									</c:if>
 									</p>
 								</div>
 							</div>
