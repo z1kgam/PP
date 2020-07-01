@@ -3,8 +3,7 @@ package member;
 public class LikeBean {
 
 	private String id;
-	private int n_num, likenum;
-	
+	private int num, likenum;
 	
 	public String getId() {
 		return id;
@@ -12,11 +11,11 @@ public class LikeBean {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getN_num() {
-		return n_num;
+	public int getNum() {
+		return num;
 	}
-	public void setN_num(int n_num) {
-		this.n_num = n_num;
+	public void setNum(int num) {
+		this.num = num;
 	}
 	public int getLikenum() {
 		return likenum;
@@ -24,6 +23,7 @@ public class LikeBean {
 	public void setLikenum(int likenum) {
 		this.likenum = likenum;
 	}
+
 	
 	
 }

@@ -7,13 +7,13 @@ public class ProductBean {
 	private String name, genre, cla, image, content;
 	private int num, minute, price;
 	private Date startdate, enddate;
-	
+	private int qty;
 	public ProductBean() {
 
 	}
 	
 	public ProductBean(String name, String genre, String cla, String image, String content, int num, int minute,
-			int price, Date startdate, Date enddate) {
+			int price, Date startdate, Date enddate, int qty) {
 		super();
 		this.name = name;
 		this.genre = genre;
@@ -25,6 +25,7 @@ public class ProductBean {
 		this.price = price;
 		this.startdate = startdate;
 		this.enddate = enddate;
+		this.qty = qty;
 	}
 	public String getName() {
 		return name;
@@ -85,6 +86,12 @@ public class ProductBean {
 	}
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
+	}
+	public int getQty() {
+		return qty;
+	}
+	public void setQty(int qty) {
+		this.qty = qty;
 	}
 	
 	

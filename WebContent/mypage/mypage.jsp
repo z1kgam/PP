@@ -62,11 +62,11 @@
       
    <tbody>
       <tr>
-        <td  height="150px">아이디</td>
+        <td  height="150px">${sessionScope.id}</td>
         <td rowspan="2">문의 내역</td>
       </tr>
         <tr>
-          <td height="150px">이름</td>
+          <td height="150px">${sessionScope.name}</td>
         </tr>
       </tbody>
 </table>
