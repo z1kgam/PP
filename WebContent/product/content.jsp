@@ -103,6 +103,12 @@
 											<td></td>
 											<td></td>
 										</tr>
+										<tr>
+											<td>좋아요<span><ion-icon name="heart" size="large"></ion-icon>${requestScope.likeCount}</span></td>
+											<td>${requestScope.likeCount}</td>
+											<td></td>
+											<td></td>
+										</tr>
 
 									</table>
 									<p style="margin-top: 70px;">
