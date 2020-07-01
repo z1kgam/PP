@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.MemberBean;
 import member.MemberDAO;
@@ -22,7 +23,8 @@ public class AdminController extends HttpServlet{
 
 	AdminDAO adminDAO = new AdminDAO();
 	AdminBean adminBean = new AdminBean();
-	
+	NoticeboardBean noticebean = new NoticeboardBean();
+	NoticeboardDAO noticeDAO = new NoticeboardDAO();
 	
 	
 		@Override
@@ -215,7 +217,6 @@ public class AdminController extends HttpServlet{
 			//관리자 페이지 고객센터 관리 페이지 이동 
 			} else if (action.equals("/InformationMain.do")) {
 				
-				NoticeboardDAO noticeDAO = new NoticeboardDAO();
 				
 				String n_cate = request.getParameter("n_cate");
 				String n_title = request.getParameter("n_title");
@@ -261,8 +262,6 @@ public class AdminController extends HttpServlet{
 					
 			//관리자 페이지 글 작성
 			} else if(action.equals("/insertWrite.do")) {
-			NoticeboardBean noticebean = new NoticeboardBean();
-			NoticeboardDAO noticeDAO = new NoticeboardDAO();
 			
 			String n_cate = request.getParameter("n_cate");
 			String n_title = request.getParameter("n_title");
@@ -275,6 +274,18 @@ public class AdminController extends HttpServlet{
 			
 			noticeDAO.insertNoticeboard(noticebean);
 			nextPage = "/admin/InformationMain.do";	
+			
+			//관리자 페이지 공지 글 상세보기
+			} else if(action.equals("/viewNotice.do")) {
+				
+				String n_num = request.getParameter("n_num");
+				
+				noticebean = noticeDAO.viewNotice(Integer.parseInt(n_num));
+				request.setAttribute("notice", noticebean);
+				
+				nextPage = "/admins/adminviewNotice.jsp";
+				
+				
 			}
 			//디스패치 방식으로 포워딩 (재요청)
 			request.getRequestDispatcher(nextPage).forward(request, response);
