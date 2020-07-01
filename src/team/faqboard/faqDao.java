@@ -204,6 +204,8 @@ public class faqDao {
 		return result;
 	}//updatefboard
 
+	
+	//faq게시판 글삭제 메소드
 	public void deletefboard(int faq_num) {
 		
 		String sql = "";

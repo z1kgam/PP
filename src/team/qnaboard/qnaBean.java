@@ -5,13 +5,14 @@ import java.util.Date;
 public class qnaBean {
 	
 	private int qna_num;
-	private String userId; 
+	private String id; 
 	private String qna_cate; 
 	private String qna_title; 
 	private String qna_contents; 
 //	private String qna_file; 
 	private Date qna_date;
 	private int qna_status;
+	private String answer;
 	
 	public qnaBean() {
 		
@@ -26,12 +27,12 @@ public class qnaBean {
 		this.qna_num = qna_num;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getid() {
+		return id;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setid(String id) {
+		this.id = id;
 	}
 
 	public String getQna_cate() {
@@ -81,6 +82,15 @@ public class qnaBean {
 	public void setQna_status(int qna_status) {
 		this.qna_status = qna_status;
 	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	
 	
 	
 

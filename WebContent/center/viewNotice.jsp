@@ -40,26 +40,7 @@
               	<div class="form-group">
                 	<label>내용 : ${notice.n_content}</label>
               	</div>
-              	<div class="form-group">
-              		<label>좋아요<span><ion-icon name="heart" size="large"></ion-icon>${requestScope.likeCount}</span></label>
-              	<c:if test="${sessionScope.id != null}">	
-              		<c:choose>
-              			<c:when test="${requestScope.checkZ == 'false'}">
-              				<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&n_num=${notice.n_num}">
-								<input type="button" value="찜하기">
-              				</a>
-              				
-              			</c:when>
-              			
-              			<c:when test="${requestScope.checkZ == 'true'}">
-              				<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&n_num=${notice.n_num}">
-								<input type="button" value="찜한 상품">
-              				</a>
-              			</c:when>
-              		</c:choose>
-              	  </c:if>		
-              	</div>
-              	
+             	
         		<input type=submit value="수정하기">
  				<a href="${contextPath}/notice/deleteNotice.do?n_num=${notice.n_num}">
  					<input type="button" value="삭제하기">

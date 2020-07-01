@@ -14,7 +14,10 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>1:1문의</title>
+
+<jsp:include page="../include/header.jsp"></jsp:include>
+
 </head>
 <body>
 
@@ -32,7 +35,7 @@ request.setCharacterEncoding("UTF-8");
 		    <td class="tdate"><b>등록일</b></td>
 		</tr>
  				<c:choose>
-  				<c:when test="${total == 0}">
+  				<c:when test="${total ==0}">
   					<tr height="10">
 					<td colspan="4">
 						<p align="center"><b>등록된 글이 없습니다.</b></p>
@@ -44,11 +47,20 @@ request.setCharacterEncoding("UTF-8");
   						<tr>
    						<td>${qnaList.qna_num}</td>
    						<td>
-							<a href="${contextPath}/qboard/qread.do?qna_num=${qnaList.qna_num}">
-								${qnaList.qna_status}
-							</a>   						
+						
+   							<c:if test="${qnaList.qna_status == 0}">
+   							대기중
+   							</c:if>
+   							
+   							<c:if test="${qnaList.qna_status == 1}">
+   							답변완료
+   							</c:if>
+   							
+<%--  							${qnaList.qna_status} --%>
 						</td>
-   						<td>${qnaList.qna_title}</td>
+   						<td>
+   						<a href="${contextPath}/qboard/viewQna.do?qna_num=${qnaList.qna_num}">${qnaList.qna_title}</a>
+   						</td>
    						<td>
    							<fmt:formatDate value="${qnaList.qna_date}" type="DATE" pattern="yyyy-MM-dd"/>
    							</td>
@@ -77,7 +89,7 @@ request.setCharacterEncoding("UTF-8");
 
 
 
-
+<jsp:include page="../include/footer.jsp"></jsp:include>
 
 
 </body>
