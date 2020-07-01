@@ -19,7 +19,7 @@
 	  f.action = "${contextPath}/notice/listNotice.do";
 	  f.submit();
 }
-  
+
   </script>
   
   
@@ -48,7 +48,7 @@
 				<div class="col-md-2 contact-info ftco-animate p-4 w-100 h-500">
 					<div class="row">      
 		            	<div class="col-md-12 mb-3">
-							<p><a href="center_notice.jsp"><span>공지사항</span></a></p>
+							<p><a href="${contextPath}/notice/listNotice.do"><span>공지사항</span></a></p>
 						</div>
 						<div class="col-md-12 mb-3">
 							<p><span>이용안내</span> <a href="tel://1234567920"></a></p>

@@ -41,7 +41,7 @@
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
             <h1 class="mb-3 bread">Class Program</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.jsp">Home</a></span> <span>Classes</span></p>
+            <p class="breadcrumbs"><span class="mr-2"><a href="${contextPath}">Home</a></span> <span>Classes</span></p>
           </div>
         </div>
       </div>

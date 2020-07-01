@@ -45,11 +45,11 @@ public class NoticeboardController extends HttpServlet{
 		NoticeboardDAO noticeDAO = new NoticeboardDAO();
 		NoticeboardBean noticebean = new NoticeboardBean();
 		HttpSession session = request.getSession();
-		
+		int checkPage = 0;
 		String nextPage = "";
 		String action = request.getPathInfo();
 		System.out.println("action:" + action);
-
+		
 		//공지사항 글을 조회
 		if(action.equals("/listNotice.do")) {			
 			String n_cate = request.getParameter("n_cate");
@@ -103,7 +103,7 @@ public class NoticeboardController extends HttpServlet{
 			String n_cate = request.getParameter("n_cate");
 			String n_title = request.getParameter("n_title");
 			String n_content = request.getParameter("n_content");
-			
+			checkPage = 1;
 			noticebean.setN_cate(n_cate);
 			noticebean.setN_title(n_title);
 			noticebean.setN_content(n_content);
@@ -111,20 +111,15 @@ public class NoticeboardController extends HttpServlet{
 			
 			noticeDAO.insertNoticeboard(noticebean);
 			
-			nextPage = "/notice/listNotice.do";	
+			nextPage = "/notice/listNotice.do";
+			
 		//공지사항 글 상세보기
 		}else if(action.equals("/viewNotice.do")) {
 			String n_num = request.getParameter("n_num");
 			String id =(String)session.getAttribute("id");
-			LikeDAO likeDAO = new LikeDAO();
-			boolean checkZ = likeDAO.checkLike(Integer.parseInt(n_num), id);
-			int likeCount = likeDAO.getProductTotalLike(Integer.parseInt(n_num));
-			System.out.println("noticeController checkz : " + checkZ);
-			System.out.println("noitceController likeCount : "+likeCount);
+			
 			noticebean = noticeDAO.viewNotice(Integer.parseInt(n_num));
 			request.setAttribute("notice", noticebean);
-			request.setAttribute("likeCount", likeCount);
-			request.setAttribute("checkZ", checkZ);
 			
 			nextPage = "/center/viewNotice.jsp";
 		//글 수정 페이지로 이동
@@ -181,10 +176,11 @@ public class NoticeboardController extends HttpServlet{
 //			
 			nextPage = "/notice/viewNotice.do?n_num="+ n_num;
 		} 
-		
-		
-		request.getRequestDispatcher(nextPage).forward(request, response);
-				
+		if(checkPage == 0) {
+			request.getRequestDispatcher(nextPage).forward(request, response);
+		}else {
+			response.sendRedirect(request.getContextPath()+nextPage);
+		}
 		}
 	}
 

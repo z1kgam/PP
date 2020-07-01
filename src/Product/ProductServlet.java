@@ -16,9 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import member.LikeDAO;
 
 @SuppressWarnings("serial")
 @WebServlet("/Proser/*")
@@ -52,6 +55,7 @@ public class ProductServlet extends HttpServlet {
 
 		String action = request.getPathInfo();
 		System.out.println(action);
+		int checkPage = 0;
 		try {
 
 			if (action.equals("/imcontact.do")) {
@@ -91,7 +95,7 @@ public class ProductServlet extends HttpServlet {
 			} else if (action.equals("/write.do")) {
 				nextPage = "/product/write.jsp";
 			} else if (action.equals("/writePro.do")) {
-				String realFolder = request.getServletContext().getRealPath("concert");
+				String realFolder = request.getServletContext().getRealPath("consert");
 				int max = 100 * 1024 * 1024;
 
 				MultipartRequest multi = new MultipartRequest(request, realFolder, max, "UTF-8",
@@ -119,7 +123,7 @@ public class ProductServlet extends HttpServlet {
 				int price = Integer.parseInt(multi.getParameter("price"));
 				Date startdate = Date.valueOf(multi.getParameter("startdate"));
 				Date enddate = Date.valueOf(multi.getParameter("enddate"));
-
+				int qty = Integer.parseInt(request.getParameter("qty"));
 				String image = "";
 				String content = "";
 				if (saveFiles != null) {
@@ -142,27 +146,31 @@ public class ProductServlet extends HttpServlet {
 				productBean.setEnddate(enddate);
 				productBean.setImage(image);
 				productBean.setContent(content);
-
+				productBean.setQty(qty);
 				productService.insert(productBean);
 
 				PrintWriter pw = response.getWriter();
-				pw.print("<script>" + "  alert('제품이 추가했습니다.');" + " location.href='" + request.getContextPath()
+				pw.print("<script>" + "  alert('제품을 추가했습니다.');" + " location.href='" + request.getContextPath()
 						+ "/Proser/imcontact.do';" + "</script>");
 
 				return;
 
 			} else if (action.equals("/content.do")) {
-
+				HttpSession session = request.getSession();
 				int num = Integer.parseInt(request.getParameter("num"));
 				//int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-
+				String id = (String)session.getAttribute("id");
 				productBean = productService.getBoard(num);
 				List<ReplyVO> list = productService.getreply(num);
 				List<DetailBean> detail = productService.getdetail(num);
-
+				LikeDAO likeDAO = new LikeDAO();
+				boolean checkZ = likeDAO.checkLike(num, id);
+				int likeCount = likeDAO.getProductTotalLike(num);
 				request.setAttribute("Bean", productBean);
 				request.setAttribute("List", list);
 				request.setAttribute("detail", detail);
+				request.setAttribute("likeCount", likeCount);
+				request.setAttribute("checkZ", checkZ);
 				//request.setAttribute("pageNum", pageNum);
 
 				nextPage = "/product/content.jsp";
@@ -239,7 +247,7 @@ public class ProductServlet extends HttpServlet {
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + " location.href='" + request.getContextPath() + "/Proser/imcontact.do';"
 						+ "</script>");
-
+				request.setAttribute("detailBean", Bean);
 				return;
 
 			}else if(action.equals("/reply.do")){
@@ -247,7 +255,7 @@ public class ProductServlet extends HttpServlet {
 				int parentsnum = Integer.parseInt(request.getParameter("parentsnum"));
 				String id = request.getParameter("id");
 				String content = request.getParameter("content");
-				
+				checkPage = 1;
 				vo = new ReplyVO();
 				vo.setProductnum(pronum);
 				vo.setParentsnum(parentsnum);
@@ -259,6 +267,7 @@ public class ProductServlet extends HttpServlet {
 				nextPage = "/Proser/content.do?num="+pronum;
 				
 			}else if(action.equals("/replydelete.do")) {
+				
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
 				
@@ -266,6 +275,7 @@ public class ProductServlet extends HttpServlet {
 				
 				nextPage = "/Proser/content.do?num="+pronum;
 			}else if(action.equals("/alldelete.do")) {
+				
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
 				
@@ -273,6 +283,7 @@ public class ProductServlet extends HttpServlet {
 				productService.deleteReply(replynum);
 				
 				nextPage = "/Proser/content.do?num="+pronum;
+				
 			}else if(action.equals("/updatereply.do")) {
 				int pronum = Integer.parseInt(request.getParameter("pnum"));
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
@@ -282,8 +293,11 @@ public class ProductServlet extends HttpServlet {
 				
 				nextPage = "/Proser/content.do?num="+pronum;
 			}
-			request.getRequestDispatcher(nextPage).forward(request, response);
-
+			if(checkPage == 0) {
+				request.getRequestDispatcher(nextPage).forward(request, response);
+			}else {
+				response.sendRedirect(request.getContextPath()+nextPage);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
