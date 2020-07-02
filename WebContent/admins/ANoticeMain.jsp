@@ -102,25 +102,25 @@
 				<c:choose>
 					<c:when test="${requestScope.n_cate != null}">
 	                    <c:if test="${blockFirst!=1}">
-	                        <a href="${contextPath}/admin/InformationMain.do?nowPage=${blockFirst-blockSize}&n_cate=${n_cate}"></a>
+	                        <a href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockFirst-blockSize}&n_cate=${n_cate}"></a>
 	                    </c:if>
 	                    <c:forEach var="i" begin="${blockFirst}" end="${blockLast}" step="1">
-	                    	<a href="${contextPath }/admin/InformationMain.do?nowPage=${i}&n_cate=${n_cate}">${i}</a>
+	                    	<a href="${contextPath }/admin/ANoticeMain.do?nowPage=${i}&n_cate=${n_cate}">${i}</a>
 	                    </c:forEach>
 	                    <c:if test="${blockLast!=totalPage}">
-	                        <a href="${contextPath}/admin/InformationMain.do?nowPage=${blockLast+1}&n_cate=${n_cate}"></a>                    
+	                        <a href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockLast+1}&n_cate=${n_cate}"></a>                    
 	                    </c:if>
                  	</c:when>
                  	
                  	<c:otherwise>
 	                 	<c:if test="${blockFirst!=1}">
-	                        <a href="${contextPath}/admin/InformationMain.do?nowPage=${blockFirst-blockSize}"></a>
+	                        <a href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockFirst-blockSize}"></a>
 	                    </c:if>
 	                    <c:forEach var="i" begin="${blockFirst}" end="${blockLast}" step="1">
-	                    	<a href="${contextPath }/admin/InformationMain.do?nowPage=${i}">${i}</a>
+	                    	<a href="${contextPath }/admin/ANoticeMain.do?nowPage=${i}">${i}</a>
 	                    </c:forEach>
 	                    <c:if test="${blockLast!=totalPage}">
-	                        <a href="${contextPath}/admin/InformationMain.do?nowPage=${blockLast+1}"></a>                    
+	                        <a href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockLast+1}"></a>                    
 	                    </c:if>
                  	</c:otherwise>   
                     
