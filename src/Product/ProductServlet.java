@@ -123,7 +123,7 @@ public class ProductServlet extends HttpServlet {
 				int price = Integer.parseInt(multi.getParameter("price"));
 				Date startdate = Date.valueOf(multi.getParameter("startdate"));
 				Date enddate = Date.valueOf(multi.getParameter("enddate"));
-				int qty = Integer.parseInt(request.getParameter("qty"));
+				//int qty = Integer.parseInt(request.getParameter("qty"));
 				String image = "";
 				String content = "";
 				if (saveFiles != null) {
@@ -146,7 +146,7 @@ public class ProductServlet extends HttpServlet {
 				productBean.setEnddate(enddate);
 				productBean.setImage(image);
 				productBean.setContent(content);
-				productBean.setQty(qty);
+				//productBean.setQty(qty);
 				productService.insert(productBean);
 
 				PrintWriter pw = response.getWriter();
@@ -292,6 +292,18 @@ public class ProductServlet extends HttpServlet {
 				productService.updatereply(replynum,content);
 				
 				nextPage = "/Proser/content.do?num="+pronum;
+			}else if(action.equals("/prepare.do")) {
+				int num = Integer.parseInt(request.getParameter("num"));
+				int detail = Integer.parseInt(request.getParameter("detailnum"));
+				
+				productBean = productService.getBoard(num);
+				Bean = productService.getdetails(detail);
+				
+				request.setAttribute("PBean", productBean);
+				request.setAttribute("DBean", Bean);
+				
+				nextPage = "/product/buyconnect.jsp";
+				
 			}
 			if(checkPage == 0) {
 				request.getRequestDispatcher(nextPage).forward(request, response);

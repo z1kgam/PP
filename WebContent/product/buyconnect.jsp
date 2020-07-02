@@ -51,10 +51,11 @@
 			var Max = price*count;
 			
 			var print = Max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
-			document.getElementById("totalprice").value = Max;
 			$("#total").text(print);
+			document.getElementById("totalprice").value = Max;
 		}
 	</script>
+	
 	<style type="text/css">
 		#table{
 			margin-left: 200px;
@@ -158,7 +159,7 @@
 										<tr>
 									</table>
 									<input type="submit" value="예매하기" id="submit">
-									<input type="hidden" name="totalprice" value="${PBean.price}">
+									<input type="hidden" id="totalprice" name="totalprice" value="${PBean.price}">
 								</form>
 							</div>
 						</div>

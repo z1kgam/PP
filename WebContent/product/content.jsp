@@ -110,7 +110,7 @@
 												<form action="${contextPath}/mycon/addBasket.do" method="post">
 													<input type="hidden" name="id" value="${sessionScope.id}">
 													<input type="hidden" name="num" value="${Bean.num}">
-													<input type="hidden" name="numbers" value="${Bean.qty}">
+													<%-- <input type="hidden" name="numbers" value="${Bean.qty}"> --%>
 													<input type="submit" value="장바구니에 담기" class="btn btn-outline-primary">
 												</form>	
 											</td>
