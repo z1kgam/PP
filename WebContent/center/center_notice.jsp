@@ -57,7 +57,7 @@
 							<p><span>FAQ</span> <a href="mailto:info@yoursite.com"></a></p>
 			            </div>
 		            	<div class="col-md-12 mb-3">
-		              		<p><span>나의 문의 내역</span> <a href="#"></a></p>
+		              		<p><a href="${contextPath}/qboard/qnaList.do"><span>나의 문의 내역</span></a> </p>
 		            	</div>
 	            	</div>
 				</div>
