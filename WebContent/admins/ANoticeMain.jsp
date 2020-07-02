@@ -46,9 +46,9 @@
 				<form action="#" name=f method="post">
 				<select onchange="location.href=this.value" name="n_cate">
 					<option>항목을 선택하세요</option>
-					<option value="${contextPath}/admin/InformationMain.do?n_cate=서비스 소식">서비스 소식</option>
-					<option value="${contextPath}/admin/InformationMain.do?n_cate=서비스 점검">서비스 점검</option>
-					<option value="${contextPath}/admin/InformationMain.do?n_cate=안내">안내</option>
+					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 소식">서비스 소식</option>
+					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 점검">서비스 점검</option>
+					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=안내">안내</option>
 				</select>
 				</form>
 			</div>
@@ -73,13 +73,13 @@
 										<p align="center"><b>등록된 글이 없습니다.</b></p>
 									</td>   				
 			   					</tr>
-			   				</c:when>
+			   				</c:when> 
 			   				<c:when test="${requestScope.noticeList != null }">
 			   					<c:forEach var="notice" items="${noticeList}" varStatus="status">
 			   						<tr>
 				   						<td>${notice.n_cate}</td>
 				   						<td>
-											<a href="${contextPath}/notice/viewNotice.do?n_num=${notice.n_num}">
+											<a href="${contextPath}/admin/AviewNotice.do?n_num=${notice.n_num}">
 												${notice.n_title}
 											</a>   						
 										</td>
@@ -95,32 +95,32 @@
 				</div>
 			</div>
 			<!--테이블  -->
-			<input type="button" onclick="location.href='${contextPath}/admin/informationwrite.do?'" value="공지 사항 작성" class="btn btn-primary py-3 px-5">
-			
+			<input type="button" onclick="location.href='${contextPath}/admin/ANoticeWritep.do?'" value="공지 사항 작성" class="btn btn-primary py-3 px-5">
+			<input type="button" onclick="location.href='${contextPath}/admin/CustomerMan.do?'" value="고객 센터 관리 페이지" class="btn btn-primary py-3 px-5">
 			<div align="center">
 			<!--페이징 -->
 				<c:choose>
 					<c:when test="${requestScope.n_cate != null}">
 	                    <c:if test="${blockFirst!=1}">
-	                        <a href="${contextPath}/notice/listNotice.do?nowPage=${blockFirst-blockSize}&n_cate=${n_cate}"></a>
+	                        <a href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockFirst-blockSize}&n_cate=${n_cate}"></a>
 	                    </c:if>
 	                    <c:forEach var="i" begin="${blockFirst}" end="${blockLast}" step="1">
-	                    	<a href="${contextPath }/notice/listNotice.do?nowPage=${i}&n_cate=${n_cate}">${i}</a>
+	                    	<a href="${contextPath }/admin/ANoticeMain.do?nowPage=${i}&n_cate=${n_cate}">${i}</a>
 	                    </c:forEach>
 	                    <c:if test="${blockLast!=totalPage}">
-	                        <a href="${contextPath}/notice/listNotice.do?nowPage=${blockLast+1}&n_cate=${n_cate}"></a>                    
+	                        <a href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockLast+1}&n_cate=${n_cate}"></a>                    
 	                    </c:if>
                  	</c:when>
                  	
                  	<c:otherwise>
 	                 	<c:if test="${blockFirst!=1}">
-	                        <a href="${contextPath}/notice/listNotice.do?nowPage=${blockFirst-blockSize}"></a>
+	                        <a href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockFirst-blockSize}"></a>
 	                    </c:if>
 	                    <c:forEach var="i" begin="${blockFirst}" end="${blockLast}" step="1">
-	                    	<a href="${contextPath }/notice/listNotice.do?nowPage=${i}">${i}</a>
+	                    	<a href="${contextPath }/admin/ANoticeMain.do?nowPage=${i}">${i}</a>
 	                    </c:forEach>
 	                    <c:if test="${blockLast!=totalPage}">
-	                        <a href="${contextPath}/notice/listNotice.do?nowPage=${blockLast+1}"></a>                    
+	                        <a href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockLast+1}"></a>                    
 	                    </c:if>
                  	</c:otherwise>   
                     
