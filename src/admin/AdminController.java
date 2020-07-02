@@ -55,11 +55,10 @@ public class AdminController extends HttpServlet{
 			
 			if(action.equals("/adminPage.do")) { 
 				
-				
 				nextPage = "/admins/adminMain.jsp";
 				
 			//회원정보 전체 조회
-			} else if(action.equals("/MemberModify.do")) {
+			} else if(action.equals("/MemberManager.do")) {
 				
 				//회원 아이디 검색값 받아오기
 				String search = "";
@@ -121,7 +120,7 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("blocklast", blocklast);
 				request.setAttribute("totalPage", totalPage);
 				
-				nextPage = "/admins/adminModify.jsp";
+				nextPage = "/admins/adminManager.jsp";
 				System.out.println(action);
 			
 			//회원 삭제 요청 (관리자 페이지)
@@ -134,7 +133,7 @@ public class AdminController extends HttpServlet{
 					
 				}
 				
-				nextPage= "/admin/MemberMan.do";
+				nextPage= "/admin/MemberMananger.do";
 				
 			} else if(action.equals("/MemberView.do")) {
 				
@@ -173,7 +172,7 @@ public class AdminController extends HttpServlet{
 				String id = request.getParameter("id");
 				result = adminDAO.MemberDelete(id);
 				
-				nextPage= "/admin/MemberMan.do";
+				nextPage= "/admin/MemberManager.do";
 				
 			} else if(action.equals("/MemberSearch.do")) {
 				
@@ -205,10 +204,7 @@ public class AdminController extends HttpServlet{
 				
 				nextPage = "/admins/Answer.jsp";
 				
-			//회원관리 페이지 이동	
-			} else if (action.equals("/MemberMan.do")) {
 				
-				nextPage = "/admins/adminManager.jsp";
 			} else if (action.equals("/MemberJoinCount.do")) {
 				
 				nextPage = "/admins/MemberJoinCount.jsp";
