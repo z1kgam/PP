@@ -1,3 +1,4 @@
+<%@page import="team.qnaboard.qnaBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -24,13 +25,12 @@ request.setCharacterEncoding("UTF-8");
 
 <section class="container body-container py-5">
 		<div class="row">
-			<div class="col-12">
+<!-- 	<div class="col-12">
 				<h2>1:1문의하기</h2>
 			</div>
-		</div>
+		</div> -->
 		<!-- 게시판 -->
 		<article class="mt-3">
-			<form action="${contextPath}/qboard/qnaWrite.do" method="post">
 				<table class="table">
 					<colgroup>
 						<col style="max-width: 15%" />
@@ -38,17 +38,12 @@ request.setCharacterEncoding("UTF-8");
 					</colgroup>
 					<tr>
 						<th class="align-middle">
-							<label for="poolName" class="m-0">카테고리 선택</label>
+							<label for="poolName" class="m-0">카테고리</label>
 						</th>
 						<td>
 						
 <!-- 						<input class="form-control" type="text" name="poolName" id="poolName" required /> -->
-							<input type="radio" name="cate" value="티켓예매" checked="checked">티켓예매 &nbsp;&nbsp;
-							<input type="radio" name="cate" value="취소/환불">취소/환불 &nbsp;&nbsp;
-							<input type="radio" name="cate" value="이벤트">이벤트 &nbsp;&nbsp;
-							<input type="radio" name="cate" value="티켓수령">티켓수령 &nbsp;&nbsp;
-							<input type="radio" name="cate" value="회원">회원 &nbsp;&nbsp;
-							
+							<label>${qna.qna_cate}</label>
 						</td>
 					</tr>
 					
@@ -57,7 +52,7 @@ request.setCharacterEncoding("UTF-8");
 							<label for="poolAddress1" class="m-0">제목</label>
 						</th>
 						<td>
-							<input type="text" class="form-control" name="title" id="poolAddress1" maxlength="50">
+							<label>${qna.qna_title}</label>
 						</td>
 					</tr>
 					
@@ -66,15 +61,31 @@ request.setCharacterEncoding("UTF-8");
 							<label for="contents" class="m-0">내용</label>
 						</th>
 						<td>
-							<textarea class="form-control" name="contents" id="poolContent" cols="40" rows="13" required></textarea>
+							${qna.qna_contents}  <br><br><br>
 						</td>
-					</tr>
+					</tr>				
+					
+				<c:if test="${qna.qna_status == 1}">					
 					<tr>
+						<th class="align-middle">
+							<label for="contents" class="m-0">답변</label>
+						</th>
 						<td>
-						<input type="hidden" name="id" value="${id}">
+							${qna.answer}  <br><br><br>
 						</td>
 					</tr>
-
+				</c:if>
+					
+					
+				<c:if test="${is_admin == 1}">	
+					<a href="${contextPath}/qboard/deleteQna.do?qna_num=${qna.qna_num}">
+						<input type="button" value="삭제하기">
+					</a>
+					
+					<a href="${contextPath}/qboard/qnaUpdateForm.do?qna_num=${qna.qna_num}">
+						<input type="button" value="수정하기">
+					</a>
+				</c:if>	
 <!-- 					
 					<tr>
 						<th class="align-middle">
@@ -92,12 +103,11 @@ request.setCharacterEncoding("UTF-8");
 					
 				</table>
 				<div class="text-center my-5">
-					<button type="button" class="btn btn-secondary" onclick="history.back()">취소</button>
-					<button type="submit" class="btn btn-primary">등록하기</button>
+					<button type="button" class="btn btn-secondary" onclick="history.back()">돌아가기</button>
 				</div>
-			</form>
 		</article>
 		<!-- 게시판 -->
+		</div>
 	</section>
 	
 	

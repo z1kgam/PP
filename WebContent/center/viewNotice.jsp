@@ -59,11 +59,12 @@
               		</c:choose>
               	  </c:if>		
               	</div>
-              	
-        		<input type=submit value="수정하기">
- 				<a href="${contextPath}/notice/deleteNotice.do?n_num=${notice.n_num}">
- 					<input type="button" value="삭제하기">
- 				</a>
+              	<c:if test="${is_admin == 1}">
+        			<input type=submit value="수정하기">
+ 					<a href="${contextPath}/notice/deleteNotice.do?n_num=${notice.n_num}">
+ 						<input type="button" value="삭제하기">
+ 					</a>
+ 				</c:if>
 			</form>
 		</div>
 	</section>
