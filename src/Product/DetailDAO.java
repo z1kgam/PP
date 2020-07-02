@@ -121,4 +121,58 @@ public class DetailDAO {
 		}
 		return detail;
 	}
+	
+	public DetailBean getdetails(int detail) {
+		DetailBean bean = new DetailBean();
+		String sql="";
+		
+		try {
+			con = getConnection();
+
+			sql = "select * from details where pronum=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, detail);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				bean.setPronum(rs.getInt("pronum"));
+				bean.setNum(rs.getInt("num"));
+				bean.setPlace(rs.getString("place"));
+				bean.setTime(rs.getString("time"));
+				bean.setSeat(rs.getInt("seat"));
+				bean.setReserved(rs.getInt("reserved"));
+				bean.setDate(rs.getDate("date"));
+			}
+		} catch (Exception e) {
+			System.out.println("details메소드 에서 예외발생 : " + e);
+		}finally {
+			resource();
+		}
+		
+		
+		return bean;
+	}
+
+	public void UpdateSeat(int num, int sub) {
+		String sql = "";
+		
+		try {
+			con = getConnection();
+
+			sql = "update details set reserved=? where pronum=?"; 
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sub);
+			pstmt.setInt(2, num);
+			pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			System.out.println("UpdateSeat메소드 에서 예외발생 : " + e);
+		}finally {
+			resource();
+		}
+		
+	}
 }
