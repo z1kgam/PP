@@ -111,6 +111,8 @@ public class ReplyDAO {
 			pstmt.setInt(1, replynum);
 			pstmt.executeUpdate();
 			
+			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			System.out.println("deleteReply메소드 에서 예외발생 : " + e);
 		}finally {
@@ -127,6 +129,8 @@ public class ReplyDAO {
 			sql = "delete from proreply where parentsnum=?"; 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, replynum);
+			pstmt.executeUpdate();
+			
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -148,6 +152,8 @@ public class ReplyDAO {
 			pstmt.setInt(2, replynum);
 			pstmt.executeUpdate();
 			
+			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			System.out.println("updatereply메소드 에서 예외발생 : " + e);
 		}finally {
@@ -166,11 +172,12 @@ public class ReplyDAO {
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
 			
+			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			System.out.println("replydelete메소드 에서 예외발생 : " + e);
 		}finally {
 			resource();
 		}
 	}
-
 }

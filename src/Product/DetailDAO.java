@@ -96,7 +96,7 @@ public class DetailDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from details where num=? order by date asc, time asc";
+			sql = "select * from details where num=?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -121,7 +121,7 @@ public class DetailDAO {
 		}
 		return detail;
 	}
-
+	
 	public DetailBean getdetails(int detail) {
 		DetailBean bean = new DetailBean();
 		String sql="";
