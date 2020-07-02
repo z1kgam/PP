@@ -79,4 +79,14 @@ public class ProductService {
 		List<DetailBean> detail = Ddao.getdetail(num);
 		return detail;
 	}
+
+	public DetailBean getdetails(int detail) {
+		DetailBean Bean = Ddao.getdetails(detail);
+		return Bean;
+	}
+
+	public void UpdateSeat(int num, int sub) {
+		Ddao.UpdateSeat(num,sub);
+	}
+
 }

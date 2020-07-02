@@ -1,7 +1,6 @@
 package Product;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -31,38 +30,6 @@ public class ProductDAO {
 		if(rs != null) try{rs.close();}catch(Exception e) {e.printStackTrace();}
 		if(pstmt != null) try{pstmt.close();}catch(Exception e) {e.printStackTrace();}
 		if(con != null) try{con.close();}catch(Exception e) {e.printStackTrace();}		
-	}
-	
-	public ArrayList<ProductBean> getAllProduct() {
-		ArrayList<ProductBean> products = new ArrayList<ProductBean>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = "";
-		ResultSet rs = null;
-		try {
-			con = getConnection();
-			sql = "SELECT * FROM prodect";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				int num = rs.getInt("num");
-				String name = rs.getString("name");
-				String genre = rs.getString("genre");
-				String cla = rs.getString("cla");
-				int minute = rs.getInt("minute");
-				int price = rs.getInt("price");
-				Date startdate = rs.getDate("startdate");
-				Date enddate = rs.getDate("enddate");
-				String image = rs.getString("image");
-				String content = rs.getString("content");
-			}
-		} catch (Exception e) {
-			System.out.println("getAllProduct Inner Err : " + e);
-		} finally {
-			resource();
-		}
-		
-		return products;
 	}
 	
 	public void insertpro(ProductBean productBean) {
