@@ -117,6 +117,7 @@ public class MyPageController extends HttpServlet{
 			nextPage="/mypage/reservlist.jsp";
 			
 		}else if(action.equals("/addBasket.do")) {
+			
 			Status status = new Status();
 			String id = request.getParameter("id");
 			int num = Integer.parseInt(request.getParameter("num"));  
@@ -132,6 +133,7 @@ public class MyPageController extends HttpServlet{
 			BasketDAO basketDAO = new BasketDAO();
 			products = productDAO.getAllProduct();
 			basketDAO.basketAdd(id, num, numbers);
+			
 			request.setAttribute("products", products);
 			
 			nextPage = "/mycon/mypageForm.do";

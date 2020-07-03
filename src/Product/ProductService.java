@@ -38,8 +38,8 @@ public class ProductService {
 		Ddao.delete(num);
 	}
 
-	public void insertDetail(DetailBean bean) {
-		Ddao.insertDetail(bean);
+	public void insertDetail(ProductBean bean) {
+		Ddao.insertDetail(bean); 
 		
 	}
 

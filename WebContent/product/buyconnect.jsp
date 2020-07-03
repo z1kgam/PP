@@ -47,7 +47,7 @@
 	<script type="text/javascript">
 		function getValue() {
 			var count = Number(document.getElementById("count").value);
-			var price = Number(${PBean.price});
+			var price = Number(${Bean.price});
 			var Max = price*count;
 			
 			var print = Max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
@@ -103,28 +103,28 @@
 						<div class="col-md-12 d-flex ftco-animate">
 							<div class="blog-entry blog-entry-2 justify-content-end d-md-flex w-100">
 								<form action="${contextPath}/Order/order.do">
-									<input type="hidden" name="id" value="id">
+									<input type="hidden" name="id" value="${sessionScope.id}">
 									<input type="hidden" name="num" value="${DBean.pronum}">
 									<table border="1" id="table">
 										<tr>
 											<td>콘서트명</td>
-											<td>${PBean.name}</td>
+											<td>${Bean.name}</td>
 										</tr>
 										<tr>
 											<td>포스터</td>
-											<td><img src="../consert/${PBean.image}"></td>
+											<td><img src="../consert/${Bean.image}"></td>
 										</tr>
 										<tr>
 											<td>장르</td>
-											<td>${PBean.genre}</td>
+											<td>${Bean.genre}</td>
 										</tr>
 										<tr>
 											<td>관람등급</td>
-											<td>${PBean.cla}</td>
+											<td>${Bean.cla}</td>
 										</tr>
 										<tr>
 											<td>관람시간</td>
-											<td>${PBean.minute}분</td>
+											<td>${Bean.minute}분</td>
 										</tr>
 										<tr>
 											<td>공연장</td>
@@ -140,7 +140,7 @@
 										</tr>
 										<tr>
 											<td>가격</td>
-											<td><fmt:formatNumber value="${PBean.price}" pattern="#,###" />원</td>
+											<td><fmt:formatNumber value="${Bean.price}" pattern="#,###" />원</td>
 										</tr>
 										<tr>
 											<td>예매수</td>
@@ -155,11 +155,11 @@
 										<tr>
 										<tr>
 											<td>총가격</td>
-											<td id="total"><fmt:formatNumber value="${PBean.price}" pattern="#,###" />원</td>
+											<td id="total"><fmt:formatNumber value="${Bean.price}" pattern="#,###" />원</td>
 										<tr>
 									</table>
 									<input type="submit" value="예매하기" id="submit">
-									<input type="hidden" id="totalprice" name="totalprice" value="${PBean.price}">
+									<input type="hidden" id="totalprice" name="totalprice" value="${Bean.price}">
 								</form>
 							</div>
 						</div>

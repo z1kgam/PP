@@ -28,8 +28,8 @@ import member.LikeDAO;
 public class ProductServlet extends HttpServlet {
 
 	ProductService productService;
-	ProductBean productBean;
-	DetailBean Bean;
+	ProductBean Bean;
+	DetailBean DBean;
 	ReplyVO vo;
 
 	public void init(ServletConfig config) throws ServletException {
@@ -52,7 +52,7 @@ public class ProductServlet extends HttpServlet {
 		String nextPage = "";
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-
+		HttpSession session = request.getSession();
 		String action = request.getPathInfo();
 		System.out.println(action);
 		int checkPage = 0;
@@ -135,19 +135,16 @@ public class ProductServlet extends HttpServlet {
 						}
 					}
 				}
-
-				productBean = new ProductBean();
-				productBean.setName(name);
-				productBean.setGenre(genre);
-				productBean.setCla(cla);
-				productBean.setMinute(minute);
-				productBean.setPrice(price);
-				productBean.setStartdate(startdate);
-				productBean.setEnddate(enddate);
-				productBean.setImage(image);
-				productBean.setContent(content);
-				//productBean.setQty(qty);
-				productService.insert(productBean);
+				Bean.setName(name);
+				Bean.setGenre(genre);
+				Bean.setCla(cla);
+				Bean.setMinute(minute);
+				Bean.setPrice(price);
+				Bean.setStartdate(startdate);
+				Bean.setEnddate(enddate);
+				Bean.setImage(image);
+				Bean.setContent(content);
+				productService.insert(Bean);
 
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + "  alert('제품을 추가했습니다.');" + " location.href='" + request.getContextPath()
@@ -156,17 +153,16 @@ public class ProductServlet extends HttpServlet {
 				return;
 
 			} else if (action.equals("/content.do")) {
-				HttpSession session = request.getSession();
 				int num = Integer.parseInt(request.getParameter("num"));
 				//int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 				String id = (String)session.getAttribute("id");
-				productBean = productService.getBoard(num);
+				Bean = productService.getBoard(num);
 				List<ReplyVO> list = productService.getreply(num);
 				List<DetailBean> detail = productService.getdetail(num);
 				LikeDAO likeDAO = new LikeDAO();
 				boolean checkZ = likeDAO.checkLike(num, id);
 				int likeCount = likeDAO.getProductTotalLike(num);
-				request.setAttribute("Bean", productBean);
+				request.setAttribute("Bean", Bean);
 				request.setAttribute("List", list);
 				request.setAttribute("detail", detail);
 				request.setAttribute("likeCount", likeCount);
@@ -216,9 +212,9 @@ public class ProductServlet extends HttpServlet {
 				int num = Integer.parseInt(request.getParameter("num"));
 				//int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 
-				productBean = productService.getBoard(num);
+				Bean = productService.getBoard(num);
 
-				request.setAttribute("Bean", productBean);
+				request.setAttribute("Bean", Bean);
 				//request.setAttribute("pageNum", pageNum);
 
 				nextPage = "/product/details.jsp";
@@ -233,7 +229,7 @@ public class ProductServlet extends HttpServlet {
 				Date date = Date.valueOf(request.getParameter("date"));
 				String time = request.getParameter("time");
 
-				Bean = new DetailBean();
+				Bean = new ProductBean();
 				Bean.setNum(num);
 				Bean.setPlace(place);
 				Bean.setSeat(seat);
@@ -253,7 +249,7 @@ public class ProductServlet extends HttpServlet {
 			}else if(action.equals("/reply.do")){
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int parentsnum = Integer.parseInt(request.getParameter("parentsnum"));
-				String id = request.getParameter("id");
+				String id = (String)session.getAttribute("id");
 				String content = request.getParameter("content");
 				checkPage = 1;
 				vo = new ReplyVO();
@@ -296,11 +292,11 @@ public class ProductServlet extends HttpServlet {
 				int num = Integer.parseInt(request.getParameter("num"));
 				int detail = Integer.parseInt(request.getParameter("detailnum"));
 				
-				productBean = productService.getBoard(num);
-				Bean = productService.getdetails(detail);
+				Bean = productService.getBoard(num);
+				DBean = productService.getdetails(detail);
 				
-				request.setAttribute("PBean", productBean);
-				request.setAttribute("DBean", Bean);
+				request.setAttribute("Bean", Bean);
+				request.setAttribute("DBean", DBean);
 				
 				nextPage = "/product/buyconnect.jsp";
 				
