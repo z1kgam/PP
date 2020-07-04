@@ -48,8 +48,10 @@ public class AdminController extends HttpServlet{
 			response.setContentType("text/html;charset=utf-8");
 			
 			//요청 URL중 2단계 요청 주소를 알아내온다
-			String action = request.getPathInfo();  //  /listArticles.do 
+			String action = request.getPathInfo();  
 			System.out.println("action : " + action);
+			
+			//디스패처 방식, 리다이렉트 방식 결정
 			int checkPage =0;
 			List<AdminBean> articlesList = null;
 			
@@ -84,7 +86,7 @@ public class AdminController extends HttpServlet{
 				}
 				int startRow = (nowPage-1)*pageSize; // 첫 번째 게시물 번호
 				int endRow = pageSize; // 마지막 게시물 번호 
-				int blocksize = 5; // 페이징 네비 사이즈
+				int blocksize = 3; // 페이징 네비 사이즈
 				int totalPage = total / pageSize + (total%pageSize==0? 0:1); // 총 페이지 수
 				int blockfirst = ((nowPage/blocksize)-(nowPage%blocksize==0?1:0)) * blocksize + 1; // 페이징 네비 첫번째 번호
 				int blocklast = blockfirst+blocksize-1; // 페이징 네비 마지막 번호
@@ -95,18 +97,16 @@ public class AdminController extends HttpServlet{
 				List<AdminBean> list = null;
 				
 				//회원 전체 정보 조회
+				//list에 멤버정보를 담음
 				if(selectserach == null) {
 					list = adminDAO.getAllmember(startRow, endRow, search);
 				} else {
 					list = adminDAO.getAllmember(startRow, endRow, search, selectserach);
 				}
 				
-				
-				//list에 멤버정보를 담음
+				System.out.println("널맞네");
+				System.out.println(list);
 				String id = "test";
-				
-				//검색한 글정보(응답할 데이터)를  VIEW페이지(listArticles.jsp)로 보내서 출력하기 위해
-				//임시로 request저장소에 저장 하여 유지 시킨다
 				
 				//회원정보
 				request.setAttribute("list", list);
@@ -135,7 +135,7 @@ public class AdminController extends HttpServlet{
 				
 				nextPage= "/admin/MemberMananger.do";
 				
-			} else if(action.equals("/MemberView.do")) {
+			} else if(action.equals("/AMemberView.do")) {
 				
 				String id =request.getParameter("id");
 				String nowpage = request.getParameter("nowpage"); 
@@ -147,7 +147,7 @@ public class AdminController extends HttpServlet{
 //				System.out.println(adminBean.getId());
 				request.setAttribute("memberInfo", adminBean);
 				request.setAttribute("nowpage", nowpage);
-				nextPage = "/admins/adminView.jsp";
+				nextPage = "/admins/AmemberView.jsp";
 			
 			//회원 정보 수정 관리 요청
 			} else if(action.equals("/MemberUpdate.do")) {
@@ -347,7 +347,7 @@ public class AdminController extends HttpServlet{
 			if(checkPage == 0) {
 				request.getRequestDispatcher(nextPage).forward(request, response);
 			}else {
-				response.sendRedirect(request.getContextPath()+nextPage);
+				response.sendRedirect(request.getContextPath()+nextPage); //물어보기 이 상태로 request에 보낸값들 들고 갈수있는지
 			}
 			
 		}// doHandle END

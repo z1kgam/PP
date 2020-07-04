@@ -287,126 +287,34 @@
 				</div>
 			</div>
 			
-			<!-- 회원 정보 출력 테이블 -->
+			<!-- Body 부분 -->
+			
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
 						<h4 class="page-title">Dashboard</h4>
-						<table class="table table-hover">
-											<thead>
-												<tr align="center">
-													<th scope="col">아이디</th>
-													<th scope="col">이름</th>
-													<th scope="col">비밀번호</th>
-													<th scope="col">이메일</th>
-													<th scope="col">휴대폰 번호</th>
-													<th scope="col">포인트</th>
-													<th scope="col">회원 상태</th>
-													<th scope="col">관리자 권한</th>
-													<th scope="col">가입일</th>
-													<th scope="col">정보 수정</th>
-													<th scope="col">회원 삭제</th>
-													
-												</tr>
-											</thead>
-											<tbody>
-											<c:choose>
-											 <c:when test="${list == null }">
-											 <tr>
-											 <td colspan="12" align="center">등록된 회원이 없습니다.</td>
-											 </tr>
-											 </c:when>
-										<c:when test="${list != null }">
-											<c:forEach var="memberlist" items="${list}" varStatus="membersNum">
-											<fmt:formatDate var="parseDate" value="${memberlist.reg_date}" pattern="yyyy-MM-dd"/>
-										<tr>
-
-											<td><b>${memberlist.id}</b></td>
-											<td>${memberlist.name}</td>
-											<td>${memberlist.password}</td>
-											<td>${memberlist.email}</td>
-											<td>${memberlist.phone}</td>
-											<td>${memberlist.point}</td>
-											<c:choose>
-												<c:when test="${memberlist.status == 1}">
-													<td><p class="text-success">이용 가능</p></td>
-												</c:when>
-												<c:when test="${memberlist.status == 2}">
-													<td><p class="text-danger">이용 정지</p></td>
-												</c:when>
-											</c:choose>
-
-											<c:choose>
-												<c:when test="${memberlist.is_admin == 1}">
-													<td><p class="text-primary">관리자</p></td>
-												</c:when>
-												<c:when test="${memberlist.is_admin == 0}">
-													<td>일반 회원</td>
-												</c:when>
-											</c:choose>
-											<td>${parseDate}</td>
-											<!-- 버튼 -->
-											<div class="form-button-action">
-											<td>
-											<button type="button" data-toggle="tooltip" title="정보 수정" 
-												onclick="location.href='${contextPath}/admin/AMemberView.do?id=${memberlist.id}&nowpage=${nowpage}'" 
-												class="btn btn-link <btn-simple-primary">
-												<i class="la la-edit"></i>
-											</button>
-											</td>
-											<td>
-											<button type="button" data-toggle="tooltip" title="회원 삭제"
-												class="btn btn-link btn-simple-danger">
-												<i class="la la-times"></i>
-											</button>
-											</td>
-											</div>
-											<!-- 버튼 -->
-										</tr>
-									</c:forEach>
-            							</c:when>
-            							</c:choose>	
-											</tbody>
-										</table>
-						<!-- 회원 정보 출력 테이블 -->
-					
-									<!-- 페이징 -->
-									<div align="center">
-									<div class="card-body">
-										<p class="demo">
-											<ul class="pagination pg-primary">
-												<li class="page-item">
-												<c:if test="${nowpage>blocksize}">
-													<a class="page-link" href="${contextPath}/admin/MemberManager.do?nowpage=${blockfirst-blocksize}" aria-label="Previous">
-														<span aria-hidden="true">&laquo;</span>
-													<!-- <span class="sr-only">Previous</span> -->
-													</a>
-												</c:if>	
-												</li>
-												<c:forEach begin="${blockfirst}" end="${blocklast}" var="i">
-												<li class="page-item active">
-												<a class="page-link" href="${contextPath}/admin/MemberManager.do?nowpage=${i}">${i}</a>
-												</li>
-												</c:forEach>
-												<c:if test="${blocklast != totalPage }">
-												<li class="page-item">
-													<a class="page-link" href="${contextPath}/admin/MemberManager.do?nowpage=${blocklast+1}" aria-label="Next">
-														<span aria-hidden="true">&raquo;</span>
-														<span class="sr-only">Next</span>
-													</a>
-												</li>
-												</c:if>
-											</ul>
-										</p>
-									</div>
-									</div>
-									<!-- 페이징 -->			
-				
-				
-						</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+					</div>
 				</div>
 			</div>
-			<!-- 회원 정보 출력 테이블 -->
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdatePro" aria-hidden="true">

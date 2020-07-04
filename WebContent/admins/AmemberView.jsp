@@ -2,10 +2,14 @@
     pageEncoding="UTF-8"%>
     
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />    
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
+    <!-- 회원 관리 페이지 -->
     
 <!DOCTYPE html>
 <html>
@@ -17,10 +21,30 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 	<link rel="stylesheet" href="${contextPath}/admins/assets/css/ready.css">
 	<link rel="stylesheet" href="${contextPath}/assets/css/demo.css">
+	
+<style type="text/css">
+
+div#box {
+	
+	
+	width: 25%;
+	
+}
+
+button#formbutton {
+
+	    padding: 20px 40px;
+	    
+}
+
+</style>
+
+
+	
 </head>
 <body>
 	<div class="wrapper">
-		<div class="main-header">
+		<div class="main-header">  
 			<div class="logo-header">
 				<a href="#" class="logo">
 					Ready Dashboard
@@ -55,6 +79,8 @@
 								<a class="dropdown-item" href="#">Something else here</a>
 							</div>
 						</li>
+						
+						<!-- 상단 알림창 -->
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-bell"></i>
@@ -111,11 +137,13 @@
 								</li>
 							</ul>
 						</li>
+						<!-- 상단 알림창 -->	
 						
 						</ul>
 					</div>
 				</nav>
 			</div>
+			
 			<div class="sidebar">
 				<div class="scrollbar-inner sidebar-wrapper">
 					<div class="user">
@@ -278,203 +306,127 @@
 					
 				</div>
 			</div>
-			<div class="main-panel">
+			
+			<!-- Body 부분 -->
+
+		
+
+		<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h4 class="page-title">Dashboard</h4>
-						<div class="row">
-							<div class="col-md-3">
-								<div class="card card-stats card-warning">
-									<div class="card-body ">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="la la-users"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Visitors</p>
-													<h4 class="card-title">1,294</h4>
-												</div>
+						<h4 class="page-title">${memberInfo.id}님의 정보</h4>
+					<div class="row">
+						<div class="col-md-3">
+							<div class="card card-stats card-warning">
+								<div class="card-body ">
+									<div class="row">
+										<div class="col-5">
+											<div class="icon-big text-center">
+												<i class="la la-users"></i>
 											</div>
 										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card card-stats card-success">
-									<div class="card-body ">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="la la-bar-chart"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Sales</p>
-													<h4 class="card-title">$ 1,345</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card card-stats card-danger">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="la la-newspaper-o"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Subscribers</p>
-													<h4 class="card-title">1303</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card card-stats card-primary">
-									<div class="card-body ">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="la la-check-circle"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Order</p>
-													<h4 class="card-title">576</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-<!-- 							<div class="col-md-3">
-								<div class="card card-stats">
-									<div class="card-body ">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center icon-warning">
-													<i class="la la-pie-chart text-warning"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Number</p>
-													<h4 class="card-title">150GB</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card card-stats">
-									<div class="card-body ">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="la la-bar-chart text-success"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Revenue</p>
-													<h4 class="card-title">$ 1,345</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card card-stats">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="la la-times-circle-o text-danger"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Errors</p>
-													<h4 class="card-title">23</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card card-stats">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="la la-heart-o text-primary"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Followers</p>
-													<h4 class="card-title">+45K</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div> -->
-						</div>
-						<div class="row">
-							<div class="col-md-3">
-								<div class="card">
-									<div class="card-header">
-										<h4 class="card-title">Task</h4>
-										<p class="card-category">Complete</p>
-									</div>
-									<div class="card-body">
-										<div id="task-complete" class="chart-circle mt-4 mb-3"></div>
-									</div>
-									<div class="card-footer">
-										<div class="legend"><i class="la la-circle text-primary"></i> Completed</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-9">
-								<div class="card">
-									<div class="card-header">
-										<h4 class="card-title">World Map</h4>
-										<p class="card-category">
-										Map of the distribution of users around the world</p>
-									</div>
-									<div class="card-body">
-										<div class="mapcontainer">
-											<div class="map">
-												<span>Alternative content for the map</span>
+										<div class="col-7 d-flex align-items-center">
+											<div class="numbers">
+												<p class="card-category">Visitors</p>
+												<h4 class="card-title">1,294</h4>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="row row-card-no-pd">
+						<div class="col-md-3">
+							<div class="card card-stats card-success">
+								<div class="card-body ">
+									<div class="row">
+										<div class="col-5">
+											<div class="icon-big text-center">
+												<i class="la la-bar-chart"></i>
+											</div>
+										</div>
+										<div class="col-7 d-flex align-items-center">
+											<div class="numbers">
+												<p class="card-category">Sales</p>
+												<h4 class="card-title">$ 1,345</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card card-stats card-danger">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-5">
+											<div class="icon-big text-center">
+												<i class="la la-newspaper-o"></i>
+											</div>
+										</div>
+										<div class="col-7 d-flex align-items-center">
+											<div class="numbers">
+												<p class="card-category">ID님의 작성 글</p>
+												<h4 class="card-title">1303</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card card-stats card-primary">
+								<div class="card-body ">
+									<div class="row">
+										<div class="col-5">
+											<div class="icon-big text-center">
+												<i class="la la-check-circle"></i>
+											</div>
+										</div>
+										<div class="col-7 d-flex align-items-center">
+											<div class="numbers">
+												<p class="card-category">주문 현황</p>
+												<h4 class="card-title">1</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 정보값 수정 칸 -->
+					
+					<div class="form-group" id="box">
+						<label for="pillInput">비밀번호</label> <input type="text"
+							class="form-control input-pill" id="pillInput" value="${memberInfo.password}">
+							<br>
+						<label for="pillInput">이름</label> <input type="text"
+							class="form-control input-pill" id="pillInput" value="${memberInfo.name}">
+							<br>
+						<label for="pillInput">이메일</label> <input type="text"
+							class="form-control input-pill" id="pillInput" value="${memberInfo.email}">
+							<br>	
+						<label for="pillInput">휴대폰 번호</label> <input type="text"
+							class="form-control input-pill" id="pillInput" value="${memberInfo.phone}">	
+							<br>
+						<label for="pillInput">회원 상태 : </label> <input type="text"
+							class="form-control input-pill" id="pillInput" value="${memberInfo.status}">		
+							<br>
+						<label for="pillInput">관리자 권한 : </label> <input type="text"
+							class="form-control input-pill" id="pillInput" value="${memberInfo.is_admin}">	
+						
+						</div>	
+					<!-- 정보값 수정 칸 -->
+					
+
+					<!-- 회원 프로파일링 -->
+				<div class="row row-card-no-pd">
 							<div class="col-md-4">
 								<div class="card">
 									<div class="card-body">
-										<p class="fw-bold mt-1">My Balance</p>
-										<h4><b>$ 3,018</b></h4>
-										<a href="#" class="btn btn-primary btn-full text-left mt-3 mb-3"><i class="la la-plus"></i> Add Balance</a>
+										<p class="fw-bold mt-1"> 포인트 </p>
+										<h4><b>P ${memberInfo.point}</b></h4>
+										<a href="#" class="btn btn-primary btn-full text-left mt-3 mb-3"><i class="la la-plus"></i> 포인트 변경</a>
 									</div>
 									<div class="card-footer">
 										<ul class="nav">
@@ -489,7 +441,7 @@
 									<div class="card-body">
 										<div class="progress-card">
 											<div class="d-flex justify-content-between mb-1">
-												<span class="text-muted">Profit</span>
+												<span class="text-muted">힙합</span>
 												<span class="text-muted fw-bold"> $3K</span>
 											</div>
 											<div class="progress mb-2" style="height: 7px;">
@@ -498,7 +450,7 @@
 										</div>
 										<div class="progress-card">
 											<div class="d-flex justify-content-between mb-1">
-												<span class="text-muted">Orders</span>
+												<span class="text-muted">클래식</span>
 												<span class="text-muted fw-bold"> 576</span>
 											</div>
 											<div class="progress mb-2" style="height: 7px;">
@@ -507,16 +459,16 @@
 										</div>
 										<div class="progress-card">
 											<div class="d-flex justify-content-between mb-1">
-												<span class="text-muted">Tasks Complete</span>
-												<span class="text-muted fw-bold"> 70%</span>
+												<span class="text-muted">아이돌</span>
+												<span class="text-muted fw-bold"> 좋아요 횟수</span>
 											</div>
 											<div class="progress mb-2" style="height: 7px;">
-												<div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="70%"></div>
+												<div class="progress-bar bg-primary" role="progressbar" style="width: 12%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="12"></div>
 											</div>
 										</div>
 										<div class="progress-card">
 											<div class="d-flex justify-content-between mb-1">
-												<span class="text-muted">Open Rate</span>
+												<span class="text-muted">발라드</span>
 												<span class="text-muted fw-bold"> 60%</span>
 											</div>
 											<div class="progress mb-2" style="height: 7px;">
@@ -552,7 +504,7 @@
 											</div>
 											<div class="col-7 d-flex align-items-center">
 												<div class="numbers">
-													<p class="card-category">Followers</p>
+													<p class="card-category">찜한 목록</p>
 													<h4 class="card-title">+45K</h4>
 												</div>
 											</div>
@@ -561,221 +513,22 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="card">
-									<div class="card-header">
-										<h4 class="card-title">Users Statistics</h4>
-										<p class="card-category">
-										Users statistics this month</p>
-									</div>
-									<div class="card-body">
-										<div id="monthlyChart" class="chart chart-pie"></div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-8">
-								<div class="card">
-									<div class="card-header">
-										<h4 class="card-title">2018 Sales</h4>
-										<p class="card-category">
-										Number of products sold</p>
-									</div>
-									<div class="card-body">
-										<div id="salesChart" class="chart"></div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="card">
-									<div class="card-header ">
-										<h4 class="card-title">Table</h4>
-										<p class="card-category">Users Table</p>
-									</div>
-									<div class="card-body">
-										<table class="table table-head-bg-success table-striped table-hover">
-											<thead>
-												<tr>
-													<th scope="col">#</th>
-													<th scope="col">First</th>
-													<th scope="col">Last</th>
-													<th scope="col">Handle</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-													<td>Otto</td>
-													<td>@mdo</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-													<td>Thornton</td>
-													<td>@fat</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td colspan="2">Larry the Bird</td>
-													<td>@twitter</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="card card-tasks">
-									<div class="card-header ">
-										<h4 class="card-title">Tasks</h4>
-										<p class="card-category">To Do List</p>
-									</div>
-									<div class="card-body ">
-										<div class="table-full-width">
-											<table class="table">
-												<thead>
-													<tr>
-														<th>
-															<div class="form-check">
-																<label class="form-check-label">
-																	<input class="form-check-input  select-all-checkbox" type="checkbox" data-select="checkbox" data-target=".task-select">
-																	<span class="form-check-sign"></span>
-																</label>
-															</div>
-														</th>
-														<th>Task</th>
-														<th>Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															<div class="form-check">
-																<label class="form-check-label">
-																	<input class="form-check-input task-select" type="checkbox">
-																	<span class="form-check-sign"></span>
-																</label>
-															</div>
-														</td>
-														<td>Planning new project structure</td>
-<!-- 														<td class="td-actions text-right"> -->
-															<div class="form-button-action">
-																<button type="button" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">
-																	<i class="la la-edit"></i>
-																</button>
-																<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">
-																	<i class="la la-times"></i>
-																</button>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="form-check">
-																<label class="form-check-label">
-																	<input class="form-check-input task-select" type="checkbox">
-																	<span class="form-check-sign"></span>
-																</label>
-															</div>
-														</td>
-														<td>Update Fonts</td>
-														<td class="td-actions text-right">
-															<div class="form-button-action">
-																<button type="button" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">
-																	<i class="la la-edit"></i>
-																</button>
-																<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">
-																	<i class="la la-times"></i>
-																</button>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="form-check">
-																<label class="form-check-label">
-																	<input class="form-check-input task-select" type="checkbox">
-																	<span class="form-check-sign"></span>
-																</label>
-															</div>
-														</td>
-														<td>Add new Post
-														</td>
-														<td class="td-actions text-right">
-															<div class="form-button-action">
-																<button type="button" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">
-																	<i class="la la-edit"></i>
-																</button>
-																<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">
-																	<i class="la la-times"></i>
-																</button>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="form-check">
-																<label class="form-check-label">
-																	<input class="form-check-input task-select" type="checkbox">
-																	<span class="form-check-sign"></span>
-																</label>
-															</div>
-														</td>
-														<td>Finalise the design proposal</td>
-														<td class="td-actions text-right">
-															<div class="form-button-action">
-																<button type="button" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">
-																	<i class="la la-edit"></i>
-																</button>
-																<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">
-																	<i class="la la-times"></i>
-																</button>
-															</div>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="card-footer ">
-										<div class="stats">
-											<i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+					<!-- 회원 프로파일링 -->	
+					
+					<div class="card-action" align="center">
+					 <button class="btn btn-success" id="formbutton">Submit</button>
+					 <button class="btn btn-danger" id="formbutton">Cancel</button>
 					</div>
-				</div>
-				<footer class="footer">
-					<div class="container-fluid">
-						<nav class="pull-left">
-							<ul class="nav">
-								<li class="nav-item">
-									<a class="nav-link" href="http://www.themekita.com">
-										ThemeKita
-									</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">
-										Help
-									</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="https://themewagon.com/license/#free-item">
-										Licenses
-									</a>
-								</li>
-							</ul>
-						</nav>
-						<div class="copyright ml-auto">
-							2018, made with <i class="la la-heart heart text-danger"></i> by <a href="http://www.themekita.com">ThemeKita</a>
-						</div>				
-					</div>
-				</footer>
+	
 			</div>
-		</div>
+		</div> 
+	</div>
+
+
+
+
+
+
 	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdatePro" aria-hidden="true">
@@ -784,7 +537,7 @@
 				<div class="modal-header bg-primary">
 					<h6 class="modal-title"><i class="la la-frown-o"></i> Under Development</h6>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span> 
 					</button>
 				</div>
 				<div class="modal-body text-center">									

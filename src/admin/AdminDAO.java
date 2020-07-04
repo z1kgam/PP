@@ -132,6 +132,7 @@ public class AdminDAO {
 					e2.printStackTrace();
 				}
 			}
+				System.out.println(memberlist);
 				return memberlist; //전체 회원정보 memberlist 리턴
 		}
 	
