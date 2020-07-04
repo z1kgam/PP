@@ -170,9 +170,11 @@ public class AdminController extends HttpServlet{
 				result = adminDAO.MemberUpdate(memberInfo);
 				
 				nextPage= "/admin/MemberManager.do";
+				
 			} else if(action.equals("/MemberDelete.do")) {
 				int result = 0;
 				String id = request.getParameter("id");
+				System.out.println(id);
 				result = adminDAO.MemberDelete(id);
 				
 				nextPage= "/admin/MemberManager.do";

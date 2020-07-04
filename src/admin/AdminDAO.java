@@ -192,7 +192,7 @@ public class AdminDAO {
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
-			System.out.println("MemberDelter 메소드 내부에서 오류 :" + e);
+			System.out.println("MemberDelte 메소드 내부에서 오류 :" + e);
 		} finally {
 			try {
 				if(con!=null)con.close();

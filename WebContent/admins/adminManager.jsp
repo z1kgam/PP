@@ -21,6 +21,23 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 	<link rel="stylesheet" href="${contextPath}/admins/assets/css/ready.css">
 	<link rel="stylesheet" href="${contextPath}/assets/css/demo.css">
+	
+	
+	<script type="text/javascript">
+	
+	function del(id) {
+		
+		var did = id
+		alert(did);
+		if (confirm("정말 삭제 하시겠습니까??") == true){
+			window.location.href ='${contextPath}/admin/MemberDelete.do?id='+did+'&nowpage=${nowpage}';
+		} else {
+			return false;
+		}
+	}
+	
+	</script>
+	
 </head>
 <body>
 	<div class="wrapper">
@@ -356,8 +373,8 @@
 											</td>
 											<td>
 											<button type="button" data-toggle="tooltip" title="회원 삭제"
-												class="btn btn-link btn-simple-danger">
-												<i class="la la-times"></i>
+												onclick="del('${memberlist.id}')" class="btn btn-link btn-simple-danger">
+											<i class="la la-times"></i>
 											</button>
 											</td>
 											</div>
