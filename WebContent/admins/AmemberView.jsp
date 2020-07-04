@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -37,9 +38,74 @@ button#formbutton {
 	    
 }
 
+
+
 </style>
 
+<script type="text/javascript">
 
+//포인트 입력 박스
+function te3(t) {
+	
+	if(t == 1) {
+	  var z = document.getElementById("po");
+	  if (z.style.display === "none") {
+	    z.style.display = "block";
+	  } else {
+	    z.style.display = "none";
+	  }
+	  
+	  var x = document.getElementById("po2");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+	  
+	 }
+	
+	if(t == 2) {
+		
+		var z = document.getElementById("po");
+		if (z.style.display === "block") {
+			z.style.display = "none";
+		 }
+		
+		
+		var x = document.getElementById("po2");
+		 if (x.style.display === "none") {
+		  x.style.display = "block";
+		}
+	}
+		
+	
+	
+	}
+
+
+//목록 리스트 이동 
+function list3(f) {
+	
+	f.action = "${contextPath}/admin/MemberManager.do?nowpage=1";
+	f.submit();
+	
+}
+
+//수정 함수
+function update(f) {
+	
+	console.debug(f);
+	 if (confirm("정말 수정하시겠습니까??") == true){    //확인
+	f.action = "${contextPath}/admin/MemberUpdate.do?point2=${memberInfo.point}";
+	f.submit();
+	} else {
+		return false;
+	}
+
+}
+
+
+</script>
 	
 </head>
 <body>
@@ -295,12 +361,6 @@ button#formbutton {
 								<p>Icons</p>
 							</a>
 						</li>
-						<li class="nav-item update-pro">
-							<button  data-toggle="modal" data-target="#modalUpdate">
-								<i class="la la-hand-pointer-o"></i>
-								<p>Update To Pro</p>
-							</button>
-						</li>
 					</ul>
 					<!-- 사이드 네비 창 -->
 					
@@ -310,7 +370,7 @@ button#formbutton {
 			<!-- Body 부분 -->
 
 		
-
+		
 		<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
@@ -393,45 +453,28 @@ button#formbutton {
 							</div>
 						</div>
 					</div>
-
-					<!-- 정보값 수정 칸 -->
 					
-					<div class="form-group" id="box">
-						<label for="pillInput">비밀번호</label> <input type="text"
-							class="form-control input-pill" id="pillInput" value="${memberInfo.password}">
-							<br>
-						<label for="pillInput">이름</label> <input type="text"
-							class="form-control input-pill" id="pillInput" value="${memberInfo.name}">
-							<br>
-						<label for="pillInput">이메일</label> <input type="text"
-							class="form-control input-pill" id="pillInput" value="${memberInfo.email}">
-							<br>	
-						<label for="pillInput">휴대폰 번호</label> <input type="text"
-							class="form-control input-pill" id="pillInput" value="${memberInfo.phone}">	
-							<br>
-						<label for="pillInput">회원 상태 : </label> <input type="text"
-							class="form-control input-pill" id="pillInput" value="${memberInfo.status}">		
-							<br>
-						<label for="pillInput">관리자 권한 : </label> <input type="text"
-							class="form-control input-pill" id="pillInput" value="${memberInfo.is_admin}">	
-						
-						</div>	
-					<!-- 정보값 수정 칸 -->
 					
-
 					<!-- 회원 프로파일링 -->
-				<div class="row row-card-no-pd">
+					<form action="#" method="post">
+					<div class="row row-card-no-pd">
 							<div class="col-md-4">
 								<div class="card">
 									<div class="card-body">
 										<p class="fw-bold mt-1"> 포인트 </p>
 										<h4><b>P ${memberInfo.point}</b></h4>
-										<a href="#" class="btn btn-primary btn-full text-left mt-3 mb-3"><i class="la la-plus"></i> 포인트 변경</a>
+										<div id="po"  style="display: none">
+										<input type="text" class="form-control input-pill" id="pillInput" placeholder="AJAX 구현하기" name="point">	
+										</div>
+										<div id="po2">
+										<a href="#" class="btn btn-primary btn-full text-left mt-3 mb-3" onclick="te3(1)"><i class="la la-plus"></i>포인트 변경</a>
+										</div>
 									</div>
 									<div class="card-footer">
 										<ul class="nav">
 											<li class="nav-item"><a class="btn btn-default btn-link" href="#"><i class="la la-history"></i> History</a></li>
-											<li class="nav-item ml-auto"><a class="btn btn-default btn-link" href="#"><i class="la la-refresh"></i> Refresh</a></li>
+											<li class="nav-item ml-auto"><a class="btn btn-default btn-link" onclick="update(this.form)"><i class="la la-refresh"></i> Refresh</a></li>
+											<li class="nav-item ml-auto"><a class="btn btn-default btn-link" href="#" onclick="te3(2)"><i class="la la-refresh"></i> Refresh</a></li>
 										</ul>
 									</div>
 								</div>
@@ -513,13 +556,173 @@ button#formbutton {
 								</div>
 							</div>
 						</div>
-					<!-- 회원 프로파일링 -->	
 					
+					<!-- 회원 프로파일링 -->
+					
+					<!-- 정보값 수정 칸 -->
+					
+					
+					<input type="hidden" value="${memberInfo.id}" name="id"/>
+					 
+					<div class="form-group" id="box">
+						<label for="pillInput"><b>비밀번호</b></label> 
+						<input type="text" class="form-control input-pill" id="pillInput" value="${memberInfo.password}" name="password">
+							<br>
+						<label for="pillInput"><b>이름</b></label> 
+						<input type="text" class="form-control input-pill" id="pillInput" value="${memberInfo.name}" name="name">
+							<br>
+						<label for="pillInput"><b>이메일</b></label> 
+						<input type="text" class="form-control input-pill" id="pillInput" value="${memberInfo.email}" name="email">
+							<br>	
+						<label for="pillInput"><b>휴대폰 번호</b></label> 
+						<input type="text" class="form-control input-pill" id="pillInput" value="${memberInfo.phone}" name="phone">	
+							<br>
+						<b>회원 상태</b> : 	
+	                  	<c:choose>
+							<c:when test="${memberInfo.status == 1}">
+								이용 가능
+							</c:when>
+							<c:when test="${memberInfo.status == 2}">
+								이용 정지
+							</c:when>
+						</c:choose>
+						<div class="col-lg-4 col-md-9 col-sm-12">
+							<select name="status" class="form-control input-fixed" id="notify_state">
+								<option value="1" selected="selected">회원 이용 가능</option>
+								<option value="2">회원 이용 정지</option>
+							</select>
+						</div>
+						<br>
+						<b>관리자 권한</b> : 
+						<c:choose>
+							<c:when test="${memberInfo.is_admin == 1}">
+								 관리자
+							</c:when>
+							<c:when test="${memberInfo.is_admin == 0}">
+						 		일반 회원
+							</c:when>
+						</c:choose> 
+						<div class="col-lg-4 col-md-9 col-sm-12">
+							<select name="admin" class="form-control input-fixed" id="notify_state">
+								<option value="0" selected="selected">일반 회원</option>
+								<option value="1">관리자</option>
+							</select>
+						</div>
+						</div>	
+					<!-- 정보값 수정 칸 -->
+					
+					
+<!-- 					회원 프로파일링 -->
+<!-- 					<div class="row row-card-no-pd"> -->
+<!-- 							<div class="col-md-4"> -->
+<!-- 								<div class="card"> -->
+<!-- 									<div class="card-body"> -->
+<!-- 										<p class="fw-bold mt-1"> 포인트 </p> -->
+<%-- 										<h4><b>P ${memberInfo.point}</b></h4> --%>
+<!-- 										<div id="po"  style="display: none"> -->
+<!-- 										<input type="text" class="form-control input-pill" id="pillInput" value="AJAX 구현하기" name="point">	 -->
+<!-- 										</div> -->
+<!-- 										<div id="po2"> -->
+<!-- 										<a href="#" class="btn btn-primary btn-full text-left mt-3 mb-3" onclick="te3(1)"><i class="la la-plus"></i>포인트 변경</a> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<div class="card-footer"> -->
+<!-- 										<ul class="nav"> -->
+<!-- 											<li class="nav-item"><a class="btn btn-default btn-link" href="#"><i class="la la-history"></i> History</a></li> -->
+<!-- 											<li class="nav-item ml-auto"><a class="btn btn-default btn-link" href="#" onclick="te3(2)"><i class="la la-refresh"></i> Refresh</a></li> -->
+<!-- 										</ul> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-md-5"> -->
+<!-- 								<div class="card"> -->
+<!-- 									<div class="card-body"> -->
+<!-- 										<div class="progress-card"> -->
+<!-- 											<div class="d-flex justify-content-between mb-1"> -->
+<!-- 												<span class="text-muted">힙합</span> -->
+<!-- 												<span class="text-muted fw-bold"> $3K</span> -->
+<!-- 											</div> -->
+<!-- 											<div class="progress mb-2" style="height: 7px;"> -->
+<!-- 												<div class="progress-bar bg-success" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="78%"></div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div class="progress-card"> -->
+<!-- 											<div class="d-flex justify-content-between mb-1"> -->
+<!-- 												<span class="text-muted">클래식</span> -->
+<!-- 												<span class="text-muted fw-bold"> 576</span> -->
+<!-- 											</div> -->
+<!-- 											<div class="progress mb-2" style="height: 7px;"> -->
+<!-- 												<div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="65%"></div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div class="progress-card"> -->
+<!-- 											<div class="d-flex justify-content-between mb-1"> -->
+<!-- 												<span class="text-muted">아이돌</span> -->
+<!-- 												<span class="text-muted fw-bold"> 좋아요 횟수</span> -->
+<!-- 											</div> -->
+<!-- 											<div class="progress mb-2" style="height: 7px;"> -->
+<!-- 												<div class="progress-bar bg-primary" role="progressbar" style="width: 12%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="12"></div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div class="progress-card"> -->
+<!-- 											<div class="d-flex justify-content-between mb-1"> -->
+<!-- 												<span class="text-muted">발라드</span> -->
+<!-- 												<span class="text-muted fw-bold"> 60%</span> -->
+<!-- 											</div> -->
+<!-- 											<div class="progress mb-2" style="height: 7px;"> -->
+<!-- 												<div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="60%"></div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-md-3"> -->
+<!-- 								<div class="card card-stats"> -->
+<!-- 									<div class="card-body"> -->
+<!-- 										<p class="fw-bold mt-1">Statistic</p> -->
+<!-- 										<div class="row"> -->
+<!-- 											<div class="col-5"> -->
+<!-- 												<div class="icon-big text-center icon-warning"> -->
+<!-- 													<i class="la la-pie-chart text-warning"></i> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="col-7 d-flex align-items-center"> -->
+<!-- 												<div class="numbers"> -->
+<!-- 													<p class="card-category">Number</p> -->
+<!-- 													<h4 class="card-title">150GB</h4> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<hr/> -->
+<!-- 										<div class="row"> -->
+<!-- 											<div class="col-5"> -->
+<!-- 												<div class="icon-big text-center"> -->
+<!-- 													<i class="la la-heart-o text-primary"></i> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="col-7 d-flex align-items-center"> -->
+<!-- 												<div class="numbers"> -->
+<!-- 													<p class="card-category">찜한 목록</p> -->
+<!-- 													<h4 class="card-title">+45K</h4> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+					
+<!-- 					회원 프로파일링 -->
+					<br><br><br>
+					
+					<!-- 버튼 -->
 					<div class="card-action" align="center">
-					 <button class="btn btn-success" id="formbutton">Submit</button>
-					 <button class="btn btn-danger" id="formbutton">Cancel</button>
+					  <button class="btn btn-success" id="formbutton" onclick="update(this.form)">Submit</button>
+					  <button class="btn btn-danger" id="formbutton" onclick="list3(this.form)">Cancel</button>
 					</div>
-	
+					<!-- 버튼 -->
+					
+					</form>
 			</div>
 		</div> 
 	</div>

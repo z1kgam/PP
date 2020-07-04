@@ -27,7 +27,7 @@
 		<div class="main-header">  
 			<div class="logo-header">
 				<a href="#" class="logo">
-					Ready Dashboard
+					관리자 페이지
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -291,7 +291,7 @@
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h4 class="page-title">Dashboard</h4>
+						<h4 class="page-title">회원 관리</h4>
 						<table class="table table-hover">
 											<thead>
 												<tr align="center">
@@ -321,12 +321,12 @@
 											<fmt:formatDate var="parseDate" value="${memberlist.reg_date}" pattern="yyyy-MM-dd"/>
 										<tr>
 
-											<td><b>${memberlist.id}</b></td>
-											<td>${memberlist.name}</td>
-											<td>${memberlist.password}</td>
-											<td>${memberlist.email}</td>
-											<td>${memberlist.phone}</td>
-											<td>${memberlist.point}</td>
+											<td><p class="text-muted">${memberlist.id}</p></td>
+											<td><p class="text-muted">${memberlist.name}</p></td>
+											<td><p class="text-muted">${memberlist.password}</p></td>
+											<td><p class="text-muted">${memberlist.email}</p></td>
+											<td><p class="text-muted">${memberlist.phone}</p></td>
+											<td><p class="text-muted">${memberlist.point}</p></td>
 											<c:choose>
 												<c:when test="${memberlist.status == 1}">
 													<td><p class="text-success">이용 가능</p></td>
@@ -341,10 +341,10 @@
 													<td><p class="text-primary">관리자</p></td>
 												</c:when>
 												<c:when test="${memberlist.is_admin == 0}">
-													<td>일반 회원</td>
+													<td><p class="text-muted">일반 회원</p></td>
 												</c:when>
 											</c:choose>
-											<td>${parseDate}</td>
+											<td><p class="text-muted">${parseDate}</p></td>
 											<!-- 버튼 -->
 											<div class="form-button-action">
 											<td>
