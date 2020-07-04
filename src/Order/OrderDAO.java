@@ -35,7 +35,7 @@ public class OrderDAO {
 		try {
 			con = getConnection();
 
-			sql = "select max(num) from prord"; 
+			sql = "select max(num) from productorder"; 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -45,20 +45,34 @@ public class OrderDAO {
 				num = 1; 
 			}
 			
-			sql ="insert into prord(num,detailnum,id,reserved,total,"
-					+ "orderdate) "
-					+ "values(?,?,?,?,?,now())";
+			sql ="insert into productorder(num,detailnum,name,genre,cla,runtime,price,startdate,enddate,image,content,"
+					+ "place,seat,totalreserved,today,starttime,id,reserved,totalprice,orderdate)"
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setInt(2, vo.getDetailnum());
-			pstmt.setString(3, vo.getId());
-			pstmt.setInt(4, vo.getReserved());
-			pstmt.setInt(5, vo.getTotal());
+			pstmt.setString(3, vo.getName());
+			pstmt.setString(4, vo.getGenre());
+			pstmt.setString(5, vo.getCla());
+			pstmt.setInt(6, vo.getRuntime());
+			pstmt.setInt(7, vo.getPrice());
+			pstmt.setDate(8, vo.getStartdate());
+			pstmt.setDate(9, vo.getEnddate());
+			pstmt.setString(10, vo.getImage());
+			pstmt.setString(11, vo.getContent());
+			pstmt.setString(12, vo.getPlace());
+			pstmt.setInt(13, vo.getSeat());
+			pstmt.setInt(14, vo.getTotalreserved());
+			pstmt.setDate(15, vo.getToday());
+			pstmt.setString(16, vo.getStarttime());
+			pstmt.setString(17, vo.getId());
+			pstmt.setInt(18, vo.getReserved());
+			pstmt.setInt(19, vo.getTotalprice());
 			
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
-			System.out.println("insertDetail메소드 에서 예외발생 : " + e);
+			System.out.println("insertOrder메소드 에서 예외발생 : " + e);
 		}finally {
 			resource();
 		}

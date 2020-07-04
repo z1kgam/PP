@@ -46,16 +46,16 @@
 					<c:forEach var="det" items="${detail}" varStatus="status">
 						<tr>
 							<fmt:formatNumber value="${det.seat}" type="number" var="seat" />
-							<fmt:formatNumber value="${det.reserved}" type="number" var="reserved" />
+							<fmt:formatNumber value="${det.totalreserved}" type="number" var="reserved" />
 							<td>${status.count}</td>
-							<td>${Bean.name}</td>
-							<td>${det.date}</td>
-							<td>${det.time}</td>
+							<td>${det.name}</td>
+							<td>${det.today}</td>
+							<td>${det.starttime}</td>
 							<td>${seat-reserved}</td>
 							<td>${det.seat}</td>
 							<td>${det.place}</td>
 							<td><input type="button" value="예매하러가기" 
-							onclick="location.href='${contextPath}/Proser/prepare.do?num=${Bean.num}&detailnum=${det.pronum}'"></td>
+							onclick="location.href='${contextPath}/Proser/prepare.do?detailnum=${det.detailnum}'"></td>
 						</tr>
 					</c:forEach>
 			</c:when>

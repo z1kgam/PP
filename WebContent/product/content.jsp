@@ -88,7 +88,7 @@
 											<td><fmt:formatDate value="${Bean.startdate}" /> ~ <fmt:formatDate
 													value="${Bean.enddate}" /></td>
 											<td>관람시간</td>
-											<td>${Bean.minute}분</td>
+											<td>${Bean.runtime}분</td>
 										</tr>
 										<tr>
 

@@ -45,18 +45,39 @@ public class OrderController extends HttpServlet{
 		
 		if (action.equals("/order.do")) {
 			
-			int num = Integer.parseInt(request.getParameter("num"));
-			int count = Integer.parseInt(request.getParameter("count"));
+			int detailnum = Integer.parseInt(request.getParameter("detailnum"));
+			int reserved = Integer.parseInt(request.getParameter("count"));
 			int totalprice = Integer.parseInt(request.getParameter("totalprice"));
 			String id = request.getParameter("id");
 
-			DetailBean DVO = Pservice.getdetails(num);
+			DetailBean DVO = Pservice.getdetails(detailnum);
 
-			int sub = DVO.getReserved() + count;
+			int sub = DVO.getTotalreserved() + reserved;
 			
-			Pservice.UpdateSeat(num,sub);
+			Pservice.UpdateSeat(detailnum,sub);
 			
-			OrderVO vo = new OrderVO(num, count, totalprice, id);
+			DetailBean Bean = Pservice.getdetails(detailnum);
+			
+			OrderVO vo = new OrderVO();
+			
+			vo.setName(Bean.getName());
+			vo.setGenre(Bean.getGenre());
+			vo.setCla(Bean.getCla());
+			vo.setRuntime(Bean.getRuntime());
+			vo.setPrice(Bean.getPrice());
+			vo.setStartdate(Bean.getStartdate());
+			vo.setEnddate(Bean.getEnddate());
+			vo.setImage(Bean.getImage());
+			vo.setContent(Bean.getContent());
+			vo.setPlace(Bean.getPlace());
+			vo.setSeat(Bean.getSeat());
+			vo.setTotalreserved(Bean.getTotalreserved());
+			vo.setToday(Bean.getToday());
+			vo.setStarttime(Bean.getStarttime());
+			vo.setId(id);
+			vo.setDetailnum(detailnum);
+			vo.setReserved(reserved);
+			vo.setTotalprice(totalprice);
 			
 			Orservice.insertOrder(vo);
 
