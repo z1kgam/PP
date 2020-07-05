@@ -32,7 +32,7 @@ public class DetailDAO {
 		if(con != null) try{con.close();}catch(Exception e) {e.printStackTrace();}		
 	}
 
-	public void insertDetail(DetailBean bean) {
+	public void insertDetail(ProductBean bean) {
 		String sql = "";
 		int pronum =0;
 		try {

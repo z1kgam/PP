@@ -4,9 +4,9 @@ import java.sql.Date;
 
 public class ProductBean {
 	
-	private String name, genre, cla, image, content;
-	private int num, minute, price;
-	private Date startdate, enddate;
+	private String name, genre, cla, image, content, place, time;
+	private int pronum, seat, reserved, num, minute, price;
+	private Date date, startdate, enddate;
 	private int qty;
 	public ProductBean() {
 
@@ -92,6 +92,54 @@ public class ProductBean {
 	}
 	public void setQty(int qty) {
 		this.qty = qty;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public int getPronum() {
+		return pronum;
+	}
+
+	public void setPronum(int pronum) {
+		this.pronum = pronum;
+	}
+
+	public int getSeat() {
+		return seat;
+	}
+
+	public void setSeat(int seat) {
+		this.seat = seat;
+	}
+
+	public int getReserved() {
+		return reserved;
+	}
+
+	public void setReserved(int reserved) {
+		this.reserved = reserved;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 	
