@@ -88,13 +88,14 @@ public class qnaDao {
 			}
 			
 			sql = "insert into qnaboard(qna_num, id, qna_cate, qna_title, qna_contents, qna_date, qna_status)"
-				+ "values(?,'id',?,?,?,now(),0)";
+				+ "values(?,?,?,?,?,now(),0)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, faq_num);
-			pstmt.setString(2, qnaBean.getQna_cate());
-			pstmt.setString(3, qnaBean.getQna_title());
-			pstmt.setString(4, qnaBean.getQna_contents());
+			pstmt.setString(2, qnaBean.getid());
+			pstmt.setString(3, qnaBean.getQna_cate());
+			pstmt.setString(4, qnaBean.getQna_title());
+			pstmt.setString(5, qnaBean.getQna_contents());
 			
 			pstmt.executeUpdate();
 			

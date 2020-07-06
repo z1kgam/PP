@@ -20,5 +20,6 @@
   	naver_id_login.setState(state);
   	naver_id_login.setPopup();
   	naver_id_login.init_naver_id_login();
+//   	182808912
   </script>
 </html>
