@@ -16,7 +16,7 @@
 		<input type="hidden" name="parentsnum">
 		<table border="1" align="center" style="margin-top: 30px;">
 			<tr id="write" style="display: none;">
-				<td align="center"><input type="text" value="id" name="id"></td>
+				<td align="center"><input type="text" value="${sessionScope.id}" name="id"></td>
 				<td align="center"><textarea rows="5" cols="30" name="content"></textarea></td>
 				<td align="center">
 				<input type="submit" value="댓글등록"><br>

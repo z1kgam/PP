@@ -111,7 +111,7 @@ input {
 		</tr>
 		<tr>
 			<td>공연시간(분)</td>
-			<td><input type="text" name="minute"></td>
+			<td><input type="text" name="runtime"></td>
 		</tr>
 		<tr>
 			<td>공연기간</td>

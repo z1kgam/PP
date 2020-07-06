@@ -69,8 +69,12 @@ request.setCharacterEncoding("UTF-8");
 							<textarea class="form-control" name="contents" id="poolContent" cols="40" rows="13" required></textarea>
 						</td>
 					</tr>
-					
-					
+					<tr>
+						<td>
+						<input type="hidden" name="id" value="${id}">
+						</td>
+					</tr>
+
 <!-- 					
 					<tr>
 						<th class="align-middle">

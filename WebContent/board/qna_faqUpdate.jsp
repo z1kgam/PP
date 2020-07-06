@@ -74,10 +74,12 @@
 				</td>
 			</tr>
 		</table>
+		
 		<div class="text-center my-5">
 			<button type="button" class="btn btn-secondary" onclick="history.back()">취소</button>
 			<button type="submit" class="btn btn-primary">수정하기</button>
 		</div>
+		
 	</form>
 </article>
 <!-- 게시판 -->
