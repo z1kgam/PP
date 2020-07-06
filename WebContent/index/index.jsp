@@ -21,7 +21,7 @@
 margin: 10px;}
 .photo{width:106px; float:left;
     margin-top: 2px;
-    margin-right: 17px;}
+    margin-right: 17px }
 
 </style>
     <title>Meditative - Free Bootstrap 4 Template by Colorlib</title>

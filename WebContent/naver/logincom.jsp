@@ -22,9 +22,7 @@
        alert(naver_id_login.getProfileData('id'));
        alert(naver_id_login.getProfileData('email'));
        
-       memberDAO adssda = new memeDAO ();
-       
-       adssda.newadd(n, i , e , ;l ; ; ; ); <<<회원추가 insert into 컬럼 naverlogin 0 / 1 
+     
        
        
        var name = naver_id_login.getProfileData('name');
