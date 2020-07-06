@@ -659,7 +659,7 @@
 															</div>
 														</td>
 														<td>Planning new project structure</td>
-														<td class="td-actions text-right">
+<!-- 														<td class="td-actions text-right"> -->
 															<div class="form-button-action">
 																<button type="button" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">
 																	<i class="la la-edit"></i>

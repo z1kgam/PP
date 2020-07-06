@@ -38,7 +38,7 @@
 
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>   
 
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	
@@ -47,14 +47,17 @@
 	<script type="text/javascript">
 		function getValue() {
 			var count = Number(document.getElementById("count").value);
-			var price = Number(${PBean.price});
+
+			var price = Number(${DBean.price});
+
 			var Max = price*count;
 			
 			var print = Max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
-			document.getElementById("totalprice").value = Max;
 			$("#total").text(print);
+			document.getElementById("totalprice").value = Max;
 		}
 	</script>
+	
 	<style type="text/css">
 		#table{
 			margin-left: 200px;
@@ -102,28 +105,29 @@
 						<div class="col-md-12 d-flex ftco-animate">
 							<div class="blog-entry blog-entry-2 justify-content-end d-md-flex w-100">
 								<form action="${contextPath}/Order/order.do">
-									<input type="hidden" name="id" value="id">
-									<input type="hidden" name="num" value="${DBean.pronum}">
+									<input type="hidden" name="id" value="${sessionScope.id}">
+
+									<input type="hidden" name="detailnum" value="${DBean.detailnum}">
 									<table border="1" id="table">
 										<tr>
 											<td>콘서트명</td>
-											<td>${PBean.name}</td>
+											<td>${DBean.name}</td>
 										</tr>
 										<tr>
 											<td>포스터</td>
-											<td><img src="../consert/${PBean.image}"></td>
+											<td><img src="../consert/${DBean.image}"></td>
 										</tr>
 										<tr>
 											<td>장르</td>
-											<td>${PBean.genre}</td>
+											<td>${DBean.genre}</td>
 										</tr>
 										<tr>
 											<td>관람등급</td>
-											<td>${PBean.cla}</td>
+											<td>${DBean.cla}</td>
 										</tr>
 										<tr>
 											<td>관람시간</td>
-											<td>${PBean.minute}분</td>
+											<td>${DBean.runtime}분</td>
 										</tr>
 										<tr>
 											<td>공연장</td>
@@ -131,15 +135,16 @@
 										</tr>
 										<tr>
 											<td>공연날짜</td>
-											<td><fmt:formatDate value="${DBean.date}" type="date" dateStyle="full" /></td>
+											<td><fmt:formatDate value="${DBean.today}" type="date" dateStyle="full" /></td>
 										</tr>
 										<tr>
 											<td>시작시간</td>
-											<td>${fn:split(DBean.time,':')[0]}시 ${fn:split(DBean.time,':')[1]}분</td>
+											<td>${fn:split(DBean.starttime,':')[0]}시 ${fn:split(DBean.starttime,':')[1]}분</td>
 										</tr>
 										<tr>
 											<td>가격</td>
-											<td><fmt:formatNumber value="${PBean.price}" pattern="#,###" />원</td>
+											<td><fmt:formatNumber value="${DBean.price}" pattern="#,###" />원</td>
+
 										</tr>
 										<tr>
 											<td>예매수</td>
@@ -154,11 +159,13 @@
 										<tr>
 										<tr>
 											<td>총가격</td>
-											<td id="total"><fmt:formatNumber value="${PBean.price}" pattern="#,###" />원</td>
+
+											<td id="total"><fmt:formatNumber value="${DBean.price}" pattern="#,###" />원</td>
 										<tr>
 									</table>
 									<input type="submit" value="예매하기" id="submit">
-									<input type="hidden" name="totalprice" value="${PBean.price}">
+									<input type="hidden" id="totalprice" name="totalprice" value="${DBean.price}">
+
 								</form>
 							</div>
 						</div>

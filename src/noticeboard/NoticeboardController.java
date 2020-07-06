@@ -53,8 +53,6 @@ public class NoticeboardController extends HttpServlet{
 		//공지사항 글을 조회
 		if(action.equals("/listNotice.do")) {			
 			String n_cate = request.getParameter("n_cate");
-			String n_title = request.getParameter("n_title");
-			String n_date = request.getParameter("n_date");
 
 			int total = noticeDAO.getAllNotice();
 			System.out.println(total);
@@ -134,7 +132,7 @@ public class NoticeboardController extends HttpServlet{
 			System.out.println(n_num);
 			noticeDAO.deleteNoticeboard(n_num);
 			
-			nextPage = "/notice/listNotice.do";
+			nextPage = "/notice/listNotice.do"; 
 		//공지사항 글 수정
 		}else if(action.equals("/modNotice.do")) {
 			int n_num = Integer.parseInt(request.getParameter("n_num"));

@@ -2,10 +2,14 @@
     pageEncoding="UTF-8"%>
     
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />    
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
+    <!-- 회원 관리 페이지 -->
     
 <!DOCTYPE html>
 <html>
@@ -17,13 +21,30 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 	<link rel="stylesheet" href="${contextPath}/admins/assets/css/ready.css">
 	<link rel="stylesheet" href="${contextPath}/assets/css/demo.css">
+	
+	
+	<script type="text/javascript">
+	
+	function del(id) {
+		
+		var did = id
+		alert(did);
+		if (confirm("정말 삭제 하시겠습니까??") == true){
+			window.location.href ='${contextPath}/admin/MemberDelete.do?id='+did+'&nowpage=${nowpage}';
+		} else {
+			return false;
+		}
+	}
+	
+	</script>
+	
 </head>
 <body>
 	<div class="wrapper">
 		<div class="main-header">  
 			<div class="logo-header">
 				<a href="#" class="logo">
-					Ready Dashboard
+					관리자 페이지
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -119,6 +140,7 @@
 					</div>
 				</nav>
 			</div>
+			
 			<div class="sidebar">
 				<div class="scrollbar-inner sidebar-wrapper">
 					<div class="user">
@@ -286,59 +308,118 @@
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h4 class="page-title">Dashboard</h4>
-						<table class="table table-bordered table-bordered-bd-warning mt-4">
+						<h4 class="page-title">회원 관리</h4>
+						<table class="table table-hover">
 											<thead>
-												<tr>
+												<tr align="center">
 													<th scope="col">아이디</th>
 													<th scope="col">이름</th>
 													<th scope="col">비밀번호</th>
 													<th scope="col">이메일</th>
-													<th scope="col">우편번호</th>
-													<th scope="col">주소1</th>
-													<th scope="col">주소2</th>
 													<th scope="col">휴대폰 번호</th>
 													<th scope="col">포인트</th>
 													<th scope="col">회원 상태</th>
 													<th scope="col">관리자 권한</th>
+													<th scope="col">가입일</th>
 													<th scope="col">정보 수정</th>
+													<th scope="col">회원 삭제</th>
+													
 												</tr>
 											</thead>
 											<tbody>
+											<c:choose>
+											 <c:when test="${list == null }">
+											 <tr>
+											 <td colspan="12" align="center">등록된 회원이 없습니다.</td>
+											 </tr>
+											 </c:when>
+										<c:when test="${list != null }">
 											<c:forEach var="memberlist" items="${list}" varStatus="membersNum">
-            						<tr>
-            								<td><b>${memberlist.id}</b></td>
-            								<td>${memberlist.name}</td>
-            								<td>${memberlist.password}</td>
-            								<td>${memberlist.email}</td>
-            								<td>${memberlist.zipcode}</td>
-            								<td>${memberlist.address1}</td>
-            								<td>${memberlist.address2}</td>
-            								<td>${memberlist.phone}</td>
-            								<td>${memberlist.point}</td>
-            								<td>${memberlist.status}</td>
-            								<td>${memberlist.is_admin}</td>
-            								<td>
-            								<input type="button" onclick="location.href='${contextPath}/admin/MemberView.do?id=${memberlist.id}&nowpage=${nowpage}'" value="정보 조회">
-            								</td>
-            						</tr>
-            							</c:forEach>
+											<fmt:formatDate var="parseDate" value="${memberlist.reg_date}" pattern="yyyy-MM-dd"/>
+										<tr>
+
+											<td><p class="text-muted">${memberlist.id}</p></td>
+											<td><p class="text-muted">${memberlist.name}</p></td>
+											<td><p class="text-muted">${memberlist.password}</p></td>
+											<td><p class="text-muted">${memberlist.email}</p></td>
+											<td><p class="text-muted">${memberlist.phone}</p></td>
+											<td><p class="text-muted">${memberlist.point}</p></td>
+											<c:choose>
+												<c:when test="${memberlist.status == 1}">
+													<td><p class="text-success">이용 가능</p></td>
+												</c:when>
+												<c:when test="${memberlist.status == 2}">
+													<td><p class="text-danger">이용 정지</p></td>
+												</c:when>
+											</c:choose>
+
+											<c:choose>
+												<c:when test="${memberlist.is_admin == 1}">
+													<td><p class="text-primary">관리자</p></td>
+												</c:when>
+												<c:when test="${memberlist.is_admin == 0}">
+													<td><p class="text-muted">일반 회원</p></td>
+												</c:when>
+											</c:choose>
+											<td><p class="text-muted">${parseDate}</p></td>
+											<!-- 버튼 -->
+											<div class="form-button-action">
+											<td>
+											<button type="button" data-toggle="tooltip" title="정보 수정" 
+												onclick="location.href='${contextPath}/admin/AMemberView.do?id=${memberlist.id}&nowpage=${nowpage}'" 
+												class="btn btn-link <btn-simple-primary">
+												<i class="la la-edit"></i>
+											</button>
+											</td>
+											<td>
+											<button type="button" data-toggle="tooltip" title="회원 삭제"
+												onclick="del('${memberlist.id}')" class="btn btn-link btn-simple-danger">
+											<i class="la la-times"></i>
+											</button>
+											</td>
+											</div>
+											<!-- 버튼 -->
+										</tr>
+									</c:forEach>
+            							</c:when>
+            							</c:choose>	
 											</tbody>
 										</table>
-				<!-- 페이징 -->	
-					<div align="center">
-						<c:if test="${nowpage>blocksize}">
-						<a href="${contextPath}/admin/MemberManager.do?nowpage=${blockfirst-blocksize}">[이전]</a>
-						</c:if>
-						<c:forEach begin="${blockfirst}" end="${blocklast}" var="i">
-							<a href="${contextPath}/admin/MemberManager.do?nowpage=${i}">${i}</a>
-						</c:forEach>
-						<c:if test="${blocklast != totalPage }">
-							<a href="${contextPath}/admin/MemberManager.do?nowpage=${blocklast+1}">[다음]</a>
-						</c:if>
-					</div>
-				<!-- 페이징 -->		
+						<!-- 회원 정보 출력 테이블 -->
 					
+									<!-- 페이징 -->
+									<div align="center">
+									<div class="card-body">
+										<p class="demo">
+											<ul class="pagination pg-primary">
+												<li class="page-item">
+												<c:if test="${nowpage>blocksize}">
+													<a class="page-link" href="${contextPath}/admin/MemberManager.do?nowpage=${blockfirst-blocksize}" aria-label="Previous">
+														<span aria-hidden="true">&laquo;</span>
+													<!-- <span class="sr-only">Previous</span> -->
+													</a>
+												</c:if>	
+												</li>
+												<c:forEach begin="${blockfirst}" end="${blocklast}" var="i">
+												<li class="page-item active">
+												<a class="page-link" href="${contextPath}/admin/MemberManager.do?nowpage=${i}">${i}</a>
+												</li>
+												</c:forEach>
+												<c:if test="${blocklast != totalPage }">
+												<li class="page-item">
+													<a class="page-link" href="${contextPath}/admin/MemberManager.do?nowpage=${blocklast+1}" aria-label="Next">
+														<span aria-hidden="true">&raquo;</span>
+														<span class="sr-only">Next</span>
+													</a>
+												</li>
+												</c:if>
+											</ul>
+										</p>
+									</div>
+									</div>
+									<!-- 페이징 -->			
+				
+				
 						</div>
 				</div>
 			</div>

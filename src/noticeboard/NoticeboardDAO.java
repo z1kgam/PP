@@ -121,7 +121,7 @@ public class NoticeboardDAO {
 		return noticeList;
 	}
 	
-	
+	//카테고리별 글 개수 가져오기
 	public int getAllnotice(String n_cate) {
 		int count = 0;
 		try {
@@ -141,7 +141,7 @@ public class NoticeboardDAO {
 		return count;
 	}
 	
-	
+	//모든 글 개수 가져오기
 	public int getAllNotice() {
 		int count = 0;
 		try {
