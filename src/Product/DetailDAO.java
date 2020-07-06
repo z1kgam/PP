@@ -32,33 +32,43 @@ public class DetailDAO {
 		if(con != null) try{con.close();}catch(Exception e) {e.printStackTrace();}		
 	}
 
-	public void insertDetail(DetailBean bean) {
+
+	public void insertDetail(DetailBean vo) {
 		String sql = "";
-		int pronum =0;
+		int detailnum =0;
 		try {
 			con = getConnection();
 
-			sql = "select max(pronum) from details"; 
+			sql = "select max(detailnum) from details"; 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				pronum =  rs.getInt("max(pronum)") + 1;		 
+				detailnum =  rs.getInt("max(detailnum)") + 1;		 
 			}else {		
-				pronum = 1; 
+				detailnum = 1; 
 			}
 			
-			sql ="insert into details(pronum,num,place,seat,reserved,"
-					+ "date,time) "
-					+ "values(?,?,?,?,?,?,?)";
+			sql ="insert into details(detailnum,name,genre,cla,runtime,price,startdate,enddate,image,content,"
+					+ "place,seat,totalreserved,today,starttime) "
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, pronum);
-			pstmt.setInt(2, bean.getNum());
-			pstmt.setString(3, bean.getPlace());
-			pstmt.setInt(4, bean.getSeat());
-			pstmt.setInt(5, bean.getReserved());
-			pstmt.setDate(6, bean.getDate());
-			pstmt.setString(7, bean.getTime());
+			pstmt.setInt(1, detailnum);
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getGenre());
+			pstmt.setString(4, vo.getCla());
+			pstmt.setInt(5, vo.getRuntime());
+			pstmt.setInt(6, vo.getPrice());
+			pstmt.setDate(7, vo.getStartdate());
+			pstmt.setDate(8, vo.getEnddate());
+			pstmt.setString(9, vo.getImage());
+			pstmt.setString(10, vo.getContent());
+			pstmt.setString(11, vo.getPlace());
+			pstmt.setInt(12, vo.getSeat());
+			pstmt.setInt(13, vo.getTotalreserved());
+			pstmt.setDate(14, vo.getToday());
+			pstmt.setString(15, vo.getStarttime());
 			
 			pstmt.executeUpdate();
 			
@@ -70,49 +80,38 @@ public class DetailDAO {
 		
 	}
 
-	public void delete(int num) {
-		String sql="";
-
-		try {
-			con = getConnection();
-
-			sql = "delete from details where num=?";
-
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
-
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			System.out.println("delete메소드 에서 예외발생 : " + e);
-		}finally {
-			resource();
-		}
-	}
-
-	public List<DetailBean> getdetail(int num) {
+	public List<DetailBean> getdetail(String name) {
 		String sql="";
 		List<DetailBean> detail = new ArrayList<DetailBean>();
 
 		try {
 			con = getConnection();
 
-			sql = "select * from details where num=?";
+			sql = "select * from details where name=?";
 
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
+			pstmt.setString(1, name);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				DetailBean bean = new DetailBean();
-				bean.setPronum(rs.getInt("pronum"));
-				bean.setNum(rs.getInt("num"));
-				bean.setPlace(rs.getString("place"));
-				bean.setTime(rs.getString("time"));
-				bean.setSeat(rs.getInt("seat"));
-				bean.setReserved(rs.getInt("reserved"));
-				bean.setDate(rs.getDate("date"));
-				detail.add(bean);
+				DetailBean vo = new DetailBean();
+				vo.setDetailnum(rs.getInt("detailnum"));
+				vo.setName(rs.getString("name"));
+				vo.setGenre(rs.getString("genre"));
+				vo.setCla(rs.getString("cla"));
+				vo.setRuntime(rs.getInt("runtime"));
+				vo.setPrice(rs.getInt("price"));
+				vo.setStartdate(rs.getDate("startdate"));
+				vo.setEnddate(rs.getDate("enddate"));
+				vo.setImage(rs.getString("image"));
+				vo.setContent(rs.getString("content"));
+				vo.setPlace(rs.getString("place"));
+				vo.setSeat(rs.getInt("seat"));
+				vo.setTotalreserved(rs.getInt("totalreserved"));
+				vo.setToday(rs.getDate("today"));
+				vo.setStarttime(rs.getString("starttime"));
+				detail.add(vo);
 			}
 		} catch (Exception e) {
 			System.out.println("getdetail메소드 에서 예외발생 : " + e);
@@ -120,5 +119,86 @@ public class DetailDAO {
 			resource();
 		}
 		return detail;
+	}
+	
+	public DetailBean getdetails(int detail) {
+		DetailBean vo = new DetailBean();
+		String sql="";
+		
+		try {
+			con = getConnection();
+
+			sql = "select * from details where detailnum=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, detail);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				vo.setDetailnum(rs.getInt("detailnum"));
+				vo.setName(rs.getString("name"));
+				vo.setGenre(rs.getString("genre"));
+				vo.setCla(rs.getString("cla"));
+				vo.setRuntime(rs.getInt("runtime"));
+				vo.setPrice(rs.getInt("price"));
+				vo.setStartdate(rs.getDate("startdate"));
+				vo.setEnddate(rs.getDate("enddate"));
+				vo.setImage(rs.getString("image"));
+				vo.setContent(rs.getString("content"));
+				vo.setPlace(rs.getString("place"));
+				vo.setSeat(rs.getInt("seat"));
+				vo.setTotalreserved(rs.getInt("totalreserved"));
+				vo.setToday(rs.getDate("today"));
+				vo.setStarttime(rs.getString("starttime"));
+			}
+		} catch (Exception e) {
+			System.out.println("details메소드 에서 예외발생 : " + e);
+		}finally {
+			resource();
+		}
+			
+		return vo;
+	}
+
+	public void UpdateSeat(int num, int sub) {
+		String sql = "";
+		
+		try {
+			con = getConnection();
+
+			sql = "update details set totalreserved=? where detailnum=?"; 
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sub);
+			pstmt.setInt(2, num);
+			pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			System.out.println("UpdateSeat메소드 에서 예외발생 : " + e);
+		}finally {
+			resource();
+		}
+		
+	}
+
+	public void detaildelete(String name) {
+		String sql="";
+
+		try {
+			con = getConnection();
+
+			sql = "delete from details where name=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("detaildelete메소드 에서 예외발생 : " + e);
+		}finally {
+			resource();
+		}
+		
 	}
 }
