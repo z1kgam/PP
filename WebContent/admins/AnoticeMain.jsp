@@ -46,7 +46,7 @@
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h4 class="page-title">회원 관리</h4>
+						<h4 class="page-title">공지 사항 관리</h4>
 						
 						<div>
 				<form action="#" name=f method="post">
@@ -84,8 +84,7 @@
 										<tr align="center">
 											<td><p class="text-muted">${notice.n_cate}</p></td>
 											<td align="left">
-											<a href="${contextPath}/admin/AviewNotice.do?n_num=${notice.n_num}">
-											<p class="text-muted">${notice.n_title}</p></a>
+											<p class="text-muted">${notice.n_title}</p>
 											</td>
 											<td>관리자</td>
 											<td><p class="text-muted">${parseDate}</p></td>
@@ -93,7 +92,7 @@
 											<div class="form-button-action">
 											<td>
 											<button type="button" data-toggle="tooltip" title="글 수정" 
-												onclick="location.href='#'" 
+												onclick="location.href='${contextPath}/admin/AviewNotice.do?n_num=${notice.n_num}'" 
 												class="btn btn-link <btn-simple-primary" style=" font-size: 17px; ">
 												<i class="la la-edit"></i>
 											</button>

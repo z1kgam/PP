@@ -147,19 +147,6 @@ margin: 10px;}
       </div>
     </section>
 
-
-
-
-
-
-
-
-
-
-
-
-    
-
     <section class="ftco-section" style="position: relative; top: -300px;">
     	<div class="container">
     	
