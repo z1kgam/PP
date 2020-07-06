@@ -30,7 +30,7 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 		<!-- 게시판 -->
 		<article class="mt-3">
-			<form action="${contextPath}/qboard/qnaWrite.do" method="post">
+			<form action="${contextPath}/qboard/qnaWrite.do" method="post" enctype="multipart/form-data">
 				<table class="table">
 					<colgroup>
 						<col style="max-width: 15%" />
@@ -75,7 +75,7 @@ request.setCharacterEncoding("UTF-8");
 						</td>
 					</tr>
 
-<!-- 					
+ 					
 					<tr>
 						<th class="align-middle">
 							<label for="boardFile1" class="m-0">이미지 첨부1</label>
@@ -87,7 +87,6 @@ request.setCharacterEncoding("UTF-8");
 							</div>
 						</td>
 					</tr>
-					 -->
 					
 					
 				</table>

@@ -63,7 +63,20 @@ request.setCharacterEncoding("UTF-8");
 						<td>
 							${qna.qna_contents}  <br><br><br>
 						</td>
-					</tr>				
+					</tr>	
+					
+					
+					<tr>
+						<th class="align-middle">
+							<label for="contents" class="m-0">첨부이미지</label>
+						</th>
+						<td>
+							<img alt="img" src="${contextPath}/board/image/${qna.file}" height="400px" width="600px">  <br><br><br>
+						</td>
+					</tr>	
+					
+					
+								
 					
 				<c:if test="${qna.qna_status == 1}">					
 					<tr>

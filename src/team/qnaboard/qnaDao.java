@@ -54,6 +54,7 @@ public class qnaDao {
 				qbean.setQna_contents(rs.getString("qna_contents"));
 				qbean.setQna_date(rs.getDate("qna_date"));
 				qbean.setQna_status(rs.getInt("qna_status"));
+				qbean.setFile(rs.getString("file"));
 				
 				qnaList.add(qbean);
 			}		
@@ -86,6 +87,7 @@ public class qnaDao {
 				qbean.setQna_contents(rs.getString("qna_contents"));
 				qbean.setQna_date(rs.getDate("qna_date"));
 				qbean.setQna_status(rs.getInt("qna_status"));
+				qbean.setFile(rs.getString("file"));
 				
 				qnaList.add(qbean);
 			}		
@@ -117,8 +119,8 @@ public class qnaDao {
 				faq_num = 1;
 			}
 			
-			sql = "insert into qnaboard(qna_num, id, qna_cate, qna_title, qna_contents, qna_date, qna_status)"
-				+ "values(?,?,?,?,?,now(),0)";
+			sql = "insert into qnaboard(qna_num, id, qna_cate, qna_title, qna_contents, qna_date, qna_status, answer, file)"
+				+ "values(?,?,?,?,?,now(),0,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, faq_num);
@@ -126,6 +128,8 @@ public class qnaDao {
 			pstmt.setString(3, qnaBean.getQna_cate());
 			pstmt.setString(4, qnaBean.getQna_title());
 			pstmt.setString(5, qnaBean.getQna_contents());
+			pstmt.setString(6, qnaBean.getAnswer());
+			pstmt.setString(7, qnaBean.getFile());
 			
 			pstmt.executeUpdate();
 			
@@ -136,6 +140,8 @@ public class qnaDao {
 		}
 	}//insertfboard()끝
 
+	
+	
 	//모든 글 개수 가져오는 메소드
 	public int getAllQna() {
 		int count = 0;
@@ -196,6 +202,7 @@ public class qnaDao {
 				qbean.setQna_contents(rs.getString("qna_contents"));
 				qbean.setQna_status(rs.getInt("qna_status"));
 				qbean.setAnswer(rs.getString("answer"));
+				qbean.setFile(rs.getString("file"));
 			}
 		} catch (Exception e) {
 			System.out.println("viewQna()에서 예외 발생 : " + e);
