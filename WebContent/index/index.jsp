@@ -21,7 +21,7 @@
 margin: 10px;}
 .photo{width:106px; float:left;
     margin-top: 2px;
-    margin-right: 17px;}
+    margin-right: 17px }
 
 </style>
     <title>Meditative - Free Bootstrap 4 Template by Colorlib</title>
@@ -220,7 +220,7 @@ margin: 10px;}
         			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/rebeca.jpg); height: 350px;"></a>
         			<div class="text w-100 text-center">
         				<h3><a href="#">레베카</a></h3>
-        			
+        			'
         			</div>
         			
         			

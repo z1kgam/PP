@@ -345,6 +345,9 @@ public class AdminController extends HttpServlet{
 				
 				nextPage = "/admin/ANoticeMain.do";
 				
+			} else if(action.equals("/sangjin.do")) {
+				
+				nextPage = "/admins/test30.jsp";
 			}
 			
 			
