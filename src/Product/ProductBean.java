@@ -4,24 +4,24 @@ import java.sql.Date;
 
 public class ProductBean {
 	
-	private String name, genre, cla, image, content, place, time;
-	private int pronum, seat, reserved, num, minute, price;
-	private Date date, startdate, enddate;
+
+	private String name, genre, cla, image, content;
+	private int num, runtime, price;
+	private Date startdate, enddate;
+
 	private int qty;
 	public ProductBean() {
 
 	}
-	
-	public ProductBean(String name, String genre, String cla, String image, String content, int num, int minute,
+	public ProductBean(String name, String genre, String cla, String image, String content, int num, int runtime,
 			int price, Date startdate, Date enddate, int qty) {
-		super();
 		this.name = name;
 		this.genre = genre;
 		this.cla = cla;
 		this.image = image;
 		this.content = content;
 		this.num = num;
-		this.minute = minute;
+		this.runtime = runtime;
 		this.price = price;
 		this.startdate = startdate;
 		this.enddate = enddate;
@@ -63,11 +63,11 @@ public class ProductBean {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public int getMinute() {
-		return minute;
+	public int getRuntime() {
+		return runtime;
 	}
-	public void setMinute(int minute) {
-		this.minute = minute;
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
 	}
 	public int getPrice() {
 		return price;
@@ -94,53 +94,7 @@ public class ProductBean {
 		this.qty = qty;
 	}
 
-	public String getPlace() {
-		return place;
-	}
-
-	public void setPlace(String place) {
-		this.place = place;
-	}
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
-	}
-
-	public int getPronum() {
-		return pronum;
-	}
-
-	public void setPronum(int pronum) {
-		this.pronum = pronum;
-	}
-
-	public int getSeat() {
-		return seat;
-	}
-
-	public void setSeat(int seat) {
-		this.seat = seat;
-	}
-
-	public int getReserved() {
-		return reserved;
-	}
-
-	public void setReserved(int reserved) {
-		this.reserved = reserved;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
+	
 	
 	
 	
