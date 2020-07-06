@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import member.MemberBean;
+
 @WebServlet("/qboard/*")
 public class qnaBoardController extends HttpServlet{
    
@@ -76,6 +78,9 @@ public class qnaBoardController extends HttpServlet{
          
          int total = qnaDao.getAllQna(id);
          System.out.println(total);
+         
+         MemberBean mb = new MemberBean();
+         
          
          int pageSize = 3;
          int nowPage = 1;

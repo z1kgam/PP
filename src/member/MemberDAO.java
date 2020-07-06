@@ -172,6 +172,35 @@ public class MemberDAO {
 		}
 	} // DELETEMEMBER END
 	
+//	public MemberBean getAdmin(MemberBean memberBean) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		String sql ="";
+//
+//		try {
+//			con = getConnection();
+//			sql = "select * from users where is_admin = 1";
+//			pstmt = con.prepareStatement(sql);
+//			rs = pstmt.executeQuery();
+//			if(rs.next()) {
+//				memberBean.setId(rs.getString("id"));
+//			}
+//		} catch (Exception e) {
+//			System.out.println("getAdmin Inner Err :" + e);
+//		} finally {
+//			try {
+//				if(con!=null) con.close();
+//				if(pstmt != null) pstmt.close();
+//			} catch (Exception e2) {
+//				e2.printStackTrace();
+//			}
+//		}
+//		return memberBean;
+//	}
+	
+	
+	
 	public MemberBean getMember(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
