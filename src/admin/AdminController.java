@@ -253,7 +253,7 @@ public class AdminController extends HttpServlet{
 					
 					System.out.println(n_cate);
 				
-				nextPage = "/admins/ANoticeMain.jsp";
+				nextPage = "/admins/AnoticeMain.jsp";
 				
 			//관리자 페이지 공지사항 작성페이지 이동	
 			} else if(action.equals("/ANoticeWritep.do")) {

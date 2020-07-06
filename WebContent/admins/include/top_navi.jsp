@@ -238,7 +238,7 @@
 							</a>
 						</li>
        				 	<li class="nav-item active">
-							<a href="#">
+							<a href="${contextPath}/admin/ANoticeMain.do">
 								<i class="la la-bullhorn"></i>
 								<p>공지 사항 관리</p>
 								<span class="badge badge-count">5</span>
@@ -252,7 +252,7 @@
 							</a>
 						</li>
 						<li class="nav-item active">
-							<a href="${contextPath}/admin/sangjin.do">
+							<a href="#">
 								<i class="la la-gavel"></i>
 								<p>회원 신고 관리</p>
 								<span class="badge badge-count">5</span>

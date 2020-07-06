@@ -74,7 +74,7 @@
 										<c:when test="${list != null }">
 											<c:forEach var="memberlist" items="${list}" varStatus="membersNum">
 											<fmt:formatDate var="parseDate" value="${memberlist.reg_date}" pattern="yyyy-MM-dd"/>
-										<tr>
+										<tr align="center">
 
 											<td><p class="text-muted">${memberlist.id}</p></td>
 											<td><p class="text-muted">${memberlist.name}</p></td>
@@ -105,13 +105,13 @@
 											<td>
 											<button type="button" data-toggle="tooltip" title="정보 수정" 
 												onclick="location.href='${contextPath}/admin/AMemberView.do?id=${memberlist.id}&nowpage=${nowpage}'" 
-												class="btn btn-link <btn-simple-primary">
+												class="btn btn-link <btn-simple-primary" style=" font-size: 17px; ">
 												<i class="la la-edit"></i>
 											</button>
 											</td>
 											<td>
 											<button type="button" data-toggle="tooltip" title="회원 삭제"
-												onclick="del('${memberlist.id}')" class="btn btn-link btn-simple-danger">
+												onclick="del('${memberlist.id}')" class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
 											<i class="la la-times"></i>
 											</button>
 											</td>
