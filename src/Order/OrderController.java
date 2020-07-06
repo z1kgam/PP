@@ -141,7 +141,6 @@ public class OrderController extends HttpServlet{
 		}else if(action.equals("/addPayment.do")) {
 			String id = (String)session.getAttribute("id");
 			
-			orderDAO.addPayment();
 		}
 		
 		if(checkPage == 0) {
