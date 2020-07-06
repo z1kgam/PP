@@ -8,7 +8,7 @@
 </head>
 <body>
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("8pLz7wxFRYdPZEaM8Wsq", "http://localhost:8090/MyTestUmHaHaHa/naver/logincom.jsp");
+  var naver_id_login = new naver_id_login("8pLz7wxFRYdPZEaM8Wsq", "http://localhost:8090/PP/naver/logincom.jsp");
   // 접근 토큰 값 출력
   alert(naver_id_login.oauthParams.access_token);
   // 네이버 사용자 프로필 조회
@@ -20,7 +20,7 @@
 //     alert(naver_id_login.getProfileData('age'));
        alert(naver_id_login.getProfileData('name'));
        var name = naver_id_login.getProfileData('name');
-    window.location.href="http://localhost:8090/MyTestUmHaHaHa/naver/test.jsp?name="+name;
+    window.location.href="http://localhost:8090/PP/naver/test.jsp?name="+name;
   }
 </script>
 </body>
