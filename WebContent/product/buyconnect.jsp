@@ -163,7 +163,7 @@
 											<td id="total"><fmt:formatNumber value="${DBean.price}" pattern="#,###" />원</td>
 										<tr>
 									</table>
-									<input type="submit" value="예매하기" id="submit">
+									<input type="submit" value="장바구니에 담기" id="submit">
 									<input type="hidden" id="totalprice" name="totalprice" value="${DBean.price}">
 
 								</form>

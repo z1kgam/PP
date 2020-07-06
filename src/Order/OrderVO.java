@@ -3,7 +3,7 @@ package Order;
 import java.sql.Date;
 
 public class OrderVO {
-	private int num,detailnum, runtime, price, seat, totalreserved,reserved,totalprice;
+	private int num,detailnum, runtime, price, seat, totalreserved,qty,totalprice;
 	private String name, genre, cla, image, content, place, starttime,id;
 	private Date startdate, enddate, today,orderdate;
 	
@@ -59,12 +59,14 @@ public class OrderVO {
 		this.totalreserved = totalreserved;
 	}
 
-	public int getReserved() {
-		return reserved;
+
+
+	public int getQty() {
+		return qty;
 	}
 
-	public void setReserved(int reserved) {
-		this.reserved = reserved;
+	public void setQty(int qty) {
+		this.qty = qty;
 	}
 
 	public int getTotalprice() {
