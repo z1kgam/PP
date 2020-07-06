@@ -63,10 +63,9 @@ request.setCharacterEncoding("UTF-8");
 						<td>
 							${qna.qna_contents}  <br><br><br>
 						</td>
-					</tr>
+					</tr>				
 					
-					
-<c:if test="${qna.qna_status == 1}">					
+				<c:if test="${qna.qna_status == 1}">					
 					<tr>
 						<th class="align-middle">
 							<label for="contents" class="m-0">답변</label>
@@ -75,10 +74,10 @@ request.setCharacterEncoding("UTF-8");
 							${qna.answer}  <br><br><br>
 						</td>
 					</tr>
-</c:if>
+				</c:if>
 					
 					
-					
+				<c:if test="${is_admin == 1}">	
 					<a href="${contextPath}/qboard/deleteQna.do?qna_num=${qna.qna_num}">
 						<input type="button" value="삭제하기">
 					</a>
@@ -86,6 +85,7 @@ request.setCharacterEncoding("UTF-8");
 					<a href="${contextPath}/qboard/qnaUpdateForm.do?qna_num=${qna.qna_num}">
 						<input type="button" value="수정하기">
 					</a>
+				</c:if>	
 <!-- 					
 					<tr>
 						<th class="align-middle">
@@ -103,10 +103,7 @@ request.setCharacterEncoding("UTF-8");
 					
 				</table>
 				<div class="text-center my-5">
-					<button type="button" class="btn btn-secondary" onclick="history.back()">취소</button>
-					<a href="${contextPath}/qboard/deleteQna.do?qna_num=${qna.qna_num}" >
-						<button type="submit">삭제하기</button>
-					</a>
+					<button type="button" class="btn btn-secondary" onclick="history.back()">돌아가기</button>
 				</div>
 		</article>
 		<!-- 게시판 -->
