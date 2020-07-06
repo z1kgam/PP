@@ -265,7 +265,35 @@ public class OrderDAO {
 		return total;
 	}
 	
-	public void addPayment(OrderVO orderVO){
+	
+	public void addPayment(OrderVO vo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		try {
+			con = getConnection();
+			sql = "INSERT INTO PAYMENT(p_num, p_paydate, totalprice, name, id) VALUES(?,now(),?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, vo.getP_num());
+			pstmt.setInt(2, vo.getTotalprice());
+			pstmt.setString(3, vo.getName());
+			pstmt.setString(4, vo.getId());
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("addPayment Inner Err : " + e);
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+/*	public void addPayment(OrderVO orderVO){	//
 		ArrayList<OrderVO> payList = new ArrayList<OrderVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -292,5 +320,6 @@ public class OrderDAO {
 			}
 		}
 	}
+	 */
 	
 }

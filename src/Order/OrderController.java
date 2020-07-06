@@ -138,9 +138,17 @@ public class OrderController extends HttpServlet{
 			
 			return;
 			
-		}else if(action.equals("/addPayment.do")) {
+		}else if(action.equals("/Payment.do")) {	//결제테이블에 하나의 선택한 장바구니상품 추가
+			List myPayList = new ArrayList<OrderVO>();
+			OrderVO payVO = new OrderVO();
 			String id = (String)session.getAttribute("id");
+			int num = Integer.parseInt(request.getParameter("num"));
 			
+			
+			session.setAttribute("myPayList", myPayList);
+
+			
+			nextPage = "/mypage/payment.jsp";
 		}
 		
 		if(checkPage == 0) {

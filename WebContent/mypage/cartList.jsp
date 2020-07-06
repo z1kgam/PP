@@ -52,7 +52,9 @@
 	 					<th style="background-color: #eeeeee; text-align: center;">수량</th>
 	 					<th style="background-color: #eeeeee; text-align: center;">가격</th>
 	 					<th style="background-color: #eeeeee; text-align: center;">주문일자</th>
+	 					<th style="background-color: #eeeeee; text-align: center;">주문하기</th>
 	 					<th style="background-color: #eeeeee; text-align: center;">삭제</th>
+	 					
 	 				</tr>
 	 			</thead>
 	 			<tbody>
@@ -65,13 +67,14 @@
 	 					<td>${cart.qty}</td>
 	 					<td>${cart.totalprice}</td>
 	 					<td>${cart.orderdate}</td>
+	 					<td><a href="${contextPath}/Order/payment.do?num=${cart.num}&id=${cart.id}">주문하기</td></td>
 	 					<td><a href="${contextPath}/Order/delCart.do?num=${cart.num}&id=${cart.id}">삭제</a></td>
 	 				</tr>
 	 			</c:forEach>
 	 		</c:if>	
 	 		<c:if test="${empty cartList}">
 	 			<tr>
-				<td colspan="7">장바구니에 상품이 없습니다.</td>
+				<td colspan="8">장바구니에 상품이 없습니다.</td>
 				</tr>
 			</c:if>
 				
