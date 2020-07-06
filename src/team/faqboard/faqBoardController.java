@@ -39,8 +39,9 @@ public class faqBoardController extends HttpServlet{
 		//클라이언트의 웹브라우저로 응답할 데이터 유형 설정
 		response.setContentType("text/html;charset=utf-8");
 		
-		//요청 URL중 2단계 요청 주소를 알아내온다
 		int checkPage = 0;
+		//요청 URL중 2단계 요청 주소를 알아내온다
+
 		String action = request.getPathInfo(); 
 		System.out.println("action : " + action);
 		faqDao faqDao = new faqDao();
@@ -95,7 +96,7 @@ public class faqBoardController extends HttpServlet{
 			
 			nextPage = "/board/qna_faqboard.jsp";		
 			
-		}else if(action.equals("/fwriteForm.do")) { // FAQ게시판 글쓰기 버튼 클릭시
+		}else if(action.equals("/fwriteForm.do")) { //FAQ게시판 글쓰기폼 가기
 			
 			String check = request.getParameter("check");
 			
@@ -103,7 +104,7 @@ public class faqBoardController extends HttpServlet{
 			
 			nextPage = "/board/qna_faqwrite.jsp";
 		
-		}else if(action.equals("/faqWrite.do")) { // FAQ게시판 글 작성 버튼 클릭시
+		}else if(action.equals("/faqWrite.do")) { //FAQ게시판 글 작성
 			
 			String Rcate = request.getParameter("cate");
 			String title = request.getParameter("title");
@@ -118,7 +119,7 @@ public class faqBoardController extends HttpServlet{
 			
 			nextPage = "/fboard/faqlist.do";
 			
-		}else if(action.equals("/faqUpdateForm.do")) { // FAQ게시판 수정 버튼 클릭시
+		}else if(action.equals("/faqUpdateForm.do")) { //FAQ게시판 글 수정폼 가기
 			
 			String faq_num = request.getParameter("faq_num");
 			faqBean = faqDao.getfaq(Integer.parseInt(faq_num));
@@ -127,7 +128,7 @@ public class faqBoardController extends HttpServlet{
 			
 			nextPage = "/board/qna_faqUpdate.jsp";
 			
-		}else if(action.equals("/faqUpdate.do")) { // FAQ게시판 글 수정시
+		}else if(action.equals("/faqUpdate.do")) { //FAQ게시판 글 수정
 			
 			int faq_num = Integer.parseInt(request.getParameter("faq_num"));
 			
@@ -146,13 +147,10 @@ public class faqBoardController extends HttpServlet{
 			
 			nextPage = "/fboard/faqlist.do";
 			
-		}else if(action.equals("/faqDelete.do")) {
+		}else if(action.equals("/faqDelete.do")) { //FAQ게시판 글 삭제
 			
 			int faq_num = Integer.parseInt(request.getParameter("faq_num"));
-			System.out.println(faq_num);
-			
 			faqDao.deletefboard(faq_num);
-			
 			
 			request.setAttribute("faqUpdate", faqBean);
 			

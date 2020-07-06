@@ -2,13 +2,17 @@ package member;
 
 import java.io.IOException;
 import java.util.List;
-
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import Product.ProductBean;
+import Product.ProductDAO;
+import util.Status;
 
 
 @WebServlet("/mycon/*")
@@ -91,14 +95,14 @@ public class MyPageController extends HttpServlet{
 			
 		}else if(action.equals("/likeAction.do")) { //좋아요 판별 and 없으면 추가 있으면 삭제
 			
-			int n_num = Integer.parseInt(request.getParameter("n_num"));
+			int num = Integer.parseInt(request.getParameter("num"));
 			String id = request.getParameter("id");
-			boolean checkZ = likeDAO.checkLike(n_num, id);
-			int likeCount = likeDAO.getProductTotalLike(n_num);
+			boolean checkZ = likeDAO.checkLike(num, id);
+			int likeCount = likeDAO.getProductTotalLike(num);
 			if(checkZ == false) {
-				likeDAO.addLike(n_num, id);
+				likeDAO.addLike(num, id);
 			}else {
-				likeDAO.delLike(n_num, id);
+				likeDAO.delLike(num, id);
 			}
 			
 			request.setAttribute("checkZ", checkZ); 
@@ -106,12 +110,34 @@ public class MyPageController extends HttpServlet{
 			System.out.println("checkZ : "+checkZ);
 			System.out.println("likeCount : " + likeCount);
 			
-			nextPage = "/notice/viewNotice.do?n_num="+n_num;
+			nextPage = "/Proser/content.do?num="+num;
 			
 		}else if(action.equals("/reservlistForm.do")) { //예매 내역
 			
 			nextPage="/mypage/reservlist.jsp";
 			
+		}else if(action.equals("/addBasket.do")) {
+			
+			Status status = new Status();
+			String id = request.getParameter("id");
+			int num = Integer.parseInt(request.getParameter("num"));  
+			int numbers = Integer.parseInt(request.getParameter("numbers"));
+			System.out.println(id);
+			System.out.println(num);
+
+						
+			request.setAttribute("status", status);
+		
+			ArrayList<ProductBean> products = null;
+			ProductDAO productDAO = new ProductDAO();
+			BasketDAO basketDAO = new BasketDAO();
+			products = productDAO.getAllProduct();
+			basketDAO.basketAdd(id, num, numbers);
+			
+			request.setAttribute("products", products);
+			
+			nextPage = "/mycon/mypageForm.do";
+	
 		}
 		if(check == 0) {
 			request.getRequestDispatcher(nextPage).forward(request, response);
