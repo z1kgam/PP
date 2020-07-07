@@ -14,6 +14,9 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <title>1:1문의하기</title>
+
+<jsp:include page="../include/header.jsp"></jsp:include>
+
 	<link rel="stylesheet" href="../css/bootstrap.min.css" />
 	<link rel="stylesheet" href="../css/style.css" />
 	
@@ -83,7 +86,7 @@ request.setCharacterEncoding("UTF-8");
 						<td>
 							<div class="custom-file">
 								<input class="custom-file-input" type="file" name="boardFile1" id="boardFile1" onchange="readURL(this, 'image')" />
-								<label class="custom-file-label" for="boardFile1">Choose file</label>
+								<label class="custom-file-label" for="boardFile1">${qna.file}</label>
 							</div>
 						</td>
 					</tr>
@@ -101,7 +104,8 @@ request.setCharacterEncoding("UTF-8");
 	
 	
 	
-<%-- 	<script src="${contextPath}/js/bs-custom-file-input.js"></script>
+	
+ 	<script src="${contextPath}/js/bs-custom-file-input.js"></script>
 	<script>
 		$(document).ready(function() {
 			bsCustomFileInput.init()
@@ -137,9 +141,9 @@ request.setCharacterEncoding("UTF-8");
 		}
 	</script>
 	
-	 --%>
 	
 	
+<jsp:include page="../include/footer.jsp"></jsp:include>		
 	
 
 </body>

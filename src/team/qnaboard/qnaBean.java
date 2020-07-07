@@ -13,6 +13,7 @@ public class qnaBean {
 	private int qna_status;
 	private String answer;
 	private String file;
+	private String file2;
 	
 	public qnaBean() {
 		
@@ -89,6 +90,14 @@ public class qnaBean {
 
 	public void setFile(String file) {
 	this.file = file;
+	}
+
+	public String getFile2() {
+		return file2;
+	}
+
+	public void setFile2(String file2) {
+		this.file2 = file2;
 	}
 	
 	

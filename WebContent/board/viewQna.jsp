@@ -15,11 +15,15 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <title>1:1문의하기</title>
+
+<jsp:include page="../include/header.jsp"></jsp:include>
+
 	<link rel="stylesheet" href="../css/bootstrap.min.css" />
 	<link rel="stylesheet" href="../css/style.css" />
 	
 	<script src="../js/jquery-3.4.1.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
+	
 </head>
 <body>
 
@@ -124,8 +128,8 @@ request.setCharacterEncoding("UTF-8");
 	</section>
 	
 	
-	
-<%-- 	<script src="${contextPath}/js/bs-custom-file-input.js"></script>
+<!--  	
+ 	<script src="${contextPath}/js/bs-custom-file-input.js"></script>
 	<script>
 		$(document).ready(function() {
 			bsCustomFileInput.init()
@@ -161,10 +165,10 @@ request.setCharacterEncoding("UTF-8");
 		}
 	</script>
 	
-	 --%>
+-->	
 	
 	
-	
+<jsp:include page="../include/footer.jsp"></jsp:include>	
 
 </body>
 </html>

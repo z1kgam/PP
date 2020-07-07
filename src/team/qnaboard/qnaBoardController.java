@@ -1,10 +1,17 @@
 package team.qnaboard;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.renderable.ParameterBlock;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.media.jai.JAI;
+import javax.media.jai.RenderedOp;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,54 +67,50 @@ public class qnaBoardController extends HttpServlet{
          
       
       }else if(action.equals("/qnaWrite.do")) { //1:1문의 글작성
-         
-         checkPage = 1;
-         
-         ServletContext ctx = getServletContext();
- 		 String realPath = ctx.getRealPath("/board/image/");
- 		
- 		 int max = 10 * 1024 * 1024;
- 		 
- 		 MultipartRequest multi = new MultipartRequest(request, realPath, max, "UTF-8", new DefaultFileRenamePolicy());
-         
- 		 String cate = multi.getParameter("cate");
- 		 String title = multi.getParameter("title");
- 		 String contents = multi.getParameter("contents");
- 		 String id = (String)session.getAttribute("id");
- 		 String boardFile1 = multi.getFilesystemName("boardFile1");
- 		 
- 		 Enumeration e = multi.getFileNames();
- 		 
- 		 String name = "";
- 		 
- 		 while (e.hasMoreElements()) {
- 			 
-			name = (String)e.nextElement();
-		}
- 		 
- 		request.setAttribute("cate", cate);
- 		System.out.println(cate);
- 		request.setAttribute("title", title);
- 		System.out.println(title);
- 		request.setAttribute("contents", contents);
- 		System.out.println(contents);
- 		request.setAttribute("boardFile1", boardFile1);
- 		System.out.println(boardFile1);
- 		request.setAttribute("id", id);
- 		
- 		qnaBean.setQna_cate(cate);
- 		qnaBean.setQna_title(title);
- 		qnaBean.setQna_contents(contents);
- 		qnaBean.setFile(boardFile1);
- 		qnaBean.setid(id);
- 				
- 		         
-        qnaDao.insertfboard(qnaBean);         
-         
-        nextPage = "/qboard/qnaList.do";
+          
+          checkPage = 1;
+          
+          ServletContext ctx = getServletContext();
+  		 String realPath = ctx.getRealPath("/board/image/");
+  		
+  		 int max = 10 * 1024 * 1024;
+  		 
+  		 MultipartRequest multi = new MultipartRequest(request, realPath, max, "UTF-8", new DefaultFileRenamePolicy());
+          
+  		 String cate = multi.getParameter("cate");
+  		 String title = multi.getParameter("title");
+  		 String contents = multi.getParameter("contents");
+  		 String id = (String)session.getAttribute("id");
+  		 String boardFile1 = multi.getFilesystemName("boardFile1");
+  		 
+  		 Enumeration e = multi.getFileNames();
+  		 
+  		 String name = "";
+  		 
+  		 while (e.hasMoreElements()) {
+  			 
+ 			name = (String)e.nextElement();
+ 		}
+  		 
+  		request.setAttribute("cate", cate);
+  		request.setAttribute("title", title);
+  		request.setAttribute("contents", contents);
+  		request.setAttribute("boardFile1", boardFile1);
+  		request.setAttribute("id", id);
+  		
+  		qnaBean.setQna_cate(cate);
+  		qnaBean.setQna_title(title);
+  		qnaBean.setQna_contents(contents);
+  		qnaBean.setFile(boardFile1);
+  		qnaBean.setid(id);
+  				
+  		         
+         qnaDao.insertfboard(qnaBean);         
+          
+         nextPage = "/qboard/qnaList.do";
 
-         
-      }else if(action.equals("/qnaList.do")) { //문의내역 리스트
+          
+       }else if(action.equals("/qnaList.do")) { //문의내역 리스트
          
          String id =(String)session.getAttribute("id");
          
