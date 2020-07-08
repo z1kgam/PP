@@ -9,7 +9,7 @@
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-    <!-- 회원 관리 페이지 -->
+    <!-- 공지 사항 관리 페이지 -->
     
 <!DOCTYPE html>
 <html>
@@ -36,6 +36,10 @@
 		}
 	}
 	
+	function test() {
+		location.href	= '${contextPath}/admins/test2.jsp';
+	}
+	
 	</script>
 	
 </head>
@@ -56,9 +60,18 @@
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 점검">서비스 점검</option>
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=안내">안내</option>
 				</select>
+				
+					<div align="right" style="margin-right: 100px; float: right;">
+					<button type="button" onclick="test()" class="btn btn-warning">글쓰기</button>
+					</div>
 				</form>
+				
+				
+				
 			</div>
-						
+				
+				
+				
 						<table class="table table-hover">
 											<thead>
 												<tr align="center">
@@ -82,7 +95,7 @@
 											<fmt:formatDate var="parseDate" value="${notice.n_date}" pattern="yyyy-MM-dd"/>
 											
 										<tr align="center">
-											<td><p class="text-muted">${notice.n_cate}</p></td>
+											<td><p class="text-muted">${requestScope.n_cate}</p></td>
 											<td align="left">
 											<p class="text-muted">${notice.n_title}</p>
 											</td>

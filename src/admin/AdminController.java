@@ -260,8 +260,6 @@ public class AdminController extends HttpServlet{
 					request.setAttribute("totalPage", totalPage);
 					request.setAttribute("nowPage", nowPage);
 					request.setAttribute("n_cate", n_cate);
-					
-					System.out.println(n_cate);
 				
 				nextPage = "/admins/AnoticeMain.jsp";
 				
@@ -382,16 +380,16 @@ public class AdminController extends HttpServlet{
 				}
 				
 			    // 업로드된 경로와 파일명을 통해 이미지의 경로를 생성
-				String uploadPath1 = "PP/upload/" + fileName;
+				String uploadPath1 = "/upload/" + fileName;
 				
 			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
 				JSONObject jobj = new JSONObject();
 				jobj.put("url", uploadPath1);
 				
 				response.setContentType("application/json"); // 데이터 타입을 json으로 설정하기 위한 세팅
-				System.out.print(jobj.toJSONString());
+				out.print(jobj.toJSONString());
 				
-				nextPage = "/admins/test2.jsp";
+				return;
 				
 
 			}
