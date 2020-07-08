@@ -9,7 +9,7 @@
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-    <!-- 회원 관리 페이지 -->
+    <!-- 공지 사항 관리 페이지 -->
     
 <!DOCTYPE html>
 <html>
@@ -36,6 +36,10 @@
 		}
 	}
 	
+	function test() {
+		location.href	= '${contextPath}/admins/test2.jsp';
+	}
+	
 	</script>
 	
 </head>
@@ -48,17 +52,23 @@
 					<div class="container-fluid">
 						<h4 class="page-title">공지 사항 관리</h4>
 						
-						<div>
 				<form action="#" name=f method="post">
-				<select onchange="location.href=this.value" name="n_cate">
+				<div>
+				<select class="form-control input-fixed" id="notify_state" onchange="location.href=this.value" 
+									name="n_cate" style="margin-top: 10px;" >
 					<option>항목을 선택하세요</option>
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 소식">서비스 소식</option>
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 점검">서비스 점검</option>
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=안내">안내</option>
 				</select>
+					<div align="right" style="margin-right: 80px; margin-bottom: 10px; float: right;">
+					<button type="button" onclick="test()" class="btn btn-warning">글쓰기</button>
+					</div>
+				</div>	
 				</form>
-			</div>
-						
+				
+				
+				
 						<table class="table table-hover">
 											<thead>
 												<tr align="center">
@@ -80,7 +90,6 @@
 										<c:when test="${noticeList != null }">
 											<c:forEach var="notice" items="${noticeList}" varStatus="membersNum">
 											<fmt:formatDate var="parseDate" value="${notice.n_date}" pattern="yyyy-MM-dd"/>
-											
 										<tr align="center">
 											<td><p class="text-muted">${notice.n_cate}</p></td>
 											<td align="left">

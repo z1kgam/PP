@@ -21,6 +21,9 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import Order.OrderDAO;
+import Order.OrderVO;
+
 
  
 	class Gmail extends Authenticator{
@@ -50,7 +53,7 @@ public class MemberController extends HttpServlet {
 	
 	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-		
+
 		MemberDAO memberDAO = new MemberDAO();
 		MemberBean memberBean=new MemberBean();
 		HttpSession session = request.getSession();
@@ -112,12 +115,14 @@ public class MemberController extends HttpServlet {
 				String address2 = memberBean.getAddress2();
 				int is_admin = memberBean.getIs_admin();
 				int check = memberDAO.login(id, password); 
+
 				
 				if(check == 1) {
 					session.setAttribute("id", id);
 					session.setAttribute("name",name);
 					session.setAttribute("profile_img",profile_img);
 					session.setAttribute("is_admin", is_admin);
+
 					PrintWriter pw = response.getWriter();
 					pw.print("<script>" + "alert('로그인에 성공했습니다.');" + "location.href='"+request.getContextPath()+ "/index/index.jsp';" + "</script>");
 					System.out.println(is_admin);
@@ -151,9 +156,10 @@ public class MemberController extends HttpServlet {
 				nextPage = "/index/index.jsp";
 				
 			}else if(action.equals("/logout.do")) {
-								
+				String id = (String)session.getAttribute("id");
+				OrderDAO orderDAO = new OrderDAO();				
 				session.invalidate();
-				
+				orderDAO.delAllCart(id);
 				nextPage = "/index/index.jsp";
 				
 			}else if(action.equals("/myInfo.do")) {

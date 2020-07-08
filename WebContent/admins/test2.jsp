@@ -31,6 +31,7 @@
 	
   <script type="text/javascript">
   
+<<<<<<< HEAD
   function sendFile(file, editor) {
 	  	alert("왔는데?");
 		var data = new FormData();
@@ -53,9 +54,28 @@
 			
 		});
 		
+=======
+  /* summernote에서 이미지 업로드시 실행할 함수 */
+	function sendFile(file, editor) {
+		alert("업로드 함수 실행");
+      // 파일 전송을 위한 폼생성
+		data = new FormData();
+	    data.append("uploadFile", file);
+	    $.ajax({ // ajax를 통해 파일 업로드 처리
+	        data : data,
+	        type : "POST",
+	        url : "${contextPath}/admin/test3.do",
+	        cache : false,
+	        contentType : false,
+	        processData : false,
+	        success : function(data) { // 처리가 성공할 경우
+	        	alert("왔으");
+              // 에디터에 이미지 출력
+	        	$(editor).summernote('editor.insertImage', data.url);
+	        }
+	    });
+>>>>>>> 169704f3bfe39e86d4833c24e6cc583e977390ac
 	}
-  
-  
   </script>
 	
 </head>
@@ -69,10 +89,20 @@
 			<div class="container-fluid">
 				<h4 class="page-title">Dashboard</h4>
 
-				<form action="${contextPath}/admin/ANoticewrite.do" method="POST">
+				<form name="writeForm" action="${contextPath}/admin/ANoticewrite.do" method="POST">
 					<div class="form-group">
 						<label for="title">Title:</label> <input type="text"
 							class="form-control" placeholder="title" id="title" name="n_title">
+					</div>
+					
+					<div class="form-group">
+						<label for="title">Category:</label>
+						<select class="form-control input-square" id="squareSelect" style="width: 10%;">
+							<option>서비스소식</option>
+							<option>서비스점검</option>
+							<option>안내</option>
+						</select>
+
 					</div>
 					<div class="form-group">
 						<label for="content">Content:</label>
@@ -113,16 +143,7 @@
 	
 	 <!-- 이 부분 질문 하기 -->
 	<script> 
-  $(document).ready(function() {
-		$('#summernote').summernote({
-			tabsize : 2,
-			height : 300
-		});
-		
-// 		$('.dropdown-toggle').dropdown()
-
-
-	});
+ 
     
     $('#summernote').summernote({
     		
@@ -134,10 +155,11 @@
     	  callbacks: {// 콜백을 사용
     		  // 이미지를 업로드할 경우 이벤트를 발생
     		  onImageUpload: function(files, editor, welEditable) {
-    			  alert("엥?");
+    			  alert("이미지 업로드 이벤트");
     			  sendFile(files[0], this);
     		  } 
     	   }
+    		
     	});
     
    		
