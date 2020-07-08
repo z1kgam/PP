@@ -52,23 +52,20 @@
 					<div class="container-fluid">
 						<h4 class="page-title">공지 사항 관리</h4>
 						
-						<div>
 				<form action="#" name=f method="post">
-				<select onchange="location.href=this.value" name="n_cate">
+				<div>
+				<select class="form-control input-fixed" id="notify_state" onchange="location.href=this.value" 
+									name="n_cate" style="margin-top: 10px;" >
 					<option>항목을 선택하세요</option>
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 소식">서비스 소식</option>
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 점검">서비스 점검</option>
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=안내">안내</option>
 				</select>
-				
-					<div align="right" style="margin-right: 100px; float: right;">
+					<div align="right" style="margin-right: 80px; margin-bottom: 10px; float: right;">
 					<button type="button" onclick="test()" class="btn btn-warning">글쓰기</button>
 					</div>
+				</div>	
 				</form>
-				
-				
-				
-			</div>
 				
 				
 				
