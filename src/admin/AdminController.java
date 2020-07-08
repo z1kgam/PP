@@ -264,14 +264,16 @@ public class AdminController extends HttpServlet{
 				nextPage = "/admins/AnoticeMain.jsp";
 				
 			//관리자 페이지 공지사항 작성페이지 이동	
-			} else if(action.equals("/ANoticeWritep.do")) {
+			} else if(action.equals("/Writep.do")) {
 				
-					nextPage = "/admins/ANoticeWritep.jsp";
+					nextPage = "/admins/test2.jsp";
 					
 			//관리자 페이지 글 추가
 			} else if(action.equals("/ANoticewrite.do")) {
-			
-				String n_cate = request.getParameter("고객센터");
+				
+				
+				String n_cate = request.getParameter("n_cate");
+				System.out.println(n_cate);
 				String n_title = request.getParameter("n_title");
 				String n_content = request.getParameter("n_content");
 				checkPage = 1;

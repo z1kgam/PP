@@ -36,8 +36,9 @@
 		}
 	}
 	
-	function test() {
-		location.href	= '${contextPath}/admins/test2.jsp';
+	function te() {
+		alert("com");
+		window.location.href = '${contextPath}/admin/Writep.do';
 	}
 	
 	</script>
@@ -61,13 +62,13 @@
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 점검">서비스 점검</option>
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=안내">안내</option>
 				</select>
-					<div align="right" style="margin-right: 80px; margin-bottom: 10px; float: right;">
-					<button type="button" onclick="test()" class="btn btn-warning">글쓰기</button>
-					</div>
+					
 				</div>	
 				</form>
 				
-				
+				<div align="right" style="margin-right: 80px; margin-bottom: 10px; float: right;">
+					<button type="button" onclick="te()" class="btn btn-warning">글쓰기</button>
+					</div>
 				
 						<table class="table table-hover">
 											<thead>
