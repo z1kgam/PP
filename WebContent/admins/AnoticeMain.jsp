@@ -9,7 +9,7 @@
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-    <!-- 회원 관리 페이지 -->
+    <!-- 공지 사항 관리 페이지 -->
     
 <!DOCTYPE html>
 <html>
@@ -36,6 +36,10 @@
 		}
 	}
 	
+	function test() {
+		location.href	= '${contextPath}/admins/test2.jsp';
+	}
+	
 	</script>
 	
 </head>
@@ -46,72 +50,69 @@
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h4 class="page-title">회원 관리</h4>
+						<h4 class="page-title">공지 사항 관리</h4>
+						
+						<div>
+				<form action="#" name=f method="post">
+				<select onchange="location.href=this.value" name="n_cate">
+					<option>항목을 선택하세요</option>
+					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 소식">서비스 소식</option>
+					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 점검">서비스 점검</option>
+					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=안내">안내</option>
+				</select>
+				
+					<div align="right" style="margin-right: 100px; float: right;">
+					<button type="button" onclick="test()" class="btn btn-warning">글쓰기</button>
+					</div>
+				</form>
+				
+				
+				
+			</div>
+				
+				
+				
 						<table class="table table-hover">
 											<thead>
 												<tr align="center">
-													<th scope="col">아이디</th>
-													<th scope="col">이름</th>
-													<th scope="col">비밀번호</th>
-													<th scope="col">이메일</th>
-													<th scope="col">휴대폰 번호</th>
-													<th scope="col">포인트</th>
-													<th scope="col">회원 상태</th>
-													<th scope="col">관리자 권한</th>
-													<th scope="col">가입일</th>
-													<th scope="col">정보 수정</th>
-													<th scope="col">회원 삭제</th>
-													
+													<th scope="col"><b>분류</b></th>
+													<th scope="col"><b>제목</b></th>
+													<th scope="col"><b>작성자</b></th>
+													<th scope="col"><b>날짜</b></th>
+													<th scope="col">글 수정</th>
+													<th scope="col">글 삭제</th>
 												</tr>
 											</thead>
 											<tbody>
 											<c:choose>
-											 <c:when test="${list == null }">
+											 <c:when test="${noticeList == null }">
 											 <tr>
-											 <td colspan="12" align="center">등록된 회원이 없습니다.</td>
+											 <td colspan="12" align="center">등록된 글이 없습니다.</td>
 											 </tr>
 											 </c:when>
-										<c:when test="${list != null }">
-											<c:forEach var="memberlist" items="${list}" varStatus="membersNum">
-											<fmt:formatDate var="parseDate" value="${memberlist.reg_date}" pattern="yyyy-MM-dd"/>
+										<c:when test="${noticeList != null }">
+											<c:forEach var="notice" items="${noticeList}" varStatus="membersNum">
+											<fmt:formatDate var="parseDate" value="${notice.n_date}" pattern="yyyy-MM-dd"/>
+											
 										<tr align="center">
-
-											<td><p class="text-muted">${memberlist.id}</p></td>
-											<td><p class="text-muted">${memberlist.name}</p></td>
-											<td><p class="text-muted">${memberlist.password}</p></td>
-											<td><p class="text-muted">${memberlist.email}</p></td>
-											<td><p class="text-muted">${memberlist.phone}</p></td>
-											<td><p class="text-muted">${memberlist.point}</p></td>
-											<c:choose>
-												<c:when test="${memberlist.status == 1}">
-													<td><p class="text-success">이용 가능</p></td>
-												</c:when>
-												<c:when test="${memberlist.status == 2}">
-													<td><p class="text-danger">이용 정지</p></td>
-												</c:when>
-											</c:choose>
-
-											<c:choose>
-												<c:when test="${memberlist.is_admin == 1}">
-													<td><p class="text-primary">관리자</p></td>
-												</c:when>
-												<c:when test="${memberlist.is_admin == 0}">
-													<td><p class="text-muted">일반 회원</p></td>
-												</c:when>
-											</c:choose>
+											<td><p class="text-muted">${requestScope.n_cate}</p></td>
+											<td align="left">
+											<p class="text-muted">${notice.n_title}</p>
+											</td>
+											<td>관리자</td>
 											<td><p class="text-muted">${parseDate}</p></td>
 											<!-- 버튼 -->
 											<div class="form-button-action">
 											<td>
-											<button type="button" data-toggle="tooltip" title="정보 수정" 
-												onclick="location.href='${contextPath}/admin/AMemberView.do?id=${memberlist.id}&nowpage=${nowpage}'" 
+											<button type="button" data-toggle="tooltip" title="글 수정" 
+												onclick="location.href='${contextPath}/admin/AviewNotice.do?n_num=${notice.n_num}'" 
 												class="btn btn-link <btn-simple-primary" style=" font-size: 17px; ">
 												<i class="la la-edit"></i>
 											</button>
 											</td>
 											<td>
-											<button type="button" data-toggle="tooltip" title="회원 삭제"
-												onclick="del('${memberlist.id}')" class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
+											<button type="button" data-toggle="tooltip" title="글 삭제"
+												onclick="#" class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
 											<i class="la la-times"></i>
 											</button>
 											</td>
@@ -126,37 +127,66 @@
 						<!-- 회원 정보 출력 테이블 -->
 					
 									<!-- 페이징 -->
+									
 									<div align="center">
 									<div class="card-body">
 										<p class="demo">
 											<ul class="pagination pg-primary">
 												<li class="page-item">
-												<c:if test="${nowpage>blocksize}">
-													<a class="page-link" href="${contextPath}/admin/MemberManager.do?nowpage=${blockfirst-blocksize}" aria-label="Previous">
-														<span aria-hidden="true">&laquo;</span>
-													<!-- <span class="sr-only">Previous</span> -->
-													</a>
-												</c:if>	
+											<c:choose>
+										     <c:when test="${requestScope.n_cate != null}">
+										      <c:if test="${blockFirst!=1}">
+											<a class="page-link"
+												href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockFirst-blockSize}&n_cate=${n_cate}"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+												<!-- <span class="sr-only">Previous</span> -->
+											</a>
+											 </c:if>
 												</li>
-												<c:forEach begin="${blockfirst}" end="${blocklast}" var="i">
+												<c:forEach var="i" begin="${blockFirst}" end="${blockLast}" step="1">
 												<li class="page-item active">
-												<a class="page-link" href="${contextPath}/admin/MemberManager.do?nowpage=${i}">${i}</a>
+												<a class="page-link" href="${contextPath }/admin/ANoticeMain.do?nowPage=${i}&n_cate=${n_cate}">${i}</a>
 												</li>
 												</c:forEach>
-												<c:if test="${blocklast != totalPage }">
+												<c:if test="${blockLast != totalPage }">
 												<li class="page-item">
-													<a class="page-link" href="${contextPath}/admin/MemberManager.do?nowpage=${blocklast+1}" aria-label="Next">
+													<a class="page-link" href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockLast+1}&n_cate=${n_cate}" aria-label="Next">
 														<span aria-hidden="true">&raquo;</span>
 														<span class="sr-only">Next</span>
 													</a>
 												</li>
 												</c:if>
+											  </c:when>
+											  
+											  <c:otherwise>
+												<c:if test="${blockFirst!=1}">
+											<a class="page-link"
+												href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockFirst-blockSize}"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+												<!-- <span class="sr-only">Previous</span> -->
+											</a>
+											 </c:if>
+												</li>
+												<c:forEach var="i" begin="${blockFirst}" end="${blockLast}" step="1">
+												<li class="page-item active">
+												<a class="page-link" href="${contextPath }/admin/ANoticeMain.do?nowPage=${i}">${i}</a>
+												</li>
+												</c:forEach>
+												<c:if test="${blockLast != totalPage }">
+												<li class="page-item">
+													<a class="page-link" href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockLast+1}" aria-label="Next">
+														<span aria-hidden="true">&raquo;</span>
+														<span class="sr-only">Next</span>
+													</a>
+												</li>
+												</c:if>			  
+											  </c:otherwise>   
+										</c:choose>
 											</ul>
 										</p>
 									</div>
 									</div>
-									<!-- 페이징 -->			
-				
+									<!-- 페이징 -->		
 				
 						</div>
 				</div>
