@@ -389,7 +389,7 @@ public class AdminController extends HttpServlet{
 				jobj.put("url", uploadPath1);
 				
 				response.setContentType("application/json"); // 데이터 타입을 json으로 설정하기 위한 세팅
-				System.out.print(jobj.toJSONString());
+				out.print(jobj.toJSONString());
 				
 				nextPage = "/admins/test2.jsp";
 				
