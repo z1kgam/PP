@@ -106,7 +106,7 @@
 							<div class="blog-entry blog-entry-2 justify-content-end d-md-flex w-100">
 								<form action="${contextPath}/Order/order.do">
 									<input type="hidden" name="id" value="${sessionScope.id}">
-
+									<input type="hidden" name="name" value="${DBean.name}">
 									<input type="hidden" name="detailnum" value="${DBean.detailnum}">
 									<table border="1" id="table">
 										<tr>
@@ -163,7 +163,7 @@
 											<td id="total"><fmt:formatNumber value="${DBean.price}" pattern="#,###" />원</td>
 										<tr>
 									</table>
-									<input type="submit" value="예매하기" id="submit">
+									<input type="submit" value="장바구니에 담기" id="submit">
 									<input type="hidden" id="totalprice" name="totalprice" value="${DBean.price}">
 
 								</form>

@@ -53,8 +53,6 @@ public class NoticeboardController extends HttpServlet{
 		//공지사항 글을 조회
 		if(action.equals("/listNotice.do")) {			
 			String n_cate = request.getParameter("n_cate");
-			String n_title = request.getParameter("n_title");
-			String n_date = request.getParameter("n_date");
 
 			int total = noticeDAO.getAllNotice();
 			System.out.println(total);

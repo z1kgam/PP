@@ -56,7 +56,7 @@
 		<!-- 본문 START -->
 		<div class="page-header">
           <hr/>
-          <h1>회원가입</h1>
+          <h1>회원가입~</h1>
         </div>
         <hr/>
           <form role="form" action="${contextPath}/member/joinAction.do" method="post" name="joinForm" onsubmit="return checkForm()">

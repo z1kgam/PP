@@ -54,8 +54,50 @@
 <script src="../js/jquery-3.4.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 
+<jsp:include page="../include/header.jsp"/>
+
+
 </head>
 <body style="text-align: center;">
+
+   <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+			<div class="container">
+        		<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+          			<div class="col-md-9 ftco-animate text-center">
+						<h1 class="mb-3 bread">Contact Us</h1>
+						<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>
+					</div>
+				</div>
+			</div>
+	</section>
+	<section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
+		<div class="container">
+			<div class="row block-9">
+				<div class="col-md-2 contact-info ftco-animate p-4 w-100 h-500">
+					<div class="row">      
+		            	<div class="col-md-12 mb-3">
+							<p><a href="${contextPath}/notice/listNotice.do"><span>공지사항</span></a></p>
+						</div>
+						<div class="col-md-12 mb-3">
+							<p><span>이용안내</span> <a href="tel://1234567920"></a></p>
+						</div>
+						<div class="col-md-12 mb-3">
+							<p><a href="${contextPath}/fboard/faqlist.do"><span>F&Q</span></a></p>
+			            </div>
+		            	<div class="col-md-12 mb-3">
+			            	<c:choose>
+				            	<c:when test="${id != null}">
+			              				<p><a href="${contextPath}/qboard/qnaList.do"><span>나의 문의 내역</span></a> </p>
+			            		</c:when>
+			            		<c:when test="${id == null}">
+			            				<p><a href="${contextPath}/member/login.do"><span>나의 문의 내역</span></a>	</p>
+			            		</c:when>
+			            	</c:choose>
+		            	</div>
+	            	</div>
+				</div>
+			<div class="col-md-10">	
 	<c:forEach items="${list}" var="A">
 	<c:if test="${A.faq_num}>1">
 		${A.faq_num}
@@ -86,7 +128,7 @@
 			<div class="col-12 col-lg-8 text-right mt-lg-3">
 				<small>클릭해서 상세정보를 확인하세요.</small>
 				<button type="button" class="btn btn-sm btn-outline-secondary ml-3" onclick="hideContent()">모두 접기</button>
-			</div>
+			</div> 
 		</div>
 		<!-- 게시판 -->
 		<article class="mt-3">
@@ -111,7 +153,7 @@
 						<th>분류</th>
 						<th>제목</th>
 					</tr>
-			
+			 
 				<tbody>
 					
 					<c:if test="${count > 0}">
@@ -217,6 +259,14 @@
 			$(".poolcontent").hide();
 		}
 	</script>
+	
+	
+	</div>
+	</div>
+	</div>
+	</section>
+
+<jsp:include page="../include/footer.jsp"/>
 	
 </body>
 </html>
