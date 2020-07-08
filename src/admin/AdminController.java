@@ -1,15 +1,25 @@
 package admin;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import member.MemberBean;
 import member.MemberDAO;
@@ -250,10 +260,8 @@ public class AdminController extends HttpServlet{
 					request.setAttribute("totalPage", totalPage);
 					request.setAttribute("nowPage", nowPage);
 					request.setAttribute("n_cate", n_cate);
-					
-					System.out.println(n_cate);
 				
-				nextPage = "/admins/ANoticeMain.jsp";
+				nextPage = "/admins/AnoticeMain.jsp";
 				
 			//관리자 페이지 공지사항 작성페이지 이동	
 			} else if(action.equals("/ANoticeWritep.do")) {
@@ -263,7 +271,7 @@ public class AdminController extends HttpServlet{
 			//관리자 페이지 글 추가
 			} else if(action.equals("/ANoticewrite.do")) {
 			
-				String n_cate = request.getParameter("n_cate");
+				String n_cate = request.getParameter("고객센터");
 				String n_title = request.getParameter("n_title");
 				String n_content = request.getParameter("n_content");
 				checkPage = 1;
@@ -345,7 +353,47 @@ public class AdminController extends HttpServlet{
 				
 				nextPage = "/admin/ANoticeMain.do";
 				
+			} else if(action.equals("/test3.do")) {
+				
+				System.out.println("파일");
+				PrintWriter out = response.getWriter();
+				
+				ServletContext ctx = getServletContext();
+				
+				 // 이미지 업로드할 경로
+				String uploadPath = ctx.getRealPath("upload");
+				
+				System.out.print(uploadPath);
+			    int size = 10 * 1024 * 1024;  // 업로드 사이즈 제한 10M 이하
+				
+				String fileName = ""; // 파일명
+				
+				try{
+			        // 파일업로드 및 업로드 후 파일명 가져옴
+					MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8", new DefaultFileRenamePolicy());
+					Enumeration files = multi.getFileNames();
+					String file = (String)files.nextElement(); 
+					fileName = multi.getFilesystemName(file); 
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
+			    // 업로드된 경로와 파일명을 통해 이미지의 경로를 생성
+				String uploadPath1 = "/upload/" + fileName;
+				
+			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
+				JSONObject jobj = new JSONObject();
+				jobj.put("url", uploadPath1);
+				
+				response.setContentType("application/json"); // 데이터 타입을 json으로 설정하기 위한 세팅
+				out.print(jobj.toJSONString());
+				
+				return;
+				
+
 			}
+					
 			
 			
 			//디스패치 방식으로 포워딩 (재요청)
