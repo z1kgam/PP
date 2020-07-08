@@ -60,21 +60,21 @@ public class OrderController extends HttpServlet{
 			int totalprice = Integer.parseInt(request.getParameter("totalprice"));
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
-			System.out.println(name);
 			DetailBean DVO = Pservice.getdetails(detailnum);
 			checkPage = 1;
 			int sub = DVO.getTotalreserved() + qty;
 			PrintWriter pw = response.getWriter();
+			String out = "";
 			for(int i=0; i<seat.length;i++) {
-				System.out.println((seat[i]+""));
+				out += seat[i];
+				if(i!=seat.length-1)out+=",";
+				
 			}
-			
 			Pservice.UpdateSeat(detailnum,sub);
 			
 			DetailBean Bean = Pservice.getdetails(detailnum);
 			
 			boolean checkproduct = orderDAO.checkproduct(id, name);
-			System.out.println(checkproduct);
 			
 			if(checkproduct == true) {			//이미 장바구니에 해당상품이 있는지 판별함
 				pw.print("<script>");
@@ -85,7 +85,7 @@ public class OrderController extends HttpServlet{
 			}else {
 
 			OrderVO vo = new OrderVO();
-			
+			vo.setSelectseat(out);
 			vo.setName(Bean.getName());
 			vo.setGenre(Bean.getGenre());
 			vo.setCla(Bean.getCla());
@@ -161,13 +161,10 @@ public class OrderController extends HttpServlet{
 		}else if(action.equals("/Payment.do")) {	//결제테이블에 하나의 선택한 장바구니상품 추가
 			String id = request.getParameter("id");
 			int num = Integer.parseInt(request.getParameter("num"));
-			System.out.println(num);
-			System.out.println(id);
 			
 			OrderVO payVO = orderDAO.getPayInfo(id, num);
 			
 			request.setAttribute("payVO", payVO);
-			System.out.println(payVO);
 			
 			nextPage = "/mypage/payment.jsp";
 			
@@ -178,10 +175,8 @@ public class OrderController extends HttpServlet{
 			OrderVO payVO = new OrderVO();
 			memberBean = memberDAO.getMember(id);
 			int point = memberBean.getPoint();
-			System.out.println(point);
 			payVO = orderDAO.getPayInfo(id, num);
 			int totalprice = payVO.getTotalprice();
-			System.out.println(totalprice);
 			
 			if(point < totalprice) {
 				pw.write("<script>");
@@ -191,9 +186,7 @@ public class OrderController extends HttpServlet{
 				return;
 			}else {
 				orderDAO.payResult(id, num, totalprice);
-				System.out.println("가진 포인트 - 총 결제금액");
 				orderDAO.addPayment(payVO);
-				System.out.println("추가완료");
 				orderDAO.delCart(num, id);
 				
 				nextPage = "/index/index.jsp";
@@ -243,9 +236,7 @@ public class OrderController extends HttpServlet{
 			memberBean = memberDAO.getMember(id);
 			int point = memberBean.getPoint();		//내가 보유한 point 
 			OrderVO payVO = new OrderVO();
-			payVO = orderDAO.getPayInfo(id);		//해당id의 장바구니 전체 결제금액얻기
-			int totalprice = orderDAO.getTotalPrice(id); //  
-			System.out.println("총 결제금액 : " + totalprice);
+			int totalprice = orderDAO.getTotalPrice(id);  //해당id의 장바구니 전체 결제금액얻기 
 			if(point < totalprice) {
 				pw.write("<script>");
 				pw.write("alert('보유한 포인트가 결제금액보다 적습니다.');");

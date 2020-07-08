@@ -57,8 +57,8 @@ public class OrderDAO {
 			}
 			
 			sql ="insert into productorder(num,detailnum,name,genre,cla,runtime,price,startdate,enddate,image,content,"
-					+ "place,seat,totalreserved,today,starttime,id,qty,totalprice,orderdate)"
-					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+					+ "place,seat,totalreserved,today,starttime,id,qty,totalprice,orderdate,selectseat)"
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setInt(2, vo.getDetailnum());
@@ -79,6 +79,7 @@ public class OrderDAO {
 			pstmt.setString(17, vo.getId());
 			pstmt.setInt(18, vo.getQty());
 			pstmt.setInt(19, vo.getTotalprice());
+			pstmt.setString(20, vo.getSelectseat());
 			
 			pstmt.executeUpdate();
 			
@@ -331,6 +332,7 @@ public class OrderDAO {
 				vo.setQty(rs.getInt("qty"));
 				vo.setTotalprice(rs.getInt("totalprice"));
 				vo.setOrderdate(rs.getDate("orderdate"));
+				vo.setSelectseat(rs.getString("selectseat"));
 			}
 		} catch (Exception e) {
 			System.out.println("getPayInfo Inner Err : " + e);
@@ -379,6 +381,7 @@ public class OrderDAO {
 				vo.setQty(rs.getInt("qty"));
 				vo.setTotalprice(rs.getInt("totalprice"));
 				vo.setOrderdate(rs.getDate("orderdate"));
+				vo.setSelectseat(rs.getString("selectseat"));
 			}
 		} catch (Exception e) {
 			System.out.println("getPayInfo Inner Err : " + e);
@@ -414,13 +417,14 @@ public class OrderDAO {
 				p_num = 1;
 			}
 			
-			sql = "INSERT INTO payment(p_num, totalprice, qty, name, id, p_paydate) VALUES (?,?,?,?,?,now())";
+			sql = "INSERT INTO payment(p_num, totalprice, qty, name, id, p_paydate, selectseat) VALUES (?,?,?,?,?,now(),?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, p_num);
 			pstmt.setInt(2, payVO.getTotalprice());
 			pstmt.setInt(3, payVO.getQty());
 			pstmt.setString(4, payVO.getName());
 			pstmt.setString(5, payVO.getId());
+			pstmt.setString(6, payVO.getSelectseat());
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -626,7 +630,6 @@ public class OrderDAO {
 	public void addAllPay(List<OrderVO> list){
 		try {
 			con=getConnection();
-
 			int p_num = 0;
 			String sql = "SELECT MAX(p_num) FROM PAYMENT";
 			pstmt = con.prepareStatement(sql);
@@ -636,7 +639,7 @@ public class OrderDAO {
 			}else {
 				p_num = 1;
 			}
-			sql = "insert into payment (p_num,qty,p_paydate,totalprice,name,id) values ";
+			sql = "insert into payment (p_num,qty,p_paydate,totalprice,name,id,selectseat) values ";
 			for(int i = 0 ; i<list.size() ; i++) {
 				OrderVO vo =  list.get(i);
 				sql+="("+
@@ -644,14 +647,17 @@ public class OrderDAO {
 						","+vo.getQty()+
 						", now()" +
 						","+ vo.getTotalprice()+",'"+vo.getName() +
-						"','"+ vo.getId()+
+						"','"+ vo.getId() +
+						"','"+vo.getSelectseat() + 
 					  "')";
+				System.out.println(vo.getSelectseat());
 				if(i!=list.size()-1) {
 					sql+=",";
 				}
 			}
 			pstmt=con.prepareStatement(sql);
 			System.out.println(pstmt);
+			System.out.println();
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("addAllPay Inner Err : "+ e);
@@ -684,6 +690,7 @@ public class OrderDAO {
 										rs.getInt("qty"),
 										p_num,
 										rs.getString("name"),
+										rs.getString("selectseat"),
 										id
 										);
 				list.add(vo);
