@@ -54,7 +54,7 @@ public class OrderController extends HttpServlet{
 		String action = request.getPathInfo();
 		
 		if (action.equals("/order.do")) {			//장바구니에 추가하기
-			
+			String[] seat = request.getParameterValues("seat");
 			int detailnum = Integer.parseInt(request.getParameter("detailnum"));
 			int qty = Integer.parseInt(request.getParameter("count"));
 			int totalprice = Integer.parseInt(request.getParameter("totalprice"));
@@ -64,6 +64,10 @@ public class OrderController extends HttpServlet{
 			DetailBean DVO = Pservice.getdetails(detailnum);
 			checkPage = 1;
 			int sub = DVO.getTotalreserved() + qty;
+			PrintWriter pw = response.getWriter();
+			for(int i=0; i<seat.length;i++) {
+				System.out.println((seat[i]+""));
+			}
 			
 			Pservice.UpdateSeat(detailnum,sub);
 			
@@ -73,7 +77,6 @@ public class OrderController extends HttpServlet{
 			System.out.println(checkproduct);
 			
 			if(checkproduct == true) {			//이미 장바구니에 해당상품이 있는지 판별함
-				PrintWriter pw = response.getWriter();
 				pw.print("<script>");
 				pw.print("alert('이미 장바구니에 있는 상품입니다.');");
 				pw.print("history.back();");
@@ -104,7 +107,6 @@ public class OrderController extends HttpServlet{
 			Orservice.insertOrder(vo);
 			session.setAttribute("cartList", vo);
 						
-			PrintWriter pw = response.getWriter();
 			pw.write("<script>");
 			pw.write("alert('장바구니에 추가되었습니다.');");
 			pw.write("location.href='"+request.getContextPath()+"/Order/cartList.do';");

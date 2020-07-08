@@ -162,6 +162,44 @@
 
 											<td id="total"><fmt:formatNumber value="${DBean.price}" pattern="#,###" />원</td>
 										<tr>
+										<tr>
+											<td>
+												<p align = "center">
+											
+											<strong>좌석 배치도</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;
+											</td>
+											<td>
+											<%for(char c='A' ; c<='Z'; c++){ %>
+												<small><%=c %></small>&nbsp;&nbsp;
+											<%} %>
+											<br>
+											<% for(int r=1;r<=3;r++){ %>
+												<%= r %>
+												<%for(char c='A';c<='Z';c++){ %>
+													<input type = "checkbox" name="seat" value="<%=c %><%=r %>">
+												<%} %>
+												<br>
+												<%} %>
+											<br>
+											<% for(int r=4;r<=6;r++){ %>
+												<%= r %>
+												<%for(char c='A';c<='Z';c++){ %>
+													<input type = "checkbox" name="seat" value="<%=c %><%=r %>">
+												<%} %>
+												<br>
+												<%} %>
+											<br>
+											<% for(int r=7;r<=9;r++){ %>
+												<%= r %>
+												<%for(char c='A';c<='Z';c++){ %>
+													<input type = "checkbox" name="seat" value="<%=c %><%=r %>">
+												<%} %>
+												<br>
+												<%} %>
+											<br>
+											</td>
+										<tr>		
+										
 									</table>
 									<input type="submit" value="장바구니에 담기" id="submit">
 									<input type="hidden" id="totalprice" name="totalprice" value="${DBean.price}">
