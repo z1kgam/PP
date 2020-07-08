@@ -106,7 +106,7 @@
 							<div class="blog-entry blog-entry-2 justify-content-end d-md-flex w-100">
 								<form action="${contextPath}/Order/order.do">
 									<input type="hidden" name="id" value="${sessionScope.id}">
-
+									<input type="hidden" name="name" value="${DBean.name}">
 									<input type="hidden" name="detailnum" value="${DBean.detailnum}">
 									<table border="1" id="table">
 										<tr>

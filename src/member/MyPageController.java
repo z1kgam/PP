@@ -66,6 +66,13 @@ public class MyPageController extends HttpServlet{
 		int check = 0;
 		if(action.equals("/mypageForm.do")) { //마이페이지폼 이동
 			
+			String id = (String)session.getAttribute("id");
+			List<OrderVO> cartList = orderDAO.getCartList(id);
+			int payCount = orderDAO.getCountPay(id);
+			int cartCount = orderDAO.getCountCartList(id);
+			session.setAttribute("cartList", cartList);
+			session.setAttribute("cartCount", cartCount);
+			request.setAttribute("payCount", payCount);
 			nextPage="/mypage/mypage.jsp";
 			
 			/* check = 1; */

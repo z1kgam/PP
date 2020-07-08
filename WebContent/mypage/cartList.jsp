@@ -33,7 +33,7 @@
 
 	function btnPay(){
 			if(confirm("결제를 진행하시겠습니까?")){
-				location.href="${contextPath}/Order/Payment.do?id=${sessionScope.id}";
+				location.href="${contextPath}/Order/AllPayment.do";
 			}else{
 				return false;
 			}
@@ -67,7 +67,7 @@
 	 					<td>${cart.qty}</td>
 	 					<td>${cart.totalprice}</td>
 	 					<td>${cart.orderdate}</td>
-	 					<td><a href="${contextPath}/Order/payment.do?num=${cart.num}&id=${cart.id}">주문하기</td></td>
+	 					<td><a href="${contextPath}/Order/Payment.do?num=${cart.num}&id=${cart.id}">주문하기</td></td>
 	 					<td><a href="${contextPath}/Order/delCart.do?num=${cart.num}&id=${cart.id}">삭제</a></td>
 	 				</tr>
 	 			</c:forEach>
