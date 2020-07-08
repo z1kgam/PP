@@ -69,6 +69,16 @@
 						<label for="title">Title:</label> <input type="text"
 							class="form-control" placeholder="title" id="title" name="n_title">
 					</div>
+					
+					<div class="form-group">
+						<label for="title">Category:</label>
+						<select class="form-control input-square" id="squareSelect" style="width: 10%;">
+							<option>서비스소식</option>
+							<option>서비스점검</option>
+							<option>안내</option>
+						</select>
+
+					</div>
 					<div class="form-group">
 						<label for="content">Content:</label>
 						<textarea id="summernote" class="form-control" rows="5"

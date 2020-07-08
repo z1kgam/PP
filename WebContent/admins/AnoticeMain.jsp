@@ -90,9 +90,8 @@
 										<c:when test="${noticeList != null }">
 											<c:forEach var="notice" items="${noticeList}" varStatus="membersNum">
 											<fmt:formatDate var="parseDate" value="${notice.n_date}" pattern="yyyy-MM-dd"/>
-											
 										<tr align="center">
-											<td><p class="text-muted">${requestScope.n_cate}</p></td>
+											<td><p class="text-muted">${notice.n_cate}</p></td>
 											<td align="left">
 											<p class="text-muted">${notice.n_title}</p>
 											</td>
