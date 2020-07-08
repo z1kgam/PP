@@ -138,7 +138,7 @@ function time_format(s) {
 			          <li class="nav-item active"><a href="${contextPath}" class="nav-link" style="font-size: 18px; font-family:나눔고딕">메인</a></li>
 			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공연&상품 페이지</a></li>
 			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 18px; font-family:나눔고딕">###</a></li>
-			          <li class="nav-item"><a href="${contextPath}/classes.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
+			          <li class="nav-item"><a href="${contextPath}/event/events.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
 			     <c:if test="${is_admin == 1}">     
 			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">관리자 페이지</a></li>
 			     </c:if>
