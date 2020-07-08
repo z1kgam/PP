@@ -25,20 +25,19 @@
 	
 	<script type="text/javascript">
 	
-	function del(id) {
+	function del(n_num) {
 		
-		var did = id
-		alert(did);
+		var dn_num = n_num
 		if (confirm("정말 삭제 하시겠습니까??") == true){
-			window.location.href ='${contextPath}/admin/MemberDelete.do?id='+did+'&nowpage=${nowpage}';
+			window.location.href='${contextPath}/admin/AdeleteNotice.do?n_num='+ dn_num;
+			
 		} else {
 			return false;
 		}
 	}
 	
 	function te() {
-		alert("com");
-		window.location.href = '${contextPath}/admin/Writep.do';
+		window.location.href = '${contextPath}/admin/Writepage.do';
 	}
 	
 	</script>
@@ -62,13 +61,13 @@
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 점검">서비스 점검</option>
 					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=안내">안내</option>
 				</select>
-					
 				</div>	
-				</form>
-				
-				<div align="right" style="margin-right: 80px; margin-bottom: 10px; float: right;">
+				<div align="right" style="margin-right: 60px; margin-bottom: 10px; float: right;">
 					<button type="button" onclick="te()" class="btn btn-warning">글쓰기</button>
 					</div>
+				</form>
+				
+				
 				
 						<table class="table table-hover">
 											<thead>
@@ -102,14 +101,15 @@
 											<div class="form-button-action">
 											<td>
 											<button type="button" data-toggle="tooltip" title="글 수정" 
-												onclick="location.href='${contextPath}/admin/AviewNotice.do?n_num=${notice.n_num}'" 
+												onclick="location.href='${contextPath}/admin/AmodNoticePage.do?n_num=${notice.n_num}'" 
 												class="btn btn-link <btn-simple-primary" style=" font-size: 17px; ">
 												<i class="la la-edit"></i>
 											</button>
 											</td>
 											<td>
 											<button type="button" data-toggle="tooltip" title="글 삭제"
-												onclick="#" class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
+												onclick="del('${notice.n_num}')"
+												class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
 											<i class="la la-times"></i>
 											</button>
 											</td>

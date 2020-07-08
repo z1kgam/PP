@@ -59,7 +59,6 @@
 	
 </head>
 <body>
-
 <jsp:include page="./include/top_navi.jsp" />
 
 
@@ -68,17 +67,43 @@
 			<div class="container-fluid">
 				<h4 class="page-title">Dashboard</h4>
 
-				<form action="${contextPath}/admin/ANoticewrite.do" method="POST">
+				<form action="${contextPath}/admin/AmodNotice.do?n_num=${notice.n_num}&check=1" method="POST">
 					<div class="form-group">
-						<label for="title">Title:</label> <input type="text"
-							class="form-control" placeholder="title" id="title" name="n_title">
+						<label for="title">Title:</label> 
+						<input type="text" class="form-control" placeholder="title" id="title" name="n_title" required value="${notice.n_title}">
+					</div>
+					<div class="form-group">
+						<label for="title">Category:</label>
+						<c:if test="${notice.n_cate == '서비스 소식' }">
+							<select class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="서비스 소식" selected="selected">서비스 소식</option>
+							<option value="서비스 점검">서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>	
+						<c:if test="${notice.n_cate == '서비스 점검' }">
+							<select class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="서비스 소식">서비스 소식</option>
+							<option value="서비스 점검" selected="selected">서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>		
+						<c:if test="${notice.n_cate == '안내' }">
+							<select class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="서비스 소식">서비스 소식</option>
+							<option value="서비스 점검">서비스 점검</option>
+							<option value="안내" selected="selected">안내</option>
+						</c:if>
+						</select>
 					</div>
 					<div class="form-group">
 						<label for="content">Content:</label>
 						<textarea id="summernote" class="form-control" rows="5"
-							id="content" name="n_content"></textarea>
+							id="content" name="n_content" required>${notice.n_content}</textarea>
 					</div>
-					<button type="submit" class="btn btn-primary">글쓰기</button>
+					<div align="center">
+					<button type="submit" class="btn btn-success" >글 수정</button>
+					<button type="reset" class="btn btn-warning">다시 쓰기</button>
+					<button onclick="location.href='${contextPath}/admin/ANoticeMain.do'" type="reset" class="btn btn-danger">목록 으로</button>
+					</div>
 				</form>
 			</div>
 		</div>

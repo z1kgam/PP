@@ -89,14 +89,14 @@ public class AdminController extends HttpServlet{
 				//페이징 처리 변수
 				//회원 총 수 구해오기
 				int total = adminDAO.AllMemberCount(search); //회원 총 수
-				int pageSize = 5; // 한 페이지당 출력할 게시물 수
+				int pageSize = 10; // 한 페이지당 출력할 게시물 수
 				int nowPage = 1; // 현재 페이지
 				if(request.getParameter("nowpage") != null) {
 					nowPage = Integer.parseInt(request.getParameter("nowpage"));
 				}
 				int startRow = (nowPage-1)*pageSize; // 첫 번째 게시물 번호
 				int endRow = pageSize; // 마지막 게시물 번호 
-				int blocksize = 3; // 페이징 네비 사이즈
+				int blocksize = 5; // 페이징 네비 사이즈
 				int totalPage = total / pageSize + (total%pageSize==0? 0:1); // 총 페이지 수
 				int blockfirst = ((nowPage/blocksize)-(nowPage%blocksize==0?1:0)) * blocksize + 1; // 페이징 네비 첫번째 번호
 				int blocklast = blockfirst+blocksize-1; // 페이징 네비 마지막 번호
@@ -219,32 +219,32 @@ public class AdminController extends HttpServlet{
 				
 				nextPage = "/admins/Answer.jsp";
 				
-				
-			} else if (action.equals("/MemberJoinCount.do")) {
-				
-				nextPage = "/admins/MemberJoinCount.jsp";
-			
-			//관리자 페이지 고객센터 관리 페이지 이동 
+			//관리자 페이지 고객센터 관리 페이지 이동 	
 			} else if (action.equals("/ANoticeMain.do")) {
 				
-				
 				String n_cate = request.getParameter("n_cate");
+				System.out.println(n_cate);
 				String n_title = request.getParameter("n_title");
 				String n_date = request.getParameter("n_date");
-
+				if(request.getParameter("check") != null) {
+				int check = Integer.parseInt(request.getParameter("check"));
+				if(check == 1) {
+					n_cate = null;
+				 }
+				}
 				int total = noticeDAO.getAllNotice();
 				System.out.println(total);
 
-				if(n_cate != null)total = noticeDAO.getAllnotice(n_cate);
+				if(n_cate != null )total = noticeDAO.getAllnotice(n_cate);
 				System.out.println(total);			
 				
-				int pageSize = 5;
+				int pageSize = 10;
 				int nowPage = 1;
 				if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
 				
 				int pageFirst = (nowPage-1) * pageSize;
 				int totalPage = total/pageSize + (total%pageSize==0?0:1);
-				int blockSize = 10;
+				int blockSize = 5;
 				int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
 				int blockLast = blockFirst + blockSize -1;
 				
@@ -264,9 +264,9 @@ public class AdminController extends HttpServlet{
 				nextPage = "/admins/AnoticeMain.jsp";
 				
 			//관리자 페이지 공지사항 작성페이지 이동	
-			} else if(action.equals("/Writep.do")) {
+			} else if(action.equals("/Writepage.do")) {
 				
-					nextPage = "/admins/test2.jsp";
+					nextPage = "/admins/Awrite.jsp";
 					
 			//관리자 페이지 글 추가
 			} else if(action.equals("/ANoticewrite.do")) {
@@ -302,7 +302,7 @@ public class AdminController extends HttpServlet{
 				noticebean = noticeDAO.viewNotice(Integer.parseInt(n_num));
 				request.setAttribute("notice", noticebean);
 				
-				nextPage = "/admins/AmodNotice.jsp";
+				nextPage = "/admins/AnoticeModify.jsp";
 				
 			//관리자 페이지 공지사항 글 수정	
 			} else if(action.equals("/AmodNotice.do")) {
@@ -344,6 +344,7 @@ public class AdminController extends HttpServlet{
 //					pw.print("</script>");
 //				}
 //				
+				
 				nextPage = "/admin/ANoticeMain.do";
 			
 			//관리자 페이지 공지사항 글 삭제
