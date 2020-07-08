@@ -55,7 +55,7 @@
               	</div>
               	<div class="form-group">
                 	<input type="submit" value="작성하기"  class="btn btn-primary py-3 px-5">
-                	<input type="button" value="취소" class="btn btn-primary py-3 px-5" onclick="backToList(this.form);">
+                	<input type="button" value="취소" class="btn btn-primary py-3 px-5" onclick="history.back();">
 				</div>
 			</form>
  		</div>

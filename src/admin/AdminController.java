@@ -1,15 +1,25 @@
 package admin;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import member.MemberBean;
 import member.MemberDAO;
@@ -22,7 +32,8 @@ public class AdminController extends HttpServlet{
 
 	AdminDAO adminDAO = new AdminDAO();
 	AdminBean adminBean = new AdminBean();
-	
+	NoticeboardBean noticebean = new NoticeboardBean();
+	NoticeboardDAO noticeDAO = new NoticeboardDAO();
 	
 	
 		@Override
@@ -47,19 +58,20 @@ public class AdminController extends HttpServlet{
 			response.setContentType("text/html;charset=utf-8");
 			
 			//요청 URL중 2단계 요청 주소를 알아내온다
-			String action = request.getPathInfo();  //  /listArticles.do 
+			String action = request.getPathInfo();  
 			System.out.println("action : " + action);
 			
+			//디스패처 방식, 리다이렉트 방식 결정
+			int checkPage =0;
 			List<AdminBean> articlesList = null;
 			
 			if(action.equals("/adminPage.do")) { 
 				
-				
 				nextPage = "/admins/adminMain.jsp";
 				
 			//회원정보 전체 조회
-			} else if(action.equals("/MemberModify.do")) {
-				
+			} else if(action.equals("/MemberManager.do")) {
+				System.out.println("취소");
 				//회원 아이디 검색값 받아오기
 				String search = "";
 				if(request.getParameter("search")==null) {
@@ -84,7 +96,7 @@ public class AdminController extends HttpServlet{
 				}
 				int startRow = (nowPage-1)*pageSize; // 첫 번째 게시물 번호
 				int endRow = pageSize; // 마지막 게시물 번호 
-				int blocksize = 5; // 페이징 네비 사이즈
+				int blocksize = 3; // 페이징 네비 사이즈
 				int totalPage = total / pageSize + (total%pageSize==0? 0:1); // 총 페이지 수
 				int blockfirst = ((nowPage/blocksize)-(nowPage%blocksize==0?1:0)) * blocksize + 1; // 페이징 네비 첫번째 번호
 				int blocklast = blockfirst+blocksize-1; // 페이징 네비 마지막 번호
@@ -95,18 +107,14 @@ public class AdminController extends HttpServlet{
 				List<AdminBean> list = null;
 				
 				//회원 전체 정보 조회
+				//list에 멤버정보를 담음
 				if(selectserach == null) {
 					list = adminDAO.getAllmember(startRow, endRow, search);
 				} else {
 					list = adminDAO.getAllmember(startRow, endRow, search, selectserach);
 				}
 				
-				
-				//list에 멤버정보를 담음
 				String id = "test";
-				
-				//검색한 글정보(응답할 데이터)를  VIEW페이지(listArticles.jsp)로 보내서 출력하기 위해
-				//임시로 request저장소에 저장 하여 유지 시킨다
 				
 				//회원정보
 				request.setAttribute("list", list);
@@ -120,7 +128,7 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("blocklast", blocklast);
 				request.setAttribute("totalPage", totalPage);
 				
-				nextPage = "/admins/adminModify.jsp";
+				nextPage = "/admins/adminManager.jsp";
 				System.out.println(action);
 			
 			//회원 삭제 요청 (관리자 페이지)
@@ -133,9 +141,9 @@ public class AdminController extends HttpServlet{
 					
 				}
 				
-				nextPage= "/admin/MemberMan.do";
+				nextPage= "/admin/MemberManager.do";
 				
-			} else if(action.equals("/MemberView.do")) {
+			} else if(action.equals("/AMemberView.do")) {
 				
 				String id =request.getParameter("id");
 				String nowpage = request.getParameter("nowpage"); 
@@ -147,7 +155,7 @@ public class AdminController extends HttpServlet{
 //				System.out.println(adminBean.getId());
 				request.setAttribute("memberInfo", adminBean);
 				request.setAttribute("nowpage", nowpage);
-				nextPage = "/admins/adminView.jsp";
+				nextPage = "/admins/AmemberView.jsp";
 			
 			//회원 정보 수정 관리 요청
 			} else if(action.equals("/MemberUpdate.do")) {
@@ -160,19 +168,26 @@ public class AdminController extends HttpServlet{
 				memberInfo.setName(request.getParameter("name"));
 				memberInfo.setPhone(request.getParameter("phone"));
 				memberInfo.setEmail(request.getParameter("email"));
-				memberInfo.setPoint(Integer.parseInt(request.getParameter("point")));
+				if(request.getParameter("point") == "" ) {
+					memberInfo.setPoint(Integer.parseInt(request.getParameter("point2")));
+				} else {
+					memberInfo.setPoint(Integer.parseInt(request.getParameter("point")));
+				}
+				
 				memberInfo.setStatus(Integer.parseInt(request.getParameter("status")));
 				memberInfo.setIs_admin(Integer.parseInt(request.getParameter("admin")));
 				
 				result = adminDAO.MemberUpdate(memberInfo);
 				
-				nextPage= "/admin/MemberModify.do";
+				nextPage= "/admin/MemberManager.do";
+				
 			} else if(action.equals("/MemberDelete.do")) {
 				int result = 0;
 				String id = request.getParameter("id");
+				System.out.println(id);
 				result = adminDAO.MemberDelete(id);
 				
-				nextPage= "/admin/MemberMan.do";
+				nextPage= "/admin/MemberManager.do";
 				
 			} else if(action.equals("/MemberSearch.do")) {
 				
@@ -204,18 +219,14 @@ public class AdminController extends HttpServlet{
 				
 				nextPage = "/admins/Answer.jsp";
 				
-			//회원관리 페이지 이동	
-			} else if (action.equals("/MemberMan.do")) {
 				
-				nextPage = "/admins/adminManager.jsp";
 			} else if (action.equals("/MemberJoinCount.do")) {
 				
 				nextPage = "/admins/MemberJoinCount.jsp";
 			
 			//관리자 페이지 고객센터 관리 페이지 이동 
-			} else if (action.equals("/InformationMain.do")) {
+			} else if (action.equals("/ANoticeMain.do")) {
 				
-				NoticeboardDAO noticeDAO = new NoticeboardDAO();
 				
 				String n_cate = request.getParameter("n_cate");
 				String n_title = request.getParameter("n_title");
@@ -249,36 +260,149 @@ public class AdminController extends HttpServlet{
 					request.setAttribute("totalPage", totalPage);
 					request.setAttribute("nowPage", nowPage);
 					request.setAttribute("n_cate", n_cate);
+				
+				nextPage = "/admins/AnoticeMain.jsp";
+				
+			//관리자 페이지 공지사항 작성페이지 이동	
+			} else if(action.equals("/ANoticeWritep.do")) {
+				
+					nextPage = "/admins/ANoticeWritep.jsp";
 					
-					System.out.println(n_cate);
+			//관리자 페이지 글 추가
+			} else if(action.equals("/ANoticewrite.do")) {
+			
+				String n_cate = request.getParameter("고객센터");
+				String n_title = request.getParameter("n_title");
+				String n_content = request.getParameter("n_content");
+				checkPage = 1;
+				noticebean.setN_cate(n_cate);
+				noticebean.setN_title(n_title);
+				noticebean.setN_content(n_content);
+				noticebean.setN_date(new Timestamp(System.currentTimeMillis()));
 				
-				nextPage = "/admins/informationMain.jsp";
+				noticeDAO.insertNoticeboard(noticebean);
 				
-			//관리자 페이지 공지사항 관리 이동 	
-			} else if(action.equals("/informationwrite.do")) {
+				nextPage = "/admin/ANoticeMain.do";
+			
+			//관리자 페이지 공지 글 상세보기
+			} else if(action.equals("/AviewNotice.do")) {
 				
-					nextPage = "/admins/informationwrite.jsp";
+				String n_num = request.getParameter("n_num");
+				
+				noticebean = noticeDAO.viewNotice(Integer.parseInt(n_num));
+				request.setAttribute("notice", noticebean);
+				
+				nextPage = "/admins/AviewNotice.jsp";
+				
+			//관리자 페이지 글 수정 페이지 이동
+			} else if(action.equals("/AmodNoticePage.do")) {
+				String n_num = request.getParameter("n_num");
+				noticebean = noticeDAO.viewNotice(Integer.parseInt(n_num));
+				request.setAttribute("notice", noticebean);
+				
+				nextPage = "/admins/AmodNotice.jsp";
+				
+			//관리자 페이지 공지사항 글 수정	
+			} else if(action.equals("/AmodNotice.do")) {
+				
+				int n_num = Integer.parseInt(request.getParameter("n_num"));
+				System.out.println(n_num);
+				
+				String n_title = request.getParameter("n_title");
+				System.out.println(n_title);
+				
+				String n_cate = request.getParameter("n_cate");
+				System.out.println(n_cate);	
+				
+				String n_content = request.getParameter("n_content");
+				System.out.println(n_content);
+				
+				NoticeboardBean NoticeVO = new NoticeboardBean();
+				
+				NoticeVO.setN_num(n_num);
+				NoticeVO.setN_title(n_title);
+				NoticeVO.setN_cate(n_cate);
+				NoticeVO.setN_content(n_content);
+				
+				int result = noticeDAO.modNotice(NoticeVO);
+				
+				System.out.println(result);
+				
+//				if(result == 0) { // 수정실패
+//					PrintWriter pw = response.getWriter();
+//					pw.print("<script>");
+//					pw.print("alert('수정실패 !')");
+//					pw.print("history.go(-1);");
+//					pw.print("</script>");
+//				}else { // 수정성공
+//					
+//					PrintWriter pw = response.getWriter();
+//					pw.print("<script>");
+//					pw.print("alert('수정성공 !')");
+//					pw.print("</script>");
+//				}
+//				
+				nextPage = "/admin/ANoticeMain.do";
+			
+			//관리자 페이지 공지사항 글 삭제
+			} else if(action.equals("/AdeleteNotice.do")) {
+				
+				int n_num = Integer.parseInt(request.getParameter("n_num")); 
+				System.out.println(n_num);
+				noticeDAO.deleteNoticeboard(n_num);
+				
+				nextPage = "/admin/ANoticeMain.do";
+				
+			} else if(action.equals("/test3.do")) {
+				
+				System.out.println("파일");
+				PrintWriter out = response.getWriter();
+				
+				ServletContext ctx = getServletContext();
+				
+				 // 이미지 업로드할 경로
+				String uploadPath = ctx.getRealPath("upload");
+				
+				System.out.print(uploadPath);
+			    int size = 10 * 1024 * 1024;  // 업로드 사이즈 제한 10M 이하
+				
+				String fileName = ""; // 파일명
+				
+				try{
+			        // 파일업로드 및 업로드 후 파일명 가져옴
+					MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8", new DefaultFileRenamePolicy());
+					Enumeration files = multi.getFileNames();
+					String file = (String)files.nextElement(); 
+					fileName = multi.getFilesystemName(file); 
 					
-			//관리자 페이지 글 작성
-			} else if(action.equals("/insertWrite.do")) {
-			NoticeboardBean noticebean = new NoticeboardBean();
-			NoticeboardDAO noticeDAO = new NoticeboardDAO();
-			
-			String n_cate = request.getParameter("n_cate");
-			String n_title = request.getParameter("n_title");
-			String n_content = request.getParameter("n_content");
-			
-			noticebean.setN_cate(n_cate);
-			noticebean.setN_title(n_title);
-			noticebean.setN_content(n_content);
-			noticebean.setN_date(new Timestamp(System.currentTimeMillis()));
-			
-			noticeDAO.insertNoticeboard(noticebean);
-			nextPage = "/admin/InformationMain.do";	
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
+			    // 업로드된 경로와 파일명을 통해 이미지의 경로를 생성
+				String uploadPath1 = "/upload/" + fileName;
+				
+			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
+				JSONObject jobj = new JSONObject();
+				jobj.put("url", uploadPath1);
+				
+				response.setContentType("application/json"); // 데이터 타입을 json으로 설정하기 위한 세팅
+				out.print(jobj.toJSONString());
+				
+				return;
+				
+
 			}
+					
+			
+			
 			//디스패치 방식으로 포워딩 (재요청)
-			request.getRequestDispatcher(nextPage).forward(request, response);
-		
+			if(checkPage == 0) {
+				request.getRequestDispatcher(nextPage).forward(request, response);
+			}else {
+				response.sendRedirect(request.getContextPath()+nextPage); //물어보기 이 상태로 request에 보낸값들 들고 갈수있는지
+			}
+			
 		}// doHandle END
 		
 				

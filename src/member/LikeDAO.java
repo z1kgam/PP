@@ -132,7 +132,7 @@ public class LikeDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql="";
-		boolean result= false;	
+		boolean checkproduct= false;	
 		try {
 			con=getConnection();
 			sql="SELECT * FROM likeboard where num = ? and id = ?";
@@ -140,7 +140,7 @@ public class LikeDAO {
 			pstmt.setInt(1, num);
 			pstmt.setString(2, id);
 			rs = pstmt.executeQuery();
-			if(rs.next()) result = true;
+			if(rs.next()) checkproduct = true;
 		} catch (Exception e) {
 		
 		} finally {
@@ -152,7 +152,7 @@ public class LikeDAO {
 				e2.printStackTrace();
 			}
 		}
-		return result;
+		return checkproduct;
 	} // checkLike END
 	
 	//이미 좋아요 된상태(true)라면 ? 좋아요를 삭제함

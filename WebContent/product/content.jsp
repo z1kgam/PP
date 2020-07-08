@@ -88,7 +88,7 @@
 											<td><fmt:formatDate value="${Bean.startdate}" /> ~ <fmt:formatDate
 													value="${Bean.enddate}" /></td>
 											<td>관람시간</td>
-											<td>${Bean.minute}분</td>
+											<td>${Bean.runtime}분</td>
 										</tr>
 										<tr>
 
@@ -110,8 +110,6 @@
 												<form action="${contextPath}/mycon/addBasket.do" method="post">
 													<input type="hidden" name="id" value="${sessionScope.id}">
 													<input type="hidden" name="num" value="${Bean.num}">
-													<input type="hidden" name="numbers" value="${Bean.qty}">
-													<input type="submit" value="장바구니에 담기" class="btn btn-outline-primary">
 												</form>	
 											</td>
 											<td></td>
@@ -122,7 +120,8 @@
 										<a href="${contextPath}/Proser/details.do?num=${Bean.num}" class="btn btn-outline-primary">상세등록</a> 
 										<a href="${contextPath}/Proser/delete.do?num=${Bean.num}&path=consert&image=${Bean.image}&content=${Bean.content}" class="btn btn-outline-primary">삭제하기</a>
 										<a href="${contextPath}/Proser/imcontact.do" class="btn btn-outline-primary">목록보기</a>					
-									<c:if test="${sessionScope.id != null}">
+									<!-- 좋아요 판별부분  checkZ 값이 false이면 찜하기 버튼이 보이고 true이면 찜한 상품이라고 표시된다  -->
+									<c:if test="${sessionScope.id != null}">      
 										<c:choose>
 											<c:when test="${requestScope.checkZ == 'false'}">
 												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}" class="btn btn-outline-primary">찜하기</a>
@@ -151,8 +150,8 @@
 			</ul>
 		</nav>
 		<hr style="width: 1500px; margin: auto;">
-		<div class="detail" id="explanation"><jsp:include page="../proinc/explanation.jsp" /></div>
-		<div class="detail" id="reply" style="display: none;"><jsp:include page="../proinc/reply.jsp" /></div>
+		<div class="detail" id="explanation" style="display: none;"><jsp:include page="../proinc/explanation.jsp" /></div>
+		<div class="detail" id="reply"><jsp:include page="../proinc/reply.jsp" /></div>
 		<div class="detail" id="review" style="display: none;"><jsp:include page="../proinc/review.jsp" /></div>
 		<div class="detail" id="trybuy" style="display: none;"><jsp:include page="../proinc/trybuy.jsp" /></div>
 	</section>

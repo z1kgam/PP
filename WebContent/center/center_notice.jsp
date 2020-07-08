@@ -54,10 +54,17 @@
 							<p><span>이용안내</span> <a href="tel://1234567920"></a></p>
 						</div>
 						<div class="col-md-12 mb-3">
-							<p><span>FAQ</span> <a href="mailto:info@yoursite.com"></a></p>
+							<p><a href="${contextPath}/fboard/faqlist.do"><span>F&Q</span></a></p>
 			            </div>
 		            	<div class="col-md-12 mb-3">
-		              		<p><span>나의 문의 내역</span> <a href="#"></a></p>
+			            	<c:choose>
+				            	<c:when test="${id != null}">
+			              				<p><a href="${contextPath}/qboard/qnaList.do"><span>나의 문의 내역</span></a> </p>
+			            		</c:when>
+			            		<c:when test="${id == null}">
+			            				<p><a href="${contextPath}/member/login.do"><span>나의 문의 내역</span></a>	</p>
+			            		</c:when>
+			            	</c:choose>
 		            	</div>
 	            	</div>
 				</div>

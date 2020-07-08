@@ -9,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import member.MemberBean;
 
 @WebServlet("/qboard/*")
 public class qnaBoardController extends HttpServlet{
@@ -37,6 +40,8 @@ public class qnaBoardController extends HttpServlet{
       response.setContentType("text/html;charset=utf-8");
       String action = request.getPathInfo();  //  
       System.out.println("action : " + action);
+      HttpSession session = request.getSession();
+
       
       
       
@@ -54,10 +59,13 @@ public class qnaBoardController extends HttpServlet{
          String Rcate = request.getParameter("cate");
          String title = request.getParameter("title");
          String contents = request.getParameter("contents");
+         String id =(String)session.getAttribute("id");
          checkPage = 1;
          qnaBean.setQna_cate(Rcate);
          qnaBean.setQna_title(title);
          qnaBean.setQna_contents(contents);
+         qnaBean.setid(id);
+         
          
          qnaDao.insertfboard(qnaBean);         
          
@@ -66,15 +74,15 @@ public class qnaBoardController extends HttpServlet{
          
       }else if(action.equals("/qnaList.do")) { //문의내역 리스트
          
-         String num = request.getParameter("qna_num");
-         String status = request.getParameter("qna_status");
-         String title = request.getParameter("qna_title");
-         String date = request.getParameter("qna_date");
-
-         int total = qnaDao.getAllQna();
+         String id =(String)session.getAttribute("id");
+         
+         int total = qnaDao.getAllQna(id);
          System.out.println(total);
          
-         int pageSize = 5;
+         MemberBean mb = new MemberBean();
+         
+         
+         int pageSize = 3;
          int nowPage = 1;
          if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
          
@@ -85,7 +93,7 @@ public class qnaBoardController extends HttpServlet{
          int blockLast = blockFirst + blockSize -1;
          
          if(blockLast>totalPage) blockLast=totalPage;
-         List<qnaBean> qnaList = qnaDao.qnaList(pageFirst, pageSize);
+         List<qnaBean> qnaList = qnaDao.qnaList(pageFirst, pageSize, id);
          request.setAttribute("qnaList", qnaList);
          request.setAttribute("blockSize", blockSize);
          request.setAttribute("blockFirst", blockFirst);

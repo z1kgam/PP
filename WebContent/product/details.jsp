@@ -56,7 +56,6 @@ input {
 	<input type="hidden" value="${Bean.startdate}" id="stdate">
 	<input type="hidden" value="${Bean.enddate}" id="endate">
 	<input type="hidden" value="${Bean.num}" name="num">
-	<input type="hidden" value="${pageNum}" name="pageNum">
 	<table id="notice">			
 		<tr>
 			<td>콘서트명</td>
@@ -88,11 +87,11 @@ input {
 		</tr>
 		<tr>
 			<td>공연날짜</td>
-			<td><input type="date" name="date" id="date" oninput="checkdate()"></td>
+			<td><input type="date" name="today" id="date" oninput="checkdate()"></td>
 		</tr>
 		<tr>
 			<td>공연시간</td>
-			<td><input type="time" name="time"></td>
+			<td><input type="time" name="starttime"></td>
 		</tr>
 		
 	</table>
