@@ -78,10 +78,8 @@ input {
 			<td>좌석</td>
 			<td>
 				<select name="seat" style="vertical-align: middle; text-align-last: center;">
-					<option>100</option>
-					<option>150</option>
-					<option>200</option>
-					<option>250</option>
+					<option>234</option>
+					<option>3</option>
 				</select>
 			</td>
 		</tr>
