@@ -124,6 +124,7 @@
 									<input type="hidden" name="id" value="${sessionScope.id}">
 									<input type="hidden" name="name" value="${DBean.name}">
 									<input type="hidden" name="detailnum" value="${DBean.detailnum}">
+									<input type="hidden" name="today" value="${DBean.today}">
 									<table border="1" id="table">
 										<tr>
 											<td>콘서트명</td>

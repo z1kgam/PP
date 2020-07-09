@@ -1,11 +1,14 @@
 package Order;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -417,7 +420,7 @@ public class OrderDAO {
 				p_num = 1;
 			}
 			
-			sql = "INSERT INTO payment(p_num, totalprice, qty, name, id, p_paydate, selectseat) VALUES (?,?,?,?,?,now(),?)";
+			sql = "INSERT INTO payment(p_num, totalprice, qty, name, id, p_paydate, selectseat, today,detailnum,genre,image,place,runtime) VALUES (?,?,?,?,?,now(),?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, p_num);
 			pstmt.setInt(2, payVO.getTotalprice());
@@ -425,6 +428,12 @@ public class OrderDAO {
 			pstmt.setString(4, payVO.getName());
 			pstmt.setString(5, payVO.getId());
 			pstmt.setString(6, payVO.getSelectseat());
+			pstmt.setDate(7, payVO.getToday());
+			pstmt.setInt(8, payVO.getDetailnum());
+			pstmt.setString(9, payVO.getGenre());
+			pstmt.setString(10, payVO.getImage());
+			pstmt.setString(11, payVO.getPlace());
+			pstmt.setInt(12, payVO.getRuntime());
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -639,7 +648,7 @@ public class OrderDAO {
 			}else {
 				p_num = 1;
 			}
-			sql = "insert into payment (p_num,qty,p_paydate,totalprice,name,id,selectseat) values ";
+			sql = "insert into payment (p_num,qty,p_paydate,totalprice,name,id,selectseat,today,detailnum,genre,image,place,runtime) values ";
 			for(int i = 0 ; i<list.size() ; i++) {
 				OrderVO vo =  list.get(i);
 				sql+="("+
@@ -649,7 +658,13 @@ public class OrderDAO {
 						","+ vo.getTotalprice()+",'"+vo.getName() +
 						"','"+ vo.getId() +
 						"','"+vo.getSelectseat() + 
-					  "')";
+						"','"+vo.getToday() + 
+						"',"+vo.getDetailnum() + 
+						",'"+vo.getGenre() + 
+						"',"+vo.getImage() +
+						"','"+vo.getPlace() +
+						"',"+vo.getRuntime() +
+					  ")";
 				System.out.println(vo.getSelectseat());
 				if(i!=list.size()-1) {
 					sql+=",";
@@ -729,6 +744,41 @@ public class OrderDAO {
 		} finally {
 			resource();
 		}
+	}
+	
+	//선택한 콘서트의 예약된 좌석 구하기
+	public List<OrderVO> getSeat(Date today, int detailnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		ResultSet rs = null;
+		OrderVO vo = new OrderVO();
+		List<OrderVO> selectseat = new ArrayList<>();
+		try {
+			con = getConnection();
+			sql = "SELECT SELECTSEAT FROM PAYMENT WHERE TODAY = ? AND DETAILNUM = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setDate(1, today);
+			pstmt.setInt(2, detailnum);
+			rs = pstmt.executeQuery();
+			System.out.println(pstmt.toString());
+			while(rs.next()) {
+				vo.setSelectseat(rs.getString("selectseat"));
+				selectseat.add(vo);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getSeat Inner Err :" + e);
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e2) {
+
+			}
+		}
+		return selectseat;
 	}
 	
 }

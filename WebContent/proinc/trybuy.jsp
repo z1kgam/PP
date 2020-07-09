@@ -55,7 +55,7 @@
 							<td>${det.seat}</td>
 							<td>${det.place}</td>
 							<td><input type="button" value="예매하러가기" 
-							onclick="location.href='${contextPath}/Proser/prepare.do?detailnum=${det.detailnum}'"></td>
+							onclick="location.href='${contextPath}/Proser/prepare.do?detailnum=${det.detailnum}&today=${det.today}'"></td>
 						</tr>
 					</c:forEach>
 			</c:when>

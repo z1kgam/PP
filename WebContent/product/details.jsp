@@ -52,7 +52,7 @@ input {
 <article>
 <h1>Register Product</h1>
 
-<form action="${contextPath}/Proser/detailsPro.do?" method="post" name="f">
+<form action="${contextPath}/Proser/detailsPro.do" method="post" name="f">
 	<input type="hidden" value="${Bean.startdate}" id="stdate">
 	<input type="hidden" value="${Bean.enddate}" id="endate">
 	<input type="hidden" value="${Bean.num}" name="num">

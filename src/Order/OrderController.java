@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.mysql.fabric.xmlrpc.base.Array;
 
 import Product.DetailBean;
 import Product.ProductBean;
@@ -58,9 +61,17 @@ public class OrderController extends HttpServlet{
 			int detailnum = Integer.parseInt(request.getParameter("detailnum"));
 			int qty = Integer.parseInt(request.getParameter("count"));
 			int totalprice = Integer.parseInt(request.getParameter("totalprice"));
+			Date today = Date.valueOf(request.getParameter("today"));
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
 			DetailBean DVO = Pservice.getdetails(detailnum);
+			
+			List<Map<String, Object>> selectseat = new ArrayList<>();
+			
+			//예약된 좌석정보 저장하기
+			List<OrderVO> checkseat = orderDAO.getSeat(today, detailnum);
+			System.out.println(checkseat);
+			
 			checkPage = 1;
 			int sub = DVO.getTotalreserved() + qty;
 			PrintWriter pw = response.getWriter();
@@ -260,8 +271,6 @@ public class OrderController extends HttpServlet{
 				
 				return;
 			}
-			
-			
 		}
 		
 		if(checkPage == 0) {
