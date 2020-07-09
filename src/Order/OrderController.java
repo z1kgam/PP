@@ -66,11 +66,19 @@ public class OrderController extends HttpServlet{
 			String name = request.getParameter("name");
 			DetailBean DVO = Pservice.getdetails(detailnum);
 			
-			List<Map<String, Object>> selectseat = new ArrayList<>();
 			
-			//예약된 좌석정보 저장하기
-			List<OrderVO> checkseat = orderDAO.getSeat(today, detailnum);
-			System.out.println(checkseat);
+			//해당 공연에 대한 예약된 좌석정보리스트 가져와서 저장하기
+			List<OrderVO> selectseat = orderDAO.getSeat(today, detailnum);
+			String chseat="";
+			for(int j=0; j<selectseat.size();j++) {
+				chseat += selectseat.get(j).getSelectseat();
+				if(j!=selectseat.size()-1) {
+					chseat += ",";
+				}
+			}
+			System.out.println(chseat);
+			
+			
 			
 			checkPage = 1;
 			int sub = DVO.getTotalreserved() + qty;
@@ -117,7 +125,6 @@ public class OrderController extends HttpServlet{
 			vo.setTotalprice(totalprice);			
 			Orservice.insertOrder(vo);
 			session.setAttribute("cartList", vo);
-						
 			pw.write("<script>");
 			pw.write("alert('장바구니에 추가되었습니다.');");
 			pw.write("location.href='"+request.getContextPath()+"/Order/cartList.do';");
@@ -260,7 +267,7 @@ public class OrderController extends HttpServlet{
 				orderDAO.addAllPay(list);	//장바구니에 있는 내역 전체 결제			
 				
 				orderDAO.delAllCart(id);    //결제완료 후 장바구니 내역삭제
-				
+				point = memberBean.getPoint();	
 				System.out.println("결제후 내 포인트 : " + point);
 				
 				checkPage = 1;

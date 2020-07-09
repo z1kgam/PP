@@ -661,7 +661,7 @@ public class OrderDAO {
 						"','"+vo.getToday() + 
 						"',"+vo.getDetailnum() + 
 						",'"+vo.getGenre() + 
-						"',"+vo.getImage() +
+						"','"+vo.getImage() +
 						"','"+vo.getPlace() +
 						"',"+vo.getRuntime() +
 					  ")";
@@ -701,13 +701,19 @@ public class OrderDAO {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				OrderVO vo = new OrderVO(
-										rs.getInt("totalprice"),
+										rs.getInt("detailnum"),
+										rs.getInt("runtime"),
 										rs.getInt("qty"),
+										rs.getInt("totalprice"),
 										p_num,
-										rs.getString("name"),
+										rs.getString("genre"),
+										rs.getString("image"),
+										rs.getString("place"),
+										id,
 										rs.getString("selectseat"),
-										id
-										);
+										rs.getString("name"),
+										rs.getDate("today")
+										); 
 				list.add(vo);
 			}
 		} catch (Exception e) {e.printStackTrace();}finally {resource();}
@@ -752,18 +758,29 @@ public class OrderDAO {
 		PreparedStatement pstmt = null;
 		String sql = "";
 		ResultSet rs = null;
-		OrderVO vo = new OrderVO();
 		List<OrderVO> selectseat = new ArrayList<>();
 		try {
 			con = getConnection();
-			sql = "SELECT SELECTSEAT FROM PAYMENT WHERE TODAY = ? AND DETAILNUM = ?";
+			sql = "SELECT * FROM PAYMENT WHERE TODAY = ? AND DETAILNUM = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setDate(1, today);
 			pstmt.setInt(2, detailnum);
 			rs = pstmt.executeQuery();
-			System.out.println(pstmt.toString());
+			System.out.println(pstmt);
 			while(rs.next()) {
-				vo.setSelectseat(rs.getString("selectseat"));
+				OrderVO vo = new OrderVO(
+										detailnum, 
+										rs.getInt("runtime"),
+										rs.getInt("qty"), 
+										rs.getInt("totalprice"),
+										rs.getInt("p_seq_num"),
+										rs.getString("genre"),
+										rs.getString("image"),
+										rs.getString("place"),
+										rs.getString("id"),
+										rs.getString("selectseat"),
+										rs.getString("name"),
+										today); 
 				selectseat.add(vo);
 			}
 			

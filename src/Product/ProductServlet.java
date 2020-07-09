@@ -282,17 +282,26 @@ public class ProductServlet extends HttpServlet {
 			
 			}else if(action.equals("/prepare.do")) {	
 				int detail = Integer.parseInt(request.getParameter("detailnum"));
-
+				Date today = Date.valueOf(request.getParameter("today"));
 				Bean = productService.getdetails(detail);
 				OrderDAO orderDAO = new OrderDAO();
 				OrderVO VO = new OrderVO();
 				request.setAttribute("DBean", Bean);
 				
-				//예약된 좌석정보 저장하기
-				//List<Map<String, Object>> checkseat = orderDAO.getSeat(today, detail);
-				//System.out.println(checkseat);
+				//해당 공연에 대한 예약된 좌석정보리스트 가져와서 저장하기
+				List<OrderVO> selectseat = orderDAO.getSeat(today, detail);
+				String chseat="";
+				for(int j=0; j<selectseat.size();j++) {
+					chseat += selectseat.get(j).getSelectseat();
+					if(j!=selectseat.size()-1) {
+						chseat += ",";
+					}
+				}
+				System.out.println(chseat);
 				
+				request.setAttribute("chseat", chseat);
 				nextPage = "/product/buyconnect.jsp";
+				
 			}else if(action.equals("/itemselect.do")) {
 
 				String name = request.getParameter("name");

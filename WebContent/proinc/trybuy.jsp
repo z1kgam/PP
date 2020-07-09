@@ -158,7 +158,7 @@ function sel() {
 								<td>매진</td>
 							</c:if>
 							<c:if test="${(seat-reserved) ne 0}">
-								<td><input type="button" value="예매하기" onclick="location.href='${contextPath}/Proser/prepare.do?detailnum=${det.detailnum}'"></td>
+								<td><input type="button" value="예매하기" onclick="location.href='${contextPath}/Proser/prepare.do?detailnum=${det.detailnum}&today=${det.today}'"></td>
 							</c:if>
 
 						</tr>

@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -199,41 +200,53 @@
 											<strong>좌석 배치도</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;
 											</td>
 											<td>&nbsp;&nbsp;&nbsp;
-											<c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,G,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"/>
+											<!-- <c:set var="alphabet" value="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26"/> -->
+											<c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"/>
+											<c:set var="number" value="1,2,3,4,5,6,7,8,9"/>
 											<c:forTokens items="${alphabet}" delims="," var="letter"  >
 												<font size="2.95em">${letter}</font>&nbsp;
 											</c:forTokens>
 											<br>
-											<c:set var="oneline" value="1,2,3"/>
-											<c:set var="twoline" value="4,5,6"/>
-											<c:set var="thrline" value="7,8,9"/>
-											<c:forTokens items="${oneline}" delims="," var="line1">
-												${line1}
-												<c:forEach begin="1" end="26" step="1" items="${alphabet}" var="i">
-													<input type="checkbox" name="seat" value="${i}${line1}"  >
-												</c:forEach>
-												<br>
-											</c:forTokens>
-												<br>
+											1<c:forEach begin="1" end="234" var="i">
+												<input type="checkbox" name="seat" value="${i}"
 												
-											<c:forTokens items="${twoline}" delims="," var="line2">
-												${line2}
-												<c:forEach begin="1" end="26" step="1" items="${alphabet}" var="i">
-													<input type="checkbox" name="seat" value="${i}${line2}">
-												</c:forEach>
-												<br>
-											</c:forTokens>
-												<br>
+													<c:if test="${i eq 54}">disabled="disabled"</c:if>
+												>
 												
-											<c:forTokens items="${thrline}" delims="," var="line3">
-												${line3}
-												<c:forEach begin="1" end="26" step="1" items="${alphabet}"  var="i">
-													<input type="checkbox" name="seat" value="${i}${line3}">
-												</c:forEach>
-												<br>
-											</c:forTokens>
-												<br>
+												<c:choose>
+													<c:when test="${i eq 234 }">
+														<br>
+													</c:when>
+													<c:when test="${i eq 208 }">
+														<br>9
+													</c:when>
+													<c:when test="${i eq 182 }">
+														<br>8
+													</c:when>
+													<c:when test="${i eq 156 }">
+														<br>7
+													</c:when>
+													<c:when test="${i eq 130 }">
+														<br>6
+													</c:when>
+													<c:when test="${i eq 104 }">
+														<br>5
+													</c:when>
+													<c:when test="${i eq 78 }">
+														<br>4
+													</c:when>
+													<c:when test="${i eq 52 }">
+														<br>3
+													</c:when>
+													<c:when test="${i eq 26 }">
+														<br>2
+													</c:when>
+												</c:choose>
+												
+											</c:forEach>
 											
+												<br>
+											${chseat}
 											
 											</td>
 										<tr>		

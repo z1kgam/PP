@@ -215,7 +215,25 @@ public class OrderVO {
 		this.selectseat = selectseat;
 		this.id = id;
 	}
+
+	public OrderVO(int detailnum, int runtime, int qty, int totalprice, int p_seq_num, String genre, String image,
+			String place, String id, String selectseat, String name, Date today) {
+		super();
+		this.detailnum = detailnum;
+		this.runtime = runtime;
+		this.qty = qty;
+		this.totalprice = totalprice;
+		this.p_seq_num = p_seq_num;
+		this.genre = genre;
+		this.image = image;
+		this.place = place;
+		this.id = id;
+		this.selectseat = selectseat;
+		this.name = name;
+		this.today = today;
+	}
 	
+
 	
 	
 	
