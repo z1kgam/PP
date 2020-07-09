@@ -88,7 +88,7 @@
 											<td><fmt:formatDate value="${Bean.startdate}" /> ~ <fmt:formatDate
 													value="${Bean.enddate}" /></td>
 											<td>관람시간</td>
-											<td>${Bean.minute}분</td>
+											<td>${Bean.runtime}분</td>
 										</tr>
 										<tr>
 
@@ -99,17 +99,38 @@
 										</tr>
 										<tr>
 											<td>가격</td>
-											<td><fmt:formatNumber value="${Bean.price}"
-													type="currency" />원</td>
+											<td><fmt:formatNumber value="${Bean.price}" pattern="#,###" />원</td>
 											<td></td>
 											<td></td>
 										</tr>
-
+										<tr>
+											<td>좋아요<span class="icon icon-heart"></span></td>
+											<td>${requestScope.likeCount}</td> 
+											<td>										
+												<form action="${contextPath}/mycon/addBasket.do" method="post">
+													<input type="hidden" name="id" value="${sessionScope.id}">
+													<input type="hidden" name="num" value="${Bean.num}">
+												</form>	
+											</td>
+											<td></td>
+										</tr>
 									</table>
+
 									<p style="margin-top: 70px;">
 										<a href="${contextPath}/Proser/details.do?num=${Bean.num}" class="btn btn-outline-primary">상세등록</a> 
 										<a href="${contextPath}/Proser/delete.do?num=${Bean.num}&path=consert&image=${Bean.image}&content=${Bean.content}" class="btn btn-outline-primary">삭제하기</a>
-										<a href="${contextPath}/Proser/imcontact.do" class="btn btn-outline-primary">목록보기</a>
+										<a href="${contextPath}/Proser/imcontact.do" class="btn btn-outline-primary">목록보기</a>					
+									<!-- 좋아요 판별부분  checkZ 값이 false이면 찜하기 버튼이 보이고 true이면 찜한 상품이라고 표시된다  -->
+									<c:if test="${sessionScope.id != null}">      
+										<c:choose>
+											<c:when test="${requestScope.checkZ == 'false'}">
+												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}" class="btn btn-outline-primary">찜하기</a>
+											</c:when>
+											<c:when test="${requestScope.checkZ == 'true'}">
+												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}" class="btn btn-outline-primary">찜취소</a>
+											</c:when>
+										</c:choose>
+									</c:if>
 									</p>
 								</div>
 							</div>
@@ -120,17 +141,17 @@
 		</div>
 	</section>
 	<section>
-		<nav style="width: 900px; height:60px; padding-bottom: 25px; margin-left: auto;margin-right: auto;">
+		<nav style="width: 1500px; height:60px; padding-bottom: 25px; margin-left: auto;margin-right: auto;">
 			<ul style="	list-style:none; font-family: verdana,Geneba,sans-serif;">
-				<li style="float: left;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="explanation()">콘서트 설명</a></li>
-				<li style="float: left;margin-left: 50px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="reply()">콘서트 댓글</a></li>
-				<li style="float: left;margin-left: 50px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="review()">콘서트 리뷰</a></li>
-				<li style="float: left;margin-left: 50px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="trybuy()">콘서트 예매</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="explanation()">상세정보</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="reply()">관람후기</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="review()">공연장정보</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="trybuy()">티켓예매</a></li>
 			</ul>
 		</nav>
 		<hr style="width: 1500px; margin: auto;">
-		<div class="detail" id="explanation"><jsp:include page="../proinc/explanation.jsp" /></div>
-		<div class="detail" id="reply" style="display: none;"><jsp:include page="../proinc/reply.jsp" /></div>
+		<div class="detail" id="explanation" style="display: none;"><jsp:include page="../proinc/explanation.jsp" /></div>
+		<div class="detail" id="reply"><jsp:include page="../proinc/reply.jsp" /></div>
 		<div class="detail" id="review" style="display: none;"><jsp:include page="../proinc/review.jsp" /></div>
 		<div class="detail" id="trybuy" style="display: none;"><jsp:include page="../proinc/trybuy.jsp" /></div>
 	</section>

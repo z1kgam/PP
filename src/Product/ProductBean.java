@@ -4,27 +4,28 @@ import java.sql.Date;
 
 public class ProductBean {
 	
+
 	private String name, genre, cla, image, content;
-	private int num, minute, price;
+	private int num, runtime, price;
 	private Date startdate, enddate;
-	
+
+	private int qty;
 	public ProductBean() {
 
 	}
-	
-	public ProductBean(String name, String genre, String cla, String image, String content, int num, int minute,
-			int price, Date startdate, Date enddate) {
-		super();
+	public ProductBean(String name, String genre, String cla, String image, String content, int num, int runtime,
+			int price, Date startdate, Date enddate, int qty) {
 		this.name = name;
 		this.genre = genre;
 		this.cla = cla;
 		this.image = image;
 		this.content = content;
 		this.num = num;
-		this.minute = minute;
+		this.runtime = runtime;
 		this.price = price;
 		this.startdate = startdate;
 		this.enddate = enddate;
+		this.qty = qty;
 	}
 	public String getName() {
 		return name;
@@ -62,11 +63,11 @@ public class ProductBean {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public int getMinute() {
-		return minute;
+	public int getRuntime() {
+		return runtime;
 	}
-	public void setMinute(int minute) {
-		this.minute = minute;
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
 	}
 	public int getPrice() {
 		return price;
@@ -86,6 +87,14 @@ public class ProductBean {
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
 	}
+	public int getQty() {
+		return qty;
+	}
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+
+	
 	
 	
 	

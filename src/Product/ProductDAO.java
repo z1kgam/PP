@@ -1,6 +1,7 @@
 package Product;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -32,13 +33,45 @@ public class ProductDAO {
 		if(con != null) try{con.close();}catch(Exception e) {e.printStackTrace();}		
 	}
 	
+	public ArrayList<ProductBean> getAllProduct() {
+		ArrayList<ProductBean> products = new ArrayList<ProductBean>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			sql = "SELECT * FROM product";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int num = rs.getInt("num");
+				String name = rs.getString("name");
+				String genre = rs.getString("genre");
+				String cla = rs.getString("cla");
+				int runtime = rs.getInt("runtime");
+				int price = rs.getInt("price");
+				Date startdate = rs.getDate("startdate");
+				Date enddate = rs.getDate("enddate");
+				String image = rs.getString("image");
+				String content = rs.getString("content");
+			}
+		} catch (Exception e) {
+			System.out.println("getAllProduct Inner Err : " + e);
+		} finally {
+			resource();
+		}
+		
+		return products;
+	}
+	
 	public void insertpro(ProductBean productBean) {
 		String sql = "";
 		int num =0;
 		try {
 			con = getConnection();
 
-			sql = "select max(num) from prodect"; 
+			sql = "select max(num) from product"; 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -48,7 +81,7 @@ public class ProductDAO {
 				num = 1; 
 			}
 			
-			sql ="insert into prodect(num,name,genre,cla,minute,"
+			sql ="insert into product(num,name,genre,cla,runtime,"
 					+ "price,startdate,enddate,image,content) "
 					+ "values(?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
@@ -56,7 +89,7 @@ public class ProductDAO {
 			pstmt.setString(2, productBean.getName());
 			pstmt.setString(3, productBean.getGenre());
 			pstmt.setString(4, productBean.getCla());
-			pstmt.setInt(5, productBean.getMinute());
+			pstmt.setInt(5, productBean.getRuntime());
 			pstmt.setInt(6, productBean.getPrice());
 			pstmt.setDate(7, productBean.getStartdate());
 			pstmt.setDate(8, productBean.getEnddate());
@@ -72,69 +105,6 @@ public class ProductDAO {
 		}
 	}
 
-	public int getCount() {
-		String sql = "";
-		int count = 0;
-		
-		try {
-
-			con = getConnection();
-
-			sql = "select count(*) from prodect";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			if(rs.next()) {
-				count = rs.getInt(1);
-			}
-		} catch (Exception e) {
-			System.out.println("getCount메소드에서 예외발생 : " + e);
-		}finally {
-			resource();	
-		}
-		
-		return count;
-	}
-
-	public List<ProductBean> getList(int startRow, int pageSize) {
-		String sql = "";
-		List<ProductBean> List = new ArrayList<ProductBean>();
-		
-		try {
-			con = getConnection();
-
-			sql = "select * from prodect order by num desc limit ?,?";
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, pageSize);
-			
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				ProductBean Bean = new ProductBean();
-				Bean.setNum(rs.getInt("num"));
-				Bean.setName(rs.getString("name"));
-				Bean.setGenre(rs.getString("genre"));
-				Bean.setCla(rs.getString("cla"));
-				Bean.setMinute(rs.getInt("minute"));
-				Bean.setPrice(rs.getInt("price"));
-				Bean.setStartdate(rs.getDate("startdate"));
-				Bean.setEnddate(rs.getDate("enddate"));
-				Bean.setImage(rs.getString("image"));
-				Bean.setContent(rs.getString("content"));
-				
-				List.add(Bean);
-			}
-		} catch (Exception e) {
-			System.out.println("getList메소드에서 예외발생 : " + e);
-		}finally {
-			resource();
-		}
-		
-		return List;
-	}
-
 	public ProductBean getBoard(int num) {
 		
 		String sql="";
@@ -144,7 +114,7 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from prodect where num=?";
+			sql = "select * from product where num=?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -156,7 +126,7 @@ public class ProductDAO {
 				Bean.setName(rs.getString("name"));
 				Bean.setGenre(rs.getString("genre"));
 				Bean.setCla(rs.getString("cla"));
-				Bean.setMinute(rs.getInt("minute"));
+				Bean.setRuntime(rs.getInt("runtime"));
 				Bean.setPrice(rs.getInt("price"));
 				Bean.setStartdate(rs.getDate("startdate"));
 				Bean.setEnddate(rs.getDate("enddate"));
@@ -179,7 +149,7 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 			
-			sql = "delete from prodect where num=?";
+			sql = "delete from product where num=?";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -200,7 +170,7 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from prodect";
+			sql = "select * from product";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -212,7 +182,7 @@ public class ProductDAO {
 				Bean.setName(rs.getString("name"));
 				Bean.setGenre(rs.getString("genre"));
 				Bean.setCla(rs.getString("cla"));
-				Bean.setMinute(rs.getInt("minute"));
+				Bean.setRuntime(rs.getInt("runtime"));
 				Bean.setPrice(rs.getInt("price"));
 				Bean.setStartdate(rs.getDate("startdate"));
 				Bean.setEnddate(rs.getDate("enddate"));

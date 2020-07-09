@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 
     <%
-    	response.sendRedirect("index/index.jsp");
+		 response.sendRedirect(request.getContextPath()+ "/main/main.do");
     %>

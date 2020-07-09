@@ -16,7 +16,7 @@
 		<input type="hidden" name="parentsnum">
 		<table border="1" align="center" style="margin-top: 30px;">
 			<tr id="write" style="display: none;">
-				<td align="center"><input type="text" value="id" name="id"></td>
+				<td align="center"><input type="text" value="${sessionScope.id}" name="id"></td>
 				<td align="center"><textarea rows="5" cols="30" name="content"></textarea></td>
 				<td align="center">
 				<input type="submit" value="댓글등록"><br>
@@ -53,19 +53,33 @@
 							<tr>
 								<td width="100" align="center" style="background-color: palegreen;">ID</td>
 								<td width="200" align="center" style="background-color: palegreen;">내용</td>
-								<td width="100" align="center" style="background-color: palegreen;">업로드날짜</td>
+								<c:choose>
+									<c:when test="${memberVO.content == '관리자나 본인에 의해 삭제된 댓글입니다.'}">
+										<td width="100" align="center" style="background-color: palegreen;">삭제한 날짜</td>
+									</c:when>
+									<c:when test="${memberVO.content != '관리자나 본인에 의해 삭제된 댓글입니다.'}">
+										<td width="100" align="center" style="background-color: palegreen;">업로드날짜</td>
+									</c:when>
+								</c:choose>
 								<td width="100" align="center" style="background-color: palegreen;"></td>
 							</tr>
 							<tr>
 								<td width="100" align="center">${memberVO.id}</td>
 								<td width="200" align="center">${memberVO.content}</td>
 								<td width="100" align="center">${memberVO.date}</td>
-								<td width="100" align="center"><input type="button"
-									value="댓글쓰기" onclick="doublereply(${memberVO.replynum})">
-									<input type="button" value="댓글수정"
-									onclick="updatereply(${memberVO.replynum})"> <input
-									type="button" value="댓글삭제"
-									onclick="location.href='${contextPath}/Proser/alldelete.do?pronum=${memberVO.productnum}&replynum=${memberVO.replynum}'">
+								<td width="100" align="center">
+								<c:choose>
+									<c:when test="${memberVO.content != '관리자나 본인에 의해 삭제된 댓글입니다.'}">
+											<input type="button" value="댓글쓰기"
+												onclick="doublereply(${memberVO.replynum})">
+											<input type="button" value="댓글수정"
+												onclick="updatereply(${memberVO.replynum})">
+											<input type="button" value="댓글삭제"
+												onclick="location.href='${contextPath}/Proser/fatedelete.do?pronum=${memberVO.productnum}&replynum=${memberVO.replynum}'">
+										</c:when>
+								</c:choose>
+									
+									<input type="button" value="댓글삭제" onclick="location.href='${contextPath}/Proser/alldelete.do?pronum=${memberVO.productnum}&replynum=${memberVO.replynum}'">
 								</td>
 							</tr>
 
@@ -75,7 +89,14 @@
 										<tr>
 											<td width="100" align="center" style="background-color: yellow;">ID</td>
 											<td width="200" align="center" style="background-color: yellow;">내용</td>
-											<td width="100" align="center" style="background-color: yellow;">업로드날짜</td>
+											<c:choose>
+												<c:when test="${VO.content == '관리자나 본인에 의해 삭제된 댓글입니다.'}">
+													<td width="100" align="center" style="background-color: yellow;">삭제된날짜</td>
+												</c:when>
+												<c:when test="${VO.content != '관리자나 본인에 의해 삭제된 댓글입니다.'}">
+													<td width="100" align="center" style="background-color: yellow;">업로드날짜</td>
+												</c:when>
+											</c:choose>
 											<td width="100" align="center" style="background-color: yellow;"></td>
 										</tr>
 										<tr>
@@ -83,7 +104,13 @@
 											<td width="200" align="center">${VO.content}</td>
 											<td width="100" align="center">${VO.date}</td>
 											<td align="center">
-											<input type="button" value="댓글수정" onclick="updatereply(${VO.replynum})"> 
+											<c:choose>
+												<c:when test="${VO.content != '관리자나 본인에 의해 삭제된 댓글입니다.'}">
+													<input type="button" value="댓글수정" onclick="updatereply(${VO.replynum})"> 
+													<input type="button" value="댓글삭제"onclick="location.href='${contextPath}/Proser/fatedelete.do?pronum=${VO.productnum}&replynum=${VO.replynum}'">
+												</c:when>
+											</c:choose>
+											
 											<input type="button" value="댓글삭제"onclick="location.href='${contextPath}/Proser/replydelete.do?pronum=${VO.productnum}&replynum=${VO.replynum}'">
 											</td>
 										</tr>

@@ -8,10 +8,27 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <style>
+
+.news {
+	border: 1px solid #e7e7e7; 
+	box-sizing: content-box; 
+	padding: 0 0 0 0px;
+	position: relative;  
+	background-color:;
+	width: auto;}
+.news1{
+margin: 10px;}
+.photo{width:106px; float:left;
+    margin-top: 2px;
+    margin-right: 17px }
+
+</style>
     <title>Meditative - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
+<<<<<<< HEAD
   <script src="https://code.jquery.com/jquery-latest.js"></script>
   
   
@@ -90,16 +107,10 @@
   
   </head>
  
-
-  
-
-  
-  
   <body>
 <jsp:include page="../include/indexheader.jsp" />
 
-
-
+ 
 
 
 
@@ -121,44 +132,24 @@
                   <div><a href="#">Admin</a></div>
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                 </div>
-                <h3 class="heading mt-2"><a href="#">티켓 오픈 소식</a></h3>
+                <h3 class="heading mt-2"><a href="#">공연/전시 소식</a></h3>
+				    <div class="news" >	
+				
+					<div class="news1" >
+							<c:forEach var="i" items="${list}">
+								${i}
+							</c:forEach>
+						</div>
+					</div>
                 <table align="center" font-size="30px"  style="width:100%; border-collapse: separate;
     border-spacing: 1px;" >
-                
-                <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px;
-    padding: 10px; font-weight: bold; color: #fff;">
-                <th>
-               	 오패라 하우스 <br>
-               	[오픈]2020.06/01
-               	 
-                </th>
-                </tr>
-                
-                <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px;
-    padding: 10px; font-weight: bold; color: #fff;">
-                <th>
-               	 레배카<br>
-               	[오픈]2020.06/02
-               	 
-                </th>
-                </tr>
-                
-                <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px;
-    padding: 10px; font-weight: bold; color: #fff;">
-                <th>
-               	 헤드윅<br>
-               	[오픈]2020.06/03
-               	 
-                </th>
-                </tr>
-                
                 
                 </table>
               
               </div>
             </div>
           </div>
-          <div class="col-md-4 d-flex ftco-animate"  style="margin-left: -100px; margin-right: 100px;">
+          <div class="col-md-4 d-flex ftco-animate" >
           	<div class="blog-entry justify-content-end">
               
               <div class="text w-100 mt-3">
@@ -217,7 +208,14 @@
                	 
                 </th>
                 </tr>
-                
+<!--                 	<div class="news" >	 -->
+
+<!-- 		<div class="news1" > -->
+<%-- 			<c:forEach var="k" items="${list2}"> --%>
+<%-- 				${k} --%>
+<%-- 			</c:forEach> --%>
+<!-- 		</div> -->
+<!-- 	</div>   -->
                 
                 </table>
               </div>
@@ -226,19 +224,6 @@
         </div>
       </div>
     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
     <section class="ftco-section" style="position: relative; top: -300px;">
     	<div class="container">
@@ -300,7 +285,7 @@
         			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/rebeca.jpg); height: 350px;"></a>
         			<div class="text w-100 text-center">
         				<h3><a href="#">레베카</a></h3>
-        			
+        			'
         			</div>
         			
         			

@@ -1,14 +1,21 @@
 package member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
-
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import Order.OrderDAO;
+import Order.OrderVO;
+import Product.ProductBean;
+import Product.ProductDAO;
+import util.Status;
 
 
 @WebServlet("/mycon/*")
@@ -48,7 +55,8 @@ public class MyPageController extends HttpServlet{
 		HttpSession session = request.getSession();
 		LikeDAO likeDAO = new LikeDAO();
 		LikeBean likeBean = new LikeBean();
-		
+		OrderDAO orderDAO = new OrderDAO();
+		OrderVO orderVO = new OrderVO();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
@@ -57,8 +65,16 @@ public class MyPageController extends HttpServlet{
 		System.out.println(action);
 		int check = 0;
 		if(action.equals("/mypageForm.do")) { //마이페이지폼 이동
-			System.out.println("왔다");
+			
+			String id = (String)session.getAttribute("id");
+			List<OrderVO> cartList = orderDAO.getCartList(id);
+			int payCount = orderDAO.getCountPay(id);
+			int cartCount = orderDAO.getCountCartList(id);
+			session.setAttribute("cartList", cartList);
+			session.setAttribute("cartCount", cartCount);
+			request.setAttribute("payCount", payCount);
 			nextPage="/mypage/mypage.jsp";
+			
 			/* check = 1; */
 		}else if(action.equals("/likelistForm.do")) { //좋아요 목록
 			
@@ -90,14 +106,14 @@ public class MyPageController extends HttpServlet{
 			
 		}else if(action.equals("/likeAction.do")) { //좋아요 판별 and 없으면 추가 있으면 삭제
 			
-			int n_num = Integer.parseInt(request.getParameter("n_num"));
+			int num = Integer.parseInt(request.getParameter("num"));
 			String id = request.getParameter("id");
-			boolean checkZ = likeDAO.checkLike(n_num, id);
-			int likeCount = likeDAO.getProductTotalLike(n_num);
+			boolean checkZ = likeDAO.checkLike(num, id);
+			int likeCount = likeDAO.getProductTotalLike(num);
 			if(checkZ == false) {
-				likeDAO.addLike(n_num, id);
+				likeDAO.addLike(num, id);
 			}else {
-				likeDAO.delLike(n_num, id);
+				likeDAO.delLike(num, id);
 			}
 			
 			request.setAttribute("checkZ", checkZ); 
@@ -105,17 +121,19 @@ public class MyPageController extends HttpServlet{
 			System.out.println("checkZ : "+checkZ);
 			System.out.println("likeCount : " + likeCount);
 			
-			nextPage = "/notice/viewNotice.do?n_num="+n_num;
-			
-		}else if(action.equals("/reservlistForm.do")) { //예매 내역
-			
-			nextPage="/mypage/reservlist.jsp";
+			nextPage = "/Proser/content.do?num="+num;
 			
 		}
+		
+		
+		
+		
 		if(check == 0) {
 			request.getRequestDispatcher(nextPage).forward(request, response);
 		}else {
 			response.sendRedirect(request.getContextPath()+nextPage);
 		}
 	}
+	
+	
 }
