@@ -12,7 +12,89 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
+  <script src="https://code.jquery.com/jquery-latest.js"></script>
+  
+  
+  <!-- The Modal -->
+    <div id="myModal" class="modal" style="display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */">
+ 
+      <!-- Modal content -->
+      <div class="modal-content" style="background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 25%;
+            
+            
+             /* Could be more or less, depending on screen size */        ">
+                <a href="../blog.jsp" ><p style="text-align: center; font-color: #000;" ><b>
+                <span style="font-size: 24pt; color: #000;">최신 콘서트 보러가기</span></b></span></p></a>
+                
+               
+                <!-- <img src="../images/concert2.jpg" alt="프로필 이미지" ><a href="../about.jsp">프로필 이미지</a> -->
+                <a href="../blog.jsp" ><img src="../images/concert2.jpg" alt="프로필 이미지" style="max-width: 100%; width: auto; height: 600px; display: table;"></a>
+                
+
+           		<br>
+                <a href="../blog.jsp" ><p style="text-align: center; font-color: #000;" ><b>
+                <span style="font-size: 24pt; color: #000;">예약하러가기</span></b></span></p></a>
+                <br>
+                <br>
+                <br>
+               
+              
+                
+            <div style="cursor:pointer;background-color:#002545;text-align: center; padding-bottom: 10px;padding-top: 10px; margin-top: -50px" onClick="close_pop();">
+                <span class="pop_bt" style="font-size: 15pt; color: #fff; " >
+                     닫기
+                </span>
+            </div>
+      </div>
+ 
+    </div>
+        <!--End Modal-->
+ 
+ 
+    <script type="text/javascript">
+      
+        jQuery(document).ready(function() {
+                $('#myModal').show();
+        });
+        //팝업 Close 기능
+        function close_pop(flag) {
+             $('#myModal').hide();
+        };
+        
+      </script>
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   </head>
+ 
+
+  
+
+  
+  
   <body>
 <jsp:include page="../include/indexheader.jsp" />
 

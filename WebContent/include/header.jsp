@@ -5,6 +5,62 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+
+<!-- Channel Plugin Scripts -->
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var d = window.document;
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "93c11d3e-a14d-4123-a8fd-2391ad9fe0fc"
+  });
+</script>
+<!-- End Channel Plugin -->
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
 var tid;
 var cnt = parseInt(3000);//초기값(초단위)
@@ -135,7 +191,7 @@ function time_format(s) {
   				<div class="col-12 w-100 text-center" style="margin-top: -100px;">
   					<div class="collapse navbar-collapse" id="ftco-nav">
 			        <ul class="navbar-nav m-auto">
-			          <li class="nav-item active"><a href="../index/index.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">메인</a></li>
+			          <li class="nav-item active"><a href="../index/index.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕 ;">메인</a></li>
 			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공연&상품 페이지</a></li>
 			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 18px; font-family:나눔고딕">###</a></li>
 			          <li class="nav-item"><a href="../classes.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>

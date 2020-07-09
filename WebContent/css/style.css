@@ -3377,6 +3377,8 @@ input[type="button"].btn-block {
   border-bottom: 1px solid #dee2e6; }
   .nav-tabs .nav-item {
     margin-bottom: -1px; }
+    
+    
   .nav-tabs .nav-link {
     border: 1px solid transparent;
     border-top-left-radius: 0.25rem;
@@ -8205,25 +8207,7 @@ h1, h2, h3, h4, h5,
     font-family: "EB Garamond", serif;
     position: relative;
     opacity: 1 !important; }
-    .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:after {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      content: '';
-      width: 3px;
-      height: 3px;
-      background: #2c396b;
-      -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-      transform: translateY(-50%);
-      margin-left: -1px;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      -ms-border-radius: 50%;
-      border-radius: 50%;
-      opacity: 0; }
-    .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
-      color: #000; }
+    
     @media (max-width: 991.98px) {
       .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
         padding-left: 0;
