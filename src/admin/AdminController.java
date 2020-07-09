@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.UUID;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
@@ -25,6 +27,8 @@ import member.MemberBean;
 import member.MemberDAO;
 import noticeboard.NoticeboardBean;
 import noticeboard.NoticeboardDAO;
+import team.qnaboard.qnaBean;
+import team.qnaboard.qnaDao;
 
 
 @WebServlet("/admin/*")
@@ -46,6 +50,7 @@ public class AdminController extends HttpServlet{
 			doHandle(request, response);
 		}
 		
+		@SuppressWarnings("unchecked")
 		protected void doHandle(HttpServletRequest request, HttpServletResponse response) 
 				throws ServletException, IOException {
 			
@@ -222,8 +227,24 @@ public class AdminController extends HttpServlet{
 			//관리자 페이지 고객센터 관리 페이지 이동 	
 			} else if (action.equals("/ANoticeMain.do")) {
 				
+				String catecheck = "";
+				
 				String n_cate = request.getParameter("n_cate");
-				System.out.println(n_cate);
+				
+				if(n_cate == null ) {
+					catecheck = "0";
+				} else if(n_cate.equals("서비스 소식")	) {
+					catecheck = "1";
+				}else if(n_cate.equals("서비스 점검")) {
+					catecheck = "2";
+				}else if(n_cate.equals("안내")) {
+					catecheck = "3";
+				}else if(n_cate.equals("전체")) {
+					catecheck = "4";
+					n_cate = null;
+				}
+				
+				
 				String n_title = request.getParameter("n_title");
 				String n_date = request.getParameter("n_date");
 				if(request.getParameter("check") != null) {
@@ -260,6 +281,7 @@ public class AdminController extends HttpServlet{
 					request.setAttribute("totalPage", totalPage);
 					request.setAttribute("nowPage", nowPage);
 					request.setAttribute("n_cate", n_cate);
+					request.setAttribute("catecheck", catecheck);
 				
 				nextPage = "/admins/AnoticeMain.jsp";
 				
@@ -276,6 +298,7 @@ public class AdminController extends HttpServlet{
 				System.out.println(n_cate);
 				String n_title = request.getParameter("n_title");
 				String n_content = request.getParameter("n_content");
+				System.out.println(n_content);
 				checkPage = 1;
 				noticebean.setN_cate(n_cate);
 				noticebean.setN_title(n_title);
@@ -353,24 +376,19 @@ public class AdminController extends HttpServlet{
 				int n_num = Integer.parseInt(request.getParameter("n_num")); 
 				System.out.println(n_num);
 				noticeDAO.deleteNoticeboard(n_num);
-				
+				checkPage = 1;
 				nextPage = "/admin/ANoticeMain.do";
 				
 			} else if(action.equals("/test3.do")) {
 				
 				System.out.println("파일");
-				PrintWriter out = response.getWriter();
-				
+//				PrintWriter out = response.getWriter();
 				ServletContext ctx = getServletContext();
-				
 				 // 이미지 업로드할 경로
 				String uploadPath = ctx.getRealPath("upload");
-				
 				System.out.print(uploadPath);
 			    int size = 10 * 1024 * 1024;  // 업로드 사이즈 제한 10M 이하
-				
 				String fileName = ""; // 파일명
-				
 				try{
 			        // 파일업로드 및 업로드 후 파일명 가져옴
 					MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8", new DefaultFileRenamePolicy());
@@ -383,18 +401,72 @@ public class AdminController extends HttpServlet{
 				}
 				
 			    // 업로드된 경로와 파일명을 통해 이미지의 경로를 생성
-				String uploadPath1 = "/upload/" + fileName;
+				String uploadPath1 = "http://localhost:8090/PP/upload/"+fileName;
 				
-			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
-				JSONObject jobj = new JSONObject();
-				jobj.put("url", uploadPath1);
 				
-				response.setContentType("application/json"); // 데이터 타입을 json으로 설정하기 위한 세팅
-				out.print(jobj.toJSONString());
+				JSONArray Array = new JSONArray();
+				JSONObject Info = new JSONObject();
+				Info.put("url", uploadPath1);
+				Array.add(Info);
+				
+				JSONObject result = new JSONObject();
+				
+				result.put("List", Array);
+				
+				PrintWriter out = response.getWriter();
+				
+				String jsonInfo = result.toString();
+				
+				out.print(jsonInfo);
 				
 				return;
 				
+			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
+//				JSONObject jobj = new JSONObject();
+//				jobj.put("url", uploadPath1);
+//				
+//				response.setContentType("application/json"); // 데이터 타입을 json으로 설정하기 위한 세팅
+//				out.print(jobj.toJSONString());
+//				
+//				return;
+				
 
+			} else if(action.equals("/Aqnaboardp.do")) {
+				 
+				 qnaDao qnadao = new qnaDao();
+				 qnaBean qnabean = new qnaBean();
+				
+				 String id =(String)request.getSession().getAttribute("id");
+		         
+		         int total = qnadao.getAllQna(id);
+		         System.out.println(total);
+		         
+		         MemberBean mb = new MemberBean();
+		         
+		         
+		         int pageSize = 3;
+		         int nowPage = 1;
+		         if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		         
+		         int pageFirst = (nowPage-1) * pageSize;
+		         int totalPage = total/pageSize + (total%pageSize==0?0:1);
+		         int blockSize = 10;
+		         int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+		         int blockLast = blockFirst + blockSize -1;
+		         
+		         if(blockLast>totalPage) blockLast=totalPage;
+		         List<qnaBean> qnaList = qnadao.qnaList(pageFirst, pageSize, id);
+		         request.setAttribute("qnaList", qnaList);
+		         request.setAttribute("blockSize", blockSize);
+		         request.setAttribute("blockFirst", blockFirst);
+		         request.setAttribute("blockLast", blockLast);
+		         request.setAttribute("totalPage", totalPage);
+		         request.setAttribute("nowPage", nowPage);
+
+		         nextPage = "/admins/AqnaBoard.jsp";
+				
+				
+				
 			}
 					
 			

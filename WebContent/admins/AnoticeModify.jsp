@@ -39,6 +39,7 @@
 		$.ajax({// ajax를 통해 파일 업로드 처리
 		
 			data: data,
+			dataType : "json",
 			type: "POST",
 			url: "${contextPath}/admin/test3.do",
 			cache: false,
@@ -46,8 +47,15 @@
 			processData: false,
 			success: function(data) {// 처리가 성공할 경우
 				// 에디터에 이미지 출력
-				$(editor).summernote('editor.insertImage', data.url);
-			
+				//alert(data.url);
+				//alert(JSON.stringify(data));
+				var aa = JSON.parse(JSON.stringify(data));
+				var bb = aa.List;
+				var image = bb[0].url;
+				alert(image);
+				alert("콜백성공");
+				var te3 = "<img src="+"'"+image+"'/>";
+				$("#test5").html(te3);
 			}
 			
 		});
@@ -96,8 +104,7 @@
 					</div>
 					<div class="form-group">
 						<label for="content">Content:</label>
-						<textarea id="summernote" class="form-control" rows="5"
-							id="content" name="n_content" required>${notice.n_content}</textarea>
+						<textarea id="summernote" class="form-control" rows="5" name="n_content" required >${notice.n_content}</textarea>
 					</div>
 					<div align="center">
 					<button type="submit" class="btn btn-success" >글 수정</button>

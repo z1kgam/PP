@@ -85,8 +85,8 @@ request.setCharacterEncoding("UTF-8");
 					  					<tr>
 					   						<td>${qnaList.qna_num}</td>
 					   						<td>			
-					   							<c:if test="${qnaList.qna_status == 0}">대기중</c:if>
-					   							<c:if test="${qnaList.qna_status == 1}">답변완료</c:if>
+					   							<c:if test="${qnaList.qna_status == 0}"><font color="crimson;">대기중</font></c:if>
+					   							<c:if test="${qnaList.qna_status == 1}"><font color="limegreen;">답변완료</font></c:if>
 											</td>
 					   						<td>
 					   						<a href="${contextPath}/qboard/viewQna.do?qna_num=${qnaList.qna_num}">${qnaList.qna_title}</a>
