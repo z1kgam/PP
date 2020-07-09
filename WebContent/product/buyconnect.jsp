@@ -150,10 +150,21 @@
 											<td>예매수</td>
 											<td>
 												<select id="count" name="count" onchange="getValue()">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
+													<c:choose>
+														<c:when test="${(DBean.seat-DBean.totalreserved) > 4}">
+															<option>1</option>
+															<option>2</option>
+															<option>3</option>
+															<option>4</option>
+														</c:when>
+														<c:when test="${(DBean.seat-DBean.totalreserved) < 4}">
+															<c:forEach begin="1"
+																end="${DBean.seat-DBean.totalreserved}"
+																varStatus="seatnum">
+																<option>${seatnum.count}</option>
+															</c:forEach>
+														</c:when>
+													</c:choose>
 												</select>
 											</td>
 										<tr>

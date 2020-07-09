@@ -54,8 +54,12 @@
 							<td>${seat-reserved}</td>
 							<td>${det.seat}</td>
 							<td>${det.place}</td>
-							<td><input type="button" value="예매하러가기" 
-							onclick="location.href='${contextPath}/Proser/prepare.do?detailnum=${det.detailnum}'"></td>
+							<c:if test="${(seat-reserved) eq 0}">
+								<td>매진</td>
+							</c:if>
+							<c:if test="${(seat-reserved) ne 0}">
+								<td><input type="button" value="예매하기" onclick="location.href='${contextPath}/Proser/prepare.do?pronum=${Bean.num}&detailnum=${det.detailnum}'"></td>
+							</c:if>
 						</tr>
 					</c:forEach>
 			</c:when>
