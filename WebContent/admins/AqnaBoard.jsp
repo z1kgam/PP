@@ -36,10 +36,11 @@
 					<table class="table table-hover">
 											<thead>
 												<tr align="center">
-													<th scope="col">NO.</th>
 													<th scope="col">처리상태</th>
 													<th scope="col">제목</th>
 													<th scope="col">등록일</th>
+													<th scope="col">답변 하기</th>
+													<th scope="col">글 삭제</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -53,20 +54,19 @@
 											<c:forEach var="qnaList" items="${qnaList}" varStatus="membersNum">
 											<fmt:formatDate var="parseDate" value="${qnaList.qna_date}" pattern="yyyy-MM-dd"/>
 										<tr align="center">
-											<td><p class="text-muted">${qnaList.qna_num}</p></td>
 											<td><p class="text-muted">
-											<c:if test="${qnaList.qna_status == 0}"><font color="crimson;">대기중</font></c:if>
-					   						<c:if test="${qnaList.qna_status == 1}"><font color="limegreen;">답변완료</font></c:if>
+											<c:if test="${qnaList.qna_status == 0}"><p class="text-warning">대기중</p></c:if>
+					   						<c:if test="${qnaList.qna_status == 1}"><p class="text-success">답변완료<p></c:if>
 											</p></td>
-											<td align="left"><p class="text-muted"><a href="${contextPath}/qboard/viewQna.do?qna_num=${qnaList.qna_num}">${qnaList.qna_title}</a></p></td>
+											<td align="left"><p class="text-muted">${qnaList.qna_title}</p></td>
 											<td><p class="text-muted">${parseDate}</p></td>
 											<!-- 버튼 -->
 											<div class="form-button-action">
 											<td>
-											<button type="button" data-toggle="tooltip" title="정보 수정" 
-												onclick="location.href='${contextPath}/admin/AMemberView.do?id=${memberlist.id}&nowpage=${nowpage}'" 
+											<button type="button" data-toggle="tooltip" title="답변 하기" 
+												onclick="location.href='${contextPath}/admin/AqnaModify.do?qna_num=${qnaList.qna_num}'" 
 												class="btn btn-link <btn-simple-primary" style=" font-size: 17px; ">
-												<i class="la la-edit"></i>
+												<i class="la la-comments"></i>
 											</button>
 											</td>
 											<td>

@@ -430,7 +430,7 @@ public class AdminController extends HttpServlet{
 //				
 //				return;
 				
-
+			//문의 답변 수정 메인 페이지
 			} else if(action.equals("/Aqnaboardp.do")) {
 				 
 				 qnaDao qnadao = new qnaDao();
@@ -464,12 +464,21 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("nowPage", nowPage);
 
 		         nextPage = "/admins/AqnaBoard.jsp";
+			//문의 답변 수정하는 페이지
+			} else if(action.equals("AqnaModify.do")) {
 				
+				 qnaBean qnabean = new qnaBean();
+				 qnaDao qnadao = new qnaDao();
 				
-				
+				 int qna_num =Integer.parseInt(request.getParameter("qna_num"));
+		         qnabean = qnadao.getqna(qna_num);
+		         
+		         request.setAttribute("qnaUpdate", qnabean);
+		         
+		         nextPage = "/admins/AqnaModify.jsp";
+		         
 			}
 					
-			
 			
 			//디스패치 방식으로 포워딩 (재요청)
 			if(checkPage == 0) {
