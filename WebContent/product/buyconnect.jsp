@@ -56,6 +56,22 @@
 			$("#total").text(print);
 			document.getElementById("totalprice").value = Max;
 		}
+		
+		jQuery(document).ready(function($){
+			$("input[name=seat]:checkbox").change(function(){  //체크박스가 변경되었을 때
+				var cnt = $("#count").val();
+				if( cnt == $("input[name=seat]:checkbox:checked").length){
+					$(":checkbox:not(:checked)").attr("disabled","disabled");
+				}else{
+					$("input[name=seat]:checkbox").removeAttr("disabled");
+				}
+			});
+			
+			$("#count").change(function(){
+				$("input[name=seat]:checkbox").removeAttr("checked");
+				$("input[name=seat]:checkbox").removeAttr("disabled");
+			});
+		});
 	</script>
 	
 	<style type="text/css">
@@ -150,10 +166,10 @@
 											<td>예매수</td>
 											<td>
 												<select id="count" name="count" onchange="getValue()">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
 												</select>
 											</td>
 										<tr>
@@ -168,43 +184,56 @@
 											
 											<strong>좌석 배치도</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;
 											</td>
-											<td>
-											<%for(char c='A' ; c<='Z'; c++){ %>
-												<small><%=c %></small>&nbsp;&nbsp;
-											<%} %>
+											<td>&nbsp;&nbsp;&nbsp;
+											<c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,G,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"/>
+											<c:forTokens items="${alphabet}" delims="," var="letter"  >
+												<font size="2.95em">${letter}</font>&nbsp;
+											</c:forTokens>
 											<br>
-											<% for(int r=1;r<=3;r++){ %>
-												<%= r %>
-												<%for(char c='A';c<='Z';c++){ %>
-													<input type = "checkbox" name="seat" value="<%=c %><%=r %>">
-												<%} %>
+											<c:set var="oneline" value="1,2,3"/>
+											<c:set var="twoline" value="4,5,6"/>
+											<c:set var="thrline" value="7,8,9"/>
+											<c:forTokens items="${oneline}" delims="," var="line1">
+												${line1}
+												<c:forEach begin="1" end="26" step="1" items="${alphabet}" var="i">
+													<input type="checkbox" name="seat" value="${i}${line1}"  >
+												</c:forEach>
 												<br>
-												<%} %>
-											<br>
-											<% for(int r=4;r<=6;r++){ %>
-												<%= r %>
-												<%for(char c='A';c<='Z';c++){ %>
-													<input type = "checkbox" name="seat" value="<%=c %><%=r %>">
-												<%} %>
+											</c:forTokens>
 												<br>
-												<%} %>
-											<br>
-											<% for(int r=7;r<=9;r++){ %>
-												<%= r %>
-												<%for(char c='A';c<='Z';c++){ %>
-													<input type = "checkbox" name="seat" value="<%=c %><%=r %>">
-												<%} %>
+												
+											<c:forTokens items="${twoline}" delims="," var="line2">
+												${line2}
+												<c:forEach begin="1" end="26" step="1" items="${alphabet}" var="i">
+													<input type="checkbox" name="seat" value="${i}${line2}">
+												</c:forEach>
 												<br>
-												<%} %>
-											<br>
+											</c:forTokens>
+												<br>
+												
+											<c:forTokens items="${thrline}" delims="," var="line3">
+												${line3}
+												<c:forEach begin="1" end="26" step="1" items="${alphabet}"  var="i">
+													<input type="checkbox" name="seat" value="${i}${line3}">
+												</c:forEach>
+												<br>
+											</c:forTokens>
+												<br>
+											
+											
 											</td>
 										<tr>		
 										
 									</table>
+									
+								<%-- <c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,G,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"/>
+								<c:forTokens items="${alphabet}" delims="," var="letter"  >
+									${letter}
+								</c:forTokens> --%>
 									<input type="submit" value="장바구니에 담기" id="submit">
 									<input type="hidden" id="totalprice" name="totalprice" value="${DBean.price}">
-
 								</form>
+							
 							</div>
 						</div>
 					</div>
@@ -212,7 +241,9 @@
 			</div>
 		</div>
 	</section>
+	<div>
 
+	</div>
 	<jsp:include page="../include/footer.jsp" />    
     
   
