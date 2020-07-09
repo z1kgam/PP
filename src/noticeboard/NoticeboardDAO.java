@@ -38,6 +38,7 @@ public class NoticeboardDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
+		System.out.println(VO.getN_content());
 		try {
 			con = getConnection();
 			sql = "select max(n_num) from noticeboard";

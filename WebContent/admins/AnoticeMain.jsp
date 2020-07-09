@@ -25,20 +25,28 @@
 	
 	<script type="text/javascript">
 	
-	function del(id) {
+	function del(n_num) {
 		
-		var did = id
-		alert(did);
+		var dn_num = n_num
 		if (confirm("정말 삭제 하시겠습니까??") == true){
-			window.location.href ='${contextPath}/admin/MemberDelete.do?id='+did+'&nowpage=${nowpage}';
+			window.location.href='${contextPath}/admin/AdeleteNotice.do?n_num='+ dn_num;
+			
 		} else {
 			return false;
 		}
 	}
 	
-	function test() {
-		location.href	= '${contextPath}/admins/test2.jsp';
+	function te() {
+		window.location.href = '${contextPath}/admin/Writepage.do';
 	}
+	
+	function test31(t) {
+		
+		var cate = t
+		window.location.href = '${contextPath}/admin/ANoticeMain.do?n_cate='+t;
+		
+	}
+	
 	
 	</script>
 	
@@ -52,24 +60,52 @@
 					<div class="container-fluid">
 						<h4 class="page-title">공지 사항 관리</h4>
 						
-						<div>
 				<form action="#" name=f method="post">
-				<select onchange="location.href=this.value" name="n_cate">
-					<option>항목을 선택하세요</option>
-					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 소식">서비스 소식</option>
-					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 점검">서비스 점검</option>
-					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=안내">안내</option>
+				<div>
+				
+				<c:if test="${catecheck == '0' }">
+							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option>항목을 선택하세요</option>
+							<option value="서비스 소식" >서비스 소식</option>
+							<option value="서비스 점검" >서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>	
+				
+				<c:if test="${catecheck == '1' }">
+							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="전체">전체</option>
+							<option value="서비스 소식" selected="selected">서비스 소식</option>
+							<option value="서비스 점검">서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>	
+						<c:if test="${catecheck == '2' }">
+							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="전체">전체</option>
+							<option value="서비스 소식">서비스 소식</option>
+							<option value="서비스 점검" selected="selected">서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>		
+						<c:if test="${catecheck == '3' }">
+							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="전체">전체</option>
+							<option value="서비스 소식">서비스 소식</option>
+							<option value="서비스 점검">서비스 점검</option>
+							<option value="안내" selected="selected">안내</option>
+						</c:if>
+						<c:if test="${catecheck == '4' }">
+							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option>항목을 선택하세요</option>
+							<option value="서비스 소식">서비스 소식</option>
+							<option value="서비스 점검">서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>
 				</select>
 				
-					<div align="right" style="margin-right: 100px; float: right;">
-					<button type="button" onclick="test()" class="btn btn-warning">글쓰기</button>
+				</div>	
+				<div align="right" style="margin-right: 60px; margin-bottom: 10px; float: right;">
+					<button type="button" onclick="te()" class="btn btn-warning">글쓰기</button>
 					</div>
 				</form>
-				
-				
-				
-			</div>
-				
 				
 				
 						<table class="table table-hover">
@@ -93,9 +129,8 @@
 										<c:when test="${noticeList != null }">
 											<c:forEach var="notice" items="${noticeList}" varStatus="membersNum">
 											<fmt:formatDate var="parseDate" value="${notice.n_date}" pattern="yyyy-MM-dd"/>
-											
 										<tr align="center">
-											<td><p class="text-muted">${requestScope.n_cate}</p></td>
+											<td><p class="text-muted">${notice.n_cate}</p></td>
 											<td align="left">
 											<p class="text-muted">${notice.n_title}</p>
 											</td>
@@ -105,14 +140,15 @@
 											<div class="form-button-action">
 											<td>
 											<button type="button" data-toggle="tooltip" title="글 수정" 
-												onclick="location.href='${contextPath}/admin/AviewNotice.do?n_num=${notice.n_num}'" 
+												onclick="location.href='${contextPath}/admin/AmodNoticePage.do?n_num=${notice.n_num}'" 
 												class="btn btn-link <btn-simple-primary" style=" font-size: 17px; ">
 												<i class="la la-edit"></i>
 											</button>
 											</td>
 											<td>
 											<button type="button" data-toggle="tooltip" title="글 삭제"
-												onclick="#" class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
+												onclick="del('${notice.n_num}')"
+												class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
 											<i class="la la-times"></i>
 											</button>
 											</td>
