@@ -5,8 +5,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-<%
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%-- <%
 	String ch =(String)request.getAttribute("chseat");
 	System.out.println(ch); 
     String[] a = ch.split(",");
@@ -16,9 +16,9 @@
 		System.out.println(a[i]);
 	}	
 
-%>
+%> --%>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 
 <!DOCTYPE html>
 <html>
@@ -57,37 +57,74 @@
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	
 	<script src="../js/content.js"></script>
+
+<c:forEach items="${selseat}" var="vo">
+	<c:forTokens items="${vo.selectseat}" delims="," var="cseat">				
+		<script>
+			function getValue() {
+				var count = Number(document.getElementById("count").value);
+				var cnt = document.getElementById("count").value;
+				var price = Number(${DBean.price});
 	
-	<script type="text/javascript">
-		function getValue() {
-			var count = Number(document.getElementById("count").value);
+				var Max = price*count;
+				
+				var print = Max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
+				$("#total").text(print);
+				document.getElementById("totalprice").value = Max;
 
-			var price = Number(${DBean.price});
-
-			var Max = price*count;
-			
-			var print = Max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
-			$("#total").text(print);
-			document.getElementById("totalprice").value = Max;
-		}
-		
-		jQuery(document).ready(function($){
-			$("input[name=seat]:checkbox").change(function(){  //체크박스가 변경되었을 때
-				var cnt = $("#count").val();
-				if( cnt == $("input[name=seat]:checkbox:checked").length){
-					$(":checkbox:not(:checked)").attr("disabled","disabled");
-				}else{
-					$("input[name=seat]:checkbox").removeAttr("disabled");
+				var select = eval("document.selectform");
+				var checked = document.getElementsByName("seat");
+				
+				for(var i=0; i<select.seat.length; i++){
+					if(checked[i].value == ${cseat}){
+						checked[i].disabled = true;
+					}
 				}
+				
+/* 				jQuery(document).ready(function($){
+					$("input[name=seat]:checkbox").change(function(){  //체크박스가 변경되었을 때
+						var cnt = $("#count").val();
+
+						if( cnt == $("input[name=seat]:checkbox:checked").length){
+							$(":checkbox:not(:checked)").attr("disabled","disabled");
+						}else{
+							$("input[name=seat]:checkbox").removeAttr("disabled");
+						}
+					}); 
+					
+					$("#count").change(function(){
+						$("input[name=seat]:checkbox").removeAttr("checked");
+						$("input[name=seat]:checkbox").removeAttr("disabled");
+					}); 
+				}); */
+				
+				
+			}
+
+			</script>
+	</c:forTokens>
+</c:forEach>
+	 		
+
+<!-- 	 		<script>
+			jQuery(document).ready(function($){
+				$("input[name=seat]:checkbox").change(function(){  //체크박스가 변경되었을 때
+					var cnt = $("#count").val();
+
+					if( cnt == $("input[name=seat]:checkbox:checked").length){
+						$(":checkbox:not(:checked)").attr("disabled","disabled");
+					}else{
+						$("input[name=seat]:checkbox").removeAttr("disabled");
+					}
+				}); 
+				
+				$("#count").change(function(){
+					$("input[name=seat]:checkbox").removeAttr("checked");
+					$("input[name=seat]:checkbox").removeAttr("disabled");
+				}); 
 			});
-			
-			$("#count").change(function(){
-				$("input[name=seat]:checkbox").removeAttr("checked");
-				$("input[name=seat]:checkbox").removeAttr("disabled");
-			});
-		});
-	</script>
-	
+		</script>  -->
+
 	<style type="text/css">
 		#table{
 			margin-left: 200px;
@@ -114,7 +151,6 @@
   <body>
 <jsp:include page="../include/subheader.jsp" />
     <!-- END nav -->
-
     <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/concert.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -222,10 +258,6 @@
 											<br>
 											1<c:forEach begin="1" end="234" var="i">
 												<input type="checkbox" name="seat" value="${i}" id="${i}">
-												
-												
-													
-												
 												<c:choose>
 													<c:when test="${i eq 234 }">
 														<br>
@@ -258,16 +290,16 @@
 												
 											</c:forEach>
 											
-											
 											<c:forEach items="${selseat}" var="vo">
 												<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
 												
 												<script>
+													
 													var select = eval("document.selectform");
 													var checked = document.getElementsByName("seat");
-													
 													for(var i=0; i<select.seat.length; i++){
 														if(checked[i].value == ${cseat}){
+					
 															checked[i].disabled = true;
 														}
 													}
