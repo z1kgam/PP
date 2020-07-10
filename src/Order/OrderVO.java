@@ -2,10 +2,11 @@ package Order;
 
 import java.sql.Date;
 
-public class OrderVO {
-	private int num,detailnum, runtime, price, seat, totalreserved,reserved,totalprice;
-	private String name, genre, cla, image, content, place, starttime,id;
-	private Date startdate, enddate, today,orderdate;
+public class OrderVO {	         
+	private int num,detailnum, runtime, price, seat, totalreserved,qty,totalprice  ;
+	private int p_num, p_seq_num;
+	private String name, genre, cla, image, content, place, starttime,id,selectseat;
+	private Date startdate, enddate, today,orderdate, p_paydate;
 	
 	public OrderVO() {
 		
@@ -59,12 +60,14 @@ public class OrderVO {
 		this.totalreserved = totalreserved;
 	}
 
-	public int getReserved() {
-		return reserved;
+
+
+	public int getQty() {
+		return qty;
 	}
 
-	public void setReserved(int reserved) {
-		this.reserved = reserved;
+	public void setQty(int qty) {
+		this.qty = qty;
 	}
 
 	public int getTotalprice() {
@@ -170,5 +173,69 @@ public class OrderVO {
 	public void setOrderdate(Date orderdate) {
 		this.orderdate = orderdate;
 	}
+
+	public int getP_num() {
+		return p_num;
+	}
+
+	public void setP_num(int p_num) {
+		this.p_num = p_num;
+	}
+
+	public int getP_seq_num() {
+		return p_seq_num;
+	}
+
+	public void setP_seq_num(int p_seq_num) {
+		this.p_seq_num = p_seq_num;
+	}
+
+	public Date getP_paydate() {
+		return p_paydate;
+	}
+
+	public void setP_paydate(Date p_paydate) {
+		this.p_paydate = p_paydate;
+	}
+
+	public String getSelectseat() {
+		return selectseat;
+	}
+
+	public void setSelectseat(String selectseat) {
+		this.selectseat = selectseat;
+	}
+
+	public OrderVO(int totalprice, int qty,int p_seq_num, String name, String selectseat,String id) {
+		super();
+		this.totalprice = totalprice;
+		this.qty = qty;
+		this.p_seq_num = p_seq_num;
+		this.name = name;
+		this.selectseat = selectseat;
+		this.id = id;
+	}
+
+	public OrderVO(int detailnum, int runtime, int qty, int totalprice, int p_seq_num, String genre, String image,
+			String place, String id, String selectseat, String name, Date today) {
+		super();
+		this.detailnum = detailnum;
+		this.runtime = runtime;
+		this.qty = qty;
+		this.totalprice = totalprice;
+		this.p_seq_num = p_seq_num;
+		this.genre = genre;
+		this.image = image;
+		this.place = place;
+		this.id = id;
+		this.selectseat = selectseat;
+		this.name = name;
+		this.today = today;
+	}
+	
+
+	
+	
+	
 	
 }

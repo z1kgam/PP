@@ -1,20 +1,34 @@
 package admin;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import member.MemberBean;
 import member.MemberDAO;
 import noticeboard.NoticeboardBean;
 import noticeboard.NoticeboardDAO;
+import team.qnaboard.qnaBean;
+import team.qnaboard.qnaDao;
 
 
 @WebServlet("/admin/*")
@@ -36,6 +50,7 @@ public class AdminController extends HttpServlet{
 			doHandle(request, response);
 		}
 		
+		@SuppressWarnings("unchecked")
 		protected void doHandle(HttpServletRequest request, HttpServletResponse response) 
 				throws ServletException, IOException {
 			
@@ -79,14 +94,14 @@ public class AdminController extends HttpServlet{
 				//페이징 처리 변수
 				//회원 총 수 구해오기
 				int total = adminDAO.AllMemberCount(search); //회원 총 수
-				int pageSize = 5; // 한 페이지당 출력할 게시물 수
+				int pageSize = 10; // 한 페이지당 출력할 게시물 수
 				int nowPage = 1; // 현재 페이지
 				if(request.getParameter("nowpage") != null) {
 					nowPage = Integer.parseInt(request.getParameter("nowpage"));
 				}
 				int startRow = (nowPage-1)*pageSize; // 첫 번째 게시물 번호
 				int endRow = pageSize; // 마지막 게시물 번호 
-				int blocksize = 3; // 페이징 네비 사이즈
+				int blocksize = 5; // 페이징 네비 사이즈
 				int totalPage = total / pageSize + (total%pageSize==0? 0:1); // 총 페이지 수
 				int blockfirst = ((nowPage/blocksize)-(nowPage%blocksize==0?1:0)) * blocksize + 1; // 페이징 네비 첫번째 번호
 				int blocklast = blockfirst+blocksize-1; // 페이징 네비 마지막 번호
@@ -209,32 +224,48 @@ public class AdminController extends HttpServlet{
 				
 				nextPage = "/admins/Answer.jsp";
 				
-				
-			} else if (action.equals("/MemberJoinCount.do")) {
-				
-				nextPage = "/admins/MemberJoinCount.jsp";
-			
-			//관리자 페이지 고객센터 관리 페이지 이동 
+			//관리자 페이지 고객센터 관리 페이지 이동 	
 			} else if (action.equals("/ANoticeMain.do")) {
 				
+				String catecheck = "";
 				
 				String n_cate = request.getParameter("n_cate");
+				
+				if(n_cate == null ) {
+					catecheck = "0";
+				} else if(n_cate.equals("서비스 소식")	) {
+					catecheck = "1";
+				}else if(n_cate.equals("서비스 점검")) {
+					catecheck = "2";
+				}else if(n_cate.equals("안내")) {
+					catecheck = "3";
+				}else if(n_cate.equals("전체")) {
+					catecheck = "4";
+					n_cate = null;
+				}
+				
+				
 				String n_title = request.getParameter("n_title");
 				String n_date = request.getParameter("n_date");
-
+				if(request.getParameter("check") != null) {
+				int check = Integer.parseInt(request.getParameter("check"));
+				if(check == 1) {
+					n_cate = null;
+				 }
+				}
 				int total = noticeDAO.getAllNotice();
 				System.out.println(total);
 
-				if(n_cate != null)total = noticeDAO.getAllnotice(n_cate);
+				if(n_cate != null )total = noticeDAO.getAllnotice(n_cate);
 				System.out.println(total);			
 				
-				int pageSize = 5;
+				int pageSize = 10;
 				int nowPage = 1;
 				if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
 				
 				int pageFirst = (nowPage-1) * pageSize;
 				int totalPage = total/pageSize + (total%pageSize==0?0:1);
-				int blockSize = 10;
+				int blockSize = 5;
 				int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
 				int blockLast = blockFirst + blockSize -1;
 				
@@ -250,22 +281,24 @@ public class AdminController extends HttpServlet{
 					request.setAttribute("totalPage", totalPage);
 					request.setAttribute("nowPage", nowPage);
 					request.setAttribute("n_cate", n_cate);
-					
-					System.out.println(n_cate);
+					request.setAttribute("catecheck", catecheck);
 				
-				nextPage = "/admins/ANoticeMain.jsp";
+				nextPage = "/admins/AnoticeMain.jsp";
 				
 			//관리자 페이지 공지사항 작성페이지 이동	
-			} else if(action.equals("/ANoticeWritep.do")) {
+			} else if(action.equals("/Writepage.do")) {
 				
-					nextPage = "/admins/ANoticeWritep.jsp";
+					nextPage = "/admins/Awrite.jsp";
 					
 			//관리자 페이지 글 추가
 			} else if(action.equals("/ANoticewrite.do")) {
-			
+				
+				
 				String n_cate = request.getParameter("n_cate");
+				System.out.println(n_cate);
 				String n_title = request.getParameter("n_title");
 				String n_content = request.getParameter("n_content");
+				System.out.println(n_content);
 				checkPage = 1;
 				noticebean.setN_cate(n_cate);
 				noticebean.setN_title(n_title);
@@ -292,7 +325,7 @@ public class AdminController extends HttpServlet{
 				noticebean = noticeDAO.viewNotice(Integer.parseInt(n_num));
 				request.setAttribute("notice", noticebean);
 				
-				nextPage = "/admins/AmodNotice.jsp";
+				nextPage = "/admins/AnoticeModify.jsp";
 				
 			//관리자 페이지 공지사항 글 수정	
 			} else if(action.equals("/AmodNotice.do")) {
@@ -334,6 +367,7 @@ public class AdminController extends HttpServlet{
 //					pw.print("</script>");
 //				}
 //				
+				
 				nextPage = "/admin/ANoticeMain.do";
 			
 			//관리자 페이지 공지사항 글 삭제
@@ -342,11 +376,109 @@ public class AdminController extends HttpServlet{
 				int n_num = Integer.parseInt(request.getParameter("n_num")); 
 				System.out.println(n_num);
 				noticeDAO.deleteNoticeboard(n_num);
-				
+				checkPage = 1;
 				nextPage = "/admin/ANoticeMain.do";
 				
+			} else if(action.equals("/test3.do")) {
+				
+				System.out.println("파일");
+//				PrintWriter out = response.getWriter();
+				ServletContext ctx = getServletContext();
+				 // 이미지 업로드할 경로
+				String uploadPath = ctx.getRealPath("upload");
+				System.out.print(uploadPath);
+			    int size = 10 * 1024 * 1024;  // 업로드 사이즈 제한 10M 이하
+				String fileName = ""; // 파일명
+				try{
+			        // 파일업로드 및 업로드 후 파일명 가져옴
+					MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8", new DefaultFileRenamePolicy());
+					Enumeration files = multi.getFileNames();
+					String file = (String)files.nextElement(); 
+					fileName = multi.getFilesystemName(file); 
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
+			    // 업로드된 경로와 파일명을 통해 이미지의 경로를 생성
+				String uploadPath1 = "http://localhost:8090/PP/upload/"+fileName;
+				
+				
+				JSONArray Array = new JSONArray();
+				JSONObject Info = new JSONObject();
+				Info.put("url", uploadPath1);
+				Array.add(Info);
+				
+				JSONObject result = new JSONObject();
+				
+				result.put("List", Array);
+				
+				PrintWriter out = response.getWriter();
+				
+				String jsonInfo = result.toString();
+				
+				out.print(jsonInfo);
+				
+				return;
+				
+			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
+//				JSONObject jobj = new JSONObject();
+//				jobj.put("url", uploadPath1);
+//				
+//				response.setContentType("application/json"); // 데이터 타입을 json으로 설정하기 위한 세팅
+//				out.print(jobj.toJSONString());
+//				
+//				return;
+				
+			//문의 답변 수정 메인 페이지
+			} else if(action.equals("/Aqnaboardp.do")) {
+				 
+				 qnaDao qnadao = new qnaDao();
+				 qnaBean qnabean = new qnaBean();
+				
+				 String id =(String)request.getSession().getAttribute("id");
+		         
+		         int total = qnadao.getAllQna(id);
+		         System.out.println(total);
+		         
+		         MemberBean mb = new MemberBean();
+		         
+		         
+		         int pageSize = 3;
+		         int nowPage = 1;
+		         if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		         
+		         int pageFirst = (nowPage-1) * pageSize;
+		         int totalPage = total/pageSize + (total%pageSize==0?0:1);
+		         int blockSize = 10;
+		         int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+		         int blockLast = blockFirst + blockSize -1;
+		         
+		         if(blockLast>totalPage) blockLast=totalPage;
+		         List<qnaBean> qnaList = qnadao.qnaList(pageFirst, pageSize, id);
+		         request.setAttribute("qnaList", qnaList);
+		         request.setAttribute("blockSize", blockSize);
+		         request.setAttribute("blockFirst", blockFirst);
+		         request.setAttribute("blockLast", blockLast);
+		         request.setAttribute("totalPage", totalPage);
+		         request.setAttribute("nowPage", nowPage);
+
+		         nextPage = "/admins/AqnaBoard.jsp";
+			//문의 답변 수정하는 페이지
+			} else if(action.equals("AqnaModify.do")) {
+				
+				 qnaBean qnabean = new qnaBean();
+				 qnaDao qnadao = new qnaDao();
+				
+				 int qna_num =Integer.parseInt(request.getParameter("qna_num"));
+		         qnabean = qnadao.getqna(qna_num);
+		         
+		         request.setAttribute("qnaUpdate", qnabean);
+		         
+		         nextPage = "/admins/AqnaModify.jsp";
+		         
 			}
-			
+					
 			
 			//디스패치 방식으로 포워딩 (재요청)
 			if(checkPage == 0) {

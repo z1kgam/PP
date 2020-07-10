@@ -38,7 +38,10 @@
 		              <p style="font-size: 16px;"><a href="#">좋아요 리스트</a></p>
 		            </div>
 		            <div class="col-md-12 mb-3">
-		              <p style="font-size: 16px;"><a href="#">예매 확인</a></p>
+		              <p style="font-size: 16px;"><a href="${contextPath}/Order/cartList.do">장바구니</a></p>
+		            </div>
+		            <div class="col-md-12 mb-3">
+		              <p style="font-size: 16px;"><a href="${contextPath}/Order/payList.do">결제내역보기</a></p>
 		            </div>
 				</div>
 			</div>  
@@ -57,7 +60,7 @@
   					</c:when>
    				</c:choose>    
        		</td>  
-          <td>예매 내역</td>
+          <td>예매 내역 : <a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}">${sessionScope.cartCount}</a></td>
         </tr>
       
    <tbody>
@@ -67,6 +70,9 @@
       </tr>
         <tr>
           <td height="150px">${sessionScope.name}</td>
+        </tr>
+        <tr>
+        	<td>결제 내역 : <a href="${contextPath}/Order/payList.do?id=${sessionScope.id}">${requestScope.payCount}</a></td>
         </tr>
       </tbody>
 </table>

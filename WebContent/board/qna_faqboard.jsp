@@ -128,7 +128,7 @@
 			<div class="col-12 col-lg-8 text-right mt-lg-3">
 				<small>클릭해서 상세정보를 확인하세요.</small>
 				<button type="button" class="btn btn-sm btn-outline-secondary ml-3" onclick="hideContent()">모두 접기</button>
-			</div>
+			</div> 
 		</div>
 		<!-- 게시판 -->
 		<article class="mt-3">
@@ -150,10 +150,11 @@
 				
 					<tr>
 						<th>NO.</th>
-						<th>분류</th>
+						<th>처리상태</th>
 						<th>제목</th>
+						<th>등록일</th>
 					</tr>
-			
+			 
 				<tbody>
 					
 					<c:if test="${count > 0}">

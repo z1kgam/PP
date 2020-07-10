@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -56,6 +57,22 @@
 			$("#total").text(print);
 			document.getElementById("totalprice").value = Max;
 		}
+		
+		jQuery(document).ready(function($){
+			$("input[name=seat]:checkbox").change(function(){  //체크박스가 변경되었을 때
+				var cnt = $("#count").val();
+				if( cnt == $("input[name=seat]:checkbox:checked").length){
+					$(":checkbox:not(:checked)").attr("disabled","disabled");
+				}else{
+					$("input[name=seat]:checkbox").removeAttr("disabled");
+				}
+			});
+			
+			$("#count").change(function(){
+				$("input[name=seat]:checkbox").removeAttr("checked");
+				$("input[name=seat]:checkbox").removeAttr("disabled");
+			});
+		});
 	</script>
 	
 	<style type="text/css">
@@ -106,8 +123,9 @@
 							<div class="blog-entry blog-entry-2 justify-content-end d-md-flex w-100">
 								<form action="${contextPath}/Order/order.do">
 									<input type="hidden" name="id" value="${sessionScope.id}">
-
+									<input type="hidden" name="name" value="${DBean.name}">
 									<input type="hidden" name="detailnum" value="${DBean.detailnum}">
+									<input type="hidden" name="today" value="${DBean.today}">
 									<table border="1" id="table">
 										<tr>
 											<td>콘서트명</td>
@@ -150,10 +168,23 @@
 											<td>예매수</td>
 											<td>
 												<select id="count" name="count" onchange="getValue()">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
+
+													<c:choose>
+														<c:when test="${(DBean.seat-DBean.totalreserved) > 4}">
+															<option value="1">1</option>
+															<option value="2">2</option>
+															<option value="3">3</option>
+															<option value="4">4</option>
+														</c:when>
+														<c:when test="${(DBean.seat-DBean.totalreserved) < 4}">
+															<c:forEach begin="1"
+																end="${DBean.seat-DBean.totalreserved}"
+																varStatus="seatnum">
+																<option>${seatnum.count}</option>
+															</c:forEach>
+														</c:when>
+													</c:choose>
+
 												</select>
 											</td>
 										<tr>
@@ -162,11 +193,74 @@
 
 											<td id="total"><fmt:formatNumber value="${DBean.price}" pattern="#,###" />원</td>
 										<tr>
+										<tr>
+											<td>
+												<p align = "center">
+											
+											<strong>좌석 배치도</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;
+											</td>
+											<td>&nbsp;&nbsp;&nbsp;
+											<!-- <c:set var="alphabet" value="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26"/> -->
+											<c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"/>
+											<c:set var="number" value="1,2,3,4,5,6,7,8,9"/>
+											<c:forTokens items="${alphabet}" delims="," var="letter"  >
+												<font size="2.95em">${letter}</font>&nbsp;
+											</c:forTokens>
+											<br>
+											1<c:forEach begin="1" end="234" var="i">
+												<input type="checkbox" name="seat" value="${i}"
+												
+													<c:if test="${i eq 54}">disabled="disabled"</c:if>
+												>
+												
+												<c:choose>
+													<c:when test="${i eq 234 }">
+														<br>
+													</c:when>
+													<c:when test="${i eq 208 }">
+														<br>9
+													</c:when>
+													<c:when test="${i eq 182 }">
+														<br>8
+													</c:when>
+													<c:when test="${i eq 156 }">
+														<br>7
+													</c:when>
+													<c:when test="${i eq 130 }">
+														<br>6
+													</c:when>
+													<c:when test="${i eq 104 }">
+														<br>5
+													</c:when>
+													<c:when test="${i eq 78 }">
+														<br>4
+													</c:when>
+													<c:when test="${i eq 52 }">
+														<br>3
+													</c:when>
+													<c:when test="${i eq 26 }">
+														<br>2
+													</c:when>
+												</c:choose>
+												
+											</c:forEach>
+											
+												<br>
+											${chseat}
+											
+											</td>
+										<tr>		
+										
 									</table>
-									<input type="submit" value="예매하기" id="submit">
+									
+								<%-- <c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,G,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"/>
+								<c:forTokens items="${alphabet}" delims="," var="letter"  >
+									${letter}
+								</c:forTokens> --%>
+									<input type="submit" value="장바구니에 담기" id="submit">
 									<input type="hidden" id="totalprice" name="totalprice" value="${DBean.price}">
-
 								</form>
+							
 							</div>
 						</div>
 					</div>
@@ -174,7 +268,9 @@
 			</div>
 		</div>
 	</section>
+	<div>
 
+	</div>
 	<jsp:include page="../include/footer.jsp" />    
     
   

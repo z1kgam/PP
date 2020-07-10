@@ -52,7 +52,7 @@ input {
 <article>
 <h1>Register Product</h1>
 
-<form action="${contextPath}/Proser/detailsPro.do?" method="post" name="f">
+<form action="${contextPath}/Proser/detailsPro.do" method="post" name="f">
 	<input type="hidden" value="${Bean.startdate}" id="stdate">
 	<input type="hidden" value="${Bean.enddate}" id="endate">
 	<input type="hidden" value="${Bean.num}" name="num">
@@ -78,10 +78,8 @@ input {
 			<td>좌석</td>
 			<td>
 				<select name="seat" style="vertical-align: middle; text-align-last: center;">
-					<option>100</option>
-					<option>150</option>
-					<option>200</option>
-					<option>250</option>
+					<option>234</option>
+					<option>3</option>
 				</select>
 			</td>
 		</tr>

@@ -30,7 +30,7 @@ public class qnaDao {
 	}
 	
 	//자원해제
-	public void freeResource(){
+	private void freeResource(){
 	if(con != null){try{con.close();}catch(Exception err){}}
 	if(rs != null){try{rs.close();}catch(Exception err){}}
 	if(pstmt != null){try{con.close();}catch(Exception err){}}
