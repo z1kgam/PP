@@ -26,6 +26,7 @@ import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.sun.glass.ui.Application;
 
 import Order.OrderDAO;
 import Order.OrderVO;
@@ -308,7 +309,7 @@ public class ProductServlet extends HttpServlet {
 				request.setAttribute("alist", alist);
 				
 				System.out.println(chseat);
-				request.setAttribute("selseat", selectseat);
+				session.setAttribute("selseat", selectseat);
 				request.setAttribute("chseat", chseat);
 				
 				nextPage = "/product/buyconnect.jsp";
