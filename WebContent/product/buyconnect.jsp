@@ -7,16 +7,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%
-	String ch =(String)request.getAttribute("chseat");
-	System.out.println(ch); 
-    String[] a = ch.split(",");
+	List alist = (List)request.getAttribute("alist");
 	
-	System.out.println(ch);
-	for(int i = 0; i<a.length; i ++){
-		System.out.println(a[i]);
-	}	
-
+	for(int i=0; i<alist.size();i++){
+		System.out.println("자바배열 :" + alist.get(i));
+	}
+	
 %>
+
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -69,9 +67,16 @@
 			var print = Max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
 			$("#total").text(print);
 			document.getElementById("totalprice").value = Max;
+			
+			
+			<%
+				for(int i=0; i<alist.size();i++){
+					
+				}
+			%>
 		}
 		
-		jQuery(document).ready(function($){
+ 		jQuery(document).ready(function($){
 			$("input[name=seat]:checkbox").change(function(){  //체크박스가 변경되었을 때
 				var cnt = $("#count").val();
 				if( cnt == $("input[name=seat]:checkbox:checked").length){
@@ -85,7 +90,7 @@
 				$("input[name=seat]:checkbox").removeAttr("checked");
 				$("input[name=seat]:checkbox").removeAttr("disabled");
 			});
-		});
+		}); 
 	</script>
 	
 	<style type="text/css">
@@ -263,6 +268,8 @@
 												<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
 												
 												<script>
+													
+												
 													var select = eval("document.selectform");
 													var checked = document.getElementsByName("seat");
 													
@@ -290,7 +297,7 @@
 									<input type="submit" value="장바구니에 담기" id="submit">
 									<input type="hidden" id="totalprice" name="totalprice" value="${DBean.price}">
 								</form>
-							
+							<input type="hidden" name="" >
 							</div>
 						</div>
 					</div>

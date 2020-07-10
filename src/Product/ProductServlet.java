@@ -297,6 +297,16 @@ public class ProductServlet extends HttpServlet {
 						chseat += ",";
 					}
 				}
+				
+				
+				String [] aa = chseat.split(",");
+				List<String> alist = new ArrayList<String>();
+				for(int i=0; i<aa.length;i++) {
+					alist.add(aa[i]);
+				}
+				
+				request.setAttribute("alist", alist);
+				
 				System.out.println(chseat);
 				request.setAttribute("selseat", selectseat);
 				request.setAttribute("chseat", chseat);
