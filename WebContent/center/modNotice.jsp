@@ -32,17 +32,24 @@
 				<input type="hidden" name="n_num" value="${notice.n_num}">
                 <input type="text" name="n_title" class="form-control" value="${notice.n_title}">
 			</div>
+			
+            <div class="form-group">
+            	<a>분류 : </a>
+               	<select name="n_cate">
+                	<option value="서비스 소식">서비스 소식</option>
+                	<option value="서비스 점검">서비스 점검</option>
+               		<option value="안내">안내</option>
+               	</select>
+           	</div>			
+ 			
 			<div class="form-group">
-                <input type="text" name="n_cate" class="form-control" value="${notice.n_cate}">
- 			</div>
-			<div class="form-group">
-                <input type="text" class="form-control" value="관리자">
+                <input type="text" class="form-control" value="관리자" readonly="readonly">
 			</div>                              
 			<div class="form-group">
                 <textarea name="n_content" cols="30" rows="7" class="form-control">${notice.n_content}</textarea>
 			</div>
 			<input type=submit value="수정완료">
- 			<input type="reset" value="취소하기" >
+ 			<input type="button" value="취소하기" onclick="history.back();">
 		</form>
 	</div>
 </section>
