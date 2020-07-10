@@ -208,10 +208,9 @@
 											</c:forTokens>
 											<br>
 											1<c:forEach begin="1" end="234" var="i">
-												<input type="checkbox" name="seat" value="${i}"
+												<input type="checkbox" name="seat" value="${i}">
 												
-													<c:if test="${i eq 54}">disabled="disabled"</c:if>
-												>
+													
 												
 												<c:choose>
 													<c:when test="${i eq 234 }">
