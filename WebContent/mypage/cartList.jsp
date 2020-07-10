@@ -67,7 +67,7 @@
 	 					<td>${cart.qty}</td>
 	 					<td>${cart.totalprice}</td>
 	 					<td>${cart.orderdate}</td>
-	 					<td><a href="${contextPath}/Order/Payment.do?num=${cart.num}&id=${cart.id}">주문하기</td></td>
+	 					<td><a href="${contextPath}/Order/Payment.do?num=${cart.num}&id=${cart.id}">결제하기</td></td>
 	 					<td><a href="${contextPath}/Order/delCart.do?num=${cart.num}&id=${cart.id}">삭제</a></td>
 	 				</tr>
 	 			</c:forEach>
@@ -84,8 +84,11 @@
 	 		</table>
 	 		총 금액 : <fmt:formatNumber pattern="###,###,###" value="${total}"/>
 			<button type="button" onclick="btnDelete()" class="btn btn-primary pull-right">장바구니 비우기</button>
+		<c:if test="${!empty cartList}">
 			<button type="button" onclick="btnPay()" class="btn btn-primary pull-right">결제하기</button>
+	 	</c:if>	
 	 	</div>
+	 	
 	 </div>
 	
 

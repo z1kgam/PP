@@ -31,31 +31,42 @@
 	
   <script type="text/javascript">
   
-  /* summernote에서 이미지 업로드시 실행할 함수 */
-	function sendFile(file, editor) {
-		alert("업로드 함수 실행");
-      // 파일 전송을 위한 폼생성
-		data = new FormData();
-	    data.append("uploadFile", file);
-	    $.ajax({ // ajax를 통해 파일 업로드 처리
-	        data : data,
-	        type : "POST",
-	        url : "${contextPath}/admin/test3.do",
-	        cache : false,
-	        contentType : false,
-	        processData : false,
-	        success : function(data) { // 처리가 성공할 경우
-	        	alert("왔으");
-              // 에디터에 이미지 출력
-	        	$(editor).summernote('editor.insertImage', data.url);
-	        }
-	    });
+  function sendFile(file, editor) {
+	  	alert("왔는데?");
+		var data = new FormData();
+		data.append('uploadFile', file);
+		
+		$.ajax({// ajax를 통해 파일 업로드 처리
+		
+			data: data,
+			dataType : "json",
+			type: "POST",
+			url: "${contextPath}/admin/test3.do",
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(data) {// 처리가 성공할 경우
+				// 에디터에 이미지 출력
+				//alert(data.url);
+				//alert(JSON.stringify(data));
+				var aa = JSON.parse(JSON.stringify(data));
+				var bb = aa.List;
+				var image = bb[0].url;
+				alert(image);
+				alert("콜백성공");
+				var te3 = "<img src="+"'"+image+"'/>";
+				$("#test5").html(te3);
+			}
+			
+		});
+		
 	}
+  
+  
   </script>
 	
 </head>
 <body>
-
 <jsp:include page="./include/top_navi.jsp" />
 
 
@@ -64,17 +75,42 @@
 			<div class="container-fluid">
 				<h4 class="page-title">Dashboard</h4>
 
-				<form name="writeForm" action="${contextPath}/admin/ANoticewrite.do" method="POST">
+				<form action="${contextPath}/admin/AmodNotice.do?n_num=${notice.n_num}&check=1" method="POST">
 					<div class="form-group">
-						<label for="title">Title:</label> <input type="text"
-							class="form-control" placeholder="title" id="title" name="n_title">
+						<label for="title">Title:</label> 
+						<input type="text" class="form-control" placeholder="title" id="title" name="n_title" required value="${notice.n_title}">
+					</div>
+					<div class="form-group">
+						<label for="title">Category:</label>
+						<c:if test="${notice.n_cate == '서비스 소식' }">
+							<select class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="서비스 소식" selected="selected">서비스 소식</option>
+							<option value="서비스 점검">서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>	
+						<c:if test="${notice.n_cate == '서비스 점검' }">
+							<select class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="서비스 소식">서비스 소식</option>
+							<option value="서비스 점검" selected="selected">서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>		
+						<c:if test="${notice.n_cate == '안내' }">
+							<select class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="서비스 소식">서비스 소식</option>
+							<option value="서비스 점검">서비스 점검</option>
+							<option value="안내" selected="selected">안내</option>
+						</c:if>
+						</select>
 					</div>
 					<div class="form-group">
 						<label for="content">Content:</label>
-						<textarea id="summernote" class="form-control" rows="5"
-							id="content" name="n_content"></textarea>
+						<textarea id="summernote" class="form-control" rows="5" name="n_content" required >${notice.n_content}</textarea>
 					</div>
-					<button type="submit" class="btn btn-primary">글쓰기</button>
+					<div align="center">
+					<button type="submit" class="btn btn-success" >글 수정</button>
+					<button type="reset" class="btn btn-warning">다시 쓰기</button>
+					<button onclick="location.href='${contextPath}/admin/ANoticeMain.do'" type="reset" class="btn btn-danger">목록 으로</button>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -108,7 +144,16 @@
 	
 	 <!-- 이 부분 질문 하기 -->
 	<script> 
- 
+  $(document).ready(function() {
+		$('#summernote').summernote({
+			tabsize : 2,
+			height : 300
+		});
+		
+// 		$('.dropdown-toggle').dropdown()
+
+
+	});
     
     $('#summernote').summernote({
     		
@@ -120,11 +165,10 @@
     	  callbacks: {// 콜백을 사용
     		  // 이미지를 업로드할 경우 이벤트를 발생
     		  onImageUpload: function(files, editor, welEditable) {
-    			  alert("이미지 업로드 이벤트");
+    			  alert("엥?");
     			  sendFile(files[0], this);
     		  } 
     	   }
-    		
     	});
     
    		

@@ -1,5 +1,6 @@
 package Product;
 
+import java.sql.Date;
 import java.util.List;
 
 public class ProductService {
@@ -81,4 +82,10 @@ public class ProductService {
 	public void detaildelete(String name) {
 		Ddao.detaildelete(name);
 	}
+
+	public List<DetailBean> SelectByDate(Date selectdate, String name) {
+		List<DetailBean> detList = Ddao.SelectByDate(selectdate,name);
+		return detList;
+	}
+
 }

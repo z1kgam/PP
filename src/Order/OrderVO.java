@@ -5,7 +5,7 @@ import java.sql.Date;
 public class OrderVO {	         
 	private int num,detailnum, runtime, price, seat, totalreserved,qty,totalprice  ;
 	private int p_num, p_seq_num;
-	private String name, genre, cla, image, content, place, starttime,id;
+	private String name, genre, cla, image, content, place, starttime,id,selectseat;
 	private Date startdate, enddate, today,orderdate, p_paydate;
 	
 	public OrderVO() {
@@ -198,15 +198,42 @@ public class OrderVO {
 		this.p_paydate = p_paydate;
 	}
 
-	public OrderVO(int totalprice, int qty,int p_seq_num, String name, String id) {
+	public String getSelectseat() {
+		return selectseat;
+	}
+
+	public void setSelectseat(String selectseat) {
+		this.selectseat = selectseat;
+	}
+
+	public OrderVO(int totalprice, int qty,int p_seq_num, String name, String selectseat,String id) {
 		super();
 		this.totalprice = totalprice;
 		this.qty = qty;
 		this.p_seq_num = p_seq_num;
 		this.name = name;
+		this.selectseat = selectseat;
 		this.id = id;
 	}
+
+	public OrderVO(int detailnum, int runtime, int qty, int totalprice, int p_seq_num, String genre, String image,
+			String place, String id, String selectseat, String name, Date today) {
+		super();
+		this.detailnum = detailnum;
+		this.runtime = runtime;
+		this.qty = qty;
+		this.totalprice = totalprice;
+		this.p_seq_num = p_seq_num;
+		this.genre = genre;
+		this.image = image;
+		this.place = place;
+		this.id = id;
+		this.selectseat = selectseat;
+		this.name = name;
+		this.today = today;
+	}
 	
+
 	
 	
 	

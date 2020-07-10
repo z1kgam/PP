@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -18,9 +21,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import Order.OrderDAO;
+import Order.OrderVO;
 import member.LikeDAO;
 
 @SuppressWarnings("serial")
@@ -191,10 +199,8 @@ public class ProductServlet extends HttpServlet {
 
 				nextPage = "/product/details.jsp";
 			} else if (action.equals("/detailsPro.do")) {
-
 				int num = Integer.parseInt(request.getParameter("num"));
 				productBean = productService.getBoard(num);
-
 				String place = request.getParameter("place");
 				int seat = Integer.parseInt(request.getParameter("seat"));
 				int totalreserved = 0;
@@ -219,8 +225,10 @@ public class ProductServlet extends HttpServlet {
 				Bean.setStarttime(starttime);
 
 				productService.insertDetail(Bean);
+				System.out.println(productBean.getName());
  
 				nextPage = "/Proser/content.do?num="+num+"&name="+productBean.getName();
+				
 			}else if(action.equals("/reply.do")){
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int parentsnum = Integer.parseInt(request.getParameter("parentsnum"));
@@ -271,16 +279,62 @@ public class ProductServlet extends HttpServlet {
 				productService.updatereply(replynum,content);
 				
 				nextPage = "/Proser/content.do?num="+pronum+"&name="+productBean.getName();
-			}else if(action.equals("/prepare.do")) {
+			
+			}else if(action.equals("/prepare.do")) {	
 				int detail = Integer.parseInt(request.getParameter("detailnum"));
-				
-
+				Date today = Date.valueOf(request.getParameter("today"));
 				Bean = productService.getdetails(detail);
-				
+				OrderDAO orderDAO = new OrderDAO();
+				OrderVO VO = new OrderVO();
 				request.setAttribute("DBean", Bean);
-
 				
+				//해당 공연에 대한 예약된 좌석정보리스트 가져와서 저장하기
+				List<OrderVO> selectseat = orderDAO.getSeat(today, detail);
+				String chseat="";
+				for(int j=0; j<selectseat.size();j++) {
+					chseat += selectseat.get(j).getSelectseat();
+					if(j!=selectseat.size()-1) {
+						chseat += ",";
+					}
+				}
+				System.out.println(chseat);
+				
+				request.setAttribute("chseat", chseat);
 				nextPage = "/product/buyconnect.jsp";
+				
+			}else if(action.equals("/itemselect.do")) {
+
+				String name = request.getParameter("name");
+				Date selectdate = Date.valueOf(request.getParameter("date"));
+
+				List<DetailBean> detList = productService.SelectByDate(selectdate,name);
+				
+				JSONObject result = new JSONObject();
+
+				JSONArray Array = new JSONArray();
+				JSONObject Info;
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+				for(int i=0;i<detList.size();i++) {
+					DetailBean vo = detList.get(i);
+					Info = new JSONObject();
+					Info.put("detnum", Integer.toString(vo.getDetailnum()));
+					Info.put("place", vo.getPlace());
+					Info.put("seat", Integer.toString(vo.getSeat()));
+					Info.put("totalreserved",Integer.toString(vo.getTotalreserved()));
+					Info.put("today", transFormat.format(vo.getToday()));
+					Info.put("starttime", vo.getStarttime());
+					Array.add(Info);
+				}
+				result.put("List", Array);
+				PrintWriter out = response.getWriter();
+				
+				String jsonInfo = result.toString();
+				
+				out.print(jsonInfo);
+				
+				return;
+				
 			}
 			if(checkPage == 0) {
 				request.getRequestDispatcher(nextPage).forward(request, response);

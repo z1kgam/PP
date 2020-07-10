@@ -52,14 +52,14 @@
     	<input type="button" class="submit" value="제품등록" onclick="location.href='${contextPath}/Proser/write.do'">
         <div class="row">
 				<c:if test="${List != null}">
-					<c:forEach var="memberVO" items="${List}">
+					<c:forEach var="VO" items="${List}">
 						<div class="col-md-3">
 							<div class="classes w-100 ftco-animate">
-								<a href="${contextPath}/Proser/content.do?num=${memberVO.num}&name=${memberVO.name}" class="img w-100 mb-3"
-									style="background-image: url(../consert/${memberVO.image}); height: 350px;"></a>
+								<a href="${contextPath}/Proser/content.do?num=${VO.num}&name=${VO.name}" class="img w-100 mb-3"
+									style="background-image: url(../consert/${VO.image}); height: 350px;"></a>
 								<div class="text w-100 text-center">
 									<h3>
-										${memberVO.name}
+										${VO.name}
 									</h3>
 
 								</div>
