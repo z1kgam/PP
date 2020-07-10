@@ -162,7 +162,7 @@ function time_format(s) {
 			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">관리자 페이지</a></li>
 			     </c:if>     
 			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">예매하기</a></li>
-			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공지사항</a></li>
+			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">고객센터</a></li>
 			     <c:if test="${id==null}">
 			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">로그인</a></li>
 			          <li class="nav-item"><a href="${contextPath}/member/join.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">회원가입</a></li>

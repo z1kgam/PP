@@ -245,7 +245,7 @@
 							</a>
 						</li>
 						<li class="nav-item active">
-							<a href="#">
+							<a href="${contextPath}/admin/Aqnaboardp.do">
 								<i class="la la-vimeo-square la-vine la-vk la-volume-down la-volume-off la-volume-up la-warning la-wechat"></i>
 								<p>문의 내역 답변 관리</p>
 								<span class="badge badge-count">5</span>

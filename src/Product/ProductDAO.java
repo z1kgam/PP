@@ -120,7 +120,7 @@ public class ProductDAO {
 			pstmt.setInt(1, num);
 
 			rs = pstmt.executeQuery();
-
+			System.out.println(pstmt);
 			if(rs.next()) {
 				Bean.setNum(num);
 				Bean.setName(rs.getString("name"));

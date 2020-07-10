@@ -92,6 +92,7 @@
 											</c:choose>
 
 											<c:choose>
+											
 												<c:when test="${memberlist.is_admin == 1}">
 													<td><p class="text-primary">관리자</p></td>
 												</c:when>
