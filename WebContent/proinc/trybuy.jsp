@@ -12,7 +12,7 @@
 
 function sel() {
 	var selectdate = $("#search").val();
-	var name = "오페라의 유령";
+	var name = $("#name").val();
 	
  	$.ajax({
 		type : "post",
@@ -66,29 +66,10 @@ function sel() {
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	}); 
-	document.getElementById("fullview").style.display = "none";
-	document.getElementById("partview").style.display = "block";
 }
-
-	function view() {
-	document.getElementById("fullview").style.display = "block";
- 	document.getElementById("partview").style.display = "none";
- 	}
-
 
 </script>
 <style type="text/css">
-
-#import{
-	width: 800px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 50px;
-}
-
-#import tr{
-	text-align: center;
-}
 
 #part{
 	width: 800px;
@@ -121,6 +102,11 @@ function sel() {
 <body>
 <div style="clear: both;"></div>
    	<label id="label">날짜 검색</label><input type="date" id="search" onchange="sel()">
+<<<<<<< HEAD
+   	<input type="button" value="전체보기" onclick="trybuy()">
+   	<input type="hidden" value="${Bean.name}" id="name">
+   	<div id="partview"><table id="part" border="1"></table></div>
+=======
    	<input type="button" value="전체보기" onclick="view()">
    	<div id="partview" style="display: none;"><table id="part" border="1"></table></div>
 	<div id="fullview">
@@ -170,5 +156,6 @@ function sel() {
 	<!-- <input type="text" id="testDatepicker" style="margin-left: 50%;"> -->
 </div>
 
+>>>>>>> a101176ef741e2d50ffe97f52177bc86c3fc021c
 </body>
 </html>

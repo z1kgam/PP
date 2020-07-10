@@ -28,6 +28,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sun.glass.ui.Application;
 
+import Order.OrderService;
 import Order.OrderDAO;
 import Order.OrderVO;
 import member.LikeDAO;
@@ -131,7 +132,7 @@ public class ProductServlet extends HttpServlet {
 				productBean.setContent(content);
 				//productBean.setQty(qty);
 				productService.insert(productBean);
-
+				checkPage = 1;
 
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + "  alert('제품을 추가했습니다.');" + " location.href='" + request.getContextPath()
@@ -144,14 +145,10 @@ public class ProductServlet extends HttpServlet {
 				String name = request.getParameter("name");
 				String id = (String)session.getAttribute("id");
 				productBean = productService.getBoard(num);
-				List<ReplyVO> list = productService.getreply(num);
-				List<DetailBean> detail = productService.getdetail(name);
 				LikeDAO likeDAO = new LikeDAO();
 				boolean checkZ = likeDAO.checkLike(num, id);
 				int likeCount = likeDAO.getProductTotalLike(num);
 				request.setAttribute("Bean", productBean);
-				request.setAttribute("List", list);
-				request.setAttribute("detail", detail);
 				request.setAttribute("likeCount", likeCount);
 				request.setAttribute("checkZ", checkZ);
 				//request.setAttribute("pageNum", pageNum);
@@ -207,7 +204,7 @@ public class ProductServlet extends HttpServlet {
 				int totalreserved = 0;
 				Date today = Date.valueOf(request.getParameter("today"));
 				String starttime = request.getParameter("starttime");
-
+				checkPage = 1;
 
 				Bean = new DetailBean();
 				Bean.setName(productBean.getName());
@@ -229,7 +226,36 @@ public class ProductServlet extends HttpServlet {
 				System.out.println(productBean.getName());
  
 				nextPage = "/Proser/content.do?num="+num+"&name="+productBean.getName();
+			}else if(action.equals("/Allreply.do")) {
+				int pronum = Integer.parseInt(request.getParameter("pronum"));
+				List<ReplyVO> list = productService.getreply(pronum);
 				
+				JSONObject result = new JSONObject();
+
+				JSONArray Array = new JSONArray();
+				JSONObject Info;
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+				for(int i=0;i<list.size();i++) {
+					ReplyVO vo = list.get(i);
+					Info = new JSONObject();
+					Info.put("replynum", Integer.toString(vo.getReplynum()));
+					Info.put("parentsnum", Integer.toString(vo.getParentsnum()));
+					Info.put("productnum", Integer.toString(vo.getProductnum()));
+					Info.put("id", vo.getId());
+					Info.put("content", vo.getContent());
+					Info.put("uploaddate", transFormat.format(vo.getDate()));
+					Array.add(Info);
+				}
+				
+				result.put("List", Array);
+				PrintWriter out = response.getWriter();
+				
+				String jsonInfo = result.toString();
+				
+				out.print(jsonInfo);
+				
+				return;
 			}else if(action.equals("/reply.do")){
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int parentsnum = Integer.parseInt(request.getParameter("parentsnum"));
@@ -244,43 +270,40 @@ public class ProductServlet extends HttpServlet {
 				productBean = productService.getBoard(pronum);
 				productService.insertReply(vo);
 				
-				nextPage = "/Proser/content.do?num="+pronum+"&name="+productBean.getName();
+				return;
 				
 			}else if(action.equals("/replydelete.do")) {
 				
-				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
-				productBean = productService.getBoard(pronum);
+				
 				productService.deleteReply(replynum);
 				
-				nextPage = "/Proser/content.do?num="+pronum+"&name="+productBean.getName();
+				return;
 			}else if(action.equals("/alldelete.do")) {
 				
-				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
-				productBean = productService.getBoard(pronum);
+
 				productService.doudelete(replynum);
 				productService.deleteReply(replynum);
 				
-				nextPage = "/Proser/content.do?num="+pronum+"&name="+productBean.getName();
+				return;
 				
 			}else if(action.equals("/updatereply.do")) {
-				int pronum = Integer.parseInt(request.getParameter("pnum"));
+				
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
 				String content = request.getParameter("upcontent");
-				productBean = productService.getBoard(pronum);
+				
 				productService.updatereply(replynum,content);
 				
-				nextPage = "/Proser/content.do?num="+pronum+"&name="+productBean.getName();
+				return;
 			}else if(action.equals("/fatedelete.do")) {
-				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
 				String content = "관리자나 본인에 의해 삭제된 댓글입니다.";
-				productBean = productService.getBoard(pronum);
-				productService.updatereply(replynum,content);
 				
-				nextPage = "/Proser/content.do?num="+pronum+"&name="+productBean.getName();
-			
+				productService.updatereply(replynum,content);
+
+				return;
+
 			}else if(action.equals("/prepare.do")) {	
 				int detail = Integer.parseInt(request.getParameter("detailnum"));
 				Date today = Date.valueOf(request.getParameter("today"));
@@ -347,6 +370,37 @@ public class ProductServlet extends HttpServlet {
 				
 				return;
 				
+			}else if(action.equals("/Allitems.do")) {
+				String name = request.getParameter("name");
+				
+				List<DetailBean> detList = productService.getdetail(name);
+				
+				JSONObject result = new JSONObject();
+
+				JSONArray Array = new JSONArray();
+				JSONObject Info;
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+				for(int i=0;i<detList.size();i++) {
+					DetailBean vo = detList.get(i);
+					Info = new JSONObject();
+					Info.put("detnum", Integer.toString(vo.getDetailnum()));
+					Info.put("place", vo.getPlace());
+					Info.put("seat", Integer.toString(vo.getSeat()));
+					Info.put("totalreserved",Integer.toString(vo.getTotalreserved()));
+					Info.put("today", transFormat.format(vo.getToday()));
+					Info.put("starttime", vo.getStarttime());
+					Array.add(Info);
+				}
+				
+				result.put("List", Array);
+				PrintWriter out = response.getWriter();
+				
+				String jsonInfo = result.toString();
+				
+				out.print(jsonInfo);
+				
+				return;
 			}
 			if(checkPage == 0) {
 				request.getRequestDispatcher(nextPage).forward(request, response);
