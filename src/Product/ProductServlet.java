@@ -298,8 +298,9 @@ public class ProductServlet extends HttpServlet {
 					}
 				}
 				System.out.println(chseat);
-				
+				request.setAttribute("selseat", selectseat);
 				request.setAttribute("chseat", chseat);
+				
 				nextPage = "/product/buyconnect.jsp";
 				
 			}else if(action.equals("/itemselect.do")) {

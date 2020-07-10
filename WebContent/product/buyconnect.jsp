@@ -1,9 +1,22 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%
+	String ch =(String)request.getAttribute("chseat");
+	System.out.println(ch); 
+    String[] a = ch.split(",");
+	
+	System.out.println(ch);
+	for(int i = 0; i<a.length; i ++){
+		System.out.println(a[i]);
+	}	
+
+%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -121,7 +134,7 @@
 					<div class="row">
 						<div class="col-md-12 d-flex ftco-animate">
 							<div class="blog-entry blog-entry-2 justify-content-end d-md-flex w-100">
-								<form action="${contextPath}/Order/order.do">
+								<form action="${contextPath}/Order/order.do" name="selectform">
 									<input type="hidden" name="id" value="${sessionScope.id}">
 									<input type="hidden" name="name" value="${DBean.name}">
 									<input type="hidden" name="detailnum" value="${DBean.detailnum}">
@@ -208,7 +221,8 @@
 											</c:forTokens>
 											<br>
 											1<c:forEach begin="1" end="234" var="i">
-												<input type="checkbox" name="seat" value="${i}">
+												<input type="checkbox" name="seat" value="${i}" id="${i}">
+												
 												
 													
 												
@@ -242,6 +256,23 @@
 													</c:when>
 												</c:choose>
 												
+											</c:forEach>
+											
+											
+											<c:forEach items="${selseat}" var="vo">
+												<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
+												
+												<script>
+													var select = eval("document.selectform");
+													var checked = document.getElementsByName("seat");
+													
+													for(var i=0; i<select.seat.length; i++){
+														if(checked[i].value == ${cseat}){
+															checked[i].disabled = true;
+														}
+													}
+												</script>
+												</c:forTokens>
 											</c:forEach>
 											
 												<br>
