@@ -12,7 +12,7 @@
 
 function sel() {
 	var selectdate = $("#search").val();
-	var name = "오페라의 유령";
+	var name = $("#name").val();
 	
  	$.ajax({
 		type : "post",
@@ -66,29 +66,10 @@ function sel() {
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	}); 
-	document.getElementById("fullview").style.display = "none";
-	document.getElementById("partview").style.display = "block";
 }
-
-	function view() {
-	document.getElementById("fullview").style.display = "block";
- 	document.getElementById("partview").style.display = "none";
- 	}
-
 
 </script>
 <style type="text/css">
-
-#import{
-	width: 800px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 50px;
-}
-
-#import tr{
-	text-align: center;
-}
 
 #part{
 	width: 800px;
@@ -121,52 +102,8 @@ function sel() {
 <body>
 <div style="clear: both;"></div>
    	<label id="label">날짜 검색</label><input type="date" id="search" onchange="sel()">
-   	<input type="button" value="전체보기" onclick="view()">
-   	<div id="partview" style="display: none;"><table id="part" border="1"></table></div>
-	<div id="fullview">
-	<table id="import" border="1">
-		<c:choose>
-			<c:when test="${empty detail}">
-				<tr>
-					<td colspan="7">등록된 콘서트가 없습니다.</td>
-				</tr>
-			</c:when>
-			<c:when test="${!empty detail}">
-					<tr>
-						<td>No.</td>
-						<td>공연명</td>
-						<td>공연날짜</td>
-						<td>시작시간</td>
-						<td>잔여좌석</td>
-						<td>좌석수</td>
-						<td>공연장</td>
-						<td></td>
-					</tr>
-					<c:forEach var="det" items="${detail}" varStatus="status">
-						<tr>
-							<fmt:formatNumber value="${det.seat}" type="number" var="seat" />
-							<fmt:formatNumber value="${det.totalreserved}" type="number" var="reserved" />
-							<td>${status.count}</td>
-							<td>${det.name}</td>
-							<td>${det.today}</td>
-							<td>${det.starttime}</td>
-							<td>${seat-reserved}</td>
-							<td>${det.seat}</td>
-							<td>${det.place}</td>
-							<c:if test="${(seat-reserved) eq 0}">
-								<td>매진</td>
-							</c:if>
-							<c:if test="${(seat-reserved) ne 0}">
-								<td><input type="button" value="예매하기" onclick="location.href='${contextPath}/Proser/prepare.do?detailnum=${det.detailnum}'"></td>
-							</c:if>
-						</tr>
-					</c:forEach>
-			</c:when>
-		</c:choose>
-			
-		</table>
-	<!-- <input type="text" id="testDatepicker" style="margin-left: 50%;"> -->
-</div>
-
+   	<input type="button" value="전체보기" onclick="trybuy()">
+   	<input type="hidden" value="${Bean.name}" id="name">
+   	<div id="partview"><table id="part" border="1"></table></div>
 </body>
 </html>

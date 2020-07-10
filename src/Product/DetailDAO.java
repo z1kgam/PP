@@ -88,7 +88,7 @@ public class DetailDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from details where name=?";
+			sql = "select * from details where name=? order by today asc, starttime asc";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
