@@ -26,7 +26,7 @@ import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.sun.glass.ui.Application;
+//import com.sun.glass.ui.Application;
 
 import Order.OrderService;
 import Order.OrderDAO;
@@ -322,6 +322,7 @@ public class ProductServlet extends HttpServlet {
 					}
 				}
 				
+				System.out.println(chseat);
 				
 				String [] aa = chseat.split(",");
 				List<String> alist = new ArrayList<String>();
