@@ -539,9 +539,32 @@ public class AdminController extends HttpServlet{
 			//상품 관리 페이지(메인) 이동
 			} else if(action.equals("/AproductMain.do")) {
 				
-				ProductDAO dao = new ProductDAO();
 				
-				List<ProductBean> list = dao.getList();
+				
+				
+				ProductDAO dao = new ProductDAO();
+				int total = dao.getCount();
+				int pageSize = 10;
+		         int nowPage = 1;
+		         if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		         
+		         int pageFirst = (nowPage-1) * pageSize;
+		         int totalPage = total/pageSize + (total%pageSize==0?0:1);
+		         int blockSize = 10;
+		         int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+		         int blockLast = blockFirst + blockSize -1;
+		         
+		         if(blockLast>totalPage) blockLast=totalPage;
+		         request.setAttribute("blockSize", blockSize);
+		         request.setAttribute("blockFirst", blockFirst);
+		         request.setAttribute("blockLast", blockLast);
+		         request.setAttribute("totalPage", totalPage);
+		         request.setAttribute("nowPage", nowPage);
+				
+				
+				
+				
+				List<ProductBean> list = dao.getList(pageFirst, pageSize);
 				request.setAttribute("List",list);
 				
 				 nextPage = "/admins/AproductMain.jsp";
@@ -550,7 +573,7 @@ public class AdminController extends HttpServlet{
 				
 				nextPage="/admins/AproductAdd.jsp";
 				
-				//상품 등록 	
+			//상품 등록 	
 			} else if(action.equals("/AwritePro.do")) {
 				
 				ProductBean productBean = new ProductBean();
@@ -615,10 +638,11 @@ public class AdminController extends HttpServlet{
 
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + "  alert('제품을 추가했습니다.');" + " location.href='" + request.getContextPath()
-						+ "/admins/AproductMain.do';" + "</script>");
+						+ "/admin/AproductMain.do';" + "</script>");
 
 				return;
- 
+			
+			//상품 상세 등록 페이지 이동
 			}	else if(action.equals("/Adetails.do")) {
 				
 				ProductBean productBean = new ProductBean();
@@ -635,7 +659,7 @@ public class AdminController extends HttpServlet{
 
 				nextPage = "/admins/AproductDetail.jsp";
 				
-				
+			//상품 상세 등록 페이지
 			} else if(action.equals("/AdetailsPro.do")) {
 				System.out.println("ㅋㅋㅋ");
 				
@@ -673,7 +697,38 @@ public class AdminController extends HttpServlet{
 
 				Ddao.insertDetail(Bean);
 				
+				 
+				
 				nextPage = "/admin/AproductMain.do";
+				
+			//ajax 테스트 	
+			} else if(action.equals("/runstatus.do")) {
+				
+				AdminDAO adminDAO = new AdminDAO();
+				int runstatus = Integer.parseInt(request.getParameter("runstatus"));
+				int num = Integer.parseInt(request.getParameter("num"));
+				
+				adminDAO.runChange(runstatus, num);
+				
+				
+				System.out.println(runstatus);
+				
+				JSONArray Array = new JSONArray();
+				JSONObject Info = new JSONObject();
+				Info.put("test", "업데이트성공");
+				Array.add(Info);
+				
+				JSONObject result = new JSONObject();
+				
+				result.put("Run", Array);
+				
+				PrintWriter out = response.getWriter();
+				
+				String jsonInfo = result.toString();
+				
+				out.print(jsonInfo);
+				
+				return;
 			}
 					
 			

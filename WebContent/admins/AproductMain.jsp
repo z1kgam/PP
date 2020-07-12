@@ -21,6 +21,46 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 	<link rel="stylesheet" href="${contextPath}/admins/assets/css/ready.css">
 	<link rel="stylesheet" href="${contextPath}/assets/css/demo.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	
+	<script type="text/javascript">
+	
+	function te33(runstatus1, num) {
+		alert(runstatus1);
+		
+		var runstatus = 0;
+		
+		if (runstatus1 != 0) {
+		var runstatus = runstatus1
+		}
+		
+		$.ajax({
+			
+			url : "${contextPath}/admin/runstatus.do?runstatus="+runstatus+"&num="+num,
+			type : "POST",
+			dataType : "json",
+			cache : false,
+			contentType : false,
+			processData : false,
+			error : function() {
+				alert("통신실패!!");
+				
+			},
+			succes: function() {
+				alert("여 왔다");
+				var aa = JSON.parse(JSON.stringify(data));
+				var bb = aa.List;
+				var test7 = bb[0].test;
+			}
+			
+			
+		});
+		
+		
+	}
+	
+	
+	</script>
 </head>
 <body>
 
@@ -48,8 +88,10 @@
 													<th scope="col">가격</th>
 													<th scope="col">시작 날짜</th>
 													<th scope="col">종료 날짜</th>
+													<th scope="col">공연 게시</th>	
 													<th scope="col">공연 상세 등록</th>
-													<th scope="col">공연 삭제</th>												
+													<th scope="col">공연 삭제</th>
+																						
 												</tr>
 											</thead>
 											<tbody>
@@ -74,8 +116,12 @@
 										<td><p class="text-muted">${productlist.price}</p></td>
 										<td><p class="text-muted">${productlist.startdate}</p></td>
 										<td><p class="text-muted">${productlist.enddate}</p></td>
+										
 										<!-- 버튼 -->
 										<div class="form-button-action">
+											<td>
+												<input type="checkbox" checked data-toggle="toggle" data-onstyle="default" data-style="btn-round" onchange="te33(${productlist.price}, ${productlist.num} );">
+											</td>
 											<td>
 												<button type="button" data-toggle="tooltip" title="상세 등록"
 													onclick="location.href='${contextPath}/admin/Adetails.do?num=${productlist.num}'"
@@ -85,7 +131,7 @@
 												</button>
 											</td>
 											<td>
-												<button type="button" data-toggle="tooltip" title="회원 삭제"
+												<button type="button" data-toggle="tooltip" title="공연 삭제"
 													onclick="del('${memberlist.id}')"
 													class="btn btn-link btn-simple-danger"
 													style="font-size: 17px;">
@@ -102,7 +148,66 @@
 											</tbody>
 										</table>
 								
-			
+								<!-- 페이징 -->
+									<div align="center">
+									<div class="card-body">
+										<p class="demo">
+											<ul class="pagination pg-primary">
+												<li class="page-item">
+											<c:choose>
+										     <c:when test="${List != null}">
+										      <c:if test="${blockFirst!=1}">
+											<a class="page-link"
+												href="${contextPath}/admin/AproductMain.do?nowPage=${blockFirst-blockSize}"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+												<!-- <span class="sr-only">Previous</span> -->
+											</a>
+											 </c:if>
+												</li>
+												<c:forEach var="i" begin="${blockFirst}" end="${blockLast}" step="1">
+												<li class="page-item active">
+												<a class="page-link" href="${contextPath }/admin/AproductMain.do?nowPage=${i}">${i}</a>
+												</li>
+												</c:forEach>
+												<c:if test="${blockLast != totalPage }">
+												<li class="page-item">
+													<a class="page-link" href="${contextPath}/admin/AproductMain.do?nowPage=${blockLast+1}" aria-label="Next">
+														<span aria-hidden="true">&raquo;</span>
+														<span class="sr-only">Next</span>
+													</a>
+												</li>
+												</c:if>
+											  </c:when>
+											  
+											  <c:otherwise>
+												<c:if test="${blockFirst!=1}">
+											<a class="page-link"
+												href="${contextPath}/admin/AproductMain.do?nowPage=${blockFirst-blockSize}"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+												<!-- <span class="sr-only">Previous</span> -->
+											</a>
+											 </c:if>
+												</li>
+												<c:forEach var="i" begin="${blockFirst}" end="${blockLast}" step="1">
+												<li class="page-item active">
+												<a class="page-link" href="${contextPath }/admin/AproductMain.do?nowPage=${i}">${i}</a>
+												</li>
+												</c:forEach>
+												<c:if test="${blockLast != totalPage }">
+												<li class="page-item">
+													<a class="page-link" href="${contextPath}/admin/AproductMain.doo?nowPage=${blockLast+1}" aria-label="Next">
+														<span aria-hidden="true">&raquo;</span>
+														<span class="sr-only">Next</span>
+													</a>
+												</li>
+												</c:if>			  
+											  </c:otherwise>   
+										</c:choose>
+											</ul>
+										</p>
+									</div>
+									</div>
+									<!-- 페이징 -->		
 										
 			
 			
