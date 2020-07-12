@@ -32,13 +32,13 @@
   <script type="text/javascript">
   
   function sendFile(file, editor) {
-	  	alert("왔는데?");
 		var data = new FormData();
 		data.append('uploadFile', file);
 		
 		$.ajax({// ajax를 통해 파일 업로드 처리
 		
 			data: data,
+			dataType : "json",
 			type: "POST",
 			url: "${contextPath}/admin/test3.do",
 			cache: false,
@@ -46,8 +46,13 @@
 			processData: false,
 			success: function(data) {// 처리가 성공할 경우
 				// 에디터에 이미지 출력
-				$(editor).summernote('editor.insertImage', data.url);
-			
+				//alert(data.url);
+				//alert(JSON.stringify(data));
+				var aa = JSON.parse(JSON.stringify(data));
+				var bb = aa.List;
+				var image = bb[0].url;
+				var te3 = "<img src="+"'"+image+"'/>";
+				$("#test5").html(te3);
 			}
 			
 		});
@@ -96,8 +101,7 @@
 					</div>
 					<div class="form-group">
 						<label for="content">Content:</label>
-						<textarea id="summernote" class="form-control" rows="5"
-							id="content" name="n_content" required>${notice.n_content}</textarea>
+						<textarea id="summernote" class="form-control" rows="5" name="n_content" required >${notice.n_content}</textarea>
 					</div>
 					<div align="center">
 					<button type="submit" class="btn btn-success" >글 수정</button>
@@ -150,7 +154,7 @@
     
     $('#summernote').summernote({
     		
-    	  height: 300,                 // set editor height
+    	  height: 700,                 // set editor height
     	  minHeight: null,             // set minimum height of editor
     	  maxHeight: null,             // set maximum height of editor
     	  focus: true,                 // set focus to editable area after initializing summernote
@@ -158,7 +162,6 @@
     	  callbacks: {// 콜백을 사용
     		  // 이미지를 업로드할 경우 이벤트를 발생
     		  onImageUpload: function(files, editor, welEditable) {
-    			  alert("엥?");
     			  sendFile(files[0], this);
     		  } 
     	   }

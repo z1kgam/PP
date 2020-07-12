@@ -40,6 +40,14 @@
 		window.location.href = '${contextPath}/admin/Writepage.do';
 	}
 	
+	function test31(t) {
+		
+		var cate = t
+		window.location.href = '${contextPath}/admin/ANoticeMain.do?n_cate='+t;
+		
+	}
+	
+	
 	</script>
 	
 </head>
@@ -54,19 +62,50 @@
 						
 				<form action="#" name=f method="post">
 				<div>
-				<select class="form-control input-fixed" id="notify_state" onchange="location.href=this.value" 
-									name="n_cate" style="margin-top: 10px;" >
-					<option>항목을 선택하세요</option>
-					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 소식">서비스 소식</option>
-					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=서비스 점검">서비스 점검</option>
-					<option value="${contextPath}/admin/ANoticeMain.do?n_cate=안내">안내</option>
+				
+				<c:if test="${catecheck == '0' }">
+							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option>항목을 선택하세요</option>
+							<option value="서비스 소식" >서비스 소식</option>
+							<option value="서비스 점검" >서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>	
+				
+				<c:if test="${catecheck == '1' }">
+							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="전체">전체</option>
+							<option value="서비스 소식" selected="selected">서비스 소식</option>
+							<option value="서비스 점검">서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>	
+						<c:if test="${catecheck == '2' }">
+							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="전체">전체</option>
+							<option value="서비스 소식">서비스 소식</option>
+							<option value="서비스 점검" selected="selected">서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>		
+						<c:if test="${catecheck == '3' }">
+							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option value="전체">전체</option>
+							<option value="서비스 소식">서비스 소식</option>
+							<option value="서비스 점검">서비스 점검</option>
+							<option value="안내" selected="selected">안내</option>
+						</c:if>
+						<c:if test="${catecheck == '4' }">
+							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
+							<option>항목을 선택하세요</option>
+							<option value="서비스 소식">서비스 소식</option>
+							<option value="서비스 점검">서비스 점검</option>
+							<option value="안내">안내</option>
+						</c:if>
 				</select>
+				
 				</div>	
 				<div align="right" style="margin-right: 60px; margin-bottom: 10px; float: right;">
 					<button type="button" onclick="te()" class="btn btn-warning">글쓰기</button>
 					</div>
 				</form>
-				
 				
 				
 						<table class="table table-hover">
@@ -110,7 +149,7 @@
 											<button type="button" data-toggle="tooltip" title="글 삭제"
 												onclick="del('${notice.n_num}')"
 												class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
-											<i class="la la-times"></i>
+											<i class="la la-trash"></i>
 											</button>
 											</td>
 											</div>

@@ -221,7 +221,7 @@ public class ProductServlet extends HttpServlet {
 				productService.insertDetail(Bean);
  
 				nextPage = "/Proser/content.do?num="+num+"&name="+productBean.getName();
-			}else if(action.equals("/reply.do")){
+			} else if(action.equals("/reply.do")){
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int parentsnum = Integer.parseInt(request.getParameter("parentsnum"));
 				String id = (String)session.getAttribute("id");
@@ -237,7 +237,7 @@ public class ProductServlet extends HttpServlet {
 				
 				nextPage = "/Proser/content.do?num="+pronum+"&name="+productBean.getName();
 				
-			}else if(action.equals("/replydelete.do")) {
+			} else if(action.equals("/replydelete.do")) {
 				
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int replynum = Integer.parseInt(request.getParameter("replynum"));

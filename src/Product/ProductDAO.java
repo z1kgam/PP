@@ -170,7 +170,7 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from product";
+			sql = "select * from product order by startdate desc";
 			
 			pstmt = con.prepareStatement(sql);
 			
