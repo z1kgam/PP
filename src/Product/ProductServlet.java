@@ -256,7 +256,7 @@ public class ProductServlet extends HttpServlet {
 				out.print(jsonInfo);
 				
 				return;
-			}else if(action.equals("/reply.do")){
+			} else if(action.equals("/reply.do")){
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int parentsnum = Integer.parseInt(request.getParameter("parentsnum"));
 				String id = (String)session.getAttribute("id");
@@ -272,7 +272,7 @@ public class ProductServlet extends HttpServlet {
 				
 				return;
 				
-			}else if(action.equals("/replydelete.do")) {
+			} else if(action.equals("/replydelete.do")) {
 				
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
 				

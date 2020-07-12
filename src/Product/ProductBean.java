@@ -6,15 +6,14 @@ public class ProductBean {
 	
 
 	private String name, genre, cla, image, content;
-	private int num, runtime, price;
+	private int num, runtime, price, runstatus;
 	private Date startdate, enddate;
-
 	private int qty;
 	public ProductBean() {
 
 	}
 	public ProductBean(String name, String genre, String cla, String image, String content, int num, int runtime,
-			int price, Date startdate, Date enddate, int qty) {
+			int price, Date startdate, Date enddate, int qty, int runstatus) {
 		this.name = name;
 		this.genre = genre;
 		this.cla = cla;
@@ -26,6 +25,15 @@ public class ProductBean {
 		this.startdate = startdate;
 		this.enddate = enddate;
 		this.qty = qty;
+		this.runstatus = runstatus;
+	}
+	
+	
+	public int getRunstatus() {
+		return runstatus;
+	}
+	public void setRunstatus(int runstatus) {
+		this.runstatus = runstatus;
 	}
 	public String getName() {
 		return name;

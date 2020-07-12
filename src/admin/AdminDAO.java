@@ -304,6 +304,36 @@ public class AdminDAO {
 		
 		return result;
 	}
+
+	public void runChange(int runstatus, int num) {
+		System.out.println("디이에오 와쓰");
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			sql = "update product set runstatus=? where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, runstatus);
+			pstmt.setInt(2, num);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("runChange 메소드 내부에서 오류 :" + e);
+		} finally {
+			try {
+				if(con!=null)con.close();
+				if(pstmt!=null)pstmt.close();
+				if(rs!=null)rs.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+	}
 	
 	
 	
