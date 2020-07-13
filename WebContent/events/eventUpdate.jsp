@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이벤트 글쓰기</title>
+<title>이벤트 글 수정하기</title>
 	<link rel="stylesheet" href="../css/bootstrap.min.css" />
 	<link rel="stylesheet" href="../css/style.css" />
 	
@@ -43,6 +43,25 @@
 			}
 			
 		}			
+	}
+	
+	function URL2(input){
+		
+		if(input.files && input.files[0]){
+
+			$("#del").html("<img id='delpreview' src='#' width=400 height=400 />");
+
+			var reader = new FileReader();
+			
+			reader.readAsDataURL(input.files[0]);
+			
+			reader.onload = function(ProgressEvent){
+
+				$('#delpreview').attr('src',ProgressEvent.target.result);
+				
+			}
+			
+		}			
 	} 
 	</script>
 </head>
@@ -54,12 +73,12 @@
 <section class="container body-container py-5">
 		<div class="row">
 			<div class="col-12">
-				<h2>이벤트 등록</h2>
+				<h2>이벤트 수정</h2>
 			</div>
 		</div>
 		<!-- 게시판 -->
 		<article class="mt-3">
-			<form action="${contextPath}/event/eventWrite.do" method="post" enctype="multipart/form-data">
+			<form action="${contextPath}/event/eventUpdate.do?event_num=${eventBean.event_num}" method="post" enctype="multipart/form-data">
 				<table class="table">
 					<colgroup>
 						<col style="max-width: 15%" />
@@ -72,7 +91,7 @@
 							<label for="poolAddress1" class="m-0">제목</label>
 						</th>
 						<td>
-							<input type="text" class="form-control" name="title" id="event_title" maxlength="50">
+							<input type="text" class="form-control" name="title" id="event_title" maxlength="50" value="${eventBean.event_title }">
 						</td>
 					</tr>
 					<tr>
@@ -80,7 +99,8 @@
 							<label for="poolAddress1" class="m-0">이벤트 날짜</label>
 						</th>
 						<td>
-							<input type="date" class="form-control" name="startdate" id="event_startdate" maxlength="50"><input type="date" class="form-control" name="enddate" id="event_enddate" maxlength="50">
+							<input type="date" class="form-control" name="startdate" id="event_startdate" maxlength="50" value="${eventBean.event_startdate}">
+							<input type="date" class="form-control" name="enddate" id="event_enddate" maxlength="50" value="${eventBean.event_enddate}">
 						</td>
 					</tr>			
 					<tr>
@@ -88,15 +108,29 @@
 							<label for="contents" class="m-0">내용</label>
 						</th>
 						<td>
-							<textarea class="form-control" name="content" id="eventContent" cols="40" rows="13" required></textarea>
+							<textarea class="form-control" name="content" id="eventContent" cols="40" rows="13" required>${eventBean.event_content }</textarea>
 						</td>
 					</tr>
 					<tr rowspan="2">
 						<th class="align-middle">
-							<label for="poolAddress1" class="m-0">이미지</label>
+							<label for="poolAddress1" class="m-0">썸네일이미지</label>
 						</th>
 						<td>
-							<input type="file" class="form-control" name="image" id="event_image" maxlength="50" onchange="URL1(this);">
+							<input  type= "hidden"   name="timage" value="${eventBean.event_timage }" />
+							<input type="file" class="form-control" name="timage" id="event_timage" maxlength="50" onchange="URL2(this);" value="../upload/${eventBean.event_timage}">
+						</td>
+						
+					</tr>
+					<tr>
+						<td id="del" colspan="2"></td>		
+					</tr>
+					<tr rowspan="2">					
+						<th class="align-middle">
+							<label for="poolAddress1" class="m-0">내용이미지</label>
+						</th>
+						<td>
+							<input  type= "hidden"   name="image" value="${eventBean.event_image }" />
+							<input type="file" class="form-control" name="image" id="event_image" maxlength="50" onchange="URL1(this);" value="../upload/${eventBean.event_image}">
 						</td>
 					</tr>
 					<tr>
@@ -106,7 +140,7 @@
 				</table>
 				<div class="text-center my-5">
 					<button type="button" class="btn btn-secondary" onclick="history.back()">취소</button>
-					<button type="submit" class="btn btn-primary">등록하기</button>
+					<button type="submit" class="btn btn-primary">수정하기</button>
 				</div>
 			</form>
 		</article>

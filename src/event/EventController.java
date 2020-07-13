@@ -62,7 +62,7 @@ public class EventController extends HttpServlet{
 	         
 	        request.setAttribute("check", check);
 	        
-			nextPage = "/events/event_write.jsp";
+			nextPage = "/events/eventWrite.jsp";
 			
 		}else if(action.equals("/eventWrite.do")) { //이벤트 등록 글작성
 			
@@ -92,11 +92,14 @@ public class EventController extends HttpServlet{
 			Date enddate = Date.valueOf(multi.getParameter("enddate"));
 			String content = multi.getParameter("content");
 			String image = "";
+			String timage = "";
 			if(saveFiles != null) {
 				for (int i = 0; i < saveFiles.size(); i++) {
 					if (i == 0) {
+						timage = (String) saveFiles.get(i);
+					} else {
 						image = (String) saveFiles.get(i);
-					} 
+					}
 				}
 			}
 						
@@ -105,6 +108,7 @@ public class EventController extends HttpServlet{
 			eventBean.setEvent_enddate(enddate);
 			eventBean.setEvent_content(content);
 			eventBean.setEvent_image(image);
+			eventBean.setEvent_timage(timage);
 			
 			eventDAO.insertevent(eventBean);
 			
@@ -119,6 +123,77 @@ public class EventController extends HttpServlet{
 			request.setAttribute("eventBean", eventBean);
 			
 			nextPage = "/events/eventInfo.jsp";
+			
+		}else if(action.equals("/eventUpdateForm.do")) { //이벤트 상세 정보 수정폼
+			
+			int event_num = Integer.parseInt(request.getParameter("event_num"));
+			
+			eventBean = eventDAO.getEventNum(event_num);
+			
+			request.setAttribute("eventBean", eventBean);
+			
+			nextPage = "/events/eventUpdate.jsp";
+			
+		}else if(action.equals("/eventUpdate.do")) {
+			
+			int event_num = Integer.parseInt(request.getParameter("event_num"));
+			
+			String realFolder = request.getServletContext().getRealPath("upload");
+			int max = 100 * 1024 * 1024;
+
+			MultipartRequest multi = new MultipartRequest(request, realFolder, max, "UTF-8",
+					new DefaultFileRenamePolicy());
+
+			Enumeration<String> e = multi.getFileNames();
+
+			ArrayList<String> saveFiles = new ArrayList<String>();
+
+			ArrayList<String> originFiles = new ArrayList<String>();
+
+			while (e.hasMoreElements()) {
+				String filename = (String) e.nextElement();
+
+				saveFiles.add(multi.getFilesystemName(filename));
+
+				originFiles.add(multi.getOriginalFileName(filename));
+
+			}
+			
+			String title = multi.getParameter("title");
+			Date startdate = Date.valueOf(multi.getParameter("startdate"));
+			Date enddate = Date.valueOf(multi.getParameter("enddate"));
+			String content = multi.getParameter("content");
+			String image = "";
+			String timage = "";
+			if(saveFiles != null) {
+				for (int i = 0; i < saveFiles.size(); i++) {
+					if (i == 0) {
+						timage = (String) saveFiles.get(i);
+					} else {
+						image = (String) saveFiles.get(i);
+					}
+				}
+			}
+						
+			eventBean.setEvent_num(event_num);
+			eventBean.setEvent_title(title);
+			eventBean.setEvent_startdate(startdate);
+			eventBean.setEvent_enddate(enddate);
+			eventBean.setEvent_content(content);
+			eventBean.setEvent_image(image);
+			eventBean.setEvent_timage(timage);
+			
+			eventDAO.eventUpdateProc(eventBean);
+			
+			nextPage = "/event/eventInfo.do";
+			
+		} else if(action.equals("/eventDelete.do")) {
+			
+			int event_num = Integer.parseInt(request.getParameter("event_num"));
+			
+			eventDAO.eventDelete(event_num);
+			
+			nextPage = "/event/events.do";
 			
 		}
 		

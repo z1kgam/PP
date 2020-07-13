@@ -7,11 +7,18 @@ public class EventBean {
 	private int event_num;
 	private String event_title;
 	private String event_image;
+	private String event_timage;
 	private String event_content;
 	private Date event_startdate;
 	private Date event_enddate;
 	
 	
+	public String getEvent_timage() {
+		return event_timage;
+	}
+	public void setEvent_timage(String event_timage) {
+		this.event_timage = event_timage;
+	}
 	public int getEvent_num() {
 		return event_num;
 	}
