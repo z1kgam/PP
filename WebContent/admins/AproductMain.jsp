@@ -119,9 +119,16 @@
 										
 										<!-- 버튼 -->
 										<div class="form-button-action">
+										<c:if test="${productlist.runstatus == 0}">
 											<td>
-												<input type="checkbox" checked data-toggle="toggle" data-onstyle="default" data-style="btn-round" onchange="te33(${productlist.price}, ${productlist.num} );">
+												<input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-style="btn-round" onchange="te33(1, ${productlist.num} );">
 											</td>
+										</c:if>	
+										<c:if test="${productlist.runstatus != 0}">
+										<td>
+										<input type="checkbox" data-toggle="toggle" data-onstyle="default" data-style="btn-round" onchange="te33(0, ${productlist.num} );">	
+										</td>
+										</c:if>
 											<td>
 												<button type="button" data-toggle="tooltip" title="상세 등록"
 													onclick="location.href='${contextPath}/admin/Adetails.do?num=${productlist.num}'"

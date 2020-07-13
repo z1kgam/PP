@@ -85,7 +85,6 @@ public class AdminController extends HttpServlet{
 				
 			//회원정보 전체 조회
 			} else if(action.equals("/MemberManager.do")) {
-				System.out.println("취소");
 				//회원 아이디 검색값 받아오기
 				String search = "";
 				if(request.getParameter("search")==null) {
