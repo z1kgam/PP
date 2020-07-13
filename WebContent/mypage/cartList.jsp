@@ -104,8 +104,10 @@
 	 		총 금액 : <fmt:formatNumber pattern="###,###,###" value="${total}"/>
 			<button type="button" onclick="btnDelete()" class="btn btn-primary pull-right">장바구니 비우기</button>
 		<c:if test="${!empty cartList}">
-			<button type="button" onclick="btnPay()" class="btn btn-primary pull-right">결제하기</button>
+			<button type="button" onclick="btnPay()" class="btn btn-primary pull-right">전체 결제</button>
 	 	</c:if>	
+	 	
+	 		<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right" >메인으로</button>
 	 	</div>
 	 	
 	 </div>
