@@ -26,12 +26,11 @@ import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+//import com.sun.glass.ui.Application;
 
 import Order.OrderService;
-
 import Order.OrderDAO;
 import Order.OrderVO;
-
 import member.LikeDAO;
 
 @SuppressWarnings("serial")
@@ -227,7 +226,6 @@ public class ProductServlet extends HttpServlet {
 				System.out.println(productBean.getName());
  
 				nextPage = "/Proser/content.do?num="+num+"&name="+productBean.getName();
-
 			}else if(action.equals("/Allreply.do")) {
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				List<ReplyVO> list = productService.getreply(pronum);
@@ -258,7 +256,6 @@ public class ProductServlet extends HttpServlet {
 				out.print(jsonInfo);
 				
 				return;
-
 			}else if(action.equals("/reply.do")){
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int parentsnum = Integer.parseInt(request.getParameter("parentsnum"));
@@ -323,9 +320,21 @@ public class ProductServlet extends HttpServlet {
 						chseat += ",";
 					}
 				}
+				
 				System.out.println(chseat);
 				
+				String [] aa = chseat.split(",");
+				List<String> alist = new ArrayList<String>();
+				for(int i=0; i<aa.length;i++) {
+					alist.add(aa[i]);
+				}
+				
+				request.setAttribute("alist", alist);
+				
+				System.out.println(chseat);
+				session.setAttribute("selseat", selectseat);
 				request.setAttribute("chseat", chseat);
+				
 				nextPage = "/product/buyconnect.jsp";
 				
 			}else if(action.equals("/itemselect.do")) {

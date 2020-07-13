@@ -1,8 +1,25 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.mysql.fabric.xmlrpc.base.Array"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%-- <%
+	String ch = request.getParameter("chseat");
+	
+	String[] a = ch.split(",");
+
+	List<String> list = new ArrayList<String>();
+	
+	for(int i = 0; i<a.length; i ++){
+		list.add(a[i]);
+		System.out.println(list);
+	}
+
+%> --%>
+
 
 <!DOCTYPE html>
 <html>
@@ -38,6 +55,8 @@
 				return false;
 			}
 	}
+	
+	
 </script>
 </head>
 <body>
