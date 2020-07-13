@@ -80,6 +80,8 @@ public class LikeDAO {
 				likeBean.setId(rs.getString("id"));
 				likeBean.setNum(rs.getInt("num"));
 				likeBean.setLikenum(rs.getInt("likenum"));
+				likeBean.setName(rs.getString("name"));
+				likeBean.setImage(rs.getString("image"));
 				likeList.add(likeBean);
 				
 			}
@@ -98,7 +100,7 @@ public class LikeDAO {
 	}
 	
 	//찜하기
-	public void addLike(int num, String id) {
+	public void addLike(int num, String id, String name, String image) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql="";
@@ -117,11 +119,13 @@ public class LikeDAO {
 				likenum = 1;
 			}
 			
-			sql = "INSERT INTO likeboard(likenum, num, id) VALUES (?, ?, ?)";
+			sql = "INSERT INTO likeboard(likenum, num, id, name, image) VALUES (?, ?, ?, ?, ?)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, likenum);
 			pstmt.setInt(2, num);			
 			pstmt.setString(3, id);
+			pstmt.setString(4, name);
+			pstmt.setString(5, image);
 			
 			pstmt.executeUpdate();
 			

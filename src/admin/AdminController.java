@@ -716,7 +716,6 @@ public class AdminController extends HttpServlet{
 		         
 			//상품 상세 등록 페이지
 			} else if(action.equals("/AdetailsPro.do")) {
-				System.out.println("ㅋㅋㅋ");
 				
 				ProductBean productBean = new ProductBean();
 				ProductDAO dao = new ProductDAO();
@@ -732,7 +731,6 @@ public class AdminController extends HttpServlet{
 				int totalreserved = 0;
 				Date today = Date.valueOf(request.getParameter("today"));
 				String starttime = request.getParameter("starttime");
-				
 
 				Bean = new DetailBean();
 				Bean.setName(productBean.getName());
@@ -751,8 +749,6 @@ public class AdminController extends HttpServlet{
 				Bean.setStarttime(starttime);
 
 				Ddao.insertDetail(Bean);
-				
-				 
 				
 				nextPage = "/admin/AproductMain.do";
 				

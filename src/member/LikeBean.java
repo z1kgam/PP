@@ -2,7 +2,7 @@ package member;
 
 public class LikeBean {
 
-	private String id;
+	private String id,name,image;
 	private int num, likenum;
 	
 	public String getId() {
@@ -22,6 +22,18 @@ public class LikeBean {
 	}
 	public void setLikenum(int likenum) {
 		this.likenum = likenum;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	
