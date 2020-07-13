@@ -659,6 +659,65 @@ public class AdminController extends HttpServlet{
 
 				nextPage = "/admins/AproductDetail.jsp";
 				
+<<<<<<< HEAD
+=======
+			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
+//				JSONObject jobj = new JSONObject();
+//				jobj.put("url", uploadPath1);
+//				
+//				response.setContentType("application/json"); // 데이터 타입을 json으로 설정하기 위한 세팅
+//				out.print(jobj.toJSONString());
+//				
+//				return;
+				
+			//문의 답변 수정 메인 페이지
+			} else if(action.equals("/Aqnaboardp.do")) {
+				 
+				 qnaDao qnadao = new qnaDao();
+				 qnaBean qnabean = new qnaBean();
+				
+				 String id =(String)request.getSession().getAttribute("id");
+		         
+		         int total = qnadao.getAllQna(id);
+		         System.out.println(total);
+		         
+		         MemberBean mb = new MemberBean();
+		         
+		         
+		         int pageSize = 3;
+		         int nowPage = 1;
+		         if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		         
+		         int pageFirst = (nowPage-1) * pageSize;
+		         int totalPage = total/pageSize + (total%pageSize==0?0:1);
+		         int blockSize = 10;
+		         int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+		         int blockLast = blockFirst + blockSize -1;
+		         
+		         if(blockLast>totalPage) blockLast=totalPage;
+		         List<qnaBean> qnaList = qnadao.qnaList(pageFirst, pageSize, id);
+		         request.setAttribute("qnaList", qnaList);
+		         request.setAttribute("blockSize", blockSize);
+		         request.setAttribute("blockFirst", blockFirst);
+		         request.setAttribute("blockLast", blockLast);
+		         request.setAttribute("totalPage", totalPage);
+		         request.setAttribute("nowPage", nowPage);
+
+		         nextPage = "/admins/AqnaBoard.jsp";
+			//문의 답변 수정하는 페이지
+			} else if(action.equals("AqnaModify.do")) {
+				
+				 qnaBean qnabean = new qnaBean();
+				 qnaDao qnadao = new qnaDao();
+				
+				 int qna_num =Integer.parseInt(request.getParameter("qna_num"));
+		         qnabean = qnadao.getqna(qna_num);
+		         
+		         request.setAttribute("qnaUpdate", qnabean);
+		         
+		         nextPage = "/admins/AqnaModify.jsp";
+		         
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 			//상품 상세 등록 페이지
 			} else if(action.equals("/AdetailsPro.do")) {
 				System.out.println("ㅋㅋㅋ");

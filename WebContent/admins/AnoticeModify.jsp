@@ -52,10 +52,14 @@
 				var bb = aa.List;
 				var image = bb[0].url;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				alert(image);
 				alert("콜백성공");
 =======
 >>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
+=======
+
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 				var te3 = "<img src="+"'"+image+"'/>";
 				$("#test5").html(te3);
 			}

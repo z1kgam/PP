@@ -22,8 +22,12 @@
 	<link rel="stylesheet" href="${contextPath}/admins/assets/css/ready.css">
 	<link rel="stylesheet" href="${contextPath}/assets/css/demo.css">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	
+=======
+
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 	
 	<script type="text/javascript">
 	
@@ -48,7 +52,10 @@
 	
 	
 	
+<<<<<<< HEAD
 >>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
+=======
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 </head>
 <body>
 
@@ -61,6 +68,7 @@
 					<div class="container-fluid">
 						<h4 class="page-title">문의 내역 답변 관리 페이지</h4>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			
 					<table class="table table-hover">
 											<thead>
@@ -70,6 +78,9 @@
 													<th scope="col">등록일</th>
 													<th scope="col">답변 하기</th>
 =======
+=======
+
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 						
 						<div class="form-group">
 						<button type="button" class="btn btn-warning" onclick="status(0)" id="t1">답변 대기중</button>
@@ -86,7 +97,10 @@
 													<th scope="col">제목</th>
 													<th scope="col">등록일</th>
 													<th scope="col">답변</th>
+<<<<<<< HEAD
 >>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
+=======
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 													<th scope="col">글 삭제</th>
 												</tr>
 											</thead>
@@ -106,14 +120,19 @@
 					   						<c:if test="${qnaList.qna_status == 1}"><p class="text-success">답변완료<p></c:if>
 											</p></td>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 											<td><p class="text-muted">${qnaList.id}</p></td>
 >>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
+=======
+											<td><p class="text-muted">${qnaList.id}</p></td>
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 											<td align="left"><p class="text-muted">${qnaList.qna_title}</p></td>
 											<td><p class="text-muted">${parseDate}</p></td>
 											<!-- 버튼 -->
 											<div class="form-button-action">
 											<td>
+<<<<<<< HEAD
 <<<<<<< HEAD
 											<button type="button" data-toggle="tooltip" title="답변 하기" 
 												onclick="location.href='${contextPath}/admin/AqnaModify.do?qna_num=${qnaList.qna_num}'" 
@@ -128,6 +147,9 @@
 											</button>
 											</td>
 =======
+=======
+
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 											<c:if test="${qnaList.qna_status == 0 }">
 											<button type="button" data-toggle="tooltip" title="답변 하기" 
 												onclick="location.href='${contextPath}/admin/AqnaAnswer.do?qna_num=${qnaList.qna_num}'" 
@@ -159,7 +181,10 @@
 											</button>
 											</td>
 											</c:if>
+<<<<<<< HEAD
 >>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
+=======
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 											</div>
 											<!-- 버튼 -->
 										</tr>
@@ -169,11 +194,15 @@
 											</tbody>
 										</table>
 <<<<<<< HEAD
+<<<<<<< HEAD
 				
 			
 			
 			
 =======
+=======
+
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 									<c:if test="${status == 0 }">
 										<!-- 페이징 -->
 									<div align="center">
@@ -241,7 +270,10 @@
 									</div>
 									<!-- 페이징 -->	
 									</c:if>
+<<<<<<< HEAD
 >>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
+=======
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 			
 			
 			

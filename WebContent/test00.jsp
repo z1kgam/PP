@@ -3,13 +3,25 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" href="${contextPath}/mypage/css/bootstrap.css">
 <link rel="stylesheet" href="${contextPath}/mypage/css/custom.css">
+<script type="text/javascript">
+	function btnPayment(){
+		if(confirm("결제를 진행하시겠습니까?")){
+			location.href="${contextPath}/Order/PaymentAction.do?id=${payVO.id}&num=${payVO.num}";
+		}else{
+			return false;
+		}
+	}
+
+</script>
+
 <meta charset="UTF-8">
-<title>나의 결제내역보기</title>
+<title>결제페이지</title>
 <style type="text/css">
 	a:hover{
 		color:red;
@@ -20,19 +32,9 @@
 		text-decoration: none;
 	}
 </style>
-<script type="text/javascript">
-	function btnPayAlldel(){
-		if(confirm("결제내역 전체를 삭제하시겠습니까?")){
-			location.href="${contextPath}/Order/payAlldel.do?id=${sessionScope.id}";
-		}else{
-			return false;
-		}
-	}
-	
-</script>
 </head>
 <body>
-<div class="container">
+	<div class="container">
 	 	<div class="row">
 	 		<table class="table table-striped" style="text-align:center; border: 1px solid #dddddd">
 	 			<thead>
@@ -42,29 +44,28 @@
 	 					<th style="background-color: #eeeeee; text-align: center;">공연명</th>
 	 					<th style="background-color: #eeeeee; text-align: center;">수량</th>
 	 					<th style="background-color: #eeeeee; text-align: center;">가격</th>
-	 					<th style="background-color: #eeeeee; text-align: center;">결제일자</th>
-	 					<th style="background-color: #eeeeee; text-align: center;">내역삭제</th>
+	 					<th style="background-color: #eeeeee; text-align: center;">주문일자</th>
+	 					<th style="background-color: #eeeeee; text-align: center;">주문취소</th>
 	 					
 	 				</tr>
 	 			</thead>
 	 			<tbody>
- 			
- 			<c:if test="${!empty paymentList}">
-				<c:forEach items="${requestScope.paymentList}" var="payment" >
+ 			<c:if test="${!empty payVO}">
+				
 	 				<tr>
-	 					<td>${payment.p_seq_num}</td>
-	 					<td>${payment.id}</td>
-	 					<td>${payment.name}</td>
-	 					<td>${payment.qty}</td>
-	 					<td>${payment.totalprice}</td>
-	 					<td>${payment.p_paydate}</td>
-	 					<td><a href="${contextPath}/Order/paydel.do?p_num=${payment.p_num}&id=${payment.id}" onclick="return confirm('결제내역을 삭제하시겠습니까?');">내역삭제</a></td>
+	 					<td>${payVO.num}</td>
+	 					<td>${payVO.id}</td>
+	 					<td>${payVO.name}</td>
+	 					<td>${payVO.qty}</td>
+	 					<td>${payVO.totalprice}</td>
+	 					<td>${payVO.orderdate}</td>
+	 					<td><a href="${contextPath}/Order/delCart.do?num=${payVO.num}&id=${payVO.id}">주문취소</a></td>
 	 				</tr>
-	 			</c:forEach>
+	 			
 	 		</c:if>	
-	 		<c:if test="${empty paymentList}">
+	 		<c:if test="${empty payVO}">
 	 			<tr>
-				<td colspan="7">결제완료 된 상품이 없습니다.</td>
+				<td colspan="7">추가된 상품이 없습니다.</td>
 				</tr>
 			</c:if>
 				
@@ -72,9 +73,18 @@
 
 	 			</tbody>
 	 		</table>
-	 		총 결제금액 : <fmt:formatNumber pattern="###,###,###" value="${totalpayprice}"/>
-	 		<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right">메인으로</button>
-	 		<button type="button" onclick="btnPayAlldel()" class="btn btn-primary pull-right">결제내역 삭제하기</button>			
+	 		총 금액 : <fmt:formatNumber pattern="###,###,###" value="${total}"/>
+	 		
+	 		<form action="${contextPath}/Order/kakaoOrder.do" method="post">
+				<input type="hidden" name="id" value="${sessionScope.id}">							
+				<input type="hidden" name="" value="">
+				<input type="hidden" name="" value="">
+				<input type="hidden" name="" value="">
+				<input type="hidden" name="" value="">
+				<input type="hidden" name="" value="">
+				<input type="submit" value="카카오페이 결제" class="btn btn-primary">
+			</form>			
+			<button type="button" onclick="btnPayment()" class="btn btn-primary pull-right">결제하기</button>
 	 	</div>
 	 </div>
 	

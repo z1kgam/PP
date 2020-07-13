@@ -241,10 +241,15 @@
 						</li>
 						<li class="nav-item active">
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<a href="${contextPath}/admin/Aqnaboardp.do">
 =======
 							<a href="${contextPath}/admin/Aqnaboardp.do?status=0">
 >>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
+=======
+
+							<a href="${contextPath}/admin/Aqnaboardp.do?status=0">
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 								<i class="la la-vimeo-square la-vine la-vk la-volume-down la-volume-off la-volume-up la-warning la-wechat"></i>
 								<p>문의 내역 답변 관리</p>
 								<span class="badge badge-count">5</span>

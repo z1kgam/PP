@@ -1,6 +1,7 @@
 package Product;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -87,7 +88,7 @@ public class DetailDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from details where name=?";
+			sql = "select * from details where name=? order by today asc, starttime asc";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -200,5 +201,47 @@ public class DetailDAO {
 			resource();
 		}
 		
+	}
+
+	public List<DetailBean> SelectByDate(Date selectdate, String name) {
+		List<DetailBean> detList = new ArrayList<DetailBean>();
+		String sql = "";
+		
+		try {
+			con = getConnection();
+
+			sql = "select * from details where name=? and today=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setDate(2, selectdate);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				DetailBean vo = new DetailBean();
+				vo.setDetailnum(rs.getInt("detailnum"));
+				vo.setName(rs.getString("name"));
+				vo.setGenre(rs.getString("genre"));
+				vo.setCla(rs.getString("cla"));
+				vo.setRuntime(rs.getInt("runtime"));
+				vo.setPrice(rs.getInt("price"));
+				vo.setStartdate(rs.getDate("startdate"));
+				vo.setEnddate(rs.getDate("enddate"));
+				vo.setImage(rs.getString("image"));
+				vo.setContent(rs.getString("content"));
+				vo.setPlace(rs.getString("place"));
+				vo.setSeat(rs.getInt("seat"));
+				vo.setTotalreserved(rs.getInt("totalreserved"));
+				vo.setToday(rs.getDate("today"));
+				vo.setStarttime(rs.getString("starttime"));
+				detList.add(vo);
+			}
+		} catch (Exception e) {
+			System.out.println("SelectByDate메소드 에서 예외발생 : " + e);
+		}finally {
+			resource();
+		}
+		return detList;
 	}
 }
