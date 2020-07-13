@@ -3,8 +3,13 @@ package admin;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+>>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
 import java.util.Enumeration;
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +28,10 @@ import org.json.simple.JSONObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import Product.DetailBean;
+import Product.DetailDAO;
+import Product.ProductBean;
+import Product.ProductDAO;
 import member.MemberBean;
 import member.MemberDAO;
 import noticeboard.NoticeboardBean;
@@ -53,6 +62,9 @@ public class AdminController extends HttpServlet{
 		@SuppressWarnings("unchecked")
 		protected void doHandle(HttpServletRequest request, HttpServletResponse response) 
 				throws ServletException, IOException {
+			
+			qnaBean qnaBean = new qnaBean();
+			qnaDao qnaDao = new qnaDao();
 			
 			
 			//MVC 중 View이름을 저장할 변수
@@ -402,6 +414,24 @@ public class AdminController extends HttpServlet{
 				
 			    // 업로드된 경로와 파일명을 통해 이미지의 경로를 생성
 				String uploadPath1 = "http://localhost:8090/PP/upload/"+fileName;
+<<<<<<< HEAD
+				
+				
+				JSONArray Array = new JSONArray();
+				JSONObject Info = new JSONObject();
+				Info.put("url", uploadPath1);
+				Array.add(Info);
+				
+				JSONObject result = new JSONObject();
+				
+				result.put("List", Array);
+				
+				PrintWriter out = response.getWriter();
+				
+				String jsonInfo = result.toString();
+				
+				out.print(jsonInfo);
+=======
 				
 				
 				JSONArray Array = new JSONArray();
@@ -421,6 +451,237 @@ public class AdminController extends HttpServlet{
 				
 				return;
 				
+			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
+//				JSONObject jobj = new JSONObject();
+//				jobj.put("url", uploadPath1);
+//				
+//				response.setContentType("application/json"); // 데이터 타입을 json으로 설정하기 위한 세팅
+//				out.print(jobj.toJSONString());
+//				
+//				return;
+				
+			//문의 답변 수정 메인 페이지
+			} else if(action.equals("/Aqnaboardp.do")) {
+				 
+				 qnaDao qnadao = new qnaDao();
+				 qnaBean qnabean = new qnaBean();
+				
+				 String id =(String)request.getSession().getAttribute("id");
+		         int status = Integer.parseInt(request.getParameter("status"));
+		         
+		         
+		         int total = qnadao.getAllQna(status);
+		         System.out.println(total);
+		         
+		         MemberBean mb = new MemberBean();
+		         
+		         
+		         int pageSize = 10;
+		         int nowPage = 1;
+		         if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		         
+		         int pageFirst = (nowPage-1) * pageSize;
+		         int totalPage = total/pageSize + (total%pageSize==0?0:1);
+		         int blockSize = 10;
+		         int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+		         int blockLast = blockFirst + blockSize -1;
+		         
+		         if(blockLast>totalPage) blockLast=totalPage;
+		         List<qnaBean> qnaList = qnadao.qnaList(pageFirst, pageSize, status);
+		         request.setAttribute("qnaList", qnaList);
+		         request.setAttribute("blockSize", blockSize);
+		         request.setAttribute("blockFirst", blockFirst);
+		         request.setAttribute("blockLast", blockLast);
+		         request.setAttribute("totalPage", totalPage);
+		         request.setAttribute("nowPage", nowPage);
+		         request.setAttribute("status", status);
+
+		         nextPage = "/admins/AqnaBoard.jsp";
+		         
+			//문의 답변 수정하는 페이지
+			} else if(action.equals("/AqnaAnswer.do")) {
+				
+				 qnaBean qnabean = new qnaBean();
+				 qnaDao qnadao = new qnaDao();
+				
+				 int qna_num =Integer.parseInt(request.getParameter("qna_num"));
+		         qnabean = qnadao.getqna(qna_num);
+		         
+		         request.setAttribute("qnaUpdate", qnabean);
+		         
+		         nextPage = "/admins/AqnaAnswer.jsp";
+		    
+		    //문의 답변 달기 실행
+			} else if(action.equals("/AqnaUpdate.do")) {
+				
+				
+				int qna_num = Integer.parseInt(request.getParameter("qna_num"));
+		         
+		         int status = Integer.parseInt(request.getParameter("status"));
+		         String cate = request.getParameter("cate");
+		         String title = request.getParameter("title");
+		         String contents = request.getParameter("contents");
+		         String answer = request.getParameter("answer");
+		         
+		         
+		         qnaBean.setQna_num(qna_num);
+		         qnaBean.setQna_cate(cate);
+		         qnaBean.setQna_status(status);
+		         qnaBean.setQna_title(title);
+		         qnaBean.setQna_contents(contents);
+		         qnaBean.setAnswer(answer);
+		         
+		         int result = qnaDao.updateQnaBoard(qnaBean);
+		         System.out.println(result);
+		         
+		         nextPage = "/admin/Aqnaboardp.do";
+		    //답변 수정 실행
+			} else if(action.equals("/AqnaAnswerMod.do")) {
+				
+
+				 qnaBean qnabean = new qnaBean();
+				 qnaDao qnadao = new qnaDao();
+				
+				 int qna_num =Integer.parseInt(request.getParameter("qna_num"));
+		         qnabean = qnadao.getqna(qna_num);
+		         
+		         request.setAttribute("qnaUpdate", qnabean);
+				
+				 nextPage = "/admins/AqnaAnswerMod.jsp";
+			//qna게시판 글 삭제	
+			} else if(action.equals("/Aqnadelete.do")) {
+				
+				int qna_num = Integer.parseInt(request.getParameter("qna_num"));
+		         System.out.println(qna_num); 
+		         qnaDao.deleteQna(qna_num);
+		         
+		         nextPage = "/admin/Aqnaboardp.do?status=0";
+				
+			//상품 관리 페이지(메인) 이동
+			} else if(action.equals("/AproductMain.do")) {
+				
+				
+				
+				
+				ProductDAO dao = new ProductDAO();
+				int total = dao.getCount();
+				int pageSize = 10;
+		         int nowPage = 1;
+		         if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		         
+		         int pageFirst = (nowPage-1) * pageSize;
+		         int totalPage = total/pageSize + (total%pageSize==0?0:1);
+		         int blockSize = 10;
+		         int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+		         int blockLast = blockFirst + blockSize -1;
+		         
+		         if(blockLast>totalPage) blockLast=totalPage;
+		         request.setAttribute("blockSize", blockSize);
+		         request.setAttribute("blockFirst", blockFirst);
+		         request.setAttribute("blockLast", blockLast);
+		         request.setAttribute("totalPage", totalPage);
+		         request.setAttribute("nowPage", nowPage);
+				
+				
+				
+				
+				List<ProductBean> list = dao.getList(pageFirst, pageSize);
+				request.setAttribute("List",list);
+				
+				 nextPage = "/admins/AproductMain.jsp";
+			//상품 등록 페이지 이동	 
+			} else if(action.equals("/AproductAdd.do")) {
+				
+				nextPage="/admins/AproductAdd.jsp";
+				
+			//상품 등록 	
+			} else if(action.equals("/AwritePro.do")) {
+				
+				ProductBean productBean = new ProductBean();
+				ProductDAO dao = new ProductDAO();
+				
+>>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
+				
+				String realFolder = request.getServletContext().getRealPath("consert");
+				int max = 100 * 1024 * 1024;
+
+				MultipartRequest multi = new MultipartRequest(request, realFolder, max, "UTF-8",
+						new DefaultFileRenamePolicy());
+
+				Enumeration e = multi.getFileNames();
+
+				ArrayList saveFiles = new ArrayList();
+
+				ArrayList originFiles = new ArrayList();
+
+				while (e.hasMoreElements()) {
+					String filename = (String) e.nextElement();
+
+					saveFiles.add(multi.getFilesystemName(filename));
+
+					originFiles.add(multi.getOriginalFileName(filename));
+
+				}
+
+				String name = multi.getParameter("name");
+				String genre = multi.getParameter("genre");
+				String cla = multi.getParameter("cla");
+				int runtime = Integer.parseInt(multi.getParameter("runtime"));
+				int price = Integer.parseInt(multi.getParameter("price"));
+				Date startdate = Date.valueOf(multi.getParameter("startdate"));
+				Date enddate = Date.valueOf(multi.getParameter("enddate"));
+				//int qty = Integer.parseInt(request.getParameter("qty"));
+				String image = "";
+				String content = "";
+				if (saveFiles != null) {
+					for (int i = 0; i < saveFiles.size(); i++) {
+						if (i == 0) {
+							content = (String) saveFiles.get(i);
+						} else {
+							image = (String) saveFiles.get(i);
+						}
+					}
+				}
+
+
+				productBean = new ProductBean();
+				productBean.setName(name);
+				productBean.setGenre(genre);
+				productBean.setCla(cla);
+				productBean.setRuntime(runtime);
+				productBean.setPrice(price);
+				productBean.setStartdate(startdate);
+				productBean.setEnddate(enddate);
+				productBean.setImage(image);
+				productBean.setContent(content);
+				//productBean.setQty(qty);
+				dao.insertpro(productBean);
+
+
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + "  alert('제품을 추가했습니다.');" + " location.href='" + request.getContextPath()
+						+ "/admin/AproductMain.do';" + "</script>");
+
+				return;
+			
+			//상품 상세 등록 페이지 이동
+			}	else if(action.equals("/Adetails.do")) {
+				
+				ProductBean productBean = new ProductBean();
+				ProductDAO dao = new ProductDAO();
+				
+				int num = Integer.parseInt(request.getParameter("num"));
+				System.out.println(num);
+				
+				productBean = dao.getBoard(num);
+				
+
+				request.setAttribute("Bean", productBean);
+				
+
+				nextPage = "/admins/AproductDetail.jsp";
+				
+<<<<<<< HEAD
 			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
 //				JSONObject jobj = new JSONObject();
 //				jobj.put("url", uploadPath1);
@@ -477,6 +738,78 @@ public class AdminController extends HttpServlet{
 		         
 		         nextPage = "/admins/AqnaModify.jsp";
 		         
+=======
+			//상품 상세 등록 페이지
+			} else if(action.equals("/AdetailsPro.do")) {
+				System.out.println("ㅋㅋㅋ");
+				
+				ProductBean productBean = new ProductBean();
+				ProductDAO dao = new ProductDAO();
+				DetailBean Bean = new DetailBean();
+				DetailDAO Ddao = new DetailDAO();
+				
+				int num = Integer.parseInt(request.getParameter("num"));
+				
+				productBean = dao.getBoard(num);
+
+				String place = request.getParameter("place");
+				int seat = Integer.parseInt(request.getParameter("seat"));
+				int totalreserved = 0;
+				Date today = Date.valueOf(request.getParameter("today"));
+				String starttime = request.getParameter("starttime");
+				
+
+				Bean = new DetailBean();
+				Bean.setName(productBean.getName());
+				Bean.setGenre(productBean.getGenre());
+				Bean.setCla(productBean.getCla());
+				Bean.setRuntime(productBean.getRuntime());
+				Bean.setPrice(productBean.getPrice());
+				Bean.setStartdate(productBean.getStartdate());
+				Bean.setEnddate(productBean.getEnddate());
+				Bean.setImage(productBean.getImage());
+				Bean.setContent(productBean.getContent());
+				Bean.setPlace(place);
+				Bean.setSeat(seat);
+				Bean.setTotalreserved(totalreserved);
+				Bean.setToday(today);
+				Bean.setStarttime(starttime);
+
+				Ddao.insertDetail(Bean);
+				
+				 
+				
+				nextPage = "/admin/AproductMain.do";
+				
+			//ajax 테스트 	
+			} else if(action.equals("/runstatus.do")) {
+				
+				AdminDAO adminDAO = new AdminDAO();
+				int runstatus = Integer.parseInt(request.getParameter("runstatus"));
+				int num = Integer.parseInt(request.getParameter("num"));
+				
+				adminDAO.runChange(runstatus, num);
+				
+				
+				System.out.println(runstatus);
+				
+				JSONArray Array = new JSONArray();
+				JSONObject Info = new JSONObject();
+				Info.put("test", "업데이트성공");
+				Array.add(Info);
+				
+				JSONObject result = new JSONObject();
+				
+				result.put("Run", Array);
+				
+				PrintWriter out = response.getWriter();
+				
+				String jsonInfo = result.toString();
+				
+				out.print(jsonInfo);
+				
+				return;
+>>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
 			}
 					
 			
