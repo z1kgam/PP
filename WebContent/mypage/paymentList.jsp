@@ -73,6 +73,7 @@
 	 			</tbody>
 	 		</table>
 	 		총 결제금액 : <fmt:formatNumber pattern="###,###,###" value="${totalpayprice}"/>
+	 		<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right">메인으로</button>
 	 		<button type="button" onclick="btnPayAlldel()" class="btn btn-primary pull-right">결제내역 삭제하기</button>			
 	 	</div>
 	 </div>

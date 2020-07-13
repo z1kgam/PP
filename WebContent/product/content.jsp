@@ -86,7 +86,7 @@
 						info += "<td>"+List[i].seat+"</td>";
 						info += "<td>"+List[i].place+"</td>";
 						if(Able > 0){
-							info += "<td><a href='${contextPath}/Proser/prepare.do?detailnum="+detnum+"'>예약하기</a></td>";
+							info += "<td><a href='${contextPath}/Proser/prepare.do?detailnum="+detnum+"&today="+List[i].today+"'>예약하기</a></td>";
 						}else{
 							info += "<td>매진</td>";
 						}	

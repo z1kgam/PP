@@ -1,8 +1,25 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.mysql.fabric.xmlrpc.base.Array"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%-- <%
+	String ch = request.getParameter("chseat");
+	
+	String[] a = ch.split(",");
+
+	List<String> list = new ArrayList<String>();
+	
+	for(int i = 0; i<a.length; i ++){
+		list.add(a[i]);
+		System.out.println(list);
+	}
+
+%> --%>
+
 
 <!DOCTYPE html>
 <html>
@@ -38,6 +55,8 @@
 				return false;
 			}
 	}
+	
+	
 </script>
 </head>
 <body>
@@ -85,8 +104,10 @@
 	 		총 금액 : <fmt:formatNumber pattern="###,###,###" value="${total}"/>
 			<button type="button" onclick="btnDelete()" class="btn btn-primary pull-right">장바구니 비우기</button>
 		<c:if test="${!empty cartList}">
-			<button type="button" onclick="btnPay()" class="btn btn-primary pull-right">결제하기</button>
+			<button type="button" onclick="btnPay()" class="btn btn-primary pull-right">전체 결제</button>
 	 	</c:if>	
+	 	
+	 		<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right" >메인으로</button>
 	 	</div>
 	 	
 	 </div>

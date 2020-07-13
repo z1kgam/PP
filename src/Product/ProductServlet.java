@@ -26,13 +26,11 @@ import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+//import com.sun.glass.ui.Application;
 
-<<<<<<< HEAD
 import Order.OrderService;
-=======
 import Order.OrderDAO;
 import Order.OrderVO;
->>>>>>> a101176ef741e2d50ffe97f52177bc86c3fc021c
 import member.LikeDAO;
 
 @SuppressWarnings("serial")
@@ -228,7 +226,6 @@ public class ProductServlet extends HttpServlet {
 				System.out.println(productBean.getName());
  
 				nextPage = "/Proser/content.do?num="+num+"&name="+productBean.getName();
-<<<<<<< HEAD
 			}else if(action.equals("/Allreply.do")) {
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				List<ReplyVO> list = productService.getreply(pronum);
@@ -259,10 +256,7 @@ public class ProductServlet extends HttpServlet {
 				out.print(jsonInfo);
 				
 				return;
-=======
-				
->>>>>>> a101176ef741e2d50ffe97f52177bc86c3fc021c
-			}else if(action.equals("/reply.do")){
+			} else if(action.equals("/reply.do")){
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int parentsnum = Integer.parseInt(request.getParameter("parentsnum"));
 				String id = (String)session.getAttribute("id");
@@ -278,7 +272,7 @@ public class ProductServlet extends HttpServlet {
 				
 				return;
 				
-			}else if(action.equals("/replydelete.do")) {
+			} else if(action.equals("/replydelete.do")) {
 				
 				int replynum = Integer.parseInt(request.getParameter("replynum"));
 				
@@ -307,15 +301,9 @@ public class ProductServlet extends HttpServlet {
 				String content = "관리자나 본인에 의해 삭제된 댓글입니다.";
 				
 				productService.updatereply(replynum,content);
-				
-<<<<<<< HEAD
+
 				return;
-			}else if(action.equals("/prepare.do")) {
-				int detail = Integer.parseInt(request.getParameter("detailnum"));
-=======
-				nextPage = "/Proser/content.do?num="+pronum+"&name="+productBean.getName();
->>>>>>> a101176ef741e2d50ffe97f52177bc86c3fc021c
-			
+
 			}else if(action.equals("/prepare.do")) {	
 				int detail = Integer.parseInt(request.getParameter("detailnum"));
 				Date today = Date.valueOf(request.getParameter("today"));
@@ -333,9 +321,21 @@ public class ProductServlet extends HttpServlet {
 						chseat += ",";
 					}
 				}
+				
 				System.out.println(chseat);
 				
+				String [] aa = chseat.split(",");
+				List<String> alist = new ArrayList<String>();
+				for(int i=0; i<aa.length;i++) {
+					alist.add(aa[i]);
+				}
+				
+				request.setAttribute("alist", alist);
+				
+				System.out.println(chseat);
+				session.setAttribute("selseat", selectseat);
 				request.setAttribute("chseat", chseat);
+				
 				nextPage = "/product/buyconnect.jsp";
 				
 			}else if(action.equals("/itemselect.do")) {

@@ -278,6 +278,37 @@ public class OrderController extends HttpServlet{
 				
 				return;
 			}
+		}else if(action.equals("/kakaoOrder.do")) {
+			String id = (String)session.getAttribute("id");
+			int num = Integer.parseInt(request.getParameter("num"));
+			
+			OrderVO payVO = new OrderVO();
+			payVO = orderDAO.getPayInfo(id, num);
+			request.setAttribute("payVO", payVO);
+			nextPage = "/product/kakaoPay.jsp";
+			
+			
+		}else if(action.equals("/kakaoOrder2.do")) {
+			PrintWriter pw = response.getWriter();
+			String id = (String)session.getAttribute("id");
+			int num = Integer.parseInt(request.getParameter("num"));
+			OrderVO payVO = new OrderVO();
+			memberBean = memberDAO.getMember(id);
+			int point = memberBean.getPoint();
+			payVO = orderDAO.getPayInfo(id, num);
+			int totalprice = payVO.getTotalprice();
+			checkPage = 1;
+			orderDAO.addPayment(payVO);
+			orderDAO.delCart(num, id);
+			
+			request.setAttribute("msg", "결제가 완료되었습니다.");
+			
+			pw.write("<script>");
+			pw.write("alert('결제가 완료 되었습니다.');");
+			pw.write("location.href='"+request.getContextPath()+"/Order/payList.do';");
+			pw.write("</script>");
+			
+			return;
 		}
 		
 		if(checkPage == 0) {

@@ -766,7 +766,7 @@ public class OrderDAO {
 			pstmt.setDate(1, today);
 			pstmt.setInt(2, detailnum);
 			rs = pstmt.executeQuery();
-			System.out.println(pstmt);
+			//System.out.println(pstmt);
 			while(rs.next()) {
 				OrderVO vo = new OrderVO(
 										detailnum, 

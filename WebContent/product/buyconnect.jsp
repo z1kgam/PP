@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -5,7 +6,29 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<%
+	List alist = (List)request.getAttribute("alist");
+	
+	for(int i=0; i<alist.size();i++){
+		System.out.println("자바배열 :" + alist.get(i));
+	}
+	
+%>
+
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%-- <%
+	String ch =(String)request.getAttribute("chseat");
+	System.out.println(ch); 
+    String[] a = ch.split(",");
+	
+	System.out.println(ch);
+	for(int i = 0; i<a.length; i ++){
+		System.out.println(a[i]);
+	}	
+
+%> --%>
+
 
 <!DOCTYPE html>
 <html>
@@ -44,37 +67,30 @@
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	
 	<script src="../js/content.js"></script>
-	
-	<script type="text/javascript">
-		function getValue() {
-			var count = Number(document.getElementById("count").value);
-
-			var price = Number(${DBean.price});
-
-			var Max = price*count;
-			
-			var print = Max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
-			$("#total").text(print);
-			document.getElementById("totalprice").value = Max;
-		}
-		
-		jQuery(document).ready(function($){
-			$("input[name=seat]:checkbox").change(function(){  //체크박스가 변경되었을 때
-				var cnt = $("#count").val();
-				if( cnt == $("input[name=seat]:checkbox:checked").length){
-					$(":checkbox:not(:checked)").attr("disabled","disabled");
-				}else{
-					$("input[name=seat]:checkbox").removeAttr("disabled");
+		<script>
+			function getValue() {
+				var count = Number(document.getElementById("count").value);
+				var price = Number(${DBean.price});
+				var seat = document.getElementsByName("seat");
+				var Max = price*count;
+				var List = String(${alist}).split(',');
+				
+				var print = Max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
+				$("#total").text(print);
+				document.getElementById("totalprice").value = Max;
+				
+				for(var i=0;i<seat.length;i++){
+					seat[i].disabled = false;
+					seat[i].checked = false;
 				}
-			});
-			
-			$("#count").change(function(){
-				$("input[name=seat]:checkbox").removeAttr("checked");
-				$("input[name=seat]:checkbox").removeAttr("disabled");
-			});
-		});
-	</script>
-	
+				
+				for(var i=0;i<List.length;i++){
+					seat[Number(List[i])-1].disabled = true;
+				}
+			}
+
+		</script>
+		
 	<style type="text/css">
 		#table{
 			margin-left: 200px;
@@ -83,7 +99,7 @@
 			text-align: center;
 			font-size: 16px;
 		}
-		
+		 
 		#count{
 			vertical-align: middle;
 			text-align-last: center;
@@ -96,12 +112,11 @@
 		}
 	
 	</style>  
-
+</script>
 </head>
   <body>
 <jsp:include page="../include/subheader.jsp" />
     <!-- END nav -->
-
     <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/concert.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -121,7 +136,7 @@
 					<div class="row">
 						<div class="col-md-12 d-flex ftco-animate">
 							<div class="blog-entry blog-entry-2 justify-content-end d-md-flex w-100">
-								<form action="${contextPath}/Order/order.do">
+								<form action="${contextPath}/Order/order.do" name="selectform">
 									<input type="hidden" name="id" value="${sessionScope.id}">
 									<input type="hidden" name="name" value="${DBean.name}">
 									<input type="hidden" name="detailnum" value="${DBean.detailnum}">
@@ -208,11 +223,7 @@
 											</c:forTokens>
 											<br>
 											1<c:forEach begin="1" end="234" var="i">
-												<input type="checkbox" name="seat" value="${i}"
-												
-													<c:if test="${i eq 54}">disabled="disabled"</c:if>
-												>
-												
+												<input type="checkbox" name="seat" value="${i}" id="seat" onclick="check()">
 												<c:choose>
 													<c:when test="${i eq 234 }">
 														<br>
@@ -242,25 +253,107 @@
 														<br>2
 													</c:when>
 												</c:choose>
+											</c:forEach> 
+						<script>
+							//html이 다 로딩된 후에 실행
+							$(document).ready(function(){	
+								//체크박스들이 변경되었을 때
+								$(":checkbox").change(function(){	
+									var cnt = $("#count").val();
+									
+									
+								//셀렉트박스의 값과 체크박스중 체크된 갯수가 같을때, 다른 체크박스들을 disabled처리함
+									if(cnt == $(":checkbox:checked").length){
+										$(":checkbox:not(:checked)").attr("disabled","disabled");
+										$("#submit").attr("disabled",false);
+									}else{	//체크된 갯수가 다르면 활성화 시킴
+										$(":checkbox").removeAttr("disabled");
+										$("#submit").attr("disabled",true);
+									}
+									
+									<c:forEach items="${selseat}" var="vo">
+										<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
+
+													var select = eval("document.selectform");
+													var checked = document.getElementsByName("seat");
+													for(var i=0; i<select.seat.length; i++){
+														if(checked[i].value == ${cseat}){
+															checked[i].disabled = true;
+														}
+													}
+										 			
+										</c:forTokens>
+									</c:forEach>				
+								});
+								
+								//셀렉트박스에서 다른 인원수를 선택하면 초기화를 시킴
+								$("#count").change(function(){
+									$(":checkbox").removeAttr("checked");
+									$(":checkbox").removeAttr("disabled");
+									
+									<c:forEach items="${selseat}" var="vo">
+									<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
+
+												var select = eval("document.selectform");
+												var checked = document.getElementsByName("seat");
+												for(var i=0; i<select.seat.length; i++){
+													if(checked[i].value == ${cseat}){
+														checked[i].disabled = true;
+													}
+												}
 												
-											</c:forEach>
-											
-												<br>
+									</c:forTokens>
+								</c:forEach>	
+									
+								});
+							});
+						
+						
+						</script>						
+
+							<c:forEach items="${selseat}" var="vo">
+									<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
+
+														<script>
+													
+
+													var select = eval("document.selectform");
+													var checked = document.getElementsByName("seat");
+													for(var i=0; i<select.seat.length; i++){
+														if(checked[i].value == ${cseat}){
+															checked[i].disabled = true;
+														}
+													}
+												</script>
+								</c:forTokens>
+							</c:forEach> 
+							<br>
 											${chseat}
 											
 											</td>
 										<tr>		
-										
+										 
 									</table>
 									
 								<%-- <c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,G,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"/>
 								<c:forTokens items="${alphabet}" delims="," var="letter"  >
 									${letter}
 								</c:forTokens> --%>
-									<input type="submit" value="장바구니에 담기" id="submit">
+								<script>
+									var cnt = $("#count").val();
+									
+									if(cnt != $(":checkbox:checked").length){
+										alert("예매선택한 갯수와 좌석선택수가 일치하지 않습니다.");
+										$(".submit").attr("disabled",false);
+										return;
+									}
+								</script>
+								
+									<input type="submit" value="장바구니에 담기" id="submit" disabled="disabled" class="btn btn-info" >
+								
 									<input type="hidden" id="totalprice" name="totalprice" value="${DBean.price}">
 								</form>
-							
+								
 							</div>
 						</div>
 					</div>

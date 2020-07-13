@@ -149,7 +149,7 @@
 											<button type="button" data-toggle="tooltip" title="글 삭제"
 												onclick="del('${notice.n_num}')"
 												class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
-											<i class="la la-times"></i>
+											<i class="la la-trash"></i>
 											</button>
 											</td>
 											</div>
