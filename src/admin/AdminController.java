@@ -659,6 +659,8 @@ public class AdminController extends HttpServlet{
 
 				nextPage = "/admins/AproductDetail.jsp";
 				
+<<<<<<< HEAD
+=======
 			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
 //				JSONObject jobj = new JSONObject();
 //				jobj.put("url", uploadPath1);
@@ -715,6 +717,7 @@ public class AdminController extends HttpServlet{
 		         
 		         nextPage = "/admins/AqnaModify.jsp";
 		         
+>>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 			//상품 상세 등록 페이지
 			} else if(action.equals("/AdetailsPro.do")) {
 				System.out.println("ㅋㅋㅋ");
