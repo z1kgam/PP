@@ -27,12 +27,11 @@ import org.json.simple.JSONObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-<<<<<<< HEAD
 import Order.OrderService;
-=======
+
 import Order.OrderDAO;
 import Order.OrderVO;
->>>>>>> a101176ef741e2d50ffe97f52177bc86c3fc021c
+
 import member.LikeDAO;
 
 @SuppressWarnings("serial")
@@ -228,7 +227,7 @@ public class ProductServlet extends HttpServlet {
 				System.out.println(productBean.getName());
  
 				nextPage = "/Proser/content.do?num="+num+"&name="+productBean.getName();
-<<<<<<< HEAD
+
 			}else if(action.equals("/Allreply.do")) {
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				List<ReplyVO> list = productService.getreply(pronum);
@@ -259,9 +258,7 @@ public class ProductServlet extends HttpServlet {
 				out.print(jsonInfo);
 				
 				return;
-=======
-				
->>>>>>> a101176ef741e2d50ffe97f52177bc86c3fc021c
+
 			}else if(action.equals("/reply.do")){
 				int pronum = Integer.parseInt(request.getParameter("pronum"));
 				int parentsnum = Integer.parseInt(request.getParameter("parentsnum"));
@@ -308,14 +305,7 @@ public class ProductServlet extends HttpServlet {
 				
 				productService.updatereply(replynum,content);
 				
-<<<<<<< HEAD
 				return;
-			}else if(action.equals("/prepare.do")) {
-				int detail = Integer.parseInt(request.getParameter("detailnum"));
-=======
-				nextPage = "/Proser/content.do?num="+pronum+"&name="+productBean.getName();
->>>>>>> a101176ef741e2d50ffe97f52177bc86c3fc021c
-			
 			}else if(action.equals("/prepare.do")) {	
 				int detail = Integer.parseInt(request.getParameter("detailnum"));
 				Date today = Date.valueOf(request.getParameter("today"));
