@@ -539,7 +539,7 @@ public class AdminController extends HttpServlet{
 			//상품 관리 페이지(메인) 이동
 			} else if(action.equals("/AproductMain.do")) {
 				
-				
+				int checkajax = 0;
 				
 				
 				ProductDAO dao = new ProductDAO();
@@ -560,7 +560,7 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("blockLast", blockLast);
 		         request.setAttribute("totalPage", totalPage);
 		         request.setAttribute("nowPage", nowPage);
-				
+				 request.setAttribute("checkajax", checkajax);
 				
 				
 				
@@ -759,31 +759,68 @@ public class AdminController extends HttpServlet{
 				
 			//ajax 테스트 	
 			} else if(action.equals("/runstatus.do")) {
+				ProductDAO dao = new ProductDAO();
+				System.out.println("ㅋㅋ전");
+				int total = dao.getCount();
+				int pageSize = 10;
+		         int nowPage = 1;
+		         if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		         int pageFirst = (nowPage-1) * pageSize;
+		         int totalPage = total/pageSize + (total%pageSize==0?0:1);
+		         int blockSize = 10;
+		         int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+		         int blockLast = blockFirst + blockSize -1;
+		         
+		         if(blockLast>totalPage) blockLast=totalPage;
+		         request.setAttribute("blockSize", blockSize);
+		         request.setAttribute("blockFirst", blockFirst);
+		         request.setAttribute("blockLast", blockLast);
+		         request.setAttribute("totalPage", totalPage);
+		         request.setAttribute("nowPage", nowPage);
 				
 				AdminDAO adminDAO = new AdminDAO();
 				int runstatus = Integer.parseInt(request.getParameter("runstatus"));
 				int num = Integer.parseInt(request.getParameter("num"));
 				
+				//업데이트 구문
+				System.out.println("ㅋㅋ전");
 				adminDAO.runChange(runstatus, num);
+				System.out.println("ㅋㅋ");
 				
+				//상품리스트 조회 구문
+				List<ProductBean> list = dao.getList(pageFirst, pageSize);
+				request.setAttribute("List",list);
 				
-				System.out.println(runstatus);
-				
-				JSONArray Array = new JSONArray();
-				JSONObject Info = new JSONObject();
-				Info.put("test", "업데이트성공");
-				Array.add(Info);
 				
 				JSONObject result = new JSONObject();
+				JSONArray Array = new JSONArray();
+				JSONObject Info;
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 				
-				result.put("Run", Array);
-				
-				PrintWriter out = response.getWriter();
+				for (int i=0; i<list.size(); i++) {
+					
+					ProductBean pb = list.get(i);
+					Info = new JSONObject();
+					Info.put("name", pb.getName());
+					Info.put("num", Integer.toString(pb.getNum()));
+					Info.put("Genre", pb.getGenre());
+					Info.put("cla", pb.getCla());
+					Info.put("runtime", Integer.toString(pb.getRuntime()));
+					Info.put("price",Integer.toString(pb.getPrice()));
+					Info.put("startdate", transFormat.format(pb.getStartdate()));
+					Info.put("enddate", transFormat.format(pb.getEnddate()));
+					Info.put("image", pb.getImage());
+					Info.put("content", pb.getContent());
+					Info.put("runtime", Integer.toString(pb.getRunstatus()));
+					Array.add(Info);
+				}
+				System.out.println("ㅋㅋ");
+				result.put("Plist", Array);
+				PrintWriter out = response.getWriter(); // 보내주는 역할
 				
 				String jsonInfo = result.toString();
 				
 				out.print(jsonInfo);
-				
 				return;
 			}
 					
