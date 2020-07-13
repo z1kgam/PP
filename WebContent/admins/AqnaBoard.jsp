@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 	<link rel="stylesheet" href="${contextPath}/admins/assets/css/ready.css">
 	<link rel="stylesheet" href="${contextPath}/assets/css/demo.css">
-	
+
 	
 	<script type="text/javascript">
 	
@@ -57,6 +57,7 @@
 				<div class="content">
 					<div class="container-fluid">
 						<h4 class="page-title">문의 내역 답변 관리 페이지</h4>
+
 						
 						<div class="form-group">
 						<button type="button" class="btn btn-warning" onclick="status(0)" id="t1">답변 대기중</button>
@@ -97,6 +98,7 @@
 											<!-- 버튼 -->
 											<div class="form-button-action">
 											<td>
+
 											<c:if test="${qnaList.qna_status == 0 }">
 											<button type="button" data-toggle="tooltip" title="답변 하기" 
 												onclick="location.href='${contextPath}/admin/AqnaAnswer.do?qna_num=${qnaList.qna_num}'" 
@@ -136,6 +138,7 @@
             							</c:choose>	
 											</tbody>
 										</table>
+
 									<c:if test="${status == 0 }">
 										<!-- 페이징 -->
 									<div align="center">

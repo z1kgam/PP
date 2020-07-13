@@ -80,7 +80,7 @@ request.setCharacterEncoding("UTF-8");
 				<c:if test="${is_admin == 1}">	
 					<a href="${contextPath}/qboard/deleteQna.do?qna_num=${qna.qna_num}">
 						<input type="button" value="삭제하기">
-					</a>
+					</a> 
 					
 					<a href="${contextPath}/qboard/qnaUpdateForm.do?qna_num=${qna.qna_num}">
 						<input type="button" value="수정하기">
