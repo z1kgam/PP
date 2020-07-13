@@ -32,7 +32,6 @@
   <script type="text/javascript">
   
   function sendFile(file, editor) {
-	  	alert("왔는데?");
 		var data = new FormData();
 		data.append('uploadFile', file);
 		
@@ -52,8 +51,7 @@
 				var aa = JSON.parse(JSON.stringify(data));
 				var bb = aa.List;
 				var image = bb[0].url;
-				alert(image);
-				alert("콜백성공");
+
 				var te3 = "<img src="+"'"+image+"'/>";
 				$("#test3").html(te3);
 			}
@@ -144,7 +142,7 @@
     
     $('#summernote').summernote({
     		
-    	  height: 300,                 // set editor height
+    	  height: 700,                 // set editor height
     	  minHeight: null,             // set minimum height of editor
     	  maxHeight: null,             // set maximum height of editor
     	  focus: true,                 // set focus to editable area after initializing summernote
@@ -152,7 +150,6 @@
     	  callbacks: {// 콜백을 사용
     		  // 이미지를 업로드할 경우 이벤트를 발생
     		  onImageUpload: function(files, editor, welEditable) {
-    			  alert("엥?");
     			  sendFile(files[0], this);
     		  } 
     	   }

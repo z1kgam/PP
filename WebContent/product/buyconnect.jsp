@@ -88,45 +88,7 @@
 					seat[Number(List[i])-1].disabled = true;
 				}
 			}
-			
-			function check() {
-				var seat = document.getElementsByName("seat");
-				var count = $("select[name=count]").val();
-				var val =0;
-				
-				for(var i=0;i<seat.length;i++){
-					if(seat[i].checked == true){
-						val++;
-					}
-				}
-				
-				if(val == count){
-					for(var i=0;i<seat.length;i++){
-						if(seat[i].checked != true){
-							seat[i].disabled = true;
-						}
-					}
-				}
-			}
-			
-/* 			jQuery(document).ready(function($){
-				$("input[name=seat]:checkbox").change(function(){  //체크박스가 변경되었을 때
-					alert("a");
-					var cnt = $("#count").val();
 
-					if( cnt == $("input[name=seat]:checkbox:checked").length){
-						$(":checkbox:not(:checked)").attr("disabled","disabled");
-					}else{
-						$("input[name=seat]:checkbox").removeAttr("disabled");
-					}
-				}); 
-				
- 				$("#count").change(function(){
-					$("input[name=seat]:checkbox").removeAttr("checked");
-
-					$("input[name=seat]:checkbox").removeAttr("disabled");
-				});  
-			}); */  
 		</script>
 		
 	<style type="text/css">
@@ -291,11 +253,66 @@
 														<br>2
 													</c:when>
 												</c:choose>
-												
 											</c:forEach> 
-											<c:forEach items="${selseat}" var="vo">
-													<c:forTokens items="${vo.selectseat}" delims=","
-														var="cseat">
+						<script>
+							//html이 다 로딩된 후에 실행
+							$(document).ready(function(){	
+								//체크박스들이 변경되었을 때
+								$(":checkbox").change(function(){	
+									var cnt = $("#count").val();
+									
+									
+								//셀렉트박스의 값과 체크박스중 체크된 갯수가 같을때, 다른 체크박스들을 disabled처리함
+									if(cnt == $(":checkbox:checked").length){
+										$(":checkbox:not(:checked)").attr("disabled","disabled");
+										$("#submit").attr("disabled",false);
+									}else{	//체크된 갯수가 다르면 활성화 시킴
+										$(":checkbox").removeAttr("disabled");
+										$("#submit").attr("disabled",true);
+									}
+									
+									<c:forEach items="${selseat}" var="vo">
+										<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
+
+													var select = eval("document.selectform");
+													var checked = document.getElementsByName("seat");
+													for(var i=0; i<select.seat.length; i++){
+														if(checked[i].value == ${cseat}){
+															checked[i].disabled = true;
+														}
+													}
+										 			
+										</c:forTokens>
+									</c:forEach>				
+								});
+								
+								//셀렉트박스에서 다른 인원수를 선택하면 초기화를 시킴
+								$("#count").change(function(){
+									$(":checkbox").removeAttr("checked");
+									$(":checkbox").removeAttr("disabled");
+									
+									<c:forEach items="${selseat}" var="vo">
+									<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
+
+												var select = eval("document.selectform");
+												var checked = document.getElementsByName("seat");
+												for(var i=0; i<select.seat.length; i++){
+													if(checked[i].value == ${cseat}){
+														checked[i].disabled = true;
+													}
+												}
+												
+									</c:forTokens>
+								</c:forEach>	
+									
+								});
+							});
+						
+						
+						</script>						
+
+							<c:forEach items="${selseat}" var="vo">
+									<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
 
 														<script>
 													
@@ -308,8 +325,9 @@
 														}
 													}
 												</script>
-													</c:forTokens>
-												</c:forEach> <br>
+								</c:forTokens>
+							</c:forEach> 
+							<br>
 											${chseat}
 											
 											</td>
@@ -321,10 +339,21 @@
 								<c:forTokens items="${alphabet}" delims="," var="letter"  >
 									${letter}
 								</c:forTokens> --%>
-									<input type="submit" value="장바구니에 담기" id="submit">
+								<script>
+									var cnt = $("#count").val();
+									
+									if(cnt != $(":checkbox:checked").length){
+										alert("예매선택한 갯수와 좌석선택수가 일치하지 않습니다.");
+										$(".submit").attr("disabled",false);
+										return;
+									}
+								</script>
+								
+									<input type="submit" value="장바구니에 담기" id="submit" disabled="disabled" class="btn btn-info" >
+								
 									<input type="hidden" id="totalprice" name="totalprice" value="${DBean.price}">
 								</form>
-							
+								
 							</div>
 						</div>
 					</div>

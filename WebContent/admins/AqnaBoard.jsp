@@ -21,6 +21,31 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 	<link rel="stylesheet" href="${contextPath}/admins/assets/css/ready.css">
 	<link rel="stylesheet" href="${contextPath}/assets/css/demo.css">
+
+	
+	<script type="text/javascript">
+	
+	function status(s) {
+		var status = s
+		window.location.href="${contextPath}/admin/Aqnaboardp.do?status="+status;
+		
+	}
+			
+	function del(num) {
+		
+		var qna_num = num
+		if (confirm("정말 삭제 하시겠습니까??") == true){
+			window.location.href ='${contextPath}/admin/Aqnadelete.do?qna_num='+qna_num;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	</script>
+	
+	
+	
 </head>
 <body>
 
@@ -32,14 +57,23 @@
 				<div class="content">
 					<div class="container-fluid">
 						<h4 class="page-title">문의 내역 답변 관리 페이지</h4>
-			
+
+						
+						<div class="form-group">
+						<button type="button" class="btn btn-warning" onclick="status(0)" id="t1">답변 대기중</button>
+						<button type="button" class="btn btn-success" onclick="status(1)" id="t2">답변 완료</button>
+						</div>
+						
+						
 					<table class="table table-hover">
+						
 											<thead>
 												<tr align="center">
 													<th scope="col">처리상태</th>
+													<th scope="col">아이디</th>
 													<th scope="col">제목</th>
 													<th scope="col">등록일</th>
-													<th scope="col">답변 하기</th>
+													<th scope="col">답변</th>
 													<th scope="col">글 삭제</th>
 												</tr>
 											</thead>
@@ -58,23 +92,44 @@
 											<c:if test="${qnaList.qna_status == 0}"><p class="text-warning">대기중</p></c:if>
 					   						<c:if test="${qnaList.qna_status == 1}"><p class="text-success">답변완료<p></c:if>
 											</p></td>
+											<td><p class="text-muted">${qnaList.id}</p></td>
 											<td align="left"><p class="text-muted">${qnaList.qna_title}</p></td>
 											<td><p class="text-muted">${parseDate}</p></td>
 											<!-- 버튼 -->
 											<div class="form-button-action">
 											<td>
+
+											<c:if test="${qnaList.qna_status == 0 }">
 											<button type="button" data-toggle="tooltip" title="답변 하기" 
-												onclick="location.href='${contextPath}/admin/AqnaModify.do?qna_num=${qnaList.qna_num}'" 
+												onclick="location.href='${contextPath}/admin/AqnaAnswer.do?qna_num=${qnaList.qna_num}'" 
 												class="btn btn-link <btn-simple-primary" style=" font-size: 17px; ">
 												<i class="la la-comments"></i>
 											</button>
+											</c:if>
+											<c:if test="${qnaList.qna_status == 1 }">
+											<button type="button" data-toggle="tooltip" title="답변  수정 하기" 
+												onclick="location.href='${contextPath}/admin/AqnaAnswerMod.do?qna_num=${qnaList.qna_num}'" 
+												class="btn btn-link <btn-simple-primary" style=" font-size: 17px; ">
+												<i class="la la-pencil"></i>
+											</button>
+											</c:if>
 											</td>
+											<c:if test="${status == 0}">
 											<td>
-											<button type="button" data-toggle="tooltip" title="회원 삭제"
-												onclick="del('${memberlist.id}')" class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
-											<i class="la la-times"></i>
+											<button type="button" data-toggle="tooltip" title="문의 글 삭제"
+												onclick="del('${qnaList.qna_num}')" class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
+											<i class="la la-trash"></i>
 											</button>
 											</td>
+											</c:if>
+											<c:if test="${status == 1}">
+											<td>
+											<button type="button" data-toggle="tooltip" title="문의 글 삭제"
+												onclick="del('${qnaList.qna_num}')" class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
+											<i class="la la-trash"></i>
+											</button>
+											</td>
+											</c:if>
 											</div>
 											<!-- 버튼 -->
 										</tr>
@@ -83,10 +138,74 @@
             							</c:choose>	
 											</tbody>
 										</table>
-				
-			
-			
-			
+
+									<c:if test="${status == 0 }">
+										<!-- 페이징 -->
+									<div align="center">
+									<div class="card-body">
+										<p class="demo">
+											<ul class="pagination pg-primary">
+												<li class="page-item">
+												<c:if test="${nowPage>blockSize}">
+													<a class="page-link" href="${contextPath}/admin/Aqnaboardp.do?nowPage=${blockFirst-blockSize}&status=0" aria-label="Previous">
+														<span aria-hidden="true">&laquo;</span>
+													<!-- <span class="sr-only">Previous</span> -->
+													</a>
+												</c:if>	
+												</li>
+												<c:forEach begin="${blockFirst}" end="${blockLast}" var="i">
+												<li class="page-item active">
+												<a class="page-link" href="${contextPath }/admin/Aqnaboardp.do?nowPage=${i}&status=0">${i}</a>
+												</li>
+												</c:forEach>
+												<c:if test="${blockLast != totalPage }">
+												<li class="page-item">
+													<a class="page-link" href="${contextPath}/admin/Aqnaboardp.do?nowPage=${blockLast+1}&status=0" aria-label="Next">
+														<span aria-hidden="true">&raquo;</span>
+														<span class="sr-only">Next</span>
+													</a>
+												</li>
+												</c:if>
+											</ul>
+										</p>
+									</div>
+									</div>
+									
+									<!-- 페이징 -->	
+									</c:if>
+									<c:if test="${status == 1 }">
+										<!-- 페이징 -->
+									<div align="center">
+									<div class="card-body">
+										<p class="demo">
+											<ul class="pagination pg-primary">
+												<li class="page-item">
+												<c:if test="${nowPage>blockSize}">
+													<a class="page-link" href="${contextPath}/admin/Aqnaboardp.do?nowPage=${blockFirst-blockSize}&status=1" aria-label="Previous">
+														<span aria-hidden="true">&laquo;</span>
+													<!-- <span class="sr-only">Previous</span> -->
+													</a>
+												</c:if>
+												</li>
+												<c:forEach begin="${blockFirst}" end="${blockLast}" var="i">
+												<li class="page-item active">
+												<a class="page-link" href="${contextPath }/admin/Aqnaboardp.do?nowPage=${i}&status=1">${i}</a>
+												</li>
+												</c:forEach>
+												<c:if test="${blockLast != totalPage }">
+												<li class="page-item">
+													<a class="page-link" href="${contextPath}/admin/Aqnaboardp.do?nowPage=${blockLast+1}&id=${id}&status=1" aria-label="Next">
+														<span aria-hidden="true">&raquo;</span>
+														<span class="sr-only">Next</span>
+													</a>
+												</li>
+												</c:if>
+											</ul>
+										</p>
+									</div>
+									</div>
+									<!-- 페이징 -->	
+									</c:if>
 			
 			
 			

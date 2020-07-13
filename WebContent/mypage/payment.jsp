@@ -73,8 +73,20 @@
 
 	 			</tbody>
 	 		</table>
-	 		총 금액 : <fmt:formatNumber pattern="###,###,###" value="${total}"/>			
-			<button type="button" onclick="btnPayment()" class="btn btn-primary pull-right">결제하기</button>
+	 		총 금액 : <fmt:formatNumber pattern="###,###,###" value="${total}"/>
+	 		
+	 		<form action="${contextPath}/Order/kakaoOrder.do" method="post">
+	 			<input type="hidden" name="num" value="${payVO.num}">
+				<input type="hidden" name="id" value="${payVO.id}">							
+				<input type="hidden" name="name" value="${payVO.name}">
+				<input type="hidden" name="qty" value="${payVO.qty}">
+				<input type="hidden" name="totalprice" value="${payVO.totalprice}">
+				<input type="hidden" name="orderdate" value="${payVO.orderdate}">
+				<input type="submit" value="카카오페이 결제" class="btn btn-warning pull-right">
+				<button type="button" onclick="btnPayment()" class="btn btn-primary pull-right">포인트 결제</button>
+			<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right">메인으로</button>
+			</form>			
+			
 	 	</div>
 	 </div>
 	
