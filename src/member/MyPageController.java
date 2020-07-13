@@ -107,10 +107,12 @@ public class MyPageController extends HttpServlet{
 			
 			int num = Integer.parseInt(request.getParameter("num"));
 			String id = request.getParameter("id");
+			String name = request.getParameter("name");
+			String image = request.getParameter("image");
 			boolean checkZ = likeDAO.checkLike(num, id);
 			int likeCount = likeDAO.getProductTotalLike(num);
 			if(checkZ == false) {
-				likeDAO.addLike(num, id);
+				likeDAO.addLike(num, id, name, image);
 			}else {
 				likeDAO.delLike(num, id);
 			}
