@@ -225,7 +225,7 @@ public class ProductDAO {
 				Bean.setEnddate(rs.getDate("enddate"));
 				Bean.setImage(rs.getString("image"));
 				Bean.setContent(rs.getString("content"));
-				
+				Bean.setRunstatus(rs.getInt("runstatus"));
 				List.add(Bean);
 			}
 		} catch (Exception e) {

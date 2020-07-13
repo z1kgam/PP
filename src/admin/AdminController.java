@@ -6,10 +6,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
->>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
 import java.util.Enumeration;
 import java.util.List;
 import java.util.UUID;
@@ -414,24 +411,6 @@ public class AdminController extends HttpServlet{
 				
 			    // 업로드된 경로와 파일명을 통해 이미지의 경로를 생성
 				String uploadPath1 = "http://localhost:8090/PP/upload/"+fileName;
-<<<<<<< HEAD
-				
-				
-				JSONArray Array = new JSONArray();
-				JSONObject Info = new JSONObject();
-				Info.put("url", uploadPath1);
-				Array.add(Info);
-				
-				JSONObject result = new JSONObject();
-				
-				result.put("List", Array);
-				
-				PrintWriter out = response.getWriter();
-				
-				String jsonInfo = result.toString();
-				
-				out.print(jsonInfo);
-=======
 				
 				
 				JSONArray Array = new JSONArray();
@@ -600,7 +579,6 @@ public class AdminController extends HttpServlet{
 				ProductBean productBean = new ProductBean();
 				ProductDAO dao = new ProductDAO();
 				
->>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
 				
 				String realFolder = request.getServletContext().getRealPath("consert");
 				int max = 100 * 1024 * 1024;
@@ -681,64 +659,6 @@ public class AdminController extends HttpServlet{
 
 				nextPage = "/admins/AproductDetail.jsp";
 				
-<<<<<<< HEAD
-			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
-//				JSONObject jobj = new JSONObject();
-//				jobj.put("url", uploadPath1);
-//				
-//				response.setContentType("application/json"); // 데이터 타입을 json으로 설정하기 위한 세팅
-//				out.print(jobj.toJSONString());
-//				
-//				return;
-				
-			//문의 답변 수정 메인 페이지
-			} else if(action.equals("/Aqnaboardp.do")) {
-				 
-				 qnaDao qnadao = new qnaDao();
-				 qnaBean qnabean = new qnaBean();
-				
-				 String id =(String)request.getSession().getAttribute("id");
-		         
-		         int total = qnadao.getAllQna(id);
-		         System.out.println(total);
-		         
-		         MemberBean mb = new MemberBean();
-		         
-		         
-		         int pageSize = 3;
-		         int nowPage = 1;
-		         if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
-		         
-		         int pageFirst = (nowPage-1) * pageSize;
-		         int totalPage = total/pageSize + (total%pageSize==0?0:1);
-		         int blockSize = 10;
-		         int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
-		         int blockLast = blockFirst + blockSize -1;
-		         
-		         if(blockLast>totalPage) blockLast=totalPage;
-		         List<qnaBean> qnaList = qnadao.qnaList(pageFirst, pageSize, id);
-		         request.setAttribute("qnaList", qnaList);
-		         request.setAttribute("blockSize", blockSize);
-		         request.setAttribute("blockFirst", blockFirst);
-		         request.setAttribute("blockLast", blockLast);
-		         request.setAttribute("totalPage", totalPage);
-		         request.setAttribute("nowPage", nowPage);
-
-		         nextPage = "/admins/AqnaBoard.jsp";
-			//문의 답변 수정하는 페이지
-			} else if(action.equals("AqnaModify.do")) {
-				
-				 qnaBean qnabean = new qnaBean();
-				 qnaDao qnadao = new qnaDao();
-				
-				 int qna_num =Integer.parseInt(request.getParameter("qna_num"));
-		         qnabean = qnadao.getqna(qna_num);
-		         
-		         request.setAttribute("qnaUpdate", qnabean);
-		         
-		         nextPage = "/admins/AqnaModify.jsp";
-		         
-=======
 			//상품 상세 등록 페이지
 			} else if(action.equals("/AdetailsPro.do")) {
 				System.out.println("ㅋㅋㅋ");
@@ -809,7 +729,6 @@ public class AdminController extends HttpServlet{
 				out.print(jsonInfo);
 				
 				return;
->>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
 			}
 					
 			

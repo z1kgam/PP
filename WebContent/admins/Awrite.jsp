@@ -51,11 +51,9 @@
 				var aa = JSON.parse(JSON.stringify(data));
 				var bb = aa.List;
 				var image = bb[0].url;
-<<<<<<< HEAD
+				
 				alert(image);
 				alert("콜백성공");
-=======
->>>>>>> e85f1b7ab340dfbfb38c64db88c0d891ce8b2b6c
 				var te3 = "<img src="+"'"+image+"'/>";
 				$("#test3").html(te3);
 			}
