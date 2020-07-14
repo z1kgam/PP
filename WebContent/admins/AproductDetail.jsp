@@ -62,7 +62,7 @@
 						<form action="${contextPath}/admin/AdetailsPro.do" method="post">
 							<input type="hidden" value="${Bean.startdate}" id="stdate">
 							<input type="hidden" value="${Bean.enddate}" id="endate">
-							<input type="text" value="${Bean.num}" name="num">
+							<input type="hidden" value="${Bean.num}" name="num">
 							<table id="notice">	
 						<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
 											<thead>
@@ -92,10 +92,11 @@
 													<td style="width: 15%">좌석</td>
 													<td>
 														<select class="form-control input-fixed" id="notify_state" name="seat" style="vertical-align: middle; text-align-last: center;">
-														<option value="100">100</option>
-														<option value="150">150</option>
+														<option value="80">80</option>
+														<option value="120">120</option>
+														<option value="160">160</option>
 														<option value="200">200</option>
-														<option value="250">250</option>
+														<option value="240">240</option>
 														</select>
 													</td>
 												</tr>

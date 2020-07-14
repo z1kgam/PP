@@ -721,13 +721,13 @@ public class AdminController extends HttpServlet{
 				int num = Integer.parseInt(request.getParameter("num"));
 				
 				productBean = dao.getBoard(num);
-
 				String place = request.getParameter("place");
 				int seat = Integer.parseInt(request.getParameter("seat"));
 				int totalreserved = 0;
 				Date today = Date.valueOf(request.getParameter("today"));
 				String starttime = request.getParameter("starttime");
 
+				
 				Bean = new DetailBean();
 				Bean.setName(productBean.getName());
 				Bean.setGenre(productBean.getGenre());
@@ -743,7 +743,8 @@ public class AdminController extends HttpServlet{
 				Bean.setTotalreserved(totalreserved);
 				Bean.setToday(today);
 				Bean.setStarttime(starttime);
-
+				Bean.setNum(num);
+				
 				Ddao.insertDetail(Bean);
 				
 				nextPage = "/admin/AproductMain.do";
