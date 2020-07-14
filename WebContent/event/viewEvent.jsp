@@ -13,8 +13,10 @@ request.setCharacterEncoding("UTF-8");
 <!DOCTYPE html>
 <html>
 <head>
-<%--    	<script type="text/javascript" id="timer">
-	CountDownTimer('7/7/2020', 'countExpire');
+<script type="text/javascript" src="timer.js"></script>
+
+	<script type="text/javascript" id="timer">
+	CountDownTimer('${event.e_enddate}', 'countExpire');
 	function CountDownTimer(dt, id) {
 		var end = new Date(dt);
 	    var _second = 1000;
@@ -48,17 +50,14 @@ request.setCharacterEncoding("UTF-8");
 	
 </script>
 
-<script type="text/javascript" src="timer.js"></script>
-<style>
-        #countdown,
-        #HourCountdown,
-        #countExpire {
-            display: inline;
-            color: blue;
-            font-weight: bold;
-        }
-</style>
---%>
+	<style>
+	        #countExpire {
+	            display: inline;
+	            color: blue;
+	            font-weight: bold;
+	        }
+	</style>
+
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -70,7 +69,6 @@ request.setCharacterEncoding("UTF-8");
 
 </head>
 <body style="text-align: center;">
-
    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 			<div class="container">
@@ -83,7 +81,9 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 	</section>
 	<section class="container body-container py-5">
-	
+	<a>이벤트 종료까지 남은시간</a><br>
+	<div id="countExpire"></div>
+
 		<article class="mt-3">
 				<table class="table">
 					<colgroup>
@@ -112,7 +112,6 @@ request.setCharacterEncoding("UTF-8");
 							<label for="contents" class="m-0">내용</label>
 						</th>
 						<td>
-							
 							<img src="${contextPath}/event/image/${event.e_file}"><br>
 							${event.e_content}  <br><br><br>
 						</td>
