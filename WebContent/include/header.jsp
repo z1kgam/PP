@@ -45,16 +45,7 @@ function time_format(s) {
 	return ""+nHour+":"+nMin+":"+nSec;
 }
 </script>
-<style>
-	.ah{
-		color:black;
-		text-decoration: none;
-	}
-	.ah:hover{
-		color:red;
-		text-decoration: underline;
-	}
-</style>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
@@ -105,20 +96,8 @@ function time_format(s) {
   	</c:when>
   </c:choose>	
         </td>
-	<!-- <td colspan="2" style="width: 100px;"><span id="counter"> </span> 후 자동로그아웃 <input type="button" class="btn btn-primary" value="연장" onclick="counter_reset()"></td>  -->
-			
-		<td colspan="2"> 장바구니
-			<span style="color:white; size:16;" class="icon icon-shopping-cart" size="25"> </span> 
-			: <a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}" class="ah">
-			<c:if test="${empty cartList}">				
-				0
-			</c:if>
-			
-			<c:if test="${!empty cartList}">				
-				${sessionScope.cartcount}
-			</c:if>
-			</a>
-		</td>
+	<td colspan="2" style="width: 100px;"><span id="counter"> </span> 후 자동로그아웃 <input type="button" class="btn btn-primary" value="연장" onclick="counter_reset()"></td>
+	
     </tr>
     <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
 		<td colspan="2">
@@ -159,7 +138,7 @@ function time_format(s) {
 			          <li class="nav-item active"><a href="${contextPath}" class="nav-link" style="font-size: 18px; font-family:나눔고딕">메인</a></li>
 			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공연&상품 페이지</a></li>
 			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 18px; font-family:나눔고딕">###</a></li>
-			          <li class="nav-item"><a href="${contextPath}/classes.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
+			          <li class="nav-item"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
 			     <c:if test="${is_admin == 1}">     
 			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">관리자 페이지</a></li>
 			     </c:if>
@@ -178,4 +157,4 @@ function time_format(s) {
     <!-- END nav -->
  <!-- Header END -->
  
- <!--<script>counter_init();</script> -->
+ <script>counter_init();</script>
