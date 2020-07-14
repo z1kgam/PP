@@ -9,16 +9,17 @@ public class qnaBean {
 	private String qna_cate; 
 	private String qna_title; 
 	private String qna_contents; 
-//	private String qna_file; 
 	private Date qna_date;
 	private int qna_status;
 	private String answer;
+	private String file;
+	private String file2;
 	
 	public qnaBean() {
 		
 	}
 	
-	//getter, setter �޼ҵ� ����
+	//getter, setter 메소드
 	public int getQna_num() {
 		return qna_num;
 	}
@@ -59,14 +60,6 @@ public class qnaBean {
 		this.qna_contents = qna_contents;
 	}
 
-//	public String getQna_file() {
-//		return qna_file;
-//	}
-//
-//	public void setQna_file(String qna_file) {
-//		this.qna_file = qna_file;
-//	}
-
 	public Date getQna_date() {
 		return qna_date;
 	}
@@ -91,6 +84,21 @@ public class qnaBean {
 		this.answer = answer;
 	}
 	
+	public String getFile() {
+	return file;
+	}
+
+	public void setFile(String file) {
+	this.file = file;
+	}
+
+	public String getFile2() {
+		return file2;
+	}
+
+	public void setFile2(String file2) {
+		this.file2 = file2;
+	}
 	
 	
 

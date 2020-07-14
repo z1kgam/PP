@@ -31,6 +31,9 @@
 
   </head>
   <body>
+  
+  
+  <jsp:include page="../include/header.jsp" />
 
       <div class="container">
      
@@ -56,7 +59,7 @@
 		<!-- 본문 START -->
 		<div class="page-header">
           <hr/>
-          <h1>비밀번호 수정</h1>
+          <h1>Password Edit</h1>
         </div>
         <hr/>
           <form role="form" action="${contextPath}/member/updatePassAction.do" method="post" name="upForm" onsubmit="return checkForm2()">
@@ -86,6 +89,9 @@
           </form>
         </div>
     <script src="../js/pass.js"></script>  
+    
+    
+    <jsp:include page="../include/footer.jsp" />
 
   </body>
   

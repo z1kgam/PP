@@ -25,7 +25,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- Respond.js으로 IE8에서 반응형 기능활성화 -->
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-
+	
 <!-- Daum postcode API -->
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
@@ -54,9 +54,9 @@
       	</div>	<!-- /.modal -->
       	<!-- END 모달창 -->
 		<!-- 본문 START -->
-		<div class="page-header">
+		<div class="page-header" style="margin-top: 50px;">
           <hr/>
-          <h1>회원가입</h1>
+          <h1>Sign Up</h1>
         </div>
         <hr/>
           <form role="form" action="${contextPath}/member/joinAction.do" method="post" name="joinForm" onsubmit="return checkForm()">
@@ -66,7 +66,7 @@
                 <div class="input-group">
                   <input type="text" class="form-control" id="InputId" name="id" placeholder="ID입력" onblur="checkId()">
                   <span class="input-group-btn">
-                  <input type="button" class="btn btn-primary" onclick="authId()" id="authBtn" value="중복확인">
+                  <input type="button" class="btn btn-primary" style="background-color: #EB008B !important; border-color: #EB008B !important; color: #fff !important;" onclick="authId()" id="authBtn" value="중복확인">
                   </span>
 			   </div>
 			   <span id="checkId">&nbsp;</span>
@@ -106,7 +106,7 @@
                <div class="input-group">
                 <input type="text" id="zip" name="zipcode" class="form-control" readonly>
                  <span class="input-group-btn" height="58px">
-                  <button type="button" class="btn btn-success" id="search" onclick="daumPostcode()">우편번호 찾기<i class="fa fa-mail-forward spaceLeft"></i></button>
+                  <button type="button" class="btn btn-success" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important" id="search" onclick="daumPostcode()">우편번호 찾기<i class="fa fa-mail-forward spaceLeft"></i></button>
                  </span>
                 </div>
                 <input type="text" id="address1" name="address1" class="form-control" readonly >
@@ -178,9 +178,9 @@
             		</div>
             	</div>
             </div>
-            <div class="form-group text-center">
-              <input type="submit" class="btn btn-info" value="회원가입">
-              <button type="button" class="btn btn-warning" onclick="location.href='${contextPath}'">메인으로</button>
+            <div class="form-group text-center" style="margin-bottom: 100px;">
+              <input type="submit" class="btn btn-info" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important;" value="회원가입">
+              <button type="button" class="btn btn-warning" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; onclick="location.href='${contextPath}'">메인으로</button>
             </div>
           </form>
     <script src="../js/join.js"></script>

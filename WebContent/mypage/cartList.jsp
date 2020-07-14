@@ -105,7 +105,11 @@
 </script>
 </head>
 <body>
- <div class="container">
+
+
+<jsp:include page="../include/header.jsp" />
+
+ <div class="container" style="margin-top: 100px; margin-bottom: 10px;">
 	 	<div class="row">
 	 		<table class="table table-striped" style="text-align:center; border: 1px solid #dddddd">
 	 			<thead>
@@ -146,14 +150,18 @@
 
 	 			</tbody>
 	 		</table>
-	 		총 금액 : <fmt:formatNumber pattern="###,###,###" value="${total}"/>
-			<button type="button" onclick="btnDelete()" class="btn btn-primary pull-right">장바구니 비우기</button>
+	 		총 금액 : <fmt:formatNumber pattern="###,###,###" value="${total}" /> 
+	 		
+	 		<div class="button" style="margin-left: 500px; margin-top: 100px;">
+			<button type="button" onclick="btnDelete()" class="btn btn-primary pull-right" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px; margin-left: 20px;">장바구니 비우기</button>
 		<c:if test="${!empty cartList}">
-			<button type="button" onclick="btnPay()" class="btn btn-primary pull-right">전체 결제</button>
+			<button type="button" onclick="btnPay()" class="btn btn-primary pull-right" >전체 결제</button>
 	 	</c:if>	
 	 	
-	 		<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right" >메인으로</button>
+	 		<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important;">메인으로</button>
 	 	</div>
+	 	</div>
+	 	
 	 </div>
 	 <div class="page_wrap">
 	 	<div class="page_nation">
@@ -173,7 +181,7 @@
 	 		</c:forEach>
 	 		
 	 		<c:if test="${blockLast != totalPage}">
-	 			<a href="location.href='${contextPath}/Order/cartList.do?${blockLast+1}'" class="arrow next"></a>
+	 			<a href="location.href='${contextPath}/Order/cartList.do?nowPage=${blockLast+1}'" class="arrow next"></a>
 	 		</c:if>
 	 	</div>
 	 </div>
@@ -185,5 +193,7 @@
     <!-- 부트스트랩 자바스크립트 추가하기 -->
 
     <script src="${contextPath}/mypage/js/bootstrap.js"></script>
+    <jsp:include page="../include/footer.jsp" />
+    
 </body>
 </html>

@@ -26,7 +26,7 @@
 	<script type="text/javascript">
 	
 	function te33(runstatus1, num) {
-		alert(runstatus1);
+		
 		
 		var runstatus = 0;
 		
@@ -43,10 +43,13 @@
 			contentType : false,
 			processData : false,
 			error : function() {
-				alert("통신실패!!");
+				 
+				setTimeout(function(){
+					location.reload();
+					},100); // 3000밀리초 = 3초
 				
 			},
-			succes: function() {
+			succes: function(data) {
 				alert("여 왔다");
 				var aa = JSON.parse(JSON.stringify(data));
 				var bb = aa.List;

@@ -6,29 +6,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%
-	List alist = (List)request.getAttribute("alist");
-	
-	for(int i=0; i<alist.size();i++){
-		System.out.println("자바배열 :" + alist.get(i));
-	}
-	
-%>
-
-
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<%-- <%
-	String ch =(String)request.getAttribute("chseat");
-	System.out.println(ch); 
-    String[] a = ch.split(",");
-	
-	System.out.println(ch);
-	for(int i = 0; i<a.length; i ++){
-		System.out.println(a[i]);
-	}	
-
-%> --%>
-
 
 <!DOCTYPE html>
 <html>
@@ -68,26 +46,62 @@
 	
 	<script src="../js/content.js"></script>
 		<script>
-			function getValue() {
-				var count = Number(document.getElementById("count").value);
-				var price = Number(${DBean.price});
+		$(document).ready(function(){	
+			//체크박스들이 변경되었을 때
+			$(":checkbox").change(function(){	
+				var cnt = $("#count").val();
+				
+				
+			//셀렉트박스의 값과 체크박스중 체크된 갯수가 같을때, 다른 체크박스들을 disabled처리함
+				if(cnt == $(":checkbox:checked").length){
+					$(":checkbox:not(:checked)").attr("disabled","disabled");
+					$("#submit").attr("disabled",false);
+				}else{	//체크된 갯수가 다르면 활성화 시킴
+					$(":checkbox").removeAttr("disabled");
+					$("#submit").attr("disabled",true);
+				}
+			
 				var seat = document.getElementsByName("seat");
+				var before = "${chseat}";
+				var reseat = before.split(',');
+
+ 				for(var i=0;seat.length;i++){
+ 					for(var j=0;j<reseat.length;j++){
+ 						if(seat[i].value == reseat[j]){
+ 							seat[i].disabled = true;
+ 						}
+					}
+ 				}			
+			});
+			
+			//셀렉트박스에서 다른 인원수를 선택하면 초기화를 시킴
+ 			$("#count").change(function(){
+				$(":checkbox").removeAttr("checked");
+				$(":checkbox").removeAttr("disabled");	
+				
+				var count = Number(document.getElementById("count").value);
+
+				var price = Number(${DBean.price});
 				var Max = price*count;
-				var List = String(${alist}).split(',');
 				
 				var print = Max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
 				$("#total").text(print);
-				document.getElementById("totalprice").value = Max;
+				document.getElementById("totalprice").value = Max;	
 				
-				for(var i=0;i<seat.length;i++){
-					seat[i].disabled = false;
-					seat[i].checked = false;
-				}
+				var seat = document.getElementsByName("seat");
+				var before = "${chseat}";
+				var reseat = before.split(',');
+
+ 				for(var i=0;seat.length;i++){
+ 					for(var j=0;j<reseat.length;j++){
+ 						if(seat[i].value == reseat[j]){
+ 							seat[i].disabled = true;
+ 						}
+					}
+ 				}
 				
-				for(var i=0;i<List.length;i++){
-					seat[Number(List[i])-1].disabled = true;
-				}
-			}
+			}); 
+		});
 
 		</script>
 		
@@ -168,21 +182,23 @@
 										</tr>
 										<tr>
 											<td>공연날짜</td>
-											<td><fmt:formatDate value="${DBean.today}" type="date" dateStyle="full" /></td>
+											<td><fmt:formatDate value="${DBean.today}" type="date"
+													dateStyle="full" /></td>
 										</tr>
 										<tr>
 											<td>시작시간</td>
-											<td>${fn:split(DBean.starttime,':')[0]}시 ${fn:split(DBean.starttime,':')[1]}분</td>
+											<td>${fn:split(DBean.starttime,':')[0]}시
+												${fn:split(DBean.starttime,':')[1]}분</td>
 										</tr>
 										<tr>
 											<td>가격</td>
-											<td><fmt:formatNumber value="${DBean.price}" pattern="#,###" />원</td>
+											<td><fmt:formatNumber value="${DBean.price}"
+													pattern="#,###" />원</td>
 
 										</tr>
 										<tr>
 											<td>예매수</td>
-											<td>
-												<select id="count" name="count" onchange="getValue()">
+											<td><select id="count" name="count">
 
 													<c:choose>
 														<c:when test="${(DBean.seat-DBean.totalreserved) > 4}">
@@ -200,142 +216,81 @@
 														</c:when>
 													</c:choose>
 
-												</select>
-											</td>
+											</select></td>
 										<tr>
 										<tr>
 											<td>총가격</td>
 
-											<td id="total"><fmt:formatNumber value="${DBean.price}" pattern="#,###" />원</td>
+											<td id="total"><fmt:formatNumber value="${DBean.price}"
+													pattern="#,###" />원</td>
+										</tr>
 										<tr>
-										<tr>
+											<td>좌석선택</td>
 											<td>
-												<p align = "center">
-											
-											<strong>좌석 배치도</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;
-											</td>
-											<td>&nbsp;&nbsp;&nbsp;
-											<!-- <c:set var="alphabet" value="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26"/> -->
-											<c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"/>
-											<c:set var="number" value="1,2,3,4,5,6,7,8,9"/>
-											<c:forTokens items="${alphabet}" delims="," var="letter"  >
-												<font size="2.95em">${letter}</font>&nbsp;
-											</c:forTokens>
-											<br>
-											1<c:forEach begin="1" end="234" var="i">
-												<input type="checkbox" name="seat" value="${i}" id="seat" onclick="check()">
-												<c:choose>
-													<c:when test="${i eq 234 }">
-														<br>
-													</c:when>
-													<c:when test="${i eq 208 }">
-														<br>9
-													</c:when>
-													<c:when test="${i eq 182 }">
-														<br>8
-													</c:when>
-													<c:when test="${i eq 156 }">
-														<br>7
-													</c:when>
-													<c:when test="${i eq 130 }">
-														<br>6
-													</c:when>
-													<c:when test="${i eq 104 }">
-														<br>5
-													</c:when>
-													<c:when test="${i eq 78 }">
-														<br>4
-													</c:when>
-													<c:when test="${i eq 52 }">
-														<br>3
-													</c:when>
-													<c:when test="${i eq 26 }">
-														<br>2
-													</c:when>
-												</c:choose>
-											</c:forEach> 
-						<script>
-							//html이 다 로딩된 후에 실행
-							$(document).ready(function(){	
-								//체크박스들이 변경되었을 때
-								$(":checkbox").change(function(){	
-									var cnt = $("#count").val();
-									
-									
-								//셀렉트박스의 값과 체크박스중 체크된 갯수가 같을때, 다른 체크박스들을 disabled처리함
-									if(cnt == $(":checkbox:checked").length){
-										$(":checkbox:not(:checked)").attr("disabled","disabled");
-										$("#submit").attr("disabled",false);
-									}else{	//체크된 갯수가 다르면 활성화 시킴
-										$(":checkbox").removeAttr("disabled");
-										$("#submit").attr("disabled",true);
-									}
-									
-									<c:forEach items="${selseat}" var="vo">
-										<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
-
-													var select = eval("document.selectform");
-													var checked = document.getElementsByName("seat");
-													for(var i=0; i<select.seat.length; i++){
-														if(checked[i].value == ${cseat}){
-															checked[i].disabled = true;
-														}
-													}
-										 			
-										</c:forTokens>
-									</c:forEach>				
-								});
-								
-								//셀렉트박스에서 다른 인원수를 선택하면 초기화를 시킴
-								$("#count").change(function(){
-									$(":checkbox").removeAttr("checked");
-									$(":checkbox").removeAttr("disabled");
-									
-									<c:forEach items="${selseat}" var="vo">
-									<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
-
-												var select = eval("document.selectform");
-												var checked = document.getElementsByName("seat");
-												for(var i=0; i<select.seat.length; i++){
-													if(checked[i].value == ${cseat}){
-														checked[i].disabled = true;
-													}
-												}
+												<p>좌석 배치도</p>
 												
-									</c:forTokens>
-								</c:forEach>	
-									
-								});
-							});
-						
-						
-						</script>						
+												<table align="center">
+													<c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T"/>
+												
+													<tr>
+														<td style="float: left; margin-left: 10px;"></td>
+														<c:forTokens items="${alphabet}" delims="," var="letter">
+														<c:forEach var="i" items="${letter}">
+															<td>${i}</td>
+														</c:forEach>
+														</c:forTokens>
+													</tr>
 
-							<c:forEach items="${selseat}" var="vo">
-									<c:forTokens items="${vo.selectseat}" delims="," var="cseat">
 
-														<script>
-													
+													<c:forEach begin="1" end="${DBean.seat}" varStatus="num">
+														<fmt:parseNumber var="titlenum" value="${(num.count+19)/20}" integerOnly="true" />
+														<c:choose>
+															<c:when test="${num.count%20==1}">
+																<tr>
+																	<td>${titlenum}</td>
+															</c:when>
+														</c:choose>
+														<c:forTokens items="${alphabet}" delims="," var="letter">
+														
+															<c:choose>
+																<c:when test="${num.count%20==1}">
+																	<td><input type="checkbox" name="seat" value="${letter}${titlenum}" onclick="check()"></td> 
+																		<%-- <td>${letter}${titlenum}</td> --%>
+																</c:when>
+															</c:choose>
 
-													var select = eval("document.selectform");
-													var checked = document.getElementsByName("seat");
-													for(var i=0; i<select.seat.length; i++){
-														if(checked[i].value == ${cseat}){
-															checked[i].disabled = true;
-														}
-													}
-												</script>
-								</c:forTokens>
-							</c:forEach> 
-							<br>
-											${chseat}
-											
+														</c:forTokens>
+														<c:choose>
+															<c:when test="${num.count%20==0}">
+																</tr>
+															</c:when>
+														</c:choose>
+
+													</c:forEach>
+
+												</table>						
 											</td>
-										<tr>		
-										 
+										</tr>
 									</table>
-									
-								<%-- <c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,G,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"/>
+
+
+									<script>
+										var seat = document.getElementsByName("seat");
+										var before = "${chseat}";
+										var reseat = before.split(',');
+
+					 					for(var i=0;seat.length;i++){
+					 						for(var j=0;j<reseat.length;j++){
+					 							if(seat[i].value == reseat[j]){
+					 								seat[i].disabled = true;
+					 							}
+											}
+										}
+									</script>
+
+
+
+									<%-- <c:set var="alphabet" value="A,B,C,D,E,F,G,H,I,G,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"/>
 								<c:forTokens items="${alphabet}" delims="," var="letter"  >
 									${letter}
 								</c:forTokens> --%>
