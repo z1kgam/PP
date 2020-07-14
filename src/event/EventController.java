@@ -53,7 +53,7 @@ public class EventController extends HttpServlet{
 			
 			int total = eventDAO.getAllEvent();
 			
-			int pageSize = 5;
+			int pageSize = 12;
 			int nowPage = 1;
 			if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
 			

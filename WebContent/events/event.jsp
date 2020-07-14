@@ -20,7 +20,7 @@
 <meta charset="UTF-8">
 <title>이벤트 페이지</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
+<!-- 
 <script>
 
 	console.log("처음로드"); 
@@ -42,7 +42,7 @@
 		} document.onkeydown = noRefresh; 
 
 </script>
-
+ -->
 
 
 </head>
