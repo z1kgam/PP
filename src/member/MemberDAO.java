@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -534,6 +535,128 @@ public class MemberDAO {
 		return result;
 	}
 	
+	//입금확인요청이 들어왔을때 p_status 를 1로 point테이블에 insert시킴
+	public void addpoint1(String id, String name, int point) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		try {
+			con = getConnection();
+			sql = "INSERT INTO POINT(id, name, point, p_status) VALUES (?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			pstmt.setInt(3, point);
+			pstmt.setInt(4, 1);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("addpoint1 Inner Err : " + e);
+		} finally {
+			try {
+				if(con!=null)con.close();
+				if(pstmt!=null)pstmt.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
+	//해당 아이디에 포인트를 추가함
+	public void updatePoint(String id, int point, int num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		try {
+			con = getConnection();
+			sql = "UPDATE USERS SET POINT = POINT + ? WHERE ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, point);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+			
+			sql = "UPDATE POINT SET P_STATUS = 2 WHERE ID = ? AND NUM = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("updatePoint Inner Err : " + e);
+		} finally {
+			try {
+				if(con!=null)con.close();
+				if(pstmt!=null)pstmt.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
+	//포인트 충전신청을한 id들 전체 내역조회(페이징)
+	public int getPointTotal() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql ="";
+		int total = 0;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			sql = "SELECT COUNT(*) FROM POINT";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println("getCountCartList Inner Err : " + e);
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return total;
+	}
+	
+	
+	//포인트충전 신청한 리스트
+	public List<LikeBean> getPointList(int pageFirst, int pageSize) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		ResultSet rs = null;
+		List pointList = new ArrayList();
+		try {
+			con = getConnection();
+			sql = "SELECT * FROM POINT";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MemberBean memberBean = new MemberBean();
+				memberBean.setId(rs.getString("id"));
+				memberBean.setName(rs.getString("name"));
+				memberBean.setPoint(rs.getInt("point"));
+				memberBean.setP_status(rs.getInt("p_status"));
+				memberBean.setNum(rs.getInt("num"));
+				pointList.add(memberBean);
+			}
+		} catch (Exception e) {
+
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return pointList;
+	}
+	
+	
 	public int updatetest(MemberBean memberBean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -560,6 +683,31 @@ public class MemberDAO {
 		}
 		return result;
 	}
+	
+	//입금신청 내역 삭제
+	public void delPoint(String id, int num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		try {
+			con = getConnection();
+			sql = "DELETE FROM POINT WHERE ID = ? AND NUM = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("delPoint Inner Err : " + e);
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
 	
 	
 }

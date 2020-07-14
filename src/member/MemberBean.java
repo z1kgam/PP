@@ -21,7 +21,8 @@ public class MemberBean {
 	private String Laddress1;
 	private String Laddress2;
 	private String rpname;
-	
+	private int p_status; 
+	private int num;
 			
 	public String getId() {
 		return id;
@@ -124,6 +125,18 @@ public class MemberBean {
 	}
 	public void setRpname(String rpname) {
 		this.rpname = rpname;
+	}
+	public int getP_status() {
+		return p_status;
+	}
+	public void setP_status(int p_status) {
+		this.p_status = p_status;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	

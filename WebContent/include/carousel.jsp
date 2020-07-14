@@ -7,6 +7,17 @@
   <title>CodePen - Carousel</title>
   <link rel="stylesheet" href="../css/caro-style.css">
 
+
+
+<style>
+#prev:hover{background-color: #fff !important; color: #EB008B !important;}
+#next:hover{background-color: #fff !important; color: #00E7D6 !important;}
+
+</style>
+
+
+
+
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -47,8 +58,8 @@
     </div>
 
     <div class="buttons" style="position: relative; top: 50px;">
-      <button id="prev" class="btn btn-outline-primary">Prev</button>
-      <button id="next" class="btn btn-outline-primary">Next</button>
+      <button id="prev" class="btn btn-outline-primary" style="background-color: #EB008B; border-color: #EB008B; color: #fff;">Prev</button>
+      <button id="next" class="btn btn-outline-primary" style="background-color: #00E7D6; border-color: #00E7D6; color: #fff;">Next</button>
     </div>
 
 
