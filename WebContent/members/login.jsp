@@ -7,6 +7,14 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+
+<style>
+#login:hover {color: #fff;}
+
+ 
+</style>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +26,7 @@
     <title>bootstrap template</title>
 
 
-<style>
-.btn btn-primary:hover {color: #fff !important;}
 
- 
-</style>
 
 
 
@@ -114,7 +118,7 @@ $(document).ready(function(){
 
 	<div class="page-header" style="padding-top: 50px;">
 	<hr/>
-		<h2>로그인 화면 </h2>
+		<h2 style="margin-bottom: 50px;">Login Page </h2>
 	</div>
 
 	<div class="col-md-6 col-md-offset-3">
@@ -131,7 +135,7 @@ $(document).ready(function(){
 			
 			<div class="form-group text-center">
 				<input type="checkbox" class="checkbox" id="idSaveCheck">아이디 기억하기	
-				<input type="submit" value="로그인" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important;">
+				<input type="submit" value="로그인" id="login" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important;">
 			</div>
 			<label for="username"><a href="${contextPath}/member/findId.do" style="color: #3d435c; "><b>아이디/비밀번호 찾기</b></a></label><br>
 			<label for="username" style=" padding-bottom: 50px;"><a href="${contextPath}/member/join.do" style="color: #3d435c;"><b>회원가입 하러 가기</b></a></label>

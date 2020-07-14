@@ -541,7 +541,7 @@ color:#ff0;
   			<div class="row m-auto">
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
-  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 10px; margin-top: 20px;" ><img src="images/tclogo.png"" alt="tlogo" style=" max-height: 120px;"></a> 
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-height: 120px;"></a> 
   					
   					
   					
