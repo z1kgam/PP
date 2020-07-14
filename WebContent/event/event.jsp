@@ -70,7 +70,7 @@
 					<c:forEach var="event" items="${eventList}" varStatus="status">
 						<div class="gallery-grid-item">
 	 						<a href="${contextPath}/ev/viewEvent.do?e_num=${event.e_num}">
-	 							<img src="${contextPath}/event/image/${event.e_file}">
+	 							<img src="${contextPath}/event/image/${event.e_file}"><br>
 							</a>
 							<small>${event.e_title}</small><br>
 							<small>${event.e_startdate}</small>&nbsp;~&nbsp;<small>${event.e_enddate}</small>

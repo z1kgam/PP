@@ -167,7 +167,8 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
-  max-width: 100% }
+  max-width: 100% ;
+  width: 300px;}
 
 svg {
   overflow: hidden;

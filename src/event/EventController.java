@@ -2,6 +2,7 @@ package event;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Enumeration;
 import java.util.List;
@@ -21,10 +22,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class EventController extends HttpServlet{
 	
 	EventBean ebean;
-	
-	
-//	private static String ARTICLE_IMAGE_REPO= "D"
-	
+		
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -52,7 +50,7 @@ public class EventController extends HttpServlet{
 			int total = edao.getAllEvent();
 			System.out.println(total);
 			
-			int pageSize = 5;
+			int pageSize = 8;
 			int nowPage = 1;
 			if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
 			
@@ -119,10 +117,11 @@ public class EventController extends HttpServlet{
 
 		//이벤트 글 상세보기	
 		}else if(action.equals("/viewEvent.do")) {
+			checkPage = 1;	
 			String e_num = request.getParameter("e_num");
 			
 			ebean = edao.viewEvent(Integer.parseInt(e_num));
-			request.setAttribute("event", ebean);
+			request.getSession().setAttribute("event", ebean);
 			System.out.println(ebean.getE_enddate());
 			
 			nextPage = "/event/viewEvent.jsp";
@@ -132,6 +131,7 @@ public class EventController extends HttpServlet{
 			System.out.println(e_num);
 			edao.deleteEvent(e_num);
 			
+			
 			nextPage = "/ev/listEvent.do";
 		
 		//이벤트 글 수정페이지 이동
@@ -140,7 +140,6 @@ public class EventController extends HttpServlet{
 	         ebean = edao.viewEvent(Integer.parseInt(e_num));
 	         
 	         request.setAttribute("event", ebean);
-	         
 	         nextPage = "/event/modEvent.jsp";			
 			
 		//이벤트 글 수정	
