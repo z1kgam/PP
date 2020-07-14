@@ -82,7 +82,7 @@
 						info += "<td>${Bean.name}</td>";
 						info += "<td>"+List[i].today+"</td>";
 						info += "<td>"+List[i].starttime+"</td>";
-						info += "<td>"+Able+"</td>";
+						info += "<td>"+	+"</td>";
 						info += "<td>"+List[i].seat+"</td>";
 						info += "<td>"+List[i].place+"</td>";
 						if(Able > 0){

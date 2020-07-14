@@ -71,22 +71,14 @@
 			function getValue() {
 				var count = Number(document.getElementById("count").value);
 				var price = Number(${DBean.price});
-				var seat = document.getElementsByName("seat");
+				
 				var Max = price*count;
 				var List = String(${alist}).split(',');
 				
 				var print = Max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
 				$("#total").text(print);
 				document.getElementById("totalprice").value = Max;
-				
-				for(var i=0;i<seat.length;i++){
-					seat[i].disabled = false;
-					seat[i].checked = false;
-				}
-				
-				for(var i=0;i<List.length;i++){
-					seat[Number(List[i])-1].disabled = true;
-				}
+			
 			}
 
 		</script>
