@@ -298,7 +298,7 @@ body {
   					
   					
  				
- <table style="width:300px; height: 100px;  border-collapse: separate;	
+<%--  <table style="width:300px; height: 100px;  border-collapse: separate;	
     border-spacing: 1px; margin: 100px; text-align: center; float: right; margin-top: -100px; font-size: 12px;">
     
   <c:if test="${id!=null}">
@@ -346,7 +346,7 @@ body {
         </tr>
 
 </c:if>
-</table>
+</table> --%>
   					
 	
   					
