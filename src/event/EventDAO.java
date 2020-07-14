@@ -28,6 +28,28 @@ public class EventDAO {
 		
 	}
 	
+	public int getAllEvent() {
+		int count = 0;
+		String sql = "";
+		try {
+			con = getConnection();
+			sql = "select * from event";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				count ++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null) try{rs.close();}catch(Exception e) {e.printStackTrace();}
+			if(pstmt != null) try{pstmt.close();}catch(Exception e) {e.printStackTrace();}
+			if(con != null) try{con.close();}catch(Exception e) {e.printStackTrace();}
+		}
+		
+		return count;
+	}
+	
 	public void insertevent(EventBean eventBean) {
 		String sql = "";
 		int event_num = 0;
@@ -108,17 +130,18 @@ public class EventDAO {
 	
 	
 	
-	public List<EventBean> getList() {
+	public List<EventBean> getList(int pageFirst, int pageSize) {
 		String sql = "";
 		List<EventBean> list = new ArrayList<EventBean>();
 		
 		try {
 			con = getConnection();
 			
-			sql = "select * from event";
+			sql = "select * from event order by event_num desc limit ?,?";
 			
 			pstmt = con.prepareStatement(sql);
-			
+			pstmt.setInt(1, pageFirst);
+			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -190,7 +213,7 @@ public class EventDAO {
 			con = getConnection();
 			
 			sql = "update event set event_title=?, event_image=?, event_timage=?"
-				+ ", event_content, event_startdate, event_enddate where event_num=?";
+				+ ", event_content=?, event_startdate=?, event_enddate=? where event_num=?";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, eventBean.getEvent_title());

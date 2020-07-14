@@ -51,8 +51,27 @@ public class EventController extends HttpServlet{
 		
 		if(action.equals("/events.do")) { //이벤트 페이지
 			
-			List<EventBean> list = eventDAO.getList();
+			int total = eventDAO.getAllEvent();
+			
+			int pageSize = 5;
+			int nowPage = 1;
+			if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+			
+			int pageFirst = (nowPage-1) * pageSize;
+			int totalPage = total/pageSize + (total%pageSize==0?0:1);
+			int blockSize = 10;
+			int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+			int blockLast = blockFirst + blockSize -1;
+			
+			if(blockLast>totalPage) blockLast = totalPage;
+			
+			List<EventBean> list = eventDAO.getList(pageFirst, pageSize);
 			request.setAttribute("list", list);
+			request.setAttribute("blockSize", blockSize);
+			request.setAttribute("blockFirst", blockFirst);
+			request.setAttribute("blockLast", blockLast);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("nowPage", nowPage);
 			
 			nextPage = "/events/event.jsp";
 			
