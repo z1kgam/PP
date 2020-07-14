@@ -656,6 +656,34 @@ public class MemberDAO {
 		return pointList;
 	}
 	
+	
+	public int updatetest(MemberBean memberBean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql ="";
+		int result = 0;
+		try {
+			con =getConnection();
+			sql = "update users set point = ? where id = ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, memberBean.getPoint());
+			pstmt.setString(2, memberBean.getId());
+			
+			result = pstmt.executeUpdate(); 
+			
+		} catch (Exception e) {
+			System.out.println("updateMember Inner Err : " + e);
+		} finally {
+			try {
+				if(con!=null) con.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	//입금신청 내역 삭제
 	public void delPoint(String id, int num) {
 		Connection con = null;
@@ -679,5 +707,7 @@ public class MemberDAO {
 			}
 		}
 	}
+	
+	
 	
 }
