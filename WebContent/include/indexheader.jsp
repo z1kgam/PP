@@ -315,7 +315,18 @@ body {
   		 </c:when>
    </c:choose>
         </td>
-	<td colspan="2" style="width: 100px;"><span id="counter"> </span> 후 자동로그아웃 <input type="button" class="btn btn-primary" value="연장" onclick="counter_reset()"></td>
+	<td colspan="2"> 장바구니
+			<span style="color:white; size:16;" class="icon icon-shopping-cart" size="25"> </span> 
+			: <a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}" class="ah">
+			<c:if test="${empty cartList}">				
+				0
+			</c:if>
+			
+			<c:if test="${!empty cartList}">				
+				${sessionScope.cartcount}
+			</c:if>
+			</a>
+		</td>
 	
     </tr>
     <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
