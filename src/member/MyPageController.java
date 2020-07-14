@@ -67,6 +67,7 @@ public class MyPageController extends HttpServlet{
 		if(action.equals("/mypageForm.do")) { //마이페이지폼 이동
 			
 			String id = (String)session.getAttribute("id");
+			String name = (String)session.getAttribute("name");
 			List<OrderVO> cartList = orderDAO.getCartList(id);
 			int payCount = orderDAO.getCountPay(id);
 			int cartCount = orderDAO.getCountCartList(id);
@@ -124,10 +125,24 @@ public class MyPageController extends HttpServlet{
 			
 			nextPage = "/Proser/content.do?num="+num;
 			
+		}else if(action.equals("/addpointForm.do")){ // 포인트충전 페이지로 이동
+
+			nextPage= "/mypage/point.jsp";
+			
+		}else if(action.equals("/addpoint.do")) { //입금확인요청 버튼을 눌렀을 때
+			
+			String id = request.getParameter("id");
+			String name = request.getParameter("name");
+			int point = Integer.parseInt(request.getParameter("point"));
+			
+			MemberBean pointBean = new MemberBean();
+			MemberDAO memberDAO = new MemberDAO();
+			
+			memberDAO.addpoint1(id, name, point); //입금확인 요청시 point테이블에 insert
+			
+			nextPage = "/mypage/mypage.jsp";
+			
 		}
-		
-		
-		
 		
 		if(check == 0) {
 			request.getRequestDispatcher(nextPage).forward(request, response);

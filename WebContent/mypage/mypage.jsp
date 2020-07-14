@@ -43,6 +43,9 @@
 		            <div class="col-md-12 mb-3">
 		              <p style="font-size: 16px;"><a href="${contextPath}/Order/payList.do">결제내역보기</a></p>
 		            </div>
+		            <div class="col-md-12 mb-3">
+		              <p style="font-size: 16px;"><a href="${contextPath}/mycon/addpointForm.do">포인트충전</a></p>
+		            </div>
 				</div>
 			</div>  
 			

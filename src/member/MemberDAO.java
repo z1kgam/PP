@@ -534,4 +534,30 @@ public class MemberDAO {
 		return result;
 	}
 	
+	//입금확인요청이 들어왔을때 p_status 를 1로 point테이블에 insert시킴
+	public void addpoint1(String id, String name, int point) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		try {
+			con = getConnection();
+			sql = "INSERT INTO POINT(id, name, point, p_status) VALUES (?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			pstmt.setInt(3, point);
+			pstmt.setInt(4, 1);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("addpoint1 Inner Err : " + e);
+		} finally {
+			try {
+				if(con!=null)con.close();
+				if(pstmt!=null)pstmt.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
 }
