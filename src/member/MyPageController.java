@@ -78,10 +78,9 @@ public class MyPageController extends HttpServlet{
 			/* check = 1; */
 		}else if(action.equals("/likelistForm.do")) { //좋아요 목록
 			
-			  int num = Integer.parseInt(request.getParameter("num"));
 			  String id = (String)session.getAttribute("id");
 			  
-			  int total = likeDAO.getTotal(num,id); 
+			  int total = likeDAO.getTotal(id); 
 			  int pageSize = 5; 
 			  int nowPage = 1;
 			  if(request.getParameter("nowPage") != null) {
@@ -108,10 +107,12 @@ public class MyPageController extends HttpServlet{
 			
 			int num = Integer.parseInt(request.getParameter("num"));
 			String id = request.getParameter("id");
+			String name = request.getParameter("name");
+			String image = request.getParameter("image");
 			boolean checkZ = likeDAO.checkLike(num, id);
 			int likeCount = likeDAO.getProductTotalLike(num);
 			if(checkZ == false) {
-				likeDAO.addLike(num, id);
+				likeDAO.addLike(num, id, name, image);
 			}else {
 				likeDAO.delLike(num, id);
 			}

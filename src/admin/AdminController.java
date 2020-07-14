@@ -85,7 +85,6 @@ public class AdminController extends HttpServlet{
 				
 			//회원정보 전체 조회
 			} else if(action.equals("/MemberManager.do")) {
-				System.out.println("취소");
 				//회원 아이디 검색값 받아오기
 				String search = "";
 				if(request.getParameter("search")==null) {
@@ -659,8 +658,6 @@ public class AdminController extends HttpServlet{
 
 				nextPage = "/admins/AproductDetail.jsp";
 				
-<<<<<<< HEAD
-=======
 			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
 //				JSONObject jobj = new JSONObject();
 //				jobj.put("url", uploadPath1);
@@ -717,10 +714,8 @@ public class AdminController extends HttpServlet{
 		         
 		         nextPage = "/admins/AqnaModify.jsp";
 		         
->>>>>>> 1e6a3c2effe9469946cb09a54c0c03d3b70493f0
 			//상품 상세 등록 페이지
 			} else if(action.equals("/AdetailsPro.do")) {
-				System.out.println("ㅋㅋㅋ");
 				
 				ProductBean productBean = new ProductBean();
 				ProductDAO dao = new ProductDAO();
@@ -736,7 +731,6 @@ public class AdminController extends HttpServlet{
 				int totalreserved = 0;
 				Date today = Date.valueOf(request.getParameter("today"));
 				String starttime = request.getParameter("starttime");
-				
 
 				Bean = new DetailBean();
 				Bean.setName(productBean.getName());
@@ -755,8 +749,6 @@ public class AdminController extends HttpServlet{
 				Bean.setStarttime(starttime);
 
 				Ddao.insertDetail(Bean);
-				
-				 
 				
 				nextPage = "/admin/AproductMain.do";
 				
