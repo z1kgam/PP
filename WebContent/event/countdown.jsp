@@ -6,7 +6,7 @@
 	<script type="text/javascript" id="timer">
 	CountDownTimer('07/10/2020', 'countdown');
 	CountDownTimer('7/7/2020 5:00 PM', 'HourCountdown');
-	CountDownTimer('7/7/2020', 'countExpire');
+	CountDownTimer('7/15/2020', 'countExpire');
 	function CountDownTimer(dt, id) {
 		var end = new Date(dt);
 	    var _second = 1000;
