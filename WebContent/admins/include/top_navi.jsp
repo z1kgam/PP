@@ -26,16 +26,6 @@
 			<nav class="navbar navbar-header navbar-expand-lg">
 				<div class="container-fluid">
 					
-					<form class="navbar-left navbar-form nav-search mr-md-3" action="">
-						<div class="input-group">
-							<input type="text" placeholder="Search ..." class="form-control">
-							<div class="input-group-append">
-								<span class="input-group-text">
-									<i class="la la-search search-icon"></i>
-								</span>
-							</div>
-						</div>
-					</form>
 					
 					<button type="button" onclick="location.href='${contextPath}/index.jsp'" >메인버튼</button>
 					
@@ -184,41 +174,7 @@
 								<span class="badge badge-count">5</span>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="${contextPath}/admins/components.html">
-								<i class="la la-table"></i>
-								<p>Components</p>
-								<span class="badge badge-count">14</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="${contextPath}/admins/forms.html">
-								<i class="la la-keyboard-o"></i>
-								<p>Forms</p>
-								<span class="badge badge-count">50</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="${contextPath}/admins/tables.html">
-								<i class="la la-th"></i>
-								<p>Tables</p>
-								<span class="badge badge-count">6</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="${contextPath}/admins/notifications.html">
-								<i class="la la-bell"></i>
-								<p>Notifications</p>
-								<span class="badge badge-success">3</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="${contextPath}/admins/typography.html">
-								<i class="la la-font"></i>
-								<p>Typography</p>
-								<span class="badge badge-danger">25</span>
-							</a>
-						</li>
+						
 						  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted te" >
         			  <span style="font-size: 12px;">고객 센터 관리</span>
           			<a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
@@ -226,7 +182,7 @@
          			 </a>
        				 </h6>
        				 	<li class="nav-item active">
-							<a href="#">
+							<a href="${contextPath}/admin/AfaqMain.do">
 								<i class="la la-clipboard"></i>
 								<p>FAQ 관리</p>
 								<span class="badge badge-count">5</span>
@@ -254,18 +210,7 @@
 								<span class="badge badge-count">5</span>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="#">
-								<i class="la la-fonticons"></i>
-								<p>Icons</p>
-							</a>
-						</li>
-						<li class="nav-item update-pro">
-							<button  data-toggle="modal" data-target="#modalUpdate">
-								<i class="la la-hand-pointer-o"></i>
-								<p>Update To Pro</p>
-							</button>
-						</li>
+					
 					</ul>
 					
 					
