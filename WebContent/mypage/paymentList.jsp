@@ -19,6 +19,55 @@
 		color:blue;
 		text-decoration: none;
 	}
+	
+	.page_wrap{
+		text-align: center;
+		font-size: 0;
+	}
+	
+	.page_nation{
+		display: inline-block;
+	}
+	
+	.page_nation .none{
+		display: none;
+	}
+	
+	.page_nation a{
+		display: block;
+		margin: 0 3px;
+		float: left;
+		border: 1px solid #e6e6e6;
+		width: 28px;
+		height: 28px;
+		line-height: 28px;
+		text-align: center;
+		background-color: #fff;
+		font-size: 13px;
+		color: #999999;
+		text-decoration: none;
+	}
+	
+	.page_nation .arrow{
+		border: 1px solid #ccc;
+	}
+	.page_nation .prev{
+		background: #f8f8f8 url('img/page_prev.png') no-repeat center center; 
+	}
+	.page_nation .next{
+		background: #f8f8f8 url('img/page_next.png') no-repeat center center;
+	}
+	
+	.page_nation a.active{
+		background-color: #42454c;
+		color: #fff;
+		border: 1px solid #42454c;
+	}
+	
+	.page_nation a:hover{
+		color: #ggg;
+	}
+	
 </style>
 <script type="text/javascript">
 	function btnPayAlldel(){
@@ -77,7 +126,28 @@
 	 		<button type="button" onclick="btnPayAlldel()" class="btn btn-primary pull-right">결제내역 삭제하기</button>			
 	 	</div>
 	 </div>
-	
+	<div class="page_wrap">
+		<div class="page_nation">
+			<c:if test="${nowPage > blockSize }">
+				<a href="location.href='${contextPath}/Order/payList.do?nowPage=${blockFirst-blockSize}'" class="arrow prev"></a>
+			</c:if>
+			
+			<c:forEach begin="${blockFirst}" end="${blockLast}" var="i">
+				<c:choose>
+					<c:when test="${i eq nowPage}">
+						<a href="${contextPath}/Order/payList.do?nowPage=${i}" class="active">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="${contextPath}/Order/payList.do?nowPage=${i}">${i}</a>
+					</c:otherwise>
+				</c:choose>			
+			</c:forEach>
+			
+			<c:if test="${blockLast != totalPage}">
+				<a href="location.href='${contextPath}/Order/payList.do?nowPage=${blockLast+1}'" class="arrow next"></a>
+			</c:if>
+		</div>
+	</div>
 
 
 

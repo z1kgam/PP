@@ -35,7 +35,7 @@
 		              <p style="font-size: 16px;"><a href="${contextPath}/member/address.do">배송지 관리</a></p>
 		            </div>
 		            <div class="col-md-12 mb-3">
-		              <p style="font-size: 16px;"><a href="#">좋아요 리스트</a></p>
+		              <p style="font-size: 16px;"><a href="${contextPath}/mycon/likelistForm.do">좋아요 리스트</a></p>
 		            </div>
 		            <div class="col-md-12 mb-3">
 		              <p style="font-size: 16px;"><a href="${contextPath}/Order/cartList.do">장바구니</a></p>

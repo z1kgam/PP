@@ -137,12 +137,32 @@ public class OrderController extends HttpServlet{
 
 			String id = (String)session.getAttribute("id");
 			
-			List<OrderVO> cartList = orderDAO.getCartList(id);
+			
 			int cartcount =orderDAO.getCountCartList(id);
 			int total = orderDAO.getTotalPrice(id);
+			
+			int pageSize = 5;
+			int nowPage = 1;
+			if(request.getParameter("nowPage") != null) {
+				nowPage = Integer.parseInt(request.getParameter("nowPage"));
+			}
+			int pageFirst = (nowPage - 1) * pageSize;
+			int totalPage = total / pageSize + (total % pageSize == 0 ? 0 : 1);
+			int blockSize = 10;
+			int blockFirst = (nowPage / blockSize - (nowPage % blockSize == 0? 1: 0)) * blockSize + 1 ;
+			int blockLast = blockFirst + blockSize - 1;
+			if(blockLast > totalPage) {
+				blockLast = totalPage;
+			}
+			List<OrderVO> cartList = orderDAO.getCartList(id, pageFirst, pageSize);
 			session.setAttribute("cartList", cartList);
 			session.setAttribute("cartcount", cartcount);
 			session.setAttribute("total", total);
+			request.setAttribute("blockSize", blockSize);
+			request.setAttribute("blockFirst", blockFirst);
+			request.setAttribute("blockLast", blockLast);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("nowPage", nowPage);
 			
 			nextPage = "/mypage/cartList.jsp";
 	
@@ -213,10 +233,33 @@ public class OrderController extends HttpServlet{
 			
 		}else if(action.equals("/payList.do")) { // 내 결제내역보기
 			String id = (String)session.getAttribute("id");
-			List<OrderVO> paymentList = orderDAO.getPaymentList(id);
+			
+			int total = orderDAO.getCountPay(id); 
+			
+			int pageSize = 5;
+			int nowPage = 1;
+			if(request.getParameter("nowPage") != null) {
+				nowPage = Integer.parseInt(request.getParameter("nowPage"));
+			}
+			int pageFirst = (nowPage - 1) * pageSize;
+			int totalPage = total / pageSize + (total % pageSize == 0 ? 0 : 1);
+			int blockSize = 10;
+			int blockFirst = (nowPage / blockSize - (nowPage % blockSize == 0 ? 1 : 0)) * blockSize + 1;
+			int blockLast = blockFirst + blockSize - 1;
+			if(blockLast > totalPage) {
+				blockLast = totalPage;
+			}
+			
+			List<OrderVO> paymentList = orderDAO.getPaymentList(id, pageFirst, pageSize);
 			int totalpayprice = orderDAO.getTotalPayPrice(id);
 			request.setAttribute("paymentList", paymentList);
 			request.setAttribute("totalpayprice", totalpayprice);
+			request.setAttribute("blockSize", blockSize);
+			request.setAttribute("blockFirst", blockFirst);
+			request.setAttribute("blockLast", blockLast);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("nowPage", nowPage);
+			
 			nextPage = "/mypage/paymentList.jsp";
 			
 		}else if(action.equals("/paydel.do")) {	//결제내역에서 해당 id의 결제번호에 해당하는 내역 삭제
