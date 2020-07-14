@@ -44,10 +44,20 @@ function checkAuthNum(){
 </head>
 <body>
 
+<jsp:include page="../include/header.jsp" />
+
+
 
       <article class="container">
-        <div class="page-header">
+      
+      <div class="page-header" style="margin-top: 50px;">
+          
+          <h1>Certification</h1>
+        </div>
         <hr/>
+      
+      
+      
         <div class="col-md-6 col-md-offset-3">
           <form role="form" action="${contextPath}/member/updatePass.do" method="post" name="pwCheckForm">        
             <div class="form-group">
@@ -59,13 +69,15 @@ function checkAuthNum(){
              	<label for="username">인증번호를 입력해주세요.</label>
              	<input type="text" name="authNum" id="authNum" placeholder="인증번호를 입력하세요" class="form-control">             	
             </div>
-            <div class="form-group text-center">
-              <button type="button" class="btn btn-primary" onclick="checkAuthNum()">확인</button>
-              <button type="button" class="btn btn-warning" onclick="location.href='${contextPath}/member/login.do'">로그인하러 가기</button>
+            <div class="form-group text-center" style="margin-top:50px; margin-bottom: 100px;">
+              <button type="button" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;" onclick="checkAuthNum()">확인</button>
+              <button type="button" class="btn btn-primary" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important;" onclick="location.href='${contextPath}/member/login.do'">로그인하러 가기</button>
             </div>
           </form>
         </div>
       </article>
+      
+      <jsp:include page="../include/footer.jsp" />
 
 </body>
 </html>

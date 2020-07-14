@@ -35,23 +35,23 @@
         <div class="row d-flex">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Meditative</h2>
+              <h2 class="ftco-heading-2">티켓팅 사이트</h2>
               <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
               <ul class="ftco-footer-social list-unstyled float-lft mt-3">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a href="#" style="background-color: #EB008B;"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#" style="background-color: #00E7D6;"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#" style="background-color: #D8FF54;"><span class="icon-instagram"></span></a></li>
               </ul>
             </div>
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4 ml-md-4">
-              <h2 class="ftco-heading-2">Popular Links</h2>
+              <h2 class="ftco-heading-2">이용약관</h2>
               <ul class="list-unstyled">
-                <li><a href="#">Yoga for Beginners</a></li>
-                <li><a href="#">Yoga for Pregnant</a></li>
-                <li><a href="#">Yoga Barre</a></li>
-                <li><a href="#">Yoga Advance</a></li>
+                <li><a href="../caution1.jsp">예매취소 시 유의사항</a></li>
+                <li><a href="../caution2.jsp">환불안내</a></li>
+                <li><a href="../caution3.jsp">무통장입금 시 주의사항</a></li>
+               
               </ul>
             </div>
           </div>
@@ -116,5 +116,7 @@
   <script src="../js/bootstrap-datepicker.js"></script>
   <script src="../js/jquery.timepicker.min.js"></script>
   <script src="../js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="../js/google-map.js"></script>
   <script src="../js/main.js"></script>
     
