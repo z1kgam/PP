@@ -26,7 +26,7 @@
 	<script type="text/javascript">
 	
 	function te33(runstatus1, num) {
-		alert(runstatus1);
+		
 		
 		var runstatus = 0;
 		
@@ -43,10 +43,13 @@
 			contentType : false,
 			processData : false,
 			error : function() {
-				alert("통신실패!!");
+				 
+				setTimeout(function(){
+					location.reload();
+					},100); // 3000밀리초 = 3초
 				
 			},
-			succes: function() {
+			succes: function(data) {
 				alert("여 왔다");
 				var aa = JSON.parse(JSON.stringify(data));
 				var bb = aa.List;
@@ -119,9 +122,16 @@
 										
 										<!-- 버튼 -->
 										<div class="form-button-action">
+										<c:if test="${productlist.runstatus == 0}">
 											<td>
-												<input type="checkbox" checked data-toggle="toggle" data-onstyle="default" data-style="btn-round" onchange="te33(${productlist.price}, ${productlist.num} );">
+												<input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-style="btn-round" onchange="te33(1, ${productlist.num} );">
 											</td>
+										</c:if>	
+										<c:if test="${productlist.runstatus != 0}">
+										<td>
+										<input type="checkbox" data-toggle="toggle" data-onstyle="default" data-style="btn-round" onchange="te33(0, ${productlist.num} );">	
+										</td>
+										</c:if>
 											<td>
 												<button type="button" data-toggle="tooltip" title="상세 등록"
 													onclick="location.href='${contextPath}/admin/Adetails.do?num=${productlist.num}'"

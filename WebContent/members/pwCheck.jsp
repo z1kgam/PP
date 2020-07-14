@@ -30,12 +30,14 @@
   <body>
 
 
+<jsp:include page="../include/header.jsp" />
+
       <article class="container">
         <div class="page-header">
-        <hr/>
-          <h1>비밀번호 확인</h1>
+        
+          <h1 style="margin-top: 100px;">Password Check</h1>
          <hr/>
-         <h4>내정보를 보기위해 비밀번호를 입력해주세요.</h4>
+         <h5>내정보를 보기위해 비밀번호를 입력해주세요.</h5>
         </div>
         
         <div class="col-md-6 col-md-offset-3">
@@ -43,13 +45,16 @@
             <div class="form-group">
               <input type="password" class="form-control" id="InputPassword1" name="password">
             </div>
-            <div class="form-group text-center">
-              <input type="submit" class="btn btn-info" value="확인">
-              <button type="button" class="btn btn-warning" onclick="location.href='${contextPath}'">메인으로</button>
+            <div class="form-group text-center" style="margin-right: -600px; margin-top: 100px;">
+              <input type="submit" class="btn btn-info" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px;" value="확인">
+              <button type="button" class="btn btn-warning" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; margin-bottom: 50px;" onclick="location.href='${contextPath}'">메인으로</button>
             </div>
           </form>
         </div>
       </article>
+
+
+<jsp:include page="../include/footer.jsp" />
 
   </body>
 </html>
