@@ -273,17 +273,16 @@ public class AdminDAO {
 		
 		try {
 			con = getConnection();
-			sql = "update users set id=?, password=? , name=? , phone=? , email=?, point=?, status=?, is_admin=? where id = ?";
+			sql = "update users set id=?, password=? , name=? , phone=? , email=?, status=?, is_admin=? where id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberInfo.getId());
 			pstmt.setString(2, memberInfo.getPassword());
 			pstmt.setString(3, memberInfo.getName());
 			pstmt.setString(4, memberInfo.getPhone());
 			pstmt.setString(5, memberInfo.getEmail());
-			pstmt.setInt(6, memberInfo.getPoint());
-			pstmt.setInt(7, memberInfo.getStatus());
-			pstmt.setInt(8, memberInfo.getIs_admin());
-			pstmt.setString(9, memberInfo.getId());
+			pstmt.setInt(6, memberInfo.getStatus());
+			pstmt.setInt(7, memberInfo.getIs_admin());
+			pstmt.setString(8, memberInfo.getId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -303,6 +302,36 @@ public class AdminDAO {
 		
 		
 		return result;
+	}
+
+	public void runChange(int runstatus, int num) {
+		System.out.println("디이에오 와쓰");
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			sql = "update product set runstatus=? where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, runstatus);
+			pstmt.setInt(2, num);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("runChange 메소드 내부에서 오류 :" + e);
+		} finally {
+			try {
+				if(con!=null)con.close();
+				if(pstmt!=null)pstmt.close();
+				if(rs!=null)rs.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
 	}
 	
 	

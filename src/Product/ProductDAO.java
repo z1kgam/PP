@@ -132,6 +132,8 @@ public class ProductDAO {
 				Bean.setEnddate(rs.getDate("enddate"));
 				Bean.setImage(rs.getString("image"));
 				Bean.setContent(rs.getString("content"));
+				Bean.setRunstatus(rs.getInt("runstatus"));
+				System.out.println(Bean.getRunstatus());
 			}
 		
 		} catch (Exception e) {
@@ -162,7 +164,7 @@ public class ProductDAO {
 		}
 		
 	}
-
+	
 	public List<ProductBean> getList() {
 		String sql = "";
 		List<ProductBean> List = new ArrayList<ProductBean>();
@@ -170,10 +172,9 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from product";
+			sql = "select * from product order by startdate desc";
 			
 			pstmt = con.prepareStatement(sql);
-			
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -188,7 +189,7 @@ public class ProductDAO {
 				Bean.setEnddate(rs.getDate("enddate"));
 				Bean.setImage(rs.getString("image"));
 				Bean.setContent(rs.getString("content"));
-				
+				Bean.setRunstatus(rs.getInt("runstatus"));
 				List.add(Bean);
 			}
 		} catch (Exception e) {
@@ -198,6 +199,70 @@ public class ProductDAO {
 		}
 		
 		return List;
+	}
+
+	public List<ProductBean> getList(int pageFirst, int pageSize) {
+		String sql = "";
+		List<ProductBean> List = new ArrayList<ProductBean>();
+		
+		try {
+			con = getConnection();
+
+			sql = "select * from product order by startdate desc limit ?,?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pageFirst);
+			pstmt.setInt(2, pageSize);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				ProductBean Bean = new ProductBean();
+				Bean.setNum(rs.getInt("num"));
+				Bean.setName(rs.getString("name"));
+				Bean.setGenre(rs.getString("genre"));
+				Bean.setCla(rs.getString("cla"));
+				Bean.setRuntime(rs.getInt("runtime"));
+				Bean.setPrice(rs.getInt("price"));
+				Bean.setStartdate(rs.getDate("startdate"));
+				Bean.setEnddate(rs.getDate("enddate"));
+				Bean.setImage(rs.getString("image"));
+				Bean.setContent(rs.getString("content"));
+				Bean.setRunstatus(rs.getInt("runstatus"));
+				List.add(Bean);
+			}
+		} catch (Exception e) {
+			System.out.println("getList메소드에서 예외발생 : " + e);
+		}finally {
+			resource();
+		}
+		
+		return List;
+	}
+	
+	//상품 게시물 총 수
+	public int getCount() {
+		String sql = "";
+		List<ProductBean> List = new ArrayList<ProductBean>();
+		int count = 0;
+		try {
+			con = getConnection();
+
+			sql = "select * from product";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				count++;
+			}
+		} catch (Exception e) {
+			System.out.println("getCount메소드에서 예외발생 : " + e);
+		}finally {
+			resource();
+		}
+		
+		return count;
 	}
 
 }

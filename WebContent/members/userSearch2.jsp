@@ -23,12 +23,14 @@
 </head>
 <body>     		
 
+ 
+ <jsp:include page="../include/header.jsp" />
       	
 <!-- 본문 START -->
 <div class="container">
 		<div class="page-header">
-          <hr/>
-          <h1>비밀번호 찾기</h1>
+         
+          <h1 style="margin-top: 50px;">Password Check</h1>
         </div>
         <hr/>
 	
@@ -45,11 +47,15 @@
 		</div>
 		
 		<div class="form-group text-center">
-              <button type="button" class="btn btn-primary" id="searchBtn2" onclick="EmailCheck()">확인</button>
-              <button type="button" class="btn btn-warning" onclick="location.href='${contextPath}'">메인으로</button>
+              <button type="button" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px;" id="searchBtn2" onclick="EmailCheck()">확인</button>
+              <button type="button" class="btn btn-warning" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; margin-bottom: 50px;" onclick="location.href='${contextPath}'">메인으로</button>
         </div>
 	  </form>
 	</div>
 </div>
+
+
+<jsp:include page="../include/footer.jsp" />
+
 </body>
 </html>

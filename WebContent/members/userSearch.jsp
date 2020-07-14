@@ -36,7 +36,9 @@
 <title>Insert title here</title>
 
 </head>
-<body>     		
+<body>
+
+ <jsp:include page="../include/header.jsp" />     		
       	<!-- START 모달창 -->
       	<div class="modal fade" id="defaultModal">
 				<div class="modal_contents">
@@ -56,7 +58,7 @@
 <div class="container">
 		<div class="page-header">
           <hr/>
-          <h1>아이디/비밀번호 찾기</h1>
+          <h1>Find ID/PW</h1>
         </div>
         <hr/>
     <div style="margin-bottom: 10px;" 
@@ -100,12 +102,15 @@
 			<input type="email" class="form-control" name="email" id="email2" placeholder="Ex) Admin@google.com">
 		</div>
 		
-		<div class="form-group text-center">
-              <input type="submit" class="btn btn-primary" id="searchBtn2" value="확인">
-              <button type="button" class="btn btn-warning" onclick="location.href='${contextPath}'">메인으로</button>
+		<div class="form-group text-center"">
+              <input type="submit" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px;" id="searchBtn2" value="확인">
+              <button type="button" class="btn btn-warning" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; margin-bottom: 50px;" onclick="location.href='${contextPath}'">메인으로</button>
         </div>
 	  </form>
 	</div>
 </div>
+
+<jsp:include page="../include/footer.jsp" />
+
 </body>
 </html>

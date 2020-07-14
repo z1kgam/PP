@@ -40,7 +40,263 @@
 
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	
-	<script src="../js/content.js"></script>  
+	<script src="../js/content.js"></script> 
+	
+	<script>
+	
+	function trybuy() {
+		
+		var name = $("#name").val();
+		
+	 	$.ajax({
+			type : "post",
+			async: false,
+			url : "${contextPath}/Proser/Allitems.do",
+			data : {name : name},
+			dataType : "json",
+			success : function(data) {
+				
+				var jsonInfo = JSON.parse(JSON.stringify(data));
+				
+				var List = jsonInfo.List;
+				var info = "<tr>";
+
+				info += "<td>No.</td>";
+				info += "<td>공연명</td>";
+				info += "<td>공연날짜</td>";
+				info += "<td>시작시간</td>";
+				info += "<td>잔여좌석</td>";
+				info += "<td>좌석수</td>";
+				info += "<td>공연장</td>";
+				info += "<td>예약하기</td>"+ "</tr>";
+				
+				if(!List.length){
+					info += "<tr><td colspan='8'>예매 가능한 콘서트가 없습니다.</td></tr>"; 
+				}else{
+					for(var i in List){
+						var num = Number(i)+1;
+						var Able = Number(List[i].seat) - Number(List[i].totalreserved);
+
+						var detnum = Number(List[i].detnum);
+						info += "<tr><td>"+num+"</td>"; 
+						info += "<td>${Bean.name}</td>";
+						info += "<td>"+List[i].today+"</td>";
+						info += "<td>"+List[i].starttime+"</td>";
+						info += "<td>"+Able+"</td>";
+						info += "<td>"+List[i].seat+"</td>";
+						info += "<td>"+List[i].place+"</td>";
+						if(Able > 0){
+							info += "<td><a href='${contextPath}/Proser/prepare.do?detailnum="+detnum+"&today="+List[i].today+"'>예약하기</a></td>";
+						}else{
+							info += "<td>매진</td>";
+						}	
+						info += "</tr>";
+					} 
+				}
+				 
+				$("#part").html(info);
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		}); 
+		document.getElementById("explanation").style.display = "none";
+		document.getElementById("reply").style.display = "none";
+		document.getElementById("review").style.display = "none";
+		document.getElementById("trybuy").style.display = "block";
+	}
+	
+	function reply() {
+		
+		var pronum = ${Bean.num};
+		
+		$.ajax({
+			type : "post",
+			async: false,
+			url : "${contextPath}/Proser/Allreply.do",
+			data : {pronum : pronum},
+			dataType : "json",
+			success : function(data) {
+				var jsonInfo = JSON.parse(JSON.stringify(data));
+				
+				var List = jsonInfo.List;
+				
+				var info = "<tr>";
+				
+				if(!List.length){
+					info += "<td colspan='4' width='500' align='center'>등록된 댓글이없습니다.</td></tr>"; 
+				}else{
+					for(var i in List){
+						var replynum = Number(List[i].replynum);
+						var parentsnum = Number(List[i].parentsnum);
+						var productnum = Number(List[i].productnum);
+						var message = "관리자나 본인에 의해 삭제된 댓글입니다.";
+						if(parentsnum == 0){
+							info +="<td width='100' align='center' style='background-color: palegreen;'>ID</td>";
+							info +="<td width='200' align='center' style='background-color: palegreen;'>내용</td>";
+							if(List[i].content == message){
+								info +="<td width='100' align='center' style='background-color: palegreen;'>삭제한 날짜</td>";
+							}else{
+								info +="<td width='100' align='center' style='background-color: palegreen;'>업로드 날짜</td>";
+							}
+							info +="<td width='100' align='center' style='background-color: palegreen;'></td></tr>";
+							info +="<tr>";
+							info +="<td width='100' align='center'>"+List[i].id+"</td>";
+							info +="<td width='200' align='center'>"+List[i].content+"</td>";
+							info +="<td width='100' align='center'>"+List[i].uploaddate+"</td>";
+							info +="<td width='100' align='center'>"
+							if(List[i].content != message){
+								info +="<a onclick='doublereply("+replynum+")'>댓글쓰기</a><br>";
+								info +="<a onclick='updatereply("+replynum+")'>댓글수정</a><br>";
+								info +="<a onclick='fatedelete("+replynum+")'>댓글삭제</a><br>";
+							}
+							info +="<a onclick='alldelete("+replynum+")'>댓글삭제</a></td></tr>";
+							for(var j in List){
+								var doreply = Number(List[j].replynum);
+								var doparents = Number(List[j].parentsnum);
+								
+								if(replynum == doparents){
+									info +="<tr>";
+									info +="<td width='100' align='center' style='background-color: yellow;'>ID</td>";
+									info +="<td width='200' align='center' style='background-color: yellow;'>내용</td>";
+									if(List[j].content == message){
+										info +="<td width='100' align='center' style='background-color: yellow;'>삭제한 날짜</td>";
+									}else{
+										info +="<td width='100' align='center' style='background-color: yellow;'>업로드 날짜</td>";
+									}
+									info +="<td width='100' align='center' style='background-color: yellow;'></td></tr>";
+									info +="<tr>";
+									info +="<td width='100' align='center'>"+List[j].id+"</td>";
+									info +="<td width='200' align='center'>"+List[j].content+"</td>";
+									info +="<td width='100' align='center'>"+List[j].uploaddate+"</td>";
+									info +="<td width='100' align='center'>";
+									if(List[j].content != message){
+										info +="<a onclick='updatereply("+doreply+")'>댓글수정</a><br>";
+										info +="<a onclick='fatedelete("+doreply+")'>댓글삭제</a><br>";
+									}
+									info +="<a onclick='replydelete("+doreply+")'>댓글삭제</a></td></tr>";
+								}
+							}
+						}
+					}
+				}
+				
+				$("#replytable").html(info);
+				
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+		
+		document.getElementById("explanation").style.display = "none";
+		document.getElementById("reply").style.display = "block";
+		document.getElementById("review").style.display = "none";
+		document.getElementById("trybuy").style.display = "none";
+	}
+	
+	function replywrite() {
+		var parentsnum = document.frmReply.parentsnum.value;
+		var id = document.frmReply.id.value;
+		var content = document.frmReply.content.value;
+		var pronum = ${Bean.num};
+		
+		$.ajax({
+			type : "post",
+			async: false,
+			url : "${contextPath}/Proser/reply.do",
+			data : {pronum : pronum, parentsnum:parentsnum, id:id, content:content},
+			success : function() {
+				
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+			
+		});
+		
+		document.getElementById("write").style.display = "none";
+		reply();
+	}
+	
+	function replyupdate() {
+		var replynum = document.upReply.replynum.value;
+		var upcontent = document.upReply.upcontent.value;
+		
+		$.ajax({
+			type : "post",
+			async: false,
+			url : "${contextPath}/Proser/updatereply.do",
+			data : {replynum : replynum, upcontent:upcontent},
+			success : function() {
+				
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+			
+		});
+		
+		document.getElementById("upwrite").style.display = "none";
+		reply();
+		
+	}
+	
+	function fatedelete(replynum) {
+		$.ajax({
+			type : "post",
+			async: false,
+			url : "${contextPath}/Proser/fatedelete.do",
+			data : {replynum : replynum},
+			success : function() {
+				
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+			
+		});
+		
+		reply();
+	}
+	
+	function alldelete(replynum) {
+		$.ajax({
+			type : "post",
+			async: false,
+			url : "${contextPath}/Proser/alldelete.do",
+			data : {replynum : replynum},
+			success : function() {
+				
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+			
+		});
+		
+		reply();
+	}
+	
+	function replydelete(replynum) {
+		$.ajax({
+			type : "post",
+			async: false,
+			url : "${contextPath}/Proser/replydelete.do",
+			data : {replynum : replynum},
+			success : function() {
+				
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+			
+		});
+		
+		reply();
+	}
+	
+	</script> 
 
 </head>
   <body>
@@ -106,12 +362,7 @@
 										<tr>
 											<td>좋아요<span class="icon icon-heart"></span></td>
 											<td>${requestScope.likeCount}</td> 
-											<td>										
-												<form action="${contextPath}/mycon/addBasket.do" method="post">
-													<input type="hidden" name="id" value="${sessionScope.id}">
-													<input type="hidden" name="num" value="${Bean.num}">
-												</form>	
-											</td>
+											<td></td>
 											<td></td>
 										</tr>
 									</table>
@@ -124,10 +375,10 @@
 									<c:if test="${sessionScope.id != null}">      
 										<c:choose>
 											<c:when test="${requestScope.checkZ == 'false'}">
-												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}" class="btn btn-outline-primary">찜하기</a>
+												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}&name=${Bean.name}&image=${Bean.image}" class="btn btn-outline-primary">찜하기</a>
 											</c:when>
 											<c:when test="${requestScope.checkZ == 'true'}">
-												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}" class="btn btn-outline-primary">찜취소</a>
+												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}&name=${Bean.name}&image=${Bean.image}" class="btn btn-outline-primary">찜취소</a>
 											</c:when>
 										</c:choose>
 									</c:if>
