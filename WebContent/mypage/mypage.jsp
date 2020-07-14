@@ -46,6 +46,9 @@
 		            <div class="col-md-12 mb-3">
 		              <p style="font-size: 16px;"><a href="${contextPath}/mycon/addpointForm.do">포인트충전</a></p>
 		            </div>
+		            <div class="col-md-12 mb-3">
+		              <p style="font-size: 16px;"><a href="${contextPath}/mycon/pointList.do">포인트충전 신청내역조회</a></p>
+		            </div>
 				</div>
 			</div>  
 			

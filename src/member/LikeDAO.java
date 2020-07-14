@@ -226,4 +226,6 @@ public class LikeDAO {
 			}
 		return likeCount;		
 	} // getProductTotalLike END
+
+	
 }

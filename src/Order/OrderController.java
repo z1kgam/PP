@@ -137,7 +137,6 @@ public class OrderController extends HttpServlet{
 
 			String id = (String)session.getAttribute("id");
 			
-			
 			int cartcount =orderDAO.getCountCartList(id);
 			int total = orderDAO.getTotalPrice(id);
 			
