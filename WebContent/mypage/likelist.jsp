@@ -64,10 +64,6 @@
 	.page_nation a:hover{
 		color:#ggg;
 	}
-	td{
-		vertical-align: center;
-	}
-	
 	
 </style>
 <body>
@@ -129,7 +125,7 @@
 	 		
 	 		
 	 		<c:if test="${blockLast != totalPage }">
-	 			<a href="location.href='${contextPath}/mycon/likelistForm.do?nowPage${blockLast+1}'" class="arrow next"></a>
+	 			<a href="location.href='${contextPath}/mycon/likelistForm.do?nowPage=${blockLast+1}'" class="arrow next"></a>
 	 		</c:if>
 	 	</div>
 	 </div>
