@@ -9,16 +9,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-
-
-
-
-
-
-
-
-
-
 <!-- Channel Plugin Scripts -->
 <script>
   (function() {
@@ -70,48 +60,7 @@
 <!---------------------------- 00후 로그아웃됩니다s. --------------------------->
 
 
-<script>
-var tid;
-var cnt = parseInt(3000);//초기값(초단위)
-function counter_init() {
-	tid = setInterval("counter_run()", 1000);
-}
-
-function counter_reset() {
-	clearInterval(tid);
-	cnt = parseInt(3000);
-	counter_init();
-}
-
-function counter_run() {
-	document.all.counter.innerText = time_format(cnt);
-	cnt--;
-	if(cnt < 0) {
-		clearInterval(tid);
-		location.href = "${contextPath}/member/logout.do";
-	}
-}
-function time_format(s) {
-	var nHour=0;
-	var nMin=0;
-	var nSec=0;
-	if(s>0) {
-		nMin = parseInt(s/60);
-		nSec = s%60;
-
-		if(nMin>60) {
-			nHour = parseInt(nMin/60);
-			nMin = nMin%60;
-		}
-	} 
-	if(nSec<10) nSec = "0"+nSec;
-	if(nMin<10) nMin = "0"+nMin;
-
-	return ""+nHour+":"+nMin+":"+nSec;
-}
-</script>
-
-
+<
 <!---------------------------- 00후 로그아웃됩니다e. --------------------------->
 
 
@@ -226,23 +175,7 @@ function time_format(s) {
   		 </c:when>
    </c:choose>
         </td>
-	<!-- <td colspan="2" style="width: 100px;"><span id="counter"> </span> 후 자동로그아웃 <input type="button" class="btn btn-primary" value="연장" onclick="counter_reset()"></td>  -->
-		<td colspan="2"> 장바구니
-			<span style="color:white; size:16;" class="icon icon-shopping-cart" size="25"> </span> 
-			: <a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}" class="ah">
-
-			<c:choose>
-				<c:when test="${empty cartList}">
-					0
-				</c:when>
-				<c:when test="${!empty cartList}">
-					${sessionScope.cartcount}
-				</c:when>
-			</c:choose>
-
-			</a>
-		</td>
-   	 
+	<td colspan="2" style="width: 100px;"><span id="counter"> </span> 후 자동로그아웃 <input type="button" class="btn btn-primary" value="연장" onclick="counter_reset()"></td>
     </tr>
     <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
 		<td colspan="2">
@@ -566,7 +499,7 @@ color:#ff0;
 			          <li class="nav-item"><a href="${contextPath}" class="nav-link" style="font-size: 18px; font-family:나눔고딕 ;" >메인</a></li>
 			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공연&상품 페이지</a></li>
 			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 18px; font-family:나눔고딕">###</a></li>
-			          <li class="nav-item"><a href="${contextPath}/classes.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
+			          <li class="nav-item"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
 			     <c:if test="${is_admin == 1}">     
 			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">관리자 페이지</a></li>
 			     </c:if> 
@@ -583,3 +516,4 @@ color:#ff0;
 	  </nav>
     <!-- END nav -->
  <!-- Header END -->
+

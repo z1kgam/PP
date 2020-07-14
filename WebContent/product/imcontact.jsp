@@ -53,6 +53,7 @@
         <div class="row">
 				<c:if test="${List != null}">
 					<c:forEach var="VO" items="${List}">
+					<c:if test="${VO.runstatus == 0}">
 						<div class="col-md-3">
 							<div class="classes w-100 ftco-animate">
 								<a href="${contextPath}/Proser/content.do?num=${VO.num}&name=${VO.name}" class="img w-100 mb-3"
@@ -65,7 +66,7 @@
 								</div>
 							</div>
 						</div>
-
+					</c:if>
 					</c:forEach>
 
 				</c:if>
