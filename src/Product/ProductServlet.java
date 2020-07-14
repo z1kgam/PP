@@ -221,6 +221,7 @@ public class ProductServlet extends HttpServlet {
 				Bean.setTotalreserved(totalreserved);
 				Bean.setToday(today);
 				Bean.setStarttime(starttime);
+				Bean.setNum(num);
 
 				productService.insertDetail(Bean);
 				System.out.println(productBean.getName());
@@ -321,18 +322,9 @@ public class ProductServlet extends HttpServlet {
 					}
 				}
 				
-				System.out.println(chseat);
 				
-				String [] aa = chseat.split(",");
-				List<String> alist = new ArrayList<String>();
-				for(int i=0; i<aa.length;i++) {
-					alist.add(aa[i]);
-				}
+				request.setAttribute("DBean", Bean);
 				
-				request.setAttribute("alist", alist);
-				
-				System.out.println(chseat);
-				session.setAttribute("selseat", selectseat);
 				request.setAttribute("chseat", chseat);
 				
 				nextPage = "/product/buyconnect.jsp";

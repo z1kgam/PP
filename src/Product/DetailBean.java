@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class DetailBean {
 	
-	private int detailnum, runtime, price, seat, totalreserved;
+	private int detailnum, runtime, price, seat, totalreserved, num;
 	private String name, genre, cla, image, content, place, starttime,selectseat;
 	private Date startdate, enddate, today;
 	
@@ -157,7 +157,13 @@ public class DetailBean {
 	public void setSelectseat(String selectseat) {
 		this.selectseat = selectseat;
 	}
-	
-	
-	
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
 }
