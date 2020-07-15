@@ -122,10 +122,10 @@ public class MemberController extends HttpServlet {
 					session.setAttribute("name",name);
 					session.setAttribute("profile_img",profile_img);
 					session.setAttribute("is_admin", is_admin);
+					session.setAttribute("user", memberBean);
 
 					PrintWriter pw = response.getWriter();
 					pw.print("<script>" + "alert('로그인에 성공했습니다.');" + "location.href='"+request.getContextPath()+ "/index/index.jsp';" + "</script>");
-					System.out.println(is_admin);
 					return;
 					
 				}else if(check == 0) {					

@@ -43,12 +43,13 @@
   </head>
   <body>
 
-<jsp:include page="../include/header.jsp" />
+<jsp:include page="../include/subheader.jsp" />
 
 
-      <div class="container">
-        <div class="page-header">
-          <h1 style="margin-top: 100px;">My Profile</h1>
+      <div class="container" style="width: 70%;">
+        <div class="page-header" style="margin-bottom: 50px;">
+          <h1 style="margin-top: 50px;">My Profile</h1>
+          <hr>
         </div>
         
         <div class="col-md-6 col-md-offset-3" >

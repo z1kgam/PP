@@ -113,8 +113,8 @@ $(document).ready(function(){
 
 </head>
 <body>
-<jsp:include page="../include/header.jsp" />
-<div class="container">
+<jsp:include page="../include/subheader.jsp" />
+<div class="container" style="width: 70%;">
 
 	<div class="page-header" style="padding-top: 50px;">
 	<hr/>
