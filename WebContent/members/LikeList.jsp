@@ -31,7 +31,7 @@
 
 <jsp:include page="../include/header.jsp" />
 
-<div class="container">
+<div class="container" style="width: 70%;">
 	<div class="page-header" style="padding-top: 50px;">
     <hr/>
     	<h1 style="margin-bottom: 50px;">Like List</h1>

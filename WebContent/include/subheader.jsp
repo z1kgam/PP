@@ -403,8 +403,8 @@ color:#ff0;
 
 </head> 
 <body>
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark" >
-	<a href="#" class="navbar-brand"><i class="fa fa-cube"></i>Ticketing</a>  		
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark" style="background: linear-gradient( to right, #EB008B, #00E7D6 ) !important;">
+	 		
 	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -412,29 +412,25 @@ color:#ff0;
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
 		<form class="navbar-form form-inline">
 			<div class="input-group search-box">								
-				<input type="text" id="search" class="form-control" placeholder="Search here..." style="height: 15px !important;">
+				<input type="text" id="search" class="form-control" placeholder="Search..." style="height: 15px !important; margin-top: 10px;">
 				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
 			</div>
 		</form>
 		<div class="navbar-nav ml-auto">
-			<a href="#" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Home</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-gears"></i><span>Projects</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-users"></i><span>Team</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-pie-chart"></i><span>Reports</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-briefcase"></i><span>Careers</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-envelope"></i><span>Messages</span></a>		
-			<a href="#" class="nav-item nav-link"><i class="fa fa-bell"></i><span>Notifications</span></a>
+			
 			<div class="nav-item dropdown">
-				<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar" style="border-radius: 50%;
+				<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" style="color: #000;"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar" style="border-radius: 50%;
 	width: 36px;
 	height: 36px;
 	margin-right: 10px;"> Antonio Moreno <b class="caret"></b></a>
 				<div class="dropdown-menu">
-					<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+					<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
+					<a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
+					<a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
+					<a href="#" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
+					<a href="#" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
 					<div class="divider dropdown-divider"></div>
-					<a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+					<a href="#" class="dropdown-item"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
 				</div>
 			</div>
 		</div>

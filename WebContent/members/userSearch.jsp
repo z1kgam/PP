@@ -55,10 +55,10 @@
       	
       	
 <!-- 본문 START -->
-<div class="container">
+<div class="container" style="width: 70%;">
 		<div class="page-header">
-          <hr/>
-          <h1>Find ID/PW</h1>
+          
+          <h1 style="margin-top: 100px;">Find ID/PW</h1>
         </div>
         <hr/>
     <div style="margin-bottom: 10px;" 

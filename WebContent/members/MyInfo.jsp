@@ -36,9 +36,10 @@
   
   
   
-      <div class="container">
-        <div class="page-header" style="margin-top: 100px;">
-          <h1 style="margin-bottom: 100px;">Information</h1>
+      <div class="container" style="width: 70%;">
+        <div class="page-header" style="margin-top: 50px;">
+          <h1 style="margin-bottom: 50px;">Information</h1>
+          <hr>
         </div>
         
         <div class="col-md-6 col-md-offset-3">
