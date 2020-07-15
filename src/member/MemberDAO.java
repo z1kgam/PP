@@ -226,6 +226,8 @@ public class MemberDAO {
 				memberBean.setProfile_img(rs.getString("profile_img"));
 				memberBean.setPoint(rs.getInt("point"));
 				memberBean.setIs_admin(rs.getInt("is_admin"));
+				memberBean.setReg_date(rs.getTimestamp("reg_date"));
+				memberBean.setStatus(rs.getInt("status"));
 			}
 		} catch (Exception e) {
 			System.out.println("getMember Inner Err : " + e);

@@ -24,7 +24,7 @@
 <body>     		
 
  
- <jsp:include page="../include/header.jsp" />
+ <jsp:include page="../include/subheader.jsp" />
       	
 <!-- 본문 START -->
 <div class="container" style="width: 70%;">

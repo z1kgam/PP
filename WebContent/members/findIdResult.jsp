@@ -22,7 +22,7 @@
 <body>
 
 
-<jsp:include page="../include/header.jsp" />
+<jsp:include page="../include/subheader.jsp" />
 
       <article class="container" style="width: 70%;">
        <div class="page-header" style="margin-top: 50px;">

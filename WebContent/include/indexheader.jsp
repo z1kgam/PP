@@ -261,7 +261,7 @@ body {
 	height: 36px;
 	margin-right: 10px;"> Antonio Moreno <b class="caret"></b></a>
 				<div class="dropdown-menu">
-					<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
+					<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
 					<a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
 					<a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
 					<a href="#" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
