@@ -6,8 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="${contextPath}/mypage/css/bootstrap.css">
-<link rel="stylesheet" href="${contextPath}/mypage/css/custom.css">
 <meta charset="UTF-8">
 <title>포인트충전</title>
 <style type="text/css">
@@ -22,8 +20,9 @@
 </style>
 </head>
 <body>
+<jsp:include page="../include/subheader.jsp" />
 	<div class="container">
-	<jsp:include page="../include/header.jsp" />
+		<br><br><br><br>
 		<h2>포인트 충전</h2>
 			<div class="row">
 				<form action="${contextPath}/mycon/addpoint.do" method="post">
@@ -65,9 +64,11 @@
 					<div class="form-group text-center">
 						<input type="hidden" name="name" value="${sessionScope.name}">
 						<input type="hidden" name="id" value="${sessionScope.id}">
+						<br>
 						<input type="submit" value="입금확인신청" class="btn btn-primary">
 						<button type="button" class="btn btn-success" onclick="location.href='${contextPath}'">메인으로</button>
 					</div>
+					<br><br><br>
 				</form>
 			</div>
 	</div>

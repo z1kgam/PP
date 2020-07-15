@@ -697,6 +697,8 @@ textarea.form-control {
                         <li><i class="fa-li fa fa-comment"></i>좋아요 리스트: <span><a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}">${requestScope.likeCount}</a></span></li>
                         <li><i class="fa-li fa fa-briefcase"></i>장바구니: <span><a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}">${sessionScope.cartCount}</a></span></li>
                         <li><i class="fa-li fa fa-gears"></i>결제내역: <span><a href="${contextPath}/Order/payList.do?id=${sessionScope.id}">${requestScope.payCount}</a></span></li>
+                    	<li><i class="fa-li fa fa-gears"></i><a href="${contextPath}/mycon/addpointForm.do">포인트충전</a></li>
+                    	
                     </ul>
                 </div>
 
