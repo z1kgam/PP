@@ -367,12 +367,7 @@
 										<tr>
 											<td>좋아요<span class="icon icon-heart"></span></td>
 											<td>${requestScope.likeCount}</td> 
-											<td>										
-												<form action="${contextPath}/mycon/addBasket.do" method="post">
-													<input type="hidden" name="id" value="${sessionScope.id}">
-													<input type="hidden" name="num" value="${Bean.num}">
-												</form>	
-											</td>
+											<td></td>
 											<td></td>
 										</tr>
 									</table>
@@ -385,10 +380,10 @@
 									<c:if test="${sessionScope.id != null}">      
 										<c:choose>
 											<c:when test="${requestScope.checkZ == 'false'}">
-												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}" class="btn btn-outline-primary">찜하기</a>
+												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}&name=${Bean.name}&image=${Bean.image}" class="btn btn-outline-primary">찜하기</a>
 											</c:when>
 											<c:when test="${requestScope.checkZ == 'true'}">
-												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}" class="btn btn-outline-primary">찜취소</a>
+												<a href="${contextPath}/mycon/likeAction.do?id=${sessionScope.id}&num=${Bean.num}&name=${Bean.name}&image=${Bean.image}" class="btn btn-outline-primary">찜취소</a>
 											</c:when>
 										</c:choose>
 									</c:if>
