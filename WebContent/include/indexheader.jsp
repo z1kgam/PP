@@ -289,7 +289,7 @@ body {
   			<div class="row m-auto">
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
-  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-height: 120px;"></a> 
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
   					
   					
   					
@@ -345,13 +345,14 @@ body {
 </table> --%>
   					
 	
-  					
+  				
   					
 			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 			        <span class="oi oi-menu"></span> Menu
 			      </button>
   				</div>
   				<div class="col-12 w-100 text-center" style="margin-top: -20px;">
+  				
   					<div class="collapse navbar-collapse" id="ftco-nav">
 			        <ul class="navbar-nav m-auto" >
 			          <li class="nav-item"><a href="index/index.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕; ">메인</a></li>
@@ -464,4 +465,4 @@ body {
  </div>
  </section>
     
-	<jsp:include page="../include/carousel.jsp" />					
+	<%-- <jsp:include page="../include/carousel.jsp" />		 --%>			
