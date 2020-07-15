@@ -14,7 +14,7 @@ public class DetailBean {
 
 	public DetailBean(int runtime, int price, int seat, int totalreserved, String name, String genre, String cla,
 			String image, String content, String place, String starttime, Date startdate, Date enddate, Date today) {
-		this.runtime = runtime;
+		this.runtime = runtime; 
 		this.price = price;
 		this.seat = seat;
 		this.totalreserved = totalreserved;

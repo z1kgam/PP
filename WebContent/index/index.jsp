@@ -55,13 +55,6 @@
 </script>
 <!-- 챗봇 -->
 
-
-
-
-
-
-
-
 <!-- 마이 페이지 테이블 -->
 
 <%--     
@@ -128,23 +121,6 @@
  --%>
 
 <!-- 마이 페이지 테이블 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -168,9 +144,6 @@ margin: 10px;}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-  
-  
-  
   <!-- 모달창 -->
   
    <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -239,24 +212,9 @@ margin: 10px;}
  
   <!-- 모달창 --> 
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   </head> 
   <body>
 <jsp:include page="../include/indexheader.jsp" />
-
- 
-
-
-
 <section class="ftco-section bg-light" style="position: relative; top: 50px;">
       <div class="container"  style="position: relative; left: 50px;">
         <div class="row justify-content-center mb-5 pb-3">
@@ -351,15 +309,7 @@ margin: 10px;}
                	 
                 </th>
                 </tr>
-<!--                 	<div class="news" >	 -->
-
-<!-- 		<div class="news1" > -->
-<%-- 			<c:forEach var="k" items="${list2}"> --%>
-<%-- 				${k} --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</div> -->
-<!-- 	</div>   -->
-                
+     
                 </table>
               </div>
             </div>
@@ -431,24 +381,14 @@ margin: 10px;}
         			<div class="text w-100 text-center">
         				<h3><a href="#">레베카</a></h3>
         			'
-        			</div>
-        			
-        			
+        			</div>	
         		</div>
         	</div>
         </div>
     	</div>
     </section>
 
-     -->
-    
-    
-    
-    
-		
-
-   
-    
+     -->  
 <jsp:include page="../include/footer.jsp" />
 		
 	
