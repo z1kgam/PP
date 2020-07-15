@@ -355,12 +355,6 @@ body {
 			        <span class="oi oi-menu"></span> Menu
 			      </button>
   				</div>
-  				
-  				<c:if test="${id!=null}">
-  					${id}님 로그인중..
-  				</c:if>
-
-
   				<div class="col-12 w-100 text-center" style="margin-top: -20px;">
   					<div class="collapse navbar-collapse" id="ftco-nav">
 			        <ul class="navbar-nav m-auto" >

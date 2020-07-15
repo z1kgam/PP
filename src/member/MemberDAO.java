@@ -540,14 +540,24 @@ public class MemberDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
+		int num = 0;
 		try {
 			con = getConnection();
-			sql = "INSERT INTO POINT(id, name, point, p_status) VALUES (?,?,?,?)";
+			
+			sql = "SELECT COUNT(NUM) FROM POINT";
+			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, name);
-			pstmt.setInt(3, point);
-			pstmt.setInt(4, 1);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				num = rs.getInt("num") + 1;
+			}
+			sql = "INSERT INTO POINT(num, id, name, point, p_status) VALUES (?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setString(2, id);
+			pstmt.setString(3, name);
+			pstmt.setInt(4, point);
+			pstmt.setInt(5, 1);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("addpoint1 Inner Err : " + e);

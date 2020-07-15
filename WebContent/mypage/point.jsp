@@ -23,6 +23,7 @@
 </head>
 <body>
 	<div class="container">
+	<jsp:include page="../include/header.jsp" />
 		<h2>포인트 충전</h2>
 			<div class="row">
 				<form action="${contextPath}/mycon/addpoint.do" method="post">
@@ -70,5 +71,6 @@
 				</form>
 			</div>
 	</div>
+	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

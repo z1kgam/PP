@@ -54,24 +54,6 @@
 <!-- End Channel Plugin -->
 
 
-
-
-
-<!---------------------------- 00후 로그아웃됩니다s. --------------------------->
-
-
-<
-<!---------------------------- 00후 로그아웃됩니다e. --------------------------->
-
-
-
-
-
-
-
-
-
-
 <link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
 
 
@@ -474,25 +456,13 @@ color:#ff0;
   			<div class="row m-auto">
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
-  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-height: 120px;"></a> 
-  					
-  					
-  					
-  	
-  					
-	
-  					
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-height: 120px;"></a> 
   					
 			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 			        <span class="oi oi-menu"></span> Menu
 			      </button>
   				</div>
-  				
-  				<c:if test="${id!=null}">
-  					${id}님 로그인중..
-  				</c:if>
-
-  				  				
+		  				
   				<div class="col-12 w-100 text-center" style="margin-top: -20px;">
   					<div class="collapse navbar-collapse" id="ftco-nav">
 			        <ul class="navbar-nav m-auto">
