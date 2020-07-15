@@ -303,7 +303,8 @@
 <jsp:include page="../include/subheader.jsp" />
     <!-- END nav -->
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/concert.jpg');" data-stellar-background-ratio="0.5">
+<!-- 
+  <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/concert.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
@@ -314,6 +315,7 @@
         </div>
       </div>
     </section>
+     -->
 
 	<section class="ftco-section">
 		<div class="container">
@@ -329,9 +331,12 @@
 								<div class="text pl-md-4 ml-md-2 pt-4"
 									style="margin-right: 100px;">
 									<div class="meta">
+									
+									<!-- 
 										<div>
 											<a href="#">단독 판매</a>
 										</div>
+										 -->
 
 									</div>
 									<h3 class="heading mt-2">
@@ -373,9 +378,9 @@
 									</table>
 
 									<p style="margin-top: 70px;">
-										<a href="${contextPath}/Proser/details.do?num=${Bean.num}" class="btn btn-outline-primary">상세등록</a> 
-										<a href="${contextPath}/Proser/delete.do?num=${Bean.num}&path=consert&image=${Bean.image}&content=${Bean.content}" class="btn btn-outline-primary">삭제하기</a>
-										<a href="${contextPath}/Proser/imcontact.do" class="btn btn-outline-primary">목록보기</a>					
+										<a href="${contextPath}/Proser/details.do?num=${Bean.num}" class="btn btn-outline-primary" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important;">상세등록</a> 
+										<a href="${contextPath}/Proser/delete.do?num=${Bean.num}&path=consert&image=${Bean.image}&content=${Bean.content}" class="btn btn-outline-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;">삭제하기</a>
+										<a href="${contextPath}/Proser/imcontact.do" class="btn btn-outline-primary" style="background-color: #EB008B !important; border-color: #EB008B !important; color: #fff !important;">목록보기</a>					
 									<!-- 좋아요 판별부분  checkZ 값이 false이면 찜하기 버튼이 보이고 true이면 찜한 상품이라고 표시된다  -->
 									<c:if test="${sessionScope.id != null}">      
 										<c:choose>
@@ -397,12 +402,12 @@
 		</div>
 	</section>
 	<section>
-		<nav style="width: 1500px; height:60px; padding-bottom: 25px; margin-left: auto;margin-right: auto;">
+		<nav style="width: 1500px; height:60px; position: relative; top: -200px; right: -100px;">
 			<ul style="	list-style:none; font-family: verdana,Geneba,sans-serif;">
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="explanation()">상세정보</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="reply()">관람후기</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="review()">공연장정보</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="trybuy()">티켓예매</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 16px;" onclick="explanation()">상세정보</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 16px;" onclick="reply()">관람후기</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 16px;" onclick="review()">공연장정보</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 16px;" onclick="trybuy()">티켓예매</a></li>
 			</ul>
 		</nav>
 		<hr style="width: 1500px; margin: auto;">

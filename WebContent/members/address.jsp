@@ -43,7 +43,7 @@
 
 <jsp:include page="../include/header.jsp" />
 
-<div class="container">
+<div class="container" style="width: 70%;">
 	<div class="page-header">
   
     	<h1 style="margin-top: 50px;">Shipping address</h1>

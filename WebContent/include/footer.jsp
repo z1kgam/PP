@@ -30,12 +30,12 @@
 
 
 <!-- footer start -->
-    <footer class="ftco-footer ftco-section bg-light">
+    <footer class="ftco-footer ftco-section bg-light" style="width: 100%;">
       <div class="container">
         <div class="row d-flex">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">티켓팅 사이트</h2>
+              <h2 class="ftco-heading-2" style="font-family:나눔고딕;">티켓팅 사이트</h2>
               <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
               <ul class="ftco-footer-social list-unstyled float-lft mt-3">
                 <li class="ftco-animate"><a href="#" style="background-color: #EB008B;"><span class="icon-twitter"></span></a></li>
@@ -46,7 +46,7 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4 ml-md-4">
-              <h2 class="ftco-heading-2">이용약관</h2>
+              <h2 class="ftco-heading-2" style="font-family:나눔고딕;">이용약관</h2>
               <ul class="list-unstyled">
                 <li><a href="../caution1.jsp">예매취소 시 유의사항</a></li>
                 <li><a href="../caution2.jsp">환불안내</a></li>
@@ -57,7 +57,7 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Quick Links</h2>
+              <h2 class="ftco-heading-2" style="font-family:나눔고딕;">Quick Links</h2>
               <ul class="list-unstyled">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
@@ -69,7 +69,7 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Have a Questions?</h2>
+              <h2 class="ftco-heading-2" style="font-family:나눔고딕;">Have a Questions?</h2>
               <div class="block-23 mb-3">
                 <ul>
                   <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>

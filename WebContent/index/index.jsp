@@ -6,8 +6,7 @@
 <!-- JSTL 사용을 위해 선언 -->    
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
-
+<link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
 
 
 
@@ -299,8 +298,9 @@ margin: 10px;}
 
 
 
+
 <section class="ftco-section bg-light" style="position: relative; top: 50px;">
-      <div class="container"  style="position: relative; left: 50px;">
+      <div class="container"  style="position: relative; left: 50px; ">
         <div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section ftco-animate text-center">
             <h2 class="mb-1" style="position: relative; left: -50px;">Recent Posts</h2>
@@ -317,7 +317,7 @@ margin: 10px;}
                   <div><a href="#">Admin</a></div>
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                 </div>
-                <h3 class="heading mt-2"><a href="#">공연/전시 소식</a></h3>
+                <h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">공연/전시 소식</a></h3>
 				    <div class="news" >	
 				
 					<div class="news1" >
@@ -343,7 +343,7 @@ margin: 10px;}
                   <div><a href="#">Admin</a></div>
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                 </div>
-                <h3 class="heading mt-2"><a href="#">For You</a></h3>
+                <h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">For You</a></h3>
                 <p>당신을 위한 맞춤 공연</p>
               	  <p>나에게 딱 맞는 공연 추천과
 				           공연 스케줄 관리를 시작해보세요!</p>
@@ -365,7 +365,7 @@ margin: 10px;}
                   <div><a href="#">Admin</a></div>
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                 </div>
-                <h3 class="heading mt-2"><a href="#">랭킹</a></h3>
+                <h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">랭킹</a></h3>
                 <table align="center" font-size="30px"  style="width:100%; border-collapse: separate;
     border-spacing: 1px;" >
                 

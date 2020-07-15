@@ -32,9 +32,17 @@
 </script>
 </head>
 <body>
+
+<jsp:include page="../include/subheader.jsp" />
+
 <div class="container">
+<div class="page-header">
+  
+    	<h1 style="margin-top: 50px;">Payment List</h1>
+   
+    </div>
 	 	<div class="row">
-	 		<table class="table table-striped" style="text-align:center; border: 1px solid #dddddd">
+	 		<table class="table table-striped" style="text-align:center; border: 1px solid #dddddd; margin-top: 50px;">
 	 			<thead>
 	 				<tr>
 	 					<th style="background-color: #eeeeee; text-align: center;">번호</th>
@@ -73,8 +81,8 @@
 	 			</tbody>
 	 		</table>
 	 		총 결제금액 : <fmt:formatNumber pattern="###,###,###" value="${totalpayprice}"/>
-	 		<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right">메인으로</button>
-	 		<button type="button" onclick="btnPayAlldel()" class="btn btn-primary pull-right">결제내역 삭제하기</button>			
+	 		<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px; margin-left: 20px; margin-left: 450px; margin-top: 100px;">메인으로</button>
+	 		<button type="button" onclick="btnPayAlldel()" class="btn btn-primary pull-right" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; margin-bottom: 50px; margin-left: 20px; margin-left: 50px; margin-top: 100px;">결제내역 삭제하기</button>			
 	 	</div>
 	 </div>
 	
@@ -86,5 +94,9 @@
     <!-- 부트스트랩 자바스크립트 추가하기 -->
 
     <script src="${contextPath}/mypage/js/bootstrap.js"></script>
+    
+    
+     <jsp:include page="../include/footer.jsp" />
+     
 </body>
 </html>
