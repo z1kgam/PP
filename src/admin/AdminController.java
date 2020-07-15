@@ -1066,7 +1066,8 @@ public class AdminController extends HttpServlet{
 						nextPage = "/index/index.jsp";
 						
 				} else {
-					System.out.println("아이디 있음");
+					
+					System.out.println("아이디 없음");
 					bean.setId(id);
 					bean.setPassword(password);
 					bean.setName(name);
@@ -1089,6 +1090,8 @@ public class AdminController extends HttpServlet{
 					}
 					
 				}
+					
+				
 				
 			} 
 			

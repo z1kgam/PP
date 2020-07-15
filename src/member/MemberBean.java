@@ -23,7 +23,15 @@ public class MemberBean {
 	private String rpname;
 	private int p_status; 
 	private int num;
-			
+	private int n_status;
+	
+	
+	public int getN_status() {
+		return n_status;
+	}
+	public void setN_status(int n_status) {
+		this.n_status = n_status;
+	}
 	public String getId() {
 		return id;
 	}
