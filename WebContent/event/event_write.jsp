@@ -85,8 +85,7 @@ request.setCharacterEncoding("UTF-8");
 						</th>
 						<td>
 							<div class="custom-file">
-								<input class="custom-file-input" type="file" name="e_file" id="e_file" accept="image/*"
-								 />
+								<input class="custom-file-input" type="file" name="e_file" id="e_file" accept="image/*" />
 								<label class="custom-file-label" for="e_file" id="fileinput">이미지를 첨부하세요</label>
 							</div>
 						</td>

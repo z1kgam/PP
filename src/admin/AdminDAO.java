@@ -180,7 +180,6 @@ public class AdminDAO {
 	public int MemberDelete(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int result = 0;
 		String sql = "";
 		
@@ -198,7 +197,6 @@ public class AdminDAO {
 			try {
 				if(con!=null)con.close();
 				if(pstmt!=null)pstmt.close();
-				if(rs!=null)rs.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
@@ -268,7 +266,6 @@ public class AdminDAO {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int result = 0;
 		String sql = "";
 		
@@ -295,7 +292,6 @@ public class AdminDAO {
 			try {
 				if(con!=null)con.close();
 				if(pstmt!=null)pstmt.close();
-				if(rs!=null)rs.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
@@ -309,7 +305,6 @@ public class AdminDAO {
 		System.out.println("디이에오 와쓰");
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int result = 0;
 		String sql = "";
 		
@@ -327,7 +322,6 @@ public class AdminDAO {
 			try {
 				if(con!=null)con.close();
 				if(pstmt!=null)pstmt.close();
-				if(rs!=null)rs.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}

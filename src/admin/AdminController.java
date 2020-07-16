@@ -30,6 +30,8 @@ import Product.DetailBean;
 import Product.DetailDAO;
 import Product.ProductBean;
 import Product.ProductDAO;
+import event.EventBean;
+import event.EventDAO;
 import member.LikeBean;
 import member.LikeDAO;
 import member.MemberBean;
@@ -1118,11 +1120,143 @@ public class AdminController extends HttpServlet{
 				}
 					
 				
-				
+			//회원신고 관리 페이지 이동	
 			} else if(action.equals("/BBiBBOBBiBBo.do")) {
 				
 				nextPage = "/admins/BBiBBOBBiBBo.jsp";
+			
+			//이벤트 페이지 이동	
+			} else if(action.equals("/AeventMain.do")) {
 				
+				EventDAO edao = new EventDAO();
+				
+				int total = edao.getAllEvent();
+				System.out.println(total);
+				
+				int pageSize = 10;
+				int nowPage = 1;
+				if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+				
+				int pageFirst = (nowPage-1) * pageSize;
+				int totalPage = total/pageSize + (total%pageSize == 0?0:1);
+				int blockSize = 10;
+				int blockFirst = (nowPage/blockSize-(nowPage%blockSize == 0?1:0)) * blockSize + 1;
+				int blockLast = blockFirst + blockSize -1;
+				
+				if(blockLast > totalPage) blockLast = totalPage;
+				
+				List<EventBean> eventList = edao.eventList(pageFirst, pageSize);
+
+				request.setAttribute("eventList", eventList);
+				request.setAttribute("blockSize", blockSize);
+				request.setAttribute("blockFirst", blockFirst);
+				request.setAttribute("blockLast", blockLast);
+				request.setAttribute("totalPage", totalPage);
+				request.setAttribute("nowPage", nowPage);
+				
+				nextPage = "/admins/AeventMain.jsp";
+			//이벤트 등록 페이지 이동
+			} else if(action.equals("/AeventWrite.do")) {
+				
+				String check = request.getParameter("check");
+				
+				request.setAttribute("check", check);
+				
+				nextPage = "/admins/AeventWrite.jsp";
+			
+			//이벤트 등록
+			} else if(action.equals("/AinsertEvent.do")) {
+				
+				EventBean ebean = new EventBean();
+				EventDAO edao = new EventDAO();
+				
+				checkPage = 1;	
+				ServletContext ctx = getServletContext();	
+				String realPath = ctx.getRealPath("/event/image/");
+				int max = 10 * 1024 * 1024;
+		  		MultipartRequest multi = new MultipartRequest(request, realPath, max, "UTF-8", new DefaultFileRenamePolicy());
+				
+				String e_title = multi.getParameter("e_title");;
+				String e_content = multi.getParameter("e_content");
+				String e_file = multi.getFilesystemName("e_file");
+				
+				Date e_startdate = Date.valueOf(multi.getParameter("e_startdate")); 
+				Date e_enddate = Date.valueOf(multi.getParameter("e_enddate"));
+				
+				ebean.setE_title(e_title);
+				ebean.setE_content(e_content);
+				ebean.setE_file(e_file);
+				ebean.setE_startdate(e_startdate);
+				ebean.setE_enddate(e_enddate);
+				
+				edao.insertEvent(ebean);
+				
+				nextPage = "/admin/AeventMain.do";
+			
+			//이벤트 수정페이지 이동
+			} else if(action.equals("/AmodEventForm.do")) {
+				
+
+				 EventBean ebean = new EventBean();
+				 EventDAO edao = new EventDAO();
+				
+				 String e_num = request.getParameter("e_num");
+		         ebean = edao.viewEvent(Integer.parseInt(e_num));
+		         
+		         request.setAttribute("event", ebean);
+		         nextPage = "/admins/AmodEventForm.jsp";	
+				
+		      //이벤트 수정	
+			} else if(action.equals("/AmodEvent.do")) {
+				
+				EventBean ebean = new EventBean();
+				EventDAO edao = new EventDAO();
+				
+				int e_num = Integer.parseInt(request.getParameter("e_num"));
+				System.out.println(e_num);
+				
+				ServletContext ctx = getServletContext();	
+				String realPath = request.getServletContext().getRealPath("/event/image/");
+				int max = 10 * 1024 * 1024;
+		  		MultipartRequest multi = new MultipartRequest(request, realPath, max, "UTF-8", new DefaultFileRenamePolicy());			
+				
+		  		String e_title = multi.getParameter("e_title");
+				System.out.println(e_title);
+				
+				Date e_startdate = Date.valueOf(multi.getParameter("e_startdate"));
+				System.out.println(e_startdate);
+				
+				Date e_enddate = Date.valueOf(multi.getParameter("e_enddate"));
+				System.out.println(e_enddate);
+				
+				String e_file = multi.getFilesystemName("e_file");
+				System.out.println(e_file);
+				
+				String e_content = multi.getParameter("e_content");
+				System.out.println(e_content);
+				
+				EventBean evbean = new EventBean();
+				evbean.setE_num(e_num);
+				evbean.setE_title(e_title);
+				evbean.setE_startdate(e_startdate);
+				evbean.setE_enddate(e_enddate);
+				evbean.setE_file(e_file);
+				evbean.setE_content(e_content);
+			
+				edao.modEvent(evbean);
+				
+				nextPage = "/admin/AeventMain.do";
+			
+			//이벤트 삭제
+			} else if(action.equals("/AdeleteEvent.do")) {
+				
+				EventBean ebean = new EventBean();
+				EventDAO edao = new EventDAO();
+				
+				int e_num = Integer.parseInt(request.getParameter("e_num"));
+				edao.deleteEvent(e_num);
+				
+				nextPage = "/admin/AeventMain.do";
 			}
 			
 			

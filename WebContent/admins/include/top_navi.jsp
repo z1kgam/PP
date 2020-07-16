@@ -175,7 +175,7 @@
 							</a>
 						</li>
 						<li class="nav-item active">
-							<a href="#">
+							<a href="${contextPath}/admin/AeventMain.do">
 								<i class="la la-gift"></i>
 								<p>이벤트 관리</p>
 								
