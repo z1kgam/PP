@@ -43,6 +43,24 @@
 	<script src="../js/content.js"></script> 
 	
 	<script>
+// 	function review() {
+		
+// 		var place = $("#place").val();
+		
+// 		$.ajax({
+// 		    type: "post",
+// 		    async: false,
+// 		    url: "${contextPath}/Proser/.do",
+// 		    data: { place : place },               
+// 		    dataType: "json",
+// 		    success : function(data) {
+		    	
+		    	
+// 		    }
+			
+// 		});
+// 	}
+	
 	
 	function trybuy() {
 		
@@ -403,7 +421,7 @@
 		<hr style="width: 1500px; margin: auto;">
 		<div class="detail" id="explanation" style="display: none;"><jsp:include page="../proinc/explanation.jsp" /></div>
 		<div class="detail" id="reply"><jsp:include page="../proinc/reply.jsp" /></div>
-		<div class="detail" id="review" style="display: none;"><jsp:include page="../proinc/review.jsp" /></div>
+		<div class="detail" id="review" style="display: none;"></div>
 		<div class="detail" id="trybuy" style="display: none;"><jsp:include page="../proinc/trybuy.jsp" /></div>
 	</section>
 

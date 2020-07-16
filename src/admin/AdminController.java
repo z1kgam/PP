@@ -332,10 +332,11 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("notice", noticebean);
 				
 				nextPage = "/admins/AnoticeModify.jsp";
-				
+			
+			//checkPage
 			//관리자 페이지 공지사항 글 수정	
 			} else if(action.equals("/AmodNotice.do")) {
-				
+				checkPage = 1;
 				int n_num = Integer.parseInt(request.getParameter("n_num"));
 				System.out.println(n_num);
 				
@@ -473,7 +474,7 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("status", status);
 
 		         nextPage = "/admins/AqnaBoard.jsp";
-		         
+		    
 			//문의 답변 수정하는 페이지
 			} else if(action.equals("/AqnaAnswer.do")) {
 				
@@ -486,11 +487,12 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("qnaUpdate", qnabean);
 		         
 		         nextPage = "/admins/AqnaAnswer.jsp";
-		    
+		         
+		    //checkPage
 		    //문의 답변 달기 실행
 			} else if(action.equals("/AqnaUpdate.do")) {
 				
-				
+				checkPage = 1;
 				int qna_num = Integer.parseInt(request.getParameter("qna_num"));
 		         
 		         int status = Integer.parseInt(request.getParameter("status"));
@@ -511,6 +513,7 @@ public class AdminController extends HttpServlet{
 		         System.out.println(result);
 		         
 		         nextPage = "/admin/Aqnaboardp.do";
+		         
 		    //답변 수정 실행
 			} else if(action.equals("/AqnaAnswerMod.do")) {
 				
@@ -524,6 +527,7 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("qnaUpdate", qnabean);
 				
 				 nextPage = "/admins/AqnaAnswerMod.jsp";
+				 
 			//qna게시판 글 삭제	
 			} else if(action.equals("/Aqnadelete.do")) {
 				
@@ -565,11 +569,13 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("List",list);
 				
 				 nextPage = "/admins/AproductMain.jsp";
+				 
 			//상품 등록 페이지 이동	 
 			} else if(action.equals("/AproductAdd.do")) {
 				
 				nextPage="/admins/AproductAdd.jsp";
-				
+			
+			
 			//상품 등록 	
 			} else if(action.equals("/AwritePro.do")) {
 				
@@ -638,7 +644,7 @@ public class AdminController extends HttpServlet{
 						+ "/admin/AproductMain.do';" + "</script>");
 
 				return;
-			
+				
 			//상품 상세 등록 페이지 이동
 			}	else if(action.equals("/Adetails.do")) {
 				
@@ -698,6 +704,7 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("nowPage", nowPage);
 
 		         nextPage = "/admins/AqnaBoard.jsp";
+		         
 			//문의 답변 수정하는 페이지
 			} else if(action.equals("AqnaModify.do")) {
 				
@@ -710,9 +717,12 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("qnaUpdate", qnabean);
 		         
 		         nextPage = "/admins/AqnaModify.jsp";
+		    
+		    //checkPage
 			//상품 상세 등록 페이지
 			} else if(action.equals("/AdetailsPro.do")) {
 				
+				checkPage = 1;
 				ProductBean productBean = new ProductBean();
 				ProductDAO dao = new ProductDAO();
 				DetailBean Bean = new DetailBean();
@@ -887,7 +897,8 @@ public class AdminController extends HttpServlet{
 				faqdao.insertfboard(faqbean);
 				
 				nextPage = "/admin/AfaqMain.do";
-				
+			
+		
 			//글 수정 페이지 이동
 			} else if(action.equals("/AfaqMod.do")) {
 				
@@ -900,7 +911,8 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("faqUpdate", faqbean);
 				
 				nextPage = "/admins/AfaqMod.jsp";
-				
+			
+			//checkPage	
 			//글 수정 	
 			} else if(action.equals("/AfaqModpro.do")) {
 					
@@ -935,6 +947,7 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("faqUpdate", faqbean);
 				
 				nextPage = "/admin/AfaqMain.do";
+				
 			} else if(action.equals("/pointupdate.do")) {
 				
 				System.out.println(request.getParameter("addpoint"));
@@ -973,8 +986,5 @@ public class AdminController extends HttpServlet{
 			}
 			
 		}// doHandle END
-		
-				
-	
-	
+			
 }

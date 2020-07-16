@@ -9828,7 +9828,7 @@ textarea.form-control {
     opacity: 1; }
 
 .gallery-grid-item {
-  width: 50%;
+  width: 33.33%;
   padding: 8px; }
   .gallery-grid-item .caption {
     overflow: hidden;

@@ -78,15 +78,15 @@
 													</td>
 												</tr>
 												<tr>
-													<td>공연장</td>
+													<td>공연장소</td>
 												 <td>
 													<select class="form-control input-fixed" id="notify_state" name="place" style="vertical-align: middle; text-align-last: center;">
-														<option value="공연장1">공연장1</option>
-														<option value="공연장2">공연장2</option>
-														<option value="공연장3">공연장3</option>
-														<option value="공연장4">공연장4</option>
-														<option value="공연장5">공연장5</option>
-														<option value="공연장6">공연장6</option>
+														<option value="KSPO DOME (올림픽공원 체조경기장)">KSPO DOME (올림픽공원 체조경기장)</option>
+														<option value="잠실종합운동장 주경기장">잠실종합운동장 주경기장</option>
+														<option value="블루스퀘어 아이마켓홀">블루스퀘어 아이마켓홀</option>
+														<option value="의정부 종합운동장">의정부 종합운동장</option>
+														<option value="예술의전당">예술의전당</option>
+														<option value="연세대학교 노천극장">연세대학교 노천극장</option>
 													</select>
 												 </td>
 													<td style="width: 15%">좌석</td>
