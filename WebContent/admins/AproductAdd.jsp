@@ -137,11 +137,11 @@
 													<td><b>장르</b></td>
 													<td style="width: 15%">
 													<select class="form-control input-fixed" id="notify_state" name="genre">
+														<option value="아이돌">아이돌</option>
 														<option value="트로트">트로트</option>
 														<option value="힙합">힙합</option>
 														<option value="락">락</option>
 														<option value="발라드">발라드</option>
-														<option value="국악">국악</option>
 														<option value="재즈">재즈</option>
 													</select>
 													</td>

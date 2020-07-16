@@ -29,7 +29,7 @@
 <body>
 
 
-<jsp:include page="../include/header.jsp" />
+<jsp:include page="../include/subheader.jsp" />
 
 <div class="container" style="width: 70%;">
 	<div class="page-header" style="padding-top: 50px;">

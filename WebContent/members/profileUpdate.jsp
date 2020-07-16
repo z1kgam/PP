@@ -39,11 +39,12 @@
 
 	
 </script>
-
-  </head>
-  <body>
-
 <jsp:include page="../include/header.jsp" />
+
+</head>
+<body>
+
+
 
 
       <div class="container" style="width: 70%;">

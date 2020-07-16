@@ -36,59 +36,59 @@ public class MainController extends HttpServlet{
 		String action = request.getPathInfo();
 		String pageNext = "";
 		
+		//메인 페이지 요청(공연/전시 소식 크롤링)
 		if(action.equals("/main.do")) {
 			String url = "https://news.naver.com/main/list.nhn?mode=LS2D&mid=shm&sid1=103&sid2=242";
-			String url2 = "https://ticket.melon.com/main/index.htm";
 
 			Document doc = null;
-			Document doc2 = null;
 			
 			String[] list = new String[3];
-			String[] list2 = new String[3];
 			
-
 			try {
 				doc = Jsoup.connect(url).get();
-				doc2 = Jsoup.connect(url2).get();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			Elements element = doc.select("ul.type06_headline");
-			Elements element2 = doc2.select("ol.list_ranking");
 			Iterator<Element> ie1 = element.select("li").iterator();
-//			Iterator<Element> ie2 = element2.select("li").iterator();
 			
 			
 			for(int i=0; i<list.length; i++) {
 				list[i] = ie1.next().html()+"<br>";
-//				list2[i] = ie2.next().html()+"<br>";
 				
 				element.next();
-				element2.next();
 			}
-			request.setAttribute("list", list);
-//			request.setAttribute("list2", list2);
-			
-			
-//			try {
-//				doc2 = Jsoup.connect(url2).get();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			Elements element2 = doc2.select("ol.list_ranking");
-//			Iterator<Element> ie2 = element2.select("li").iterator();
-//			
-//			for(int k=0; k<list.length; k++) {
-//				list[k] = ie2.next().html()+"<br>";
-//				element2.next();
-//			}
-//			request.setAttribute("list2", list2);
-			
-			
+			request.setAttribute("list", list);		
 			pageNext = "/index/index.jsp";
 			
-			request.getRequestDispatcher(pageNext).forward(request, response);
+		}else if(action.equals("/news.do")) {
+			String url = "https://news.naver.com/main/list.nhn?mode=LS2D&mid=shm&sid1=103&sid2=242";
+
+			Document doc = null;
+			
+			String[] list = new String[10];
+			
+			try {
+				doc = Jsoup.connect(url).get();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Elements element = doc.select("ul.type06_headline");
+			Iterator<Element> ie1 = element.select("li").iterator();
+			
+			
+			for(int i=0; i<list.length; i++) {
+				list[i] = ie1.next().html()+"<br>";
+				
+				element.next();
+			}
+			request.setAttribute("list", list);	
+			
+			pageNext = "/index/news.jsp";
+			
 		}
+		
+			request.getRequestDispatcher(pageNext).forward(request, response);
 		
 	}
 	

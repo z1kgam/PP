@@ -54,6 +54,7 @@
 </script>
 <!-- 챗봇 -->
 
+<<<<<<< HEAD
 
 
 
@@ -101,6 +102,74 @@ function time_format(s) {
 
 
 
+=======
+<!-- 마이 페이지 테이블 -->
+
+<%--     
+  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+  		<div class="container" >
+  			<div class="row m-auto">
+  				<div class="col-12 w-100 text-center">
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: -400px;" >Ticketing</a>
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: -600px; margin-top: 5px;" ><img src="../images/tclogo.png"" alt="tlogo"></a>
+  					
+  					
+ 				
+  	<table style="width:300px; height: 100px;  border-collapse: separate;	
+    border-spacing: 1px; margin: 100px; text-align: center; float: right; margin-top: 100px; font-size: 12px;">
+    
+  <c:if test="${id!=null}">
+     <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px;
+    		padding: 10px; font-weight: bold;">
+        <td rowspan="3" align = "center" bgcolor="#FFB5B5" width="100px;">
+   <c:choose>    	
+    	 <c:when test="${!empty profile_img }">
+	       <img src="${contextPath}/upload/${profile_img}" alt="프로필 이미지" style="max-width: 100px;">
+    	 </c:when>
+     
+   		 <c:when test="${empty profile_img}">
+			<img src="${contextPath}/images/icon.png" width="100px" height="100px">
+  		 </c:when>
+   </c:choose>
+        </td>
+	<!--  <td colspan="2" style="width: 100px;"><span id="counter"> </span> 후 자동로그아웃 <input type="button" class="btn btn-primary" value="연장" onclick="counter_reset()"></td> -->
+		
+		<td colspan="2"> 장바구니
+			<span style="color:white; size:16;" class="icon icon-shopping-cart" size="25"> </span> 
+			: <a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}" class="ah">
+			<c:if test="${empty cartList}">				
+				0
+			</c:if>
+			
+			<c:if test="${!empty cartList}">				
+				${sessionScope.cartcount}
+			</c:if>
+			</a>
+		</td>	
+    </tr>
+    <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
+		<td colspan="2">
+	
+		<c:if test="${id!=null}">
+  					${id}님 로그인중..
+  		</c:if>
+		</td>
+        </tr>
+        
+        <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
+		    <c:if test="${id!=null}">
+		        <td><a href="${contextPath}/member/logout.do" style="color: #fff;">로그아웃</a></td>
+				<td><a href="${contextPath}/mycon/mypageForm.do" style="color: #fff;">마이 페이지</a></td>
+			</c:if>	
+        </tr>
+
+</c:if>
+</table>
+
+ --%>
+
+<!-- 마이 페이지 테이블 -->
+>>>>>>> 80cd2a0d72e457840e9c2c5e98e42ceb2521b055
 
 <!DOCTYPE html>
 <html>
@@ -125,9 +194,6 @@ margin: 10px;}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-  
-  
-  
   <!-- 모달창 -->
   
    <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -196,23 +262,16 @@ margin: 10px;}
  
   <!-- 모달창 --> 
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   </head> 
   <body>
 <jsp:include page="../include/indexheader.jsp" />
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 80cd2a0d72e457840e9c2c5e98e42ceb2521b055
 <section class="ftco-section bg-light" style="position: relative; top: 50px;">
       <div class="container"  style="position: relative; left: 50px; ">
         <div class="row justify-content-center mb-5 pb-3">
@@ -307,15 +366,7 @@ margin: 10px;}
                	 
                 </th>
                 </tr>
-<!--                 	<div class="news" >	 -->
-
-<!-- 		<div class="news1" > -->
-<%-- 			<c:forEach var="k" items="${list2}"> --%>
-<%-- 				${k} --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</div> -->
-<!-- 	</div>   -->
-                
+     
                 </table>
               </div>
             </div>
@@ -325,12 +376,85 @@ margin: 10px;}
     </section>
 
 
+<<<<<<< HEAD
 
     
    
 
    
     
+=======
+<!-- 
+    <section class="ftco-section" style="position: relative; top: -300px;">
+    	<div class="container">
+    	
+        
+            <div class="col-md-12 heading-section ftco-animate text-center" style="margin-bottom: 100px;">
+            <h2 class="mb-1">예매하기</h2>
+            </div>
+          
+          
+        <div class="row">
+        	<div class="col-md-3">
+        		<div class="classes w-100 ftco-animate">
+        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/con1.jpg); height: 350px;"></a>
+        			<div class="text w-100 text-center">
+        				<h3><a href="#">2020 서울 파크 뮤직 페스티벌</a></h3>
+        				
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-md-3">
+        		<div class="classes w-100 ftco-animate">
+        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/opera.jpg); height: 350px;"></a>
+        			<div class="text w-100 text-center">
+        				<h3><a href="#">오페라 하우스</a></h3>
+        			
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-md-3">
+        		<div class="classes w-100 ftco-animate">
+        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/cats.jpg); height: 350px;"></a>
+        			<div class="text w-100 text-center">
+        				<h3><a href="#">캣츠</a></h3>
+        				
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-md-3">
+        		<div class="classes w-100 ftco-animate">
+        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/hodu.jpg); height: 350px;"></a>
+        			<div class="text w-100 text-center">
+        				<h3><a href="#">호두깎이 인형</a></h3>
+        				
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-md-3">
+        		<div class="classes w-100 ftco-animate">
+        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/headmu.jpg); height: 350px;"></a>
+        			<div class="text w-100 text-center">
+        				<h3><a href="#">헤드윅</a></h3>
+        				
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-md-3">
+        		<div class="classes w-100 ftco-animate">
+        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/rebeca.jpg); height: 350px;"></a>
+        			<div class="text w-100 text-center">
+        				<h3><a href="#">레베카</a></h3>
+        			'
+        			</div>	
+        		</div>
+        	</div>
+        </div>
+    	</div>
+    </section>
+
+     -->  
+>>>>>>> 80cd2a0d72e457840e9c2c5e98e42ceb2521b055
 <jsp:include page="../include/footer.jsp" />
 		
 	

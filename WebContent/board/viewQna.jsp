@@ -25,7 +25,55 @@ request.setCharacterEncoding("UTF-8");
 	<script src="../js/bootstrap.min.js"></script>
 	
 </head>
-<body>
+<body style="font-family: 'Nanum Gothic Coding', monospace;">
+
+<section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
+		<div class="container">
+			<div class="row block-9" style="margin-top: 50px;">
+			
+			<div class="col-md-10">		
+
+<!-- 탭메뉴 -->	
+<ul class="nav nav-tabs" style="font-size: 14px;">
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 85px 15px 85px;">
+   	 공지사항
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/board/info2.jsp" style="padding: 15px 85px 15px 85px;">
+	이용안내
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 100px 15px 100px;">
+    FAQ
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+  
+	  <c:choose>
+	   	<c:when test="${id != null}">
+	    		<a class="nav-link"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 70px 15px 70px;">
+	    		나의 문의 내역
+	    		</a>
+	  		</c:when>
+	  		<c:when test="${id == null}">
+	  			<a class="nav-link"  href="${contextPath}/member/login.do" style="padding: 15px 70px 15px 70px;">
+	  			나의 문의 내역
+	  			</a>
+	  		</c:when>
+	  	</c:choose>
+
+  </li>
+</ul>			
+
+
+
+
+
+
+
 
 <section class="container body-container py-5">
 		<div class="row">
@@ -75,11 +123,9 @@ request.setCharacterEncoding("UTF-8");
 							<label for="contents" class="m-0">첨부이미지</label>
 						</th>
 						<td>
-							<img alt="img" src="${contextPath}/board/image/${qna.file}" height="400px" width="600px">  <br><br><br>
+ 							<a href="${contextPath}/board/image/${qna.file}" target="_blank"><img alt="img" src="${contextPath}/board/image/${qna.file}" height="40%" width="35%"></a>  <br><br><br>
 						</td>
 					</tr>	
-					
-					
 								
 					
 				<c:if test="${qna.qna_status == 1}">					
@@ -97,7 +143,7 @@ request.setCharacterEncoding("UTF-8");
 				<c:if test="${is_admin == 1}">	
 					<a href="${contextPath}/qboard/deleteQna.do?qna_num=${qna.qna_num}">
 						<input type="button" value="삭제하기">
-					</a> 
+					</a>
 					
 					<a href="${contextPath}/qboard/qnaUpdateForm.do?qna_num=${qna.qna_num}">
 						<input type="button" value="수정하기">
@@ -166,6 +212,11 @@ request.setCharacterEncoding("UTF-8");
 	</script>
 	
 -->	
+
+			</div>
+		</div>
+	</div>
+</section>
 	
 	
 <jsp:include page="../include/footer.jsp"></jsp:include>	

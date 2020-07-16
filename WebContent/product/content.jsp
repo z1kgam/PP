@@ -102,7 +102,7 @@
 		}); 
 		document.getElementById("explanation").style.display = "none";
 		document.getElementById("reply").style.display = "none";
-		document.getElementById("review").style.display = "none";
+		document.getElementById("location").style.display = "none";
 		document.getElementById("trybuy").style.display = "block";
 	}
 	
@@ -191,7 +191,7 @@
 		
 		document.getElementById("explanation").style.display = "none";
 		document.getElementById("reply").style.display = "block";
-		document.getElementById("review").style.display = "none";
+		document.getElementById("location").style.display = "none";
 		document.getElementById("trybuy").style.display = "none";
 	}
 	
@@ -300,7 +300,7 @@
 
 </head>
   <body>
-<jsp:include page="../include/subheader.jsp" />
+<jsp:include page="../include/header.jsp" />
     <!-- END nav -->
 
 <!-- 
@@ -372,7 +372,7 @@
 										</tr>
 									</table>
 
-									<p style="margin-top: 70px; margin-left: 300px;">
+									<p style="margin-top: 70px;">
 										<a href="${contextPath}/Proser/details.do?num=${Bean.num}" class="btn btn-outline-primary" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important;">상세등록</a> 
 										<a href="${contextPath}/Proser/delete.do?num=${Bean.num}&path=consert&image=${Bean.image}&content=${Bean.content}" class="btn btn-outline-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;">삭제하기</a>
 										<a href="${contextPath}/Proser/imcontact.do" class="btn btn-outline-primary" style="background-color: #EB008B !important; border-color: #EB008B !important; color: #fff !important;">목록보기</a>					
@@ -397,19 +397,23 @@
 		</div>
 	</section>
 	<section>
+<<<<<<< HEAD
 	
 		<nav style="margin-left: 300px; margin-top: -300px;">
+=======
+		<nav style="width: 1500px; height:60px; position: relative; top: -200px; right: -100px;">
+>>>>>>> 80cd2a0d72e457840e9c2c5e98e42ceb2521b055
 			<ul style="	list-style:none; font-family: verdana,Geneba,sans-serif;">
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 16px;" onclick="explanation()">상세정보</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 16px;" onclick="reply()">관람후기</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 16px;" onclick="review()">공연장정보</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 16px;" onclick="trybuy()">티켓예매</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="explanation()">상세정보</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="reply()">관람후기</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="location()">공연장정보</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="trybuy()">티켓예매</a></li>
 			</ul>
 		</nav>
 		<hr style="width: 1500px; margin: auto;">
 		<div class="detail" id="explanation" style="display: none;"><jsp:include page="../proinc/explanation.jsp" /></div>
 		<div class="detail" id="reply"><jsp:include page="../proinc/reply.jsp" /></div>
-		<div class="detail" id="review" style="display: none;"><jsp:include page="../proinc/review.jsp" /></div>
+		<div class="detail" id="location" style="display: none;"><jsp:include page="../proinc/location.jsp" /></div>
 		<div class="detail" id="trybuy" style="display: none;"><jsp:include page="../proinc/trybuy.jsp" /></div>
 	</section>
 

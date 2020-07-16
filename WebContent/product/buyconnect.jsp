@@ -129,7 +129,7 @@
 </script>
 </head>
   <body>
-<jsp:include page="../include/subheader.jsp" />
+<jsp:include page="../include/header.jsp" />
     <!-- END nav -->
     
 
@@ -192,7 +192,6 @@
 											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">가격</b></td>
 											<td><fmt:formatNumber value="${DBean.price}"
 													pattern="#,###" />원</td>
-
 										</tr>
 										<tr>
 											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">예매수</b></td>
@@ -213,7 +212,6 @@
 															</c:forEach>
 														</c:when>
 													</c:choose>
-
 											</select></td>
 										<tr>
 										<tr>
@@ -238,8 +236,6 @@
 														</c:forEach>
 														</c:forTokens>
 													</tr>
-
-
 													<c:forEach begin="1" end="${DBean.seat}" varStatus="num">
 														<fmt:parseNumber var="titlenum" value="${(num.count+19)/20}" integerOnly="true" />
 														<c:choose>
@@ -319,8 +315,7 @@
 	<div>
 
 	</div>
-	<jsp:include page="../include/footer.jsp" />    
-    
+<jsp:include page="../include/footer.jsp" />    
   
   <script src="../js/jquery.min.js"></script>
   <script src="../js/jquery-migrate-3.0.1.min.js"></script>

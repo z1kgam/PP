@@ -5,37 +5,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Meditative - Free Bootstrap 4 Template by Colorlib</title>
+    <title>공연목록</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="${contextPath}/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="${contextPath}/css/animate.css">
     
-    <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../css/magnific-popup.css">
+    <link rel="stylesheet" href="${contextPath}/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="${contextPath}/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="${contextPath}/css/magnific-popup.css">
 
-    <link rel="stylesheet" href="../css/aos.css">
+    <link rel="stylesheet" href="${contextPath}/css/aos.css">
 
-    <link rel="stylesheet" href="../css/ionicons.min.css">
+    <link rel="stylesheet" href="${contextPath}/css/ionicons.min.css">
 
-    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="../css/jquery.timepicker.css">
+    <link rel="stylesheet" href="${contextPath}/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="${contextPath}/css/jquery.timepicker.css">
 
     
-    <link rel="stylesheet" href="../css/flaticon.css">
-    <link rel="stylesheet" href="../css/icomoon.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="${contextPath}/css/flaticon.css">
+    <link rel="stylesheet" href="${contextPath}/css/icomoon.css">
+    <link rel="stylesheet" href="${contextPath}/css/style.css">
   </head>
   <body>
-  	<jsp:include page="../include/subheader.jsp" />
+  	<jsp:include page="../include/header.jsp" />
     <!-- END nav -->
 
-    
+ 
 
     <section class="ftco-section">
     	<div class="container">
@@ -57,7 +57,7 @@
 						<div class="col-md-3">
 							<div class="classes w-100 ftco-animate">
 								<a href="${contextPath}/Proser/content.do?num=${VO.num}&name=${VO.name}" class="img w-100 mb-3"
-									style="background-image: url(../consert/${VO.image}); height: 350px;"></a>
+									style="background-image: url(${contextPath}/consert/${VO.image}); height: 350px;"></a>
 								<div class="text w-100 text-center">
 									<h3>
 										${VO.name}
@@ -67,18 +67,13 @@
 							</div>
 						</div>
 					</c:if>
-					</c:forEach>
+				</c:forEach>
 
 				</c:if>
         	</div>
         </div>
-    	
     </section>
-
-   <jsp:include page="../include/footer.jsp" />
-    
+  <jsp:include page="../include/footer.jsp" />
  
-  
-    
   </body>
 </html>
