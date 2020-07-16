@@ -82,6 +82,39 @@ public class MemberDAO {
 		}
 	} // INSERTMEMBER END
 	
+	public void insertMember2(MemberBean memberBean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			
+			sql = "INSERT INTO USERS(id, password, name, email, reg_date, n_status) VALUES "
+				+ " (?,?,?,?,?,?)";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, memberBean.getId());
+			pstmt.setString(2, memberBean.getPassword());
+			pstmt.setString(3, memberBean.getName());
+			pstmt.setString(4, memberBean.getEmail());
+			pstmt.setTimestamp(5, memberBean.getReg_date());
+			pstmt.setInt(6, 1);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("insertMember Inner Err : " + e.getMessage());
+		} finally {
+			try {
+				if(con != null) con.close();
+				if(pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+				System.out.println("insertMember2 메소드 내부에서 오류 : " + e);
+			}
+		}
+	} // INSERTMEMBER2 END
 	
 	//아이디 중복체크
 	public boolean idCheck(String id) {
@@ -226,8 +259,6 @@ public class MemberDAO {
 				memberBean.setProfile_img(rs.getString("profile_img"));
 				memberBean.setPoint(rs.getInt("point"));
 				memberBean.setIs_admin(rs.getInt("is_admin"));
-				memberBean.setReg_date(rs.getTimestamp("reg_date"));
-				memberBean.setStatus(rs.getInt("status"));
 			}
 		} catch (Exception e) {
 			System.out.println("getMember Inner Err : " + e);
@@ -542,25 +573,33 @@ public class MemberDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
-		int num = 0;
 		try {
 			con = getConnection();
+			sql = "INSERT INTO POINT(id, name, point) VALUES (?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			pstmt.setInt(3, point);
+			pstmt.executeUpdate();
 			
-			sql = "SELECT COUNT(NUM) FROM POINT";
-			
+			//최고 포인트 조회 후 똑같이 포인트신청상태(횟수)를 더해주기 위함
+			sql = "select max(p_status) from point"; 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
+			
+			int p_status =0;
 			if(rs.next()) {
-				num = rs.getInt("num") + 1;
+				p_status =  rs.getInt("max(p_status)") + 1;		 
+			}else {		
+				p_status = 1; 
 			}
-			sql = "INSERT INTO POINT(num, id, name, point, p_status) VALUES (?,?,?,?,?)";
+			
+			sql = "UPDATE POINT SET P_STATUS = ?  WHERE ID = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
+			pstmt.setInt(1, p_status);
 			pstmt.setString(2, id);
-			pstmt.setString(3, name);
-			pstmt.setInt(4, point);
-			pstmt.setInt(5, 1);
 			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			System.out.println("addpoint1 Inner Err : " + e);
 		} finally {
@@ -586,11 +625,24 @@ public class MemberDAO {
 			pstmt.setString(2, id);
 			pstmt.executeUpdate();
 			
-			sql = "UPDATE POINT SET P_STATUS = 2 WHERE ID = ? AND NUM = ?";
+			//최고 포인트 조회 후 똑같이 포인트신청상태(횟수)를 빼주기더해주기 위함
+			sql = "select max(p_status) from point"; 
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setInt(2, num);
+			rs = pstmt.executeQuery();
+			
+			int p_status =0;
+			if(rs.next()) {
+				p_status =  rs.getInt("max(p_status)") - 1;		 
+			}else {		
+				p_status = 1; 
+			}
+			
+			sql = "UPDATE POINT SET P_STATUS = ? WHERE ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, p_status);
+			pstmt.setString(2, id);
 			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			System.out.println("updatePoint Inner Err : " + e);
 		} finally {
@@ -720,6 +772,37 @@ public class MemberDAO {
 		}
 	}
 	
-	
+	public int NaverUserCheck(String id) {
+		int check = 0;
+		String sql ="";
+		
+		try {
+			
+			con=getConnection();
+			sql="select * from users where id = ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				check = 1;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("NaverUserCheck 메소드 내부에서 오류 :" + e);
+		} finally {
+			try {
+				if(con!=null)con.close();
+				if(pstmt!=null)pstmt.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+			//return == 1 기존에 로그인 이력 있음.
+			return check;
+		
+	}
 	
 }
+	
+

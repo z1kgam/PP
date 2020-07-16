@@ -49,7 +49,17 @@
 
     <section class="ftco-section">
     	<div class="container">
-    	<input type="button" class="submit" value="제품등록" onclick="location.href='${contextPath}/Proser/write.do'">
+    	
+    	
+    	<div class="page-header" style="margin-top: 50px;">
+          
+        <h1>Check</h1>
+        </div>
+        <hr/>
+    	
+    	<p>제품 등록 페이지입니다.</p>
+    	
+    	<input type="button" class="submit" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px;" value="제품등록" onclick="location.href='${contextPath}/Proser/write.do'">
         <div class="row">
 				<c:if test="${List != null}">
 					<c:forEach var="VO" items="${List}">
@@ -67,14 +77,13 @@
 							</div>
 						</div>
 					</c:if>
-					</c:forEach>
+				</c:forEach>
 
 				</c:if>
         	</div>
         </div>
-    	</div>
     </section>
-
-    <jsp:include page="../include/footer.jsp" /> 
+  <jsp:include page="../include/footer.jsp" />
+ 
   </body>
 </html>

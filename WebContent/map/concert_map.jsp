@@ -12,28 +12,22 @@
 	<jsp:include page="../include/header.jsp"></jsp:include>
 </head>
 <body>
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-			<div class="container">
-        		<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
-          			<div class="col-md-9 ftco-animate text-center">
-						<h1 class="mb-3 bread">Contact Us</h1>
-						<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>
-					</div>
-				</div>
-			</div>
-	</section>
-<div>	
-	<a href="#" onclick="te3(1)"><input type="button" value="서울" id="seoul"></a>
-</div>
-<div>
-	<a href="#" onclick="te3(2)"><input type="button" value="부산" id="busan"></a>
-</div>
 
-<div id="map" style="width:50%;height:400px;"></div>
+    <div class="page-header">
+   	<h1 style="margin-top: 50px; margin-left: 700px;">Address</h1>
+    <hr/>
+    </div>
+    
+    
+
+
+<div id="map" style="width:50%;height:400px; margin-left: 25%;"></div>
 <div id="map2" style="width:50%; height:400px;"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed9791d0d9caeff08abc43ebd08003f0"></script>
+
+
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed9791d0d9caeff08abc43ebd08003f0" ></script>
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	    mapOption = { 
@@ -142,7 +136,14 @@
 </script>
 
 
-
+<div style="margin-left: 650px; margin-top: 100px;">	
+	<a href="#" onclick="te3(1)"><input type="button" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; width: 100px;" value="서울" id="seoul"></a>
+</div>
+<div style="margin-left: 800px; margin-top: -30px;">
+	<a href="#" onclick="te3(2)"><input type="button" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 100px; width: 100px;" value="부산" id="busan"></a>
+</div>
+  
+   
 <jsp:include page="../include/footer.jsp"/>
 
 </body>

@@ -100,13 +100,21 @@ function sel() {
 </style>
 </head>
 <body>
+
 <div style="clear: both;"></div>
+
+<div class="page-header" style="margin-top: 50px;">
+          
+        <h1 style="margin-left: 300px;">Date</h1>
+        </div>
+        
+
+
    	<label id="label">날짜 검색</label><input type="date" id="search" onchange="sel()">
 
    	<input type="button" value="전체보기" onclick="trybuy()">
    	<input type="hidden" value="${Bean.name}" id="name">
    	<div id="partview"><table id="part" border="1"></table></div>
 
- 
 </body>
 </html>

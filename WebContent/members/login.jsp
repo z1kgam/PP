@@ -7,28 +7,13 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-
-<style>
-#login:hover {color: #fff;}
-
- 
-</style>
-
-
 <!DOCTYPE html>
 <html>
 <head>
-
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>bootstrap template</title>
-
-
-
-
-
 
      <!-- Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -39,8 +24,8 @@
     <!-- Respond.js으로 IE8에서 반응형 기능활성화 -->
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<script src="../js/login.js"></script>
-	
-
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 
 
@@ -100,25 +85,14 @@ $(document).ready(function(){
  
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
 </head>
 <body>
-<jsp:include page="../include/subheader.jsp" />
-<div class="container" style="width: 70%;">
+<jsp:include page="../include/header.jsp" />
+<div class="container">
 
-	<div class="page-header" style="padding-top: 50px;">
+	<div class="page-header">
 	<hr/>
-		<h2 style="margin-bottom: 50px;">Login Page </h2>
+		<h2>로그인 화면 </h2>
 	</div>
 
 	<div class="col-md-6 col-md-offset-3">
@@ -135,14 +109,27 @@ $(document).ready(function(){
 			
 			<div class="form-group text-center">
 				<input type="checkbox" class="checkbox" id="idSaveCheck">아이디 기억하기	
-				<input type="submit" value="로그인" id="login" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important;">
+				<input type="submit" value="로그인" class="btn btn-primary">
+				 <div id="naver_id_login"></div>
 			</div>
-			<label for="username"><a href="${contextPath}/member/findId.do" style="color: #3d435c; "><b>아이디/비밀번호 찾기</b></a></label><br>
-			<label for="username" style=" padding-bottom: 50px;"><a href="${contextPath}/member/join.do" style="color: #3d435c;"><b>회원가입 하러 가기</b></a></label>
+			<label for="username"><a href="${contextPath}/member/findId.do">아이디/비밀번호 찾기</a></label><br>
+			<label for="username"><a href="${contextPath}/member/join.do">회원가입 하러 가기</a></label>
 	</form>
 
 </div>
 </div>
 <jsp:include page="../include/footer.jsp" />
+
+ <script type="text/javascript">
+  	var naver_id_login = new naver_id_login("8pLz7wxFRYdPZEaM8Wsq", "http://localhost:8090/PP/naver/logincom.jsp");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setDomain("http://localhost:8090/PP/members/login.jsp");
+  	naver_id_login.setState(state);
+//   	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+//   	182808912
+  </script>
+
 </body>
 </html>

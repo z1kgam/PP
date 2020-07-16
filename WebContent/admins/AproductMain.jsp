@@ -87,11 +87,13 @@
 													<th scope="col">공연 이름</th>
 													<th scope="col">공연 썸네일</th>
 													<th scope="col">공연 장르</th>
+													<th scope="col">공연 시간</th>
 													<th scope="col">이용가 등급</th>
 													<th scope="col">가격</th>
 													<th scope="col">시작 날짜</th>
 													<th scope="col">종료 날짜</th>
 													<th scope="col">공연 게시</th>	
+													<th scope="col">공연 상세 정보</th>
 													<th scope="col">공연 상세 등록</th>
 													<th scope="col">공연 삭제</th>
 																						
@@ -115,6 +117,7 @@
 											src="${contextPath}/consert/${productlist.image}"
 											style="width: 100px; height: 100px;"></a></td>
 										<td><p class="text-muted">${productlist.genre}</p></td>
+										<td><p class="text-muted">${productlist.runtime}</p></td>
 										<td><p class="text-muted">${productlist.cla}</p></td>
 										<td><p class="text-muted">${productlist.price}</p></td>
 										<td><p class="text-muted">${productlist.startdate}</p></td>
@@ -133,11 +136,19 @@
 										</td>
 										</c:if>
 											<td>
+												<button type="button" data-toggle="tooltip" title="상세 정보"
+													onclick="location.href='${contextPath}/admin/AproductInfo.do?num=${productlist.num}&name=${productlist.name}'"
+													class="btn btn-link <btn-simple-primary"
+													style="font-size: 17px;">
+													<i class="la la-list-alt" style="font-size: 20px;"></i>
+												</button>
+											</td>
+											<td>
 												<button type="button" data-toggle="tooltip" title="상세 등록"
 													onclick="location.href='${contextPath}/admin/Adetails.do?num=${productlist.num}'"
 													class="btn btn-link <btn-simple-primary"
 													style="font-size: 17px;">
-													<i class="la la-edit"></i>
+													<i class="la la-edit" style="font-size: 20px;"></i>
 												</button>
 											</td>
 											<td>
@@ -145,7 +156,7 @@
 													onclick="del('${memberlist.id}')"
 													class="btn btn-link btn-simple-danger"
 													style="font-size: 17px;">
-													<i class="la la-trash"></i>
+													<i class="la la-trash" style="font-size: 20px;"></i>
 												</button>
 											</td>
 										</div>
