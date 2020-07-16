@@ -15,6 +15,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script> 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<title>Ready Bootstrap Dashboard</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -43,7 +45,6 @@ button#formbutton {
 </style>
 
 <script type="text/javascript">
-
 //포인트 입력 박스
 function te3(t) {
 	
@@ -91,16 +92,61 @@ function list3(f) {
 	
 }
 
-//수정 함수
+//회원 정보 수정
 function update(f) {
 	
-	console.debug(f);
-	 if (confirm("정말 수정하시겠습니까??") == true){    //확인
-	f.action = "${contextPath}/admin/MemberUpdate.do?point2=${memberInfo.point}";
-	f.submit();
+	if(confirm("정말 수정 하시겠습니까??") == true) { //확인
+		
+		f.action = "${contextPath}/admin/MemberUpdate.do";
+		f.submit();
 	} else {
 		return false;
 	}
+}
+
+//포인트 수정 함수
+function updatePoint() {
+	
+	var addpoint = document.getElementById('addpoint').value;
+	var totalpoint = document.getElementById('tes3').value;
+	var id = '${memberInfo.id}';
+	console.log(id);
+	$.ajax({
+		
+		type : "post",
+		async : false,
+		data : {addpoint : addpoint, totalpoint : totalpoint, id : id},
+		url : "${contextPath}/admin/pointupdate.do",
+		success : function(data ,textStatus) {
+			
+			var jsonInfo = JSON.parse(data);
+			
+			$("#totalpoint").text("");
+			$("#totalpoint").text(jsonInfo.resultpoint);
+			document.getElementById('tes3').value = jsonInfo.resultpoint;
+			document.getElementById('addpoint').value = "";
+			
+				
+				var z = document.getElementById("po");
+				if (z.style.display === "block") {
+					z.style.display = "none";
+				 }
+				
+				
+				var x = document.getElementById("po2");
+				 if (x.style.display === "none") {
+				  x.style.display = "block";
+				}
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+	});
 
 }
 
@@ -204,9 +250,10 @@ function update(f) {
 								<div class="card">
 									<div class="card-body">
 										<p class="fw-bold mt-1"> 포인트 </p>
-										<h4><b>P ${memberInfo.point}</b></h4>
+										<input type="hidden" value="${memberInfo.point}" id="tes3">
+										<h4><b>P</b> <b id="totalpoint">${memberInfo.point}</b></h4>
 										<div id="po"  style="display: none">
-										<input type="text" class="form-control input-pill" id="pillInput" placeholder="AJAX 구현하기" name="point">	
+										<input type="text" class="form-control input-pill" id="addpoint" placeholder="포인트를 입력해 주세요" name="point">	
 										</div>
 										<div id="po2">
 										<a href="#" class="btn btn-primary btn-full text-left mt-3 mb-3" onclick="te3(1)"><i class="la la-plus"></i>포인트 변경</a>
@@ -215,7 +262,7 @@ function update(f) {
 									<div class="card-footer">
 										<ul class="nav">
 											<li class="nav-item"><a class="btn btn-default btn-link" href="#"><i class="la la-history"></i> History</a></li>
-											<li class="nav-item ml-auto"><a class="btn btn-default btn-link" onclick="update(this.form)"><i class="la la-refresh"></i> Refresh</a></li>
+											<li class="nav-item ml-auto"><a class="btn btn-default btn-link" onclick="updatePoint()"><i class="la la-heart"></i> 충전하기</a></li>
 											<li class="nav-item ml-auto"><a class="btn btn-default btn-link" href="#" onclick="te3(2)"><i class="la la-refresh"></i> Refresh</a></li>
 										</ul>
 									</div>

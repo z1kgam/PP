@@ -62,7 +62,7 @@
 						<form action="${contextPath}/admin/AdetailsPro.do" method="post">
 							<input type="hidden" value="${Bean.startdate}" id="stdate">
 							<input type="hidden" value="${Bean.enddate}" id="endate">
-							<input type="text" value="${Bean.num}" name="num">
+							<input type="hidden" value="${Bean.num}" name="num">
 							<table id="notice">	
 						<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
 											<thead>
@@ -78,24 +78,25 @@
 													</td>
 												</tr>
 												<tr>
-													<td>공연장</td>
+													<td>공연장소</td>
 												 <td>
 													<select class="form-control input-fixed" id="notify_state" name="place" style="vertical-align: middle; text-align-last: center;">
-														<option value="공연장1">공연장1</option>
-														<option value="공연장2">공연장2</option>
-														<option value="공연장3">공연장3</option>
-														<option value="공연장4">공연장4</option>
-														<option value="공연장5">공연장5</option>
-														<option value="공연장6">공연장6</option>
+														<option value="KSPO DOME (올림픽공원 체조경기장)">KSPO DOME (올림픽공원 체조경기장)</option>
+														<option value="잠실종합운동장 주경기장">잠실종합운동장 주경기장</option>
+														<option value="블루스퀘어 아이마켓홀">블루스퀘어 아이마켓홀</option>
+														<option value="의정부 종합운동장">의정부 종합운동장</option>
+														<option value="예술의전당">예술의전당</option>
+														<option value="연세대학교 노천극장">연세대학교 노천극장</option>
 													</select>
 												 </td>
 													<td style="width: 15%">좌석</td>
 													<td>
 														<select class="form-control input-fixed" id="notify_state" name="seat" style="vertical-align: middle; text-align-last: center;">
-														<option value="100">100</option>
-														<option value="150">150</option>
+														<option value="80">80</option>
+														<option value="120">120</option>
+														<option value="160">160</option>
 														<option value="200">200</option>
-														<option value="250">250</option>
+														<option value="240">240</option>
 														</select>
 													</td>
 												</tr>

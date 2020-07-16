@@ -4,6 +4,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+<style>
+#login:hover {color: #fff;}
+
+</style>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,16 +27,20 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 </head>
 <body>
-<div class="container">
-	<div class="page-header">
+
+
+<jsp:include page="../include/subheader.jsp" />
+
+<div class="container" style="width: 70%;">
+	<div class="page-header" style="padding-top: 50px;">
     <hr/>
-    	<h1>좋아요 목록</h1>
+    	<h1 style="margin-bottom: 50px;">Like List</h1>
     <hr/>
     </div>
    
-    <div class="w3-border w3-center w3-padding">
+    <div class="w3-border w3-center w3-padding" style="margin-bottom: 100px;">
     	<c:if test="${id == null}">
-    		추천 기능은 <button type="button" id="login"><b class="w3-text-blue">로그인</b></button> 후 사용 가능합니다.<br/>
+    		추천 기능은 <button type="button" id="login" class="btn btn-primary" style="background-color: #EB008B !important; border-color: #EB008B !important;">로그인</button> 후 사용 가능합니다.<br/>
     		<i class="fa fa-heart" style="font-size:16px; color:red"></i>
     		<span class="rec_count"></span>
     	</c:if>
@@ -43,5 +52,9 @@
     	</c:if>
 	</div>
 </div>
+
+
+<jsp:include page="../include/footer.jsp" />
+
 </body>
 </html>

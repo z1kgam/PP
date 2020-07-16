@@ -24,7 +24,11 @@
     <!-- Respond.js으로 IE8에서 반응형 기능활성화 -->
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<script src="../js/login.js"></script>
-	
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
+
 
 <script type="text/javascript">
 
@@ -106,6 +110,7 @@ $(document).ready(function(){
 			<div class="form-group text-center">
 				<input type="checkbox" class="checkbox" id="idSaveCheck">아이디 기억하기	
 				<input type="submit" value="로그인" class="btn btn-primary">
+				 <div id="naver_id_login"></div>
 			</div>
 			<label for="username"><a href="${contextPath}/member/findId.do">아이디/비밀번호 찾기</a></label><br>
 			<label for="username"><a href="${contextPath}/member/join.do">회원가입 하러 가기</a></label>
@@ -114,5 +119,17 @@ $(document).ready(function(){
 </div>
 </div>
 <jsp:include page="../include/footer.jsp" />
+
+ <script type="text/javascript">
+  	var naver_id_login = new naver_id_login("8pLz7wxFRYdPZEaM8Wsq", "http://localhost:8090/PP/naver/logincom.jsp");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setDomain("http://localhost:8090/PP/members/login.jsp");
+  	naver_id_login.setState(state);
+//   	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+//   	182808912
+  </script>
+
 </body>
 </html>

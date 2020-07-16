@@ -10,7 +10,7 @@
 </head>
 <body>
 	<input type="hidden" id="contextPath" value="${contextPath}">
-	<input type="button" value="댓글쓰기" class="submit" onclick="openreply()" style="margin-left: 65%;margin-top: 30px;">
+	<input type="button" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;" value="댓글쓰기" class="submit" onclick="openreply()" style="margin-left: 65%;margin-top: 30px;">
 	<form action="${contextPath}/Proser/reply.do" name="frmReply" method="post">
 		<input type="hidden" name="pronum" value="${Bean.num}">
 		<input type="hidden" name="parentsnum">
@@ -19,8 +19,8 @@
 				<td align="center"><input type="text" value="${sessionScope.id}" name="id"></td>
 				<td align="center"><textarea rows="5" cols="30" name="content"></textarea></td>
 				<td align="center">
-				<input type="button" value="댓글등록" onclick="replywrite()"><br>
-				<input type="button" value="작성취소" onclick="hide()">
+				<input type="button" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;" value="댓글등록" onclick="replywrite()"><br>
+				<input type="button" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;" value="작성취소" onclick="hide()">
 				</td>
 			</tr>
 		</table>

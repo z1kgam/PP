@@ -131,20 +131,18 @@
   <body>
 <jsp:include page="../include/subheader.jsp" />
     <!-- END nav -->
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/concert.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-3 bread">Our Blog</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.jsp">Home</a></span> <span>Blog</span></p>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
 	<section class="ftco-section">
 		<div class="container">
+		
+		<div class="page-header" style="margin-top: -50px;">
+          
+        <h1 style="margin-left: 300px;">Check</h1>
+        </div>
+       
+        
+		
 			<div class="row">
 				<div>
 					<div class="row">
@@ -155,49 +153,48 @@
 									<input type="hidden" name="name" value="${DBean.name}">
 									<input type="hidden" name="detailnum" value="${DBean.detailnum}">
 									<input type="hidden" name="today" value="${DBean.today}">
-									<table border="1" id="table">
+									<table border="1" id="table" style="text-align: center; border: 1px solid #dddddd; max-width: 80%; margin-left: 300px;">
 										<tr>
-											<td>콘서트명</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">콘서트명</b></td>
 											<td>${DBean.name}</td>
 										</tr>
 										<tr>
-											<td>포스터</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">포스터</b></td>
 											<td><img src="../consert/${DBean.image}"></td>
 										</tr>
 										<tr>
-											<td>장르</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">장르</b></td>
 											<td>${DBean.genre}</td>
 										</tr>
 										<tr>
-											<td>관람등급</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">>관람등급</b></td>
 											<td>${DBean.cla}</td>
 										</tr>
 										<tr>
-											<td>관람시간</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">관람시간</b></td>
 											<td>${DBean.runtime}분</td>
 										</tr>
 										<tr>
-											<td>공연장</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">공연장</b></td>
 											<td>${DBean.place}</td>
 										</tr>
 										<tr>
-											<td>공연날짜</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">공연날짜</b></td>
 											<td><fmt:formatDate value="${DBean.today}" type="date"
 													dateStyle="full" /></td>
 										</tr>
 										<tr>
-											<td>시작시간</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">시작시간</b></td>
 											<td>${fn:split(DBean.starttime,':')[0]}시
 												${fn:split(DBean.starttime,':')[1]}분</td>
 										</tr>
 										<tr>
-											<td>가격</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">가격</b></td>
 											<td><fmt:formatNumber value="${DBean.price}"
 													pattern="#,###" />원</td>
-
 										</tr>
 										<tr>
-											<td>예매수</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">예매수</b></td>
 											<td><select id="count" name="count">
 
 													<c:choose>
@@ -215,17 +212,16 @@
 															</c:forEach>
 														</c:when>
 													</c:choose>
-
 											</select></td>
 										<tr>
 										<tr>
-											<td>총가격</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">총가격</b></td>
 
 											<td id="total"><fmt:formatNumber value="${DBean.price}"
 													pattern="#,###" />원</td>
 										</tr>
 										<tr>
-											<td>좌석선택</td>
+											<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">좌석선택</b></td>
 											<td>
 												<p>좌석 배치도</p>
 												
@@ -240,8 +236,6 @@
 														</c:forEach>
 														</c:forTokens>
 													</tr>
-
-
 													<c:forEach begin="1" end="${DBean.seat}" varStatus="num">
 														<fmt:parseNumber var="titlenum" value="${(num.count+19)/20}" integerOnly="true" />
 														<c:choose>
@@ -304,7 +298,9 @@
 									}
 								</script>
 								
-									<input type="submit" value="장바구니에 담기" id="submit" disabled="disabled" class="btn btn-info" >
+									<input type="submit" style="margin-top:50px; margin-right:-10px; background-color: #00E7D6 !important; 
+									border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 10px;" 
+									value="장바구니에 담기" id="submit" disabled="disabled" class="btn btn-info" >
 								
 									<input type="hidden" id="totalprice" name="totalprice" value="${DBean.price}">
 								</form>
@@ -319,8 +315,7 @@
 	<div>
 
 	</div>
-	<jsp:include page="../include/footer.jsp" />    
-    
+<jsp:include page="${contextPath}/include/footer.jsp" />    
   
   <script src="../js/jquery.min.js"></script>
   <script src="../js/jquery-migrate-3.0.1.min.js"></script>

@@ -43,13 +43,16 @@
   </head>
   <body>
 
+<jsp:include page="../include/subheader.jsp" />
 
-      <div class="container">
-        <div class="page-header">
-          <h1>내정보</h1>
+
+      <div class="container" style="width: 70%;">
+        <div class="page-header" style="margin-bottom: 50px;">
+          <h1 style="margin-top: 50px;">My Profile</h1>
+          <hr>
         </div>
         
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3" >
           <form role="form" action="${contextPath}/member/updateProfileAction.do" method="post" name="modifyForm" enctype="multipart/form-data">
             <div class="form-group">
               <label for="username">아이디</label>
@@ -63,20 +66,22 @@
 	           		<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
 	           		<input type="text" class="form-control input-lg" disabled placeholder="이미지를 업로드하세요.">
 	           		<span class="input-group-btn">
-	           			<button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i>파일 찾기</button>
+	           			<button class="browse btn btn-primary input-lg" style="background-color: #EB008B !important; border-color: #EB008B !important; color: #fff !important;" type="button"><i class="glyphicon glyphicon-search" ></i>파일 찾기</button>
 	           		</span>
 	           </div>
            </div>
            
            </div>
 
-            <div class="form-group text-center">
-              <input type="submit" class="btn btn-info" value="프로필수정">
-              <input type="button" class="btn btn-warning" onclick="location.href='${contextPath}'" value="취소">
+            <div class="form-group text-center" style="margin-top: 100px;">
+              <input type="submit" class="btn btn-info" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px;" value="프로필수정">
+              <input type="button" class="btn btn-warning" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; margin-bottom: 50px;" onclick="location.href='${contextPath}'" value="취소">
             </div>
           </form>
         </div>
 
+
+<jsp:include page="../include/footer.jsp" />
 
   </body>
 </html>

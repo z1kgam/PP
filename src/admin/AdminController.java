@@ -29,10 +29,13 @@ import Product.DetailBean;
 import Product.DetailDAO;
 import Product.ProductBean;
 import Product.ProductDAO;
+import member.LikeBean;
 import member.MemberBean;
 import member.MemberDAO;
 import noticeboard.NoticeboardBean;
 import noticeboard.NoticeboardDAO;
+import team.faqboard.faqBean;
+import team.faqboard.faqDao;
 import team.qnaboard.qnaBean;
 import team.qnaboard.qnaDao;
 
@@ -85,7 +88,6 @@ public class AdminController extends HttpServlet{
 				
 			//회원정보 전체 조회
 			} else if(action.equals("/MemberManager.do")) {
-				System.out.println("취소");
 				//회원 아이디 검색값 받아오기
 				String search = "";
 				if(request.getParameter("search")==null) {
@@ -182,11 +184,7 @@ public class AdminController extends HttpServlet{
 				memberInfo.setName(request.getParameter("name"));
 				memberInfo.setPhone(request.getParameter("phone"));
 				memberInfo.setEmail(request.getParameter("email"));
-				if(request.getParameter("point") == "" ) {
-					memberInfo.setPoint(Integer.parseInt(request.getParameter("point2")));
-				} else {
-					memberInfo.setPoint(Integer.parseInt(request.getParameter("point")));
-				}
+				
 				
 				memberInfo.setStatus(Integer.parseInt(request.getParameter("status")));
 				memberInfo.setIs_admin(Integer.parseInt(request.getParameter("admin")));
@@ -335,10 +333,11 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("notice", noticebean);
 				
 				nextPage = "/admins/AnoticeModify.jsp";
-				
+			
+			//checkPage
 			//관리자 페이지 공지사항 글 수정	
 			} else if(action.equals("/AmodNotice.do")) {
-				
+				checkPage = 1;
 				int n_num = Integer.parseInt(request.getParameter("n_num"));
 				System.out.println(n_num);
 				
@@ -476,7 +475,7 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("status", status);
 
 		         nextPage = "/admins/AqnaBoard.jsp";
-		         
+		    
 			//문의 답변 수정하는 페이지
 			} else if(action.equals("/AqnaAnswer.do")) {
 				
@@ -489,11 +488,12 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("qnaUpdate", qnabean);
 		         
 		         nextPage = "/admins/AqnaAnswer.jsp";
-		    
+		         
+		    //checkPage
 		    //문의 답변 달기 실행
 			} else if(action.equals("/AqnaUpdate.do")) {
 				
-				
+				checkPage = 1;
 				int qna_num = Integer.parseInt(request.getParameter("qna_num"));
 		         
 		         int status = Integer.parseInt(request.getParameter("status"));
@@ -514,6 +514,7 @@ public class AdminController extends HttpServlet{
 		         System.out.println(result);
 		         
 		         nextPage = "/admin/Aqnaboardp.do";
+		         
 		    //답변 수정 실행
 			} else if(action.equals("/AqnaAnswerMod.do")) {
 				
@@ -527,6 +528,7 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("qnaUpdate", qnabean);
 				
 				 nextPage = "/admins/AqnaAnswerMod.jsp";
+				 
 			//qna게시판 글 삭제	
 			} else if(action.equals("/Aqnadelete.do")) {
 				
@@ -539,7 +541,7 @@ public class AdminController extends HttpServlet{
 			//상품 관리 페이지(메인) 이동
 			} else if(action.equals("/AproductMain.do")) {
 				
-				
+				int checkajax = 0;
 				
 				
 				ProductDAO dao = new ProductDAO();
@@ -560,7 +562,7 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("blockLast", blockLast);
 		         request.setAttribute("totalPage", totalPage);
 		         request.setAttribute("nowPage", nowPage);
-				
+				 request.setAttribute("checkajax", checkajax);
 				
 				
 				
@@ -568,11 +570,13 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("List",list);
 				
 				 nextPage = "/admins/AproductMain.jsp";
+				 
 			//상품 등록 페이지 이동	 
 			} else if(action.equals("/AproductAdd.do")) {
 				
 				nextPage="/admins/AproductAdd.jsp";
-				
+			
+			
 			//상품 등록 	
 			} else if(action.equals("/AwritePro.do")) {
 				
@@ -641,7 +645,7 @@ public class AdminController extends HttpServlet{
 						+ "/admin/AproductMain.do';" + "</script>");
 
 				return;
-			
+				
 			//상품 상세 등록 페이지 이동
 			}	else if(action.equals("/Adetails.do")) {
 				
@@ -658,7 +662,6 @@ public class AdminController extends HttpServlet{
 				
 
 				nextPage = "/admins/AproductDetail.jsp";
-				
 			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
 //				JSONObject jobj = new JSONObject();
 //				jobj.put("url", uploadPath1);
@@ -702,6 +705,7 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("nowPage", nowPage);
 
 		         nextPage = "/admins/AqnaBoard.jsp";
+		         
 			//문의 답변 수정하는 페이지
 			} else if(action.equals("AqnaModify.do")) {
 				
@@ -714,11 +718,12 @@ public class AdminController extends HttpServlet{
 		         request.setAttribute("qnaUpdate", qnabean);
 		         
 		         nextPage = "/admins/AqnaModify.jsp";
-		         
+		    
+		    //checkPage
 			//상품 상세 등록 페이지
 			} else if(action.equals("/AdetailsPro.do")) {
-				System.out.println("ㅋㅋㅋ");
 				
+				checkPage = 1;
 				ProductBean productBean = new ProductBean();
 				ProductDAO dao = new ProductDAO();
 				DetailBean Bean = new DetailBean();
@@ -727,14 +732,13 @@ public class AdminController extends HttpServlet{
 				int num = Integer.parseInt(request.getParameter("num"));
 				
 				productBean = dao.getBoard(num);
-
 				String place = request.getParameter("place");
 				int seat = Integer.parseInt(request.getParameter("seat"));
 				int totalreserved = 0;
 				Date today = Date.valueOf(request.getParameter("today"));
 				String starttime = request.getParameter("starttime");
-				
 
+				
 				Bean = new DetailBean();
 				Bean.setName(productBean.getName());
 				Bean.setGenre(productBean.getGenre());
@@ -750,43 +754,362 @@ public class AdminController extends HttpServlet{
 				Bean.setTotalreserved(totalreserved);
 				Bean.setToday(today);
 				Bean.setStarttime(starttime);
-
-				Ddao.insertDetail(Bean);
+				Bean.setNum(num);
 				
-				 
+				Ddao.insertDetail(Bean);
 				
 				nextPage = "/admin/AproductMain.do";
 				
 			//ajax 테스트 	
 			} else if(action.equals("/runstatus.do")) {
+				ProductDAO dao = new ProductDAO();
+				System.out.println("ㅋㅋ전");
+				int total = dao.getCount();
+				int pageSize = 10;
+		         int nowPage = 1;
+		         if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		         int pageFirst = (nowPage-1) * pageSize;
+		         int totalPage = total/pageSize + (total%pageSize==0?0:1);
+		         int blockSize = 10;
+		         int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+		         int blockLast = blockFirst + blockSize -1;
+		         
+		         if(blockLast>totalPage) blockLast=totalPage;
+		         request.setAttribute("blockSize", blockSize);
+		         request.setAttribute("blockFirst", blockFirst);
+		         request.setAttribute("blockLast", blockLast);
+		         request.setAttribute("totalPage", totalPage);
+		         request.setAttribute("nowPage", nowPage);
 				
 				AdminDAO adminDAO = new AdminDAO();
 				int runstatus = Integer.parseInt(request.getParameter("runstatus"));
 				int num = Integer.parseInt(request.getParameter("num"));
 				
+				//업데이트 구문
+				System.out.println("ㅋㅋ전");
 				adminDAO.runChange(runstatus, num);
+				System.out.println("ㅋㅋ");
 				
+				//상품리스트 조회 구문
+				List<ProductBean> list = dao.getList(pageFirst, pageSize);
+				request.setAttribute("List",list);
 				
-				System.out.println(runstatus);
-				
-				JSONArray Array = new JSONArray();
-				JSONObject Info = new JSONObject();
-				Info.put("test", "업데이트성공");
-				Array.add(Info);
 				
 				JSONObject result = new JSONObject();
+				JSONArray Array = new JSONArray();
+				JSONObject Info;
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 				
-				result.put("Run", Array);
+				for (int i=0; i<list.size(); i++) {
+					
+					ProductBean pb = list.get(i);
+					Info = new JSONObject();
+					Info.put("name", pb.getName());
+					Info.put("num", Integer.toString(pb.getNum()));
+					Info.put("Genre", pb.getGenre());
+					Info.put("cla", pb.getCla());
+					Info.put("runtime", Integer.toString(pb.getRuntime()));
+					Info.put("price",Integer.toString(pb.getPrice()));
+					Info.put("startdate", transFormat.format(pb.getStartdate()));
+					Info.put("enddate", transFormat.format(pb.getEnddate()));
+					Info.put("image", pb.getImage());
+					Info.put("content", pb.getContent());
+					Info.put("runtime", Integer.toString(pb.getRunstatus()));
+					Array.add(Info);
+				}
+				System.out.println("ㅋㅋ 끝");
 				
-				PrintWriter out = response.getWriter();
+				result.put("Plist", Array);
+				PrintWriter out = response.getWriter(); // 보내주는 역할
 				
 				String jsonInfo = result.toString();
-				
+				System.out.println("창모");
 				out.print(jsonInfo);
+				System.out.println("창모2");
+//				return;
+				nextPage = "/admin/AproductMain.do";
+				
+			//FAQ 관리페이지 이동
+			} else if(action.equals("/AfaqMain.do")) {
+				
+				faqBean faqbean = new faqBean();
+				faqDao faqdao = new faqDao();
+				List<faqBean> articlesList2 = new ArrayList<faqBean>();
+				
+				String search = (request.getParameter("search") != null) ? request.getParameter("search") : "";
+				String category = (request.getParameter("category") != null) ? request.getParameter("category") : "";
+//				
+				int total = faqdao.getfaqCount(search);
+				int nowpage = 1 ;
+				if(request.getParameter("nowpage") !=null) nowpage = Integer.parseInt(request.getParameter("nowpage"));
+				int pagesize = 5 ;
+				int startrow = (nowpage-1)*pagesize;
+				int endrow = pagesize;
+				int totalpage = total/pagesize + (total%pagesize==0?0:1);
+				int blocksize = 3;
+				int blockfirst = ((nowpage/blocksize)-(nowpage%blocksize==0?1:0))*blocksize+1;
+				int blocklast = blockfirst + blocksize -1;
+				if(blocklast > totalpage) blocklast = totalpage;
+				
+				articlesList2 = faqdao.getFaqList(search, startrow, endrow);
+				
+				int count = total;
+				
+				request.setAttribute("category", category);
+				
+				request.setAttribute("articlesList", articlesList2);
+				request.setAttribute("count", count);
+				//페이징
+				request.setAttribute("nowpage", nowpage);
+				request.setAttribute("blockfirst", blockfirst);
+				request.setAttribute("blocklast", blocklast);
+				request.setAttribute("blocksize", blocksize);
+				request.setAttribute("totalpage", totalpage);	
+				
+				
+				nextPage = "/admins/AfaqMain.jsp";
+				
+			//FAQ게시판 글 작성하러 가기	
+			} else if(action.equals("/AfaqWrite.do")) {
+				
+				String check = request.getParameter("check");
+				
+				request.setAttribute("check", check);
+				
+				
+				
+				nextPage = "/admins/AfaqWrite.jsp";
+				
+			//FAQ 게시판 글 작성 	
+			} else if(action.equals("/AfaqWritepro.do")) {
+				
+				faqBean faqbean = new faqBean();
+				faqDao faqdao = new faqDao();
+				
+				String Rcate = request.getParameter("cate");
+				String title = request.getParameter("title");
+				String contents = request.getParameter("contents");
+				checkPage = 1;
+
+				faqbean.setFaq_cate(Rcate);
+				faqbean.setFaq_title(title);
+				faqbean.setFaq_contents(contents);
+				
+				faqdao.insertfboard(faqbean);
+				
+				nextPage = "/admin/AfaqMain.do";
+			
+		
+			//글 수정 페이지 이동
+			} else if(action.equals("/AfaqMod.do")) {
+				
+				faqBean faqbean = new faqBean();
+				faqDao faqdao = new faqDao();
+				
+				String faq_num = request.getParameter("faq_num");
+				faqbean = faqdao.getfaq(Integer.parseInt(faq_num));
+				
+				request.setAttribute("faqUpdate", faqbean);
+				
+				nextPage = "/admins/AfaqMod.jsp";
+			
+			//checkPage	
+			//글 수정 	
+			} else if(action.equals("/AfaqModpro.do")) {
+					
+				faqBean faqbean = new faqBean();
+				faqDao faqdao = new faqDao();
+				
+				int faq_num = Integer.parseInt(request.getParameter("faq_num"));
+				
+				String Rcate = request.getParameter("cate");
+				String title = request.getParameter("title");
+				String contents = request.getParameter("contents");
+				
+				faqbean.setFaq_num(faq_num);
+				faqbean.setFaq_cate(Rcate);
+				faqbean.setFaq_title(title);
+				faqbean.setFaq_contents(contents);
+				
+				int result = faqdao.updatefboard(faqbean);
+				
+				System.out.println(result);
+				
+				nextPage = "/admin/AfaqMain.do";
+			//FAQ 게시글 삭제	
+			} else if(action.equals("/AfaqDel.do")) {
+				
+				faqBean faqbean = new faqBean();
+				faqDao faqdao = new faqDao();
+				
+				int faq_num = Integer.parseInt(request.getParameter("faq_num"));
+				faqdao.deletefboard(faq_num);
+				
+				request.setAttribute("faqUpdate", faqbean);
+				
+				nextPage = "/admin/AfaqMain.do";
+
+			//회원정보 페이지내 포인트 업데이트 (에이젝스)	
+			} else if(action.equals("/pointupdate.do")) {
+				
+				System.out.println(request.getParameter("addpoint"));
+			    System.out.println(request.getParameter("totalpoint"));
+				System.out.println(request.getParameter("id"));
+			    int addpoint = Integer.parseInt(request.getParameter("addpoint"));
+			    int totalpoint = Integer.parseInt(request.getParameter("totalpoint"));
+			    String id = request.getParameter("id");
+			    
+			    int resultpoint = addpoint + totalpoint;
+			    
+			    MemberBean b = new MemberBean();
+			    MemberDAO d = new MemberDAO();
+			    
+			    b.setPoint(resultpoint);
+			    b.setId(id);
+			    
+			    d.updatetest(b);
+			    
+			    PrintWriter pw = response.getWriter();
+				JSONObject memberInfo = new JSONObject();
+				//회원 한명의 정보를 name/value 쌍으로 저장함
+				memberInfo.put("resultpoint", resultpoint);
+			    
+				request.setAttribute("resultpointT", resultpoint);
+				pw.print(memberInfo);
 				
 				return;
-			}
+			} else if(action.equals("/MemberPoint.do")) {
+				
+				 MemberDAO memberDAO = new MemberDAO();
+				  int total = memberDAO.getPointTotal();
+				  int pageSize = 5; 
+				  int nowPage = 1;
+				  if(request.getParameter("nowPage") != null) {
+					  nowPage = Integer.parseInt(request.getParameter("nowPage"));
+				  }
+				  int pageFirst = (nowPage - 1) * pageSize; 
+				  int totalPage = total / pageSize + (total % pageSize == 0 ? 0 : 1); 
+				  int blockSize = 10; 
+				  int blockFirst = (nowPage / blockSize- (nowPage%blockSize == 0 ? 1 : 0) ) * blockSize + 1; 
+				  int blockLast = blockFirst + blockSize -1;			  
+				  if(blockLast > totalPage) {blockLast = totalPage;}
+				
+				  List<LikeBean> pointList = memberDAO.getPointList(pageFirst, pageSize);
+				  request.setAttribute("blockSize", blockSize);
+				  request.setAttribute("blockFirst", blockFirst);
+				  request.setAttribute("blockLast", blockLast);
+				  request.setAttribute("totalPage", totalPage);
+				  request.setAttribute("nowPage", nowPage);
+				  request.setAttribute("pointList", pointList);
+				  
+				  nextPage = "/admins/MemberPoint.jsp";
+			//포인트 추가	
+			} else if(action.equals("/MemberPointAdd.do")) {
+				
+				String id = (String)request.getSession().getAttribute("id");
+				String name = (String)request.getSession().getAttribute("name");
+				int point = Integer.parseInt(request.getParameter("point"));
+				int num = Integer.parseInt(request.getParameter("num"));
+				MemberDAO memberDAO = new MemberDAO();
+				MemberBean memberBean = new MemberBean();
+				memberBean = memberDAO.getMember(id);
+				int totalpoint = memberBean.getPoint();
+				
+				memberDAO.updatePoint(id, point, num); 	//해당 id의 포인트에 충전할 포인트만큼 추가해줌
+				memberDAO.delPoint(id, num);
+				
+				nextPage = "/admin/MemberPoint.do";
+			//포인트 내역 삭제
+			} else if(action.equals("/MemberdelPoint.do")) {
+				
+				String id = request.getParameter("id");
+				int num = Integer.parseInt(request.getParameter("num"));
+				MemberDAO memberDAO = new MemberDAO();
+				MemberBean memberBean = new MemberBean();
+				 
+				memberDAO.delPoint(id,num);
+				
+				nextPage = "/admin/MemberPoint.do";
+			
+			//상품 상세 정보 조회
+			} else if(action.equals("/AproductInfo.do")) {
+				
+				ProductBean productBean = new ProductBean();
+				ProductDAO productdao = new ProductDAO();
+				DetailDAO detail = new DetailDAO();
+				
+				int num = Integer.parseInt(request.getParameter("num"));
+				String name = request.getParameter("name");
+				String id = (String)request.getSession().getAttribute("id");
+				productBean = productdao.getBoard(num);
+				
+				
+				System.out.println( "여기야" + name);
+				List<DetailBean> detList = detail.getdetail(name);
+				request.setAttribute("Bean", detList);
+				request.setAttribute("bean", productBean);
+				
+				nextPage = "/admins/AproductInfo.jsp";
+			
+			//네이버 로그인
+			} else if(action.equals("/NaverTest.do")) {
+				
+				MemberBean bean = new MemberBean();
+				MemberDAO dao = new MemberDAO();
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				int s = email.indexOf("@");
+				String id = email.substring(0, s);
+				String password = id+"1234";
+				int nst = Integer.parseInt(request.getParameter("nst"));
+				
+				
+				
+				//최초로그인 ? 체크
+				int check = dao.NaverUserCheck(id);
+				
+				
+				// check == 1 아이디있음 , check == 0 아이디 없음 
+				if(check == 1) {
+						System.out.println("아이디 체크");
+						request.getSession().setAttribute("id", id);
+						request.getSession().setAttribute("name",name);
+						PrintWriter pw = response.getWriter();
+						
+						nextPage = "/index/index.jsp";
+						
+				} else {
 					
+					System.out.println("아이디 없음");
+					bean.setId(id);
+					bean.setPassword(password);
+					bean.setName(name);
+					bean.setEmail(email);
+					
+					//아이디없을시 회원추가
+					dao.insertMember2(bean);
+					
+					//로그인 action
+					int check2 =dao.login(id, password); 
+					System.out.println(check2);
+					if(check2 == 1) {
+						System.out.println("아이디 있음");
+						
+						request.getSession().setAttribute("id", id);
+						request.getSession().setAttribute("name",name);
+						PrintWriter pw = response.getWriter();
+						
+						nextPage = "/index/index.jsp";
+					}
+					
+				}
+					
+				
+				
+			} 
+			
+			
+			
 			
 			//디스패치 방식으로 포워딩 (재요청)
 			if(checkPage == 0) {
@@ -796,8 +1119,5 @@ public class AdminController extends HttpServlet{
 			}
 			
 		}// doHandle END
-		
-				
-	
-	
+			
 }

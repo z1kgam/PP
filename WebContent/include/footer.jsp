@@ -9,55 +9,55 @@
 
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="${contextPath}/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="${contextPath}/css/animate.css">
     
-    <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../css/magnific-popup.css">
+    <link rel="stylesheet" href="${contextPath}/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="${contextPath}/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="${contextPath}/css/magnific-popup.css">
 
-    <link rel="stylesheet" href="../css/aos.css">
+    <link rel="stylesheet" href="${contextPath}/css/aos.css">
 
-    <link rel="stylesheet" href="../css/ionicons.min.css">
+    <link rel="stylesheet" href="${contextPath}/css/ionicons.min.css">
 
-    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="../css/jquery.timepicker.css">
+    <link rel="stylesheet" href="${contextPath}/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="${contextPath}/css/jquery.timepicker.css">
 
     
-    <link rel="stylesheet" href="../css/flaticon.css">
-    <link rel="stylesheet" href="../css/icomoon.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="${contextPath}/css/flaticon.css">
+    <link rel="stylesheet" href="${contextPath}/css/icomoon.css">
+    <link rel="stylesheet" href="${contextPath}/css/style.css">
 
 
 <!-- footer start -->
-    <footer class="ftco-footer ftco-section bg-light">
+    <footer class="ftco-footer ftco-section bg-light" style="width: 100%;">
       <div class="container">
         <div class="row d-flex">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Meditative</h2>
+              <h2 class="ftco-heading-2" style="font-family:나눔고딕;">티켓팅 사이트</h2>
               <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
               <ul class="ftco-footer-social list-unstyled float-lft mt-3">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a href="#" style="background-color: #EB008B;"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#" style="background-color: #00E7D6;"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#" style="background-color: #D8FF54;"><span class="icon-instagram"></span></a></li>
               </ul>
             </div>
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4 ml-md-4">
-              <h2 class="ftco-heading-2">Popular Links</h2>
+              <h2 class="ftco-heading-2" style="font-family:나눔고딕;">이용약관</h2>
               <ul class="list-unstyled">
-                <li><a href="#">Yoga for Beginners</a></li>
-                <li><a href="#">Yoga for Pregnant</a></li>
-                <li><a href="#">Yoga Barre</a></li>
-                <li><a href="#">Yoga Advance</a></li>
+                <li><a href="${contextPath}/caution1.jsp">예매취소 시 유의사항</a></li>
+                <li><a href="${contextPath}/caution2.jsp">환불안내</a></li>
+                <li><a href="${contextPath}/caution3.jsp">무통장입금 시 주의사항</a></li>
+               
               </ul>
             </div>
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Quick Links</h2>
+              <h2 class="ftco-heading-2" style="font-family:나눔고딕;">Quick Links</h2>
               <ul class="list-unstyled">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
@@ -69,7 +69,7 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Have a Questions?</h2>
+              <h2 class="ftco-heading-2" style="font-family:나눔고딕;">Have a Questions?</h2>
               <div class="block-23 mb-3">
                 <ul>
                   <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
@@ -96,25 +96,22 @@
       </div>
     </footer>
     
-    
+  <script src="${contextPath}/js/jquery.min.js"></script>
+  <script src="${contextPath}/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="${contextPath}/js/popper.min.js"></script>
+  <script src="${contextPath}/js/bootstrap.min.js"></script>
+  <script src="${contextPath}/js/jquery.easing.1.3.js"></script>
+  <script src="${contextPath}/js/jquery.waypoints.min.js"></script>
+  <script src="${contextPath}/js/jquery.stellar.min.js"></script>
+  <script src="${contextPath}/js/owl.carousel.min.js"></script>
+  <script src="${contextPath}/js/jquery.magnific-popup.min.js"></script>
+  <script src="${contextPath}/js/aos.js"></script>
+  <script src="${contextPath}/js/jquery.animateNumber.min.js"></script>
+  <script src="${contextPath}/js/bootstrap-datepicker.js"></script>
+  <script src="${contextPath}/js/jquery.timepicker.min.js"></script>
+  <script src="${contextPath}/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="${contextPath}/js/google-map.js"></script>
+  <script src="${contextPath}/js/main.js"></script>
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
-
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="../js/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/jquery.easing.1.3.js"></script>
-  <script src="../js/jquery.waypoints.min.js"></script>
-  <script src="../js/jquery.stellar.min.js"></script>
-  <script src="../js/owl.carousel.min.js"></script>
-  <script src="../js/jquery.magnific-popup.min.js"></script>
-  <script src="../js/aos.js"></script>
-  <script src="../js/jquery.animateNumber.min.js"></script>
-  <script src="../js/bootstrap-datepicker.js"></script>
-  <script src="../js/jquery.timepicker.min.js"></script>
-  <script src="../js/scrollax.min.js"></script>
-  <script src="../js/main.js"></script>
     

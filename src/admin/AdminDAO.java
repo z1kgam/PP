@@ -273,17 +273,16 @@ public class AdminDAO {
 		
 		try {
 			con = getConnection();
-			sql = "update users set id=?, password=? , name=? , phone=? , email=?, point=?, status=?, is_admin=? where id = ?";
+			sql = "update users set id=?, password=? , name=? , phone=? , email=?, status=?, is_admin=? where id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberInfo.getId());
 			pstmt.setString(2, memberInfo.getPassword());
 			pstmt.setString(3, memberInfo.getName());
 			pstmt.setString(4, memberInfo.getPhone());
 			pstmt.setString(5, memberInfo.getEmail());
-			pstmt.setInt(6, memberInfo.getPoint());
-			pstmt.setInt(7, memberInfo.getStatus());
-			pstmt.setInt(8, memberInfo.getIs_admin());
-			pstmt.setString(9, memberInfo.getId());
+			pstmt.setInt(6, memberInfo.getStatus());
+			pstmt.setInt(7, memberInfo.getIs_admin());
+			pstmt.setString(8, memberInfo.getId());
 			
 			result = pstmt.executeUpdate();
 			

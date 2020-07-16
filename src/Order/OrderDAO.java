@@ -93,8 +93,8 @@ public class OrderDAO {
 		}
 	}
 	
-	//해당 id의 전체 장바구니 내역 리스트조회
-	public ArrayList<OrderVO> getCartList(String id){
+	//해당 id의 전체 장바구니 내역 리스트조회 (페이징까지)
+	public ArrayList<OrderVO> getCartList(String id, int pageFirst, int pageSize){
 		ArrayList<OrderVO> cartList = new ArrayList<OrderVO>();
 		
 		Connection con = null;
@@ -103,9 +103,11 @@ public class OrderDAO {
 		ResultSet rs = null;
 		try {
 			con = getConnection();
-			sql = "SELECT * FROM PRODUCTORDER WHERE ID = ?";
+			sql = "SELECT * FROM PRODUCTORDER WHERE ID = ? ORDER BY NUM DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, pageFirst);
+			pstmt.setInt(3, pageSize);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				OrderVO orderVO = new OrderVO();
@@ -132,6 +134,47 @@ public class OrderDAO {
 		
 		return cartList;
 	}
+	
+	//해당 id의 전체 장바구니 내역 총개수
+		public ArrayList<OrderVO> getCartList(String id){
+			ArrayList<OrderVO> cartList = new ArrayList<OrderVO>();
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = "";
+			ResultSet rs = null;
+			try {
+				con = getConnection();
+				sql = "SELECT * FROM PRODUCTORDER WHERE ID = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					OrderVO orderVO = new OrderVO();
+					orderVO.setNum(rs.getInt("num"));
+					orderVO.setId(rs.getString("id"));
+					orderVO.setName(rs.getString("name"));
+					orderVO.setQty(rs.getInt("qty"));
+					orderVO.setTotalprice(rs.getInt("totalprice"));
+					orderVO.setOrderdate(rs.getDate("orderdate"));				
+					cartList.add(orderVO);
+				}
+				
+			} catch (Exception e) {
+				System.out.println("getCartList Inner Err : " + e);
+			} finally {
+				try {
+					if(rs!=null)rs.close();
+					if(pstmt!=null)pstmt.close();
+					if(con!=null)con.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			
+			return cartList;
+		}
+
 
 	//장바구니 내역삭제
 	public void delCart(int num, String id) {
@@ -528,6 +571,48 @@ public class OrderDAO {
 		return paymentList;
 	}
 	
+	//해당 id의 결제내역 보기(페이징)
+		public ArrayList<OrderVO> getPaymentList(String id, int pageFirst, int pageSize) {
+			ArrayList<OrderVO> paymentList = new ArrayList<OrderVO>();
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = "";
+			ResultSet rs = null;
+			
+			try {
+				con = getConnection();
+				sql = "SELECT * FROM PAYMENT WHERE ID = ? ORDER BY p_seq_num DESC LIMIT ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setInt(2, pageFirst);
+				pstmt.setInt(3, pageSize);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					OrderVO paymentVO = new OrderVO();
+					paymentVO.setId(id);
+					paymentVO.setName(rs.getString("name"));
+					paymentVO.setQty(rs.getInt("qty"));
+					paymentVO.setP_seq_num(rs.getInt("p_seq_num"));
+					paymentVO.setP_num(rs.getInt("p_num"));
+					paymentVO.setTotalprice(rs.getInt("totalprice"));
+					paymentVO.setP_paydate(rs.getDate("p_paydate"));
+					paymentList.add(paymentVO);
+				}
+			} catch (Exception e) {
+				System.out.println("getPaymentList Inner Err : " + e);
+			} finally {
+				try {
+					if(rs!=null)rs.close();
+					if(pstmt!=null)pstmt.close();
+					if(con!=null)con.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			
+			return paymentList;
+		}
+	
 	//해당 id의 총 결제금액 
 	public int getTotalPayPrice(String id) {
 		Connection con = null;
@@ -758,7 +843,7 @@ public class OrderDAO {
 		PreparedStatement pstmt = null;
 		String sql = "";
 		ResultSet rs = null;
-		List<OrderVO> selectseat = new ArrayList<>();
+		List<OrderVO> selectseat = new ArrayList<OrderVO>();
 		try {
 			con = getConnection();
 			sql = "SELECT * FROM PAYMENT WHERE TODAY = ? AND DETAILNUM = ?";
