@@ -658,10 +658,11 @@ textarea.form-control {
 }
 
     </style>
+<jsp:include page="../include/header.jsp" />    
 </head>
 <body>
 
-<jsp:include page="../include/header.jsp" />
+
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container bootstrap snippets">
     <div class="row" id="user-profile">

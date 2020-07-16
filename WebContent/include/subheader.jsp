@@ -9,16 +9,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-
-
-
-
-
-
-
-
-
-
 <!-- Channel Plugin Scripts -->
 <script>
   (function() {
@@ -62,65 +52,6 @@
   });
 </script>
 <!-- End Channel Plugin -->
-
-
-
-
-
-<!---------------------------- 00후 로그아웃됩니다s. --------------------------->
-
-
-<script>
-var tid;
-var cnt = parseInt(3000);//초기값(초단위)
-function counter_init() {
-	tid = setInterval("counter_run()", 1000);
-}
-
-function counter_reset() {
-	clearInterval(tid);
-	cnt = parseInt(3000);
-	counter_init();
-}
-
-function counter_run() {
-	document.all.counter.innerText = time_format(cnt);
-	cnt--;
-	if(cnt < 0) {
-		clearInterval(tid);
-		location.href = "${contextPath}/member/logout.do";
-	}
-}
-function time_format(s) {
-	var nHour=0;
-	var nMin=0;
-	var nSec=0;
-	if(s>0) {
-		nMin = parseInt(s/60);
-		nSec = s%60;
-
-		if(nMin>60) {
-			nHour = parseInt(nMin/60);
-			nMin = nMin%60;
-		}
-	} 
-	if(nSec<10) nSec = "0"+nSec;
-	if(nMin<10) nMin = "0"+nMin;
-
-	return ""+nHour+":"+nMin+":"+nSec;
-}
-</script>
-
-
-<!---------------------------- 00후 로그아웃됩니다e. --------------------------->
-
-
-
-
-
-
-
-
 
 
 <link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
@@ -226,23 +157,7 @@ function time_format(s) {
   		 </c:when>
    </c:choose>
         </td>
-	<!-- <td colspan="2" style="width: 100px;"><span id="counter"> </span> 후 자동로그아웃 <input type="button" class="btn btn-primary" value="연장" onclick="counter_reset()"></td>  -->
-		<td colspan="2"> 장바구니
-			<span style="color:white; size:16;" class="icon icon-shopping-cart" size="25"> </span> 
-			: <a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}" class="ah">
-
-			<c:choose>
-				<c:when test="${empty cartList}">
-					0
-				</c:when>
-				<c:when test="${!empty cartList}">
-					${sessionScope.cartcount}
-				</c:when>
-			</c:choose>
-
-			</a>
-		</td>
-   	 
+	<td colspan="2" style="width: 100px;"><span id="counter"> </span> 후 자동로그아웃 <input type="button" class="btn btn-primary" value="연장" onclick="counter_reset()"></td>
     </tr>
     <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
 		<td colspan="2">
@@ -509,13 +424,21 @@ color:#ff0;
 	height: 36px;
 	margin-right: 10px;"> Antonio Moreno <b class="caret"></b></a>
 				<div class="dropdown-menu">
-					<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
+				<c:if test="${id != null}">
+					<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
+				</c:if>
+				<c:if test="${id == null}">
+					<a href="${contextPath}/member/login.do" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
+					<a href="${contextPath}/member/join.do" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
+				</c:if>
+				<c:if test="${id != null}">
+					<c:if test="${is_admin == 1}">
+						<a href="${contextPath}/admin/adminPage.do" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
+					</c:if>
+					<a href="${contextPath}/Order/cartList.do" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
 					<div class="divider dropdown-divider"></div>
-					<a href="#" class="dropdown-item"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
+					<a href="${contextPath}/member/logout.do" class="dropdown-item"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
+				</c:if>
 				</div>
 			</div>
 		</div>
@@ -537,32 +460,20 @@ color:#ff0;
   			<div class="row m-auto">
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
-  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-height: 120px;"></a> 
-  					
-  					
-  					
-  	
-  					
-	
-  					
-  					
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
+ 			
 			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 			        <span class="oi oi-menu"></span> Menu
 			      </button>
   				</div>
-  				
-  				<c:if test="${id!=null}">
-  					${id}님 로그인중..
-  				</c:if>
-
-  				  				
+		  				
   				<div class="col-12 w-100 text-center" style="margin-top: -20px;">
   					<div class="collapse navbar-collapse" id="ftco-nav">
 			        <ul class="navbar-nav m-auto">
 			          <li class="nav-item"><a href="${contextPath}" class="nav-link" style="font-size: 18px; font-family:나눔고딕 ;" >메인</a></li>
 			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공연&상품 페이지</a></li>
 			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 18px; font-family:나눔고딕">###</a></li>
-			          <li class="nav-item"><a href="${contextPath}/classes.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
+			          <li class="nav-item"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
 			     <c:if test="${is_admin == 1}">     
 			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">관리자 페이지</a></li>
 			     </c:if> 
@@ -579,3 +490,4 @@ color:#ff0;
 	  </nav>
     <!-- END nav -->
  <!-- Header END -->
+

@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet" href="${contextPath}/mypage/css/bootstrap.css">
 <link rel="stylesheet" href="${contextPath}/mypage/css/custom.css">
 <meta charset="UTF-8">
@@ -79,10 +80,11 @@
 	}
 	
 </script>
+
+<jsp:include page="../include/header.jsp" />
 </head>
 <body>
 
-<jsp:include page="../include/subheader.jsp" />
 
 <div class="container">
 <div class="page-header">

@@ -31,7 +31,7 @@ public class bestController extends HttpServlet{
 		doHandle(request, response);
 	}
 	
-	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
 		//MVC 중 View이름을 저장할 변수
@@ -55,7 +55,7 @@ public class bestController extends HttpServlet{
 			List<DetailBean> bestList = new ArrayList<DetailBean>();	
 			bestList = bestdao.getBestList();
 			request.setAttribute("bestList", bestList);
-			nextPage = "/best/best02.jsp";
+			nextPage = "/best/best01.jsp";
 				
 			
 		}else if(action.equals("/mainBest.do")) {

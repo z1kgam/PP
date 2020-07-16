@@ -261,13 +261,21 @@ body {
 	height: 36px;
 	margin-right: 10px;"> Antonio Moreno <b class="caret"></b></a>
 				<div class="dropdown-menu">
-					<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
+				<c:if test="${id != null}">
+					<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
+				</c:if>
+				<c:if test="${id == null}">
+					<a href="${contextPath}/member/login.do" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
+					<a href="${contextPath}/member/join.do" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
+				</c:if>
+				<c:if test="${id != null}">
+					<c:if test="${is_admin == 1}">
+						<a href="${contextPath}/admin/adminPage.do" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
+					</c:if>
+					<a href="${contextPath}/Order/cartList.do" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
 					<div class="divider dropdown-divider"></div>
-					<a href="#" class="dropdown-item"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
+					<a href="${contextPath}/member/logout.do" class="dropdown-item"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
+				</c:if>	
 				</div>
 			</div>
 		</div>
@@ -289,47 +297,81 @@ body {
   			<div class="row m-auto">
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
-  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-height: 120px;"></a> 
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
   					
   					
   					
-  	
+ 				
+<%--  <table style="width:300px; height: 100px;  border-collapse: separate;	
+    border-spacing: 1px; margin: 100px; text-align: center; float: right; margin-top: -100px; font-size: 12px;">
+    
+  <c:if test="${id!=null}">
+     <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px;
+    		padding: 10px; font-weight: bold;">
+        <td rowspan="3" align = "center" bgcolor="#FFB5B5" width="100px;">
+   <c:choose>    	
+    	 <c:when test="${!empty profile_img }">
+	       <img src="${contextPath}/upload/${profile_img}" alt="프로필 이미지" style="max-width: 100px;">
+    	 </c:when>
+     
+   		 <c:when test="${empty profile_img}">
+			<img src="${contextPath}/images/icon.png" width="100px" height="100px">
+  		 </c:when>
+   </c:choose>
+        </td>
+	<td colspan="2"> 장바구니
+			<span style="color:white; size:16;" class="icon icon-shopping-cart" size="25"> </span> 
+			: <a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}" class="ah">
+			<c:if test="${empty cartList}">				
+				0
+			</c:if>
+			
+			<c:if test="${!empty cartList}">				
+				${sessionScope.cartcount}
+			</c:if>
+			</a>
+		</td>
+	
+    </tr>
+    <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
+		<td colspan="2">
+	
+		<c:if test="${id!=null}">
+  					${id}님 로그인중..
+  		</c:if>
+		</td>
+        </tr>
+        
+        <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
+		    <c:if test="${id!=null}">
+		        <td><a href="${contextPath}/member/logout.do" style="color: #fff;">로그아웃</a></td>
+				<td><a href="${contextPath}/mycon/mypageForm.do" style="color: #fff;">마이 페이지</a></td>
+			</c:if>	
+        </tr>
+
+</c:if>
+</table> --%>
   					
 	
-  					
+  				
   					
 			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 			        <span class="oi oi-menu"></span> Menu
 			      </button>
   				</div>
-  				
-  				<c:if test="${id!=null}">
-  					${id}님 로그인중..
-  				</c:if>
-
-  				
-  				
-
-  				
-
-
-
   				<div class="col-12 w-100 text-center" style="margin-top: -20px;">
+  				
   					<div class="collapse navbar-collapse" id="ftco-nav">
 			        <ul class="navbar-nav m-auto" >
 			          <li class="nav-item"><a href="index/index.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕; ">메인</a></li>
 			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공연&상품 페이지</a></li>
 			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 18px; font-family:나눔고딕">###</a></li>
-			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
+			          <li class="nav-item"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
 			     <c:if test="${is_admin == 1}">     
 			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">관리자 페이지</a></li>
 			     </c:if>     
 			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">예매하기</a></li>
 			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">고객센터</a></li>
-			     <c:if test="${id==null}">
-			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">로그인</a></li>
-			          <li class="nav-item"><a href="${contextPath}/member/join.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">회원가입</a></li>
-			     </c:if>
 			        </ul>
 			      </div>
   				</div>
@@ -426,4 +468,5 @@ body {
   </div>
  </div>
  </section>
- 
+    
+	<%-- <jsp:include page="../include/carousel.jsp" />		 --%>			

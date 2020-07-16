@@ -56,7 +56,7 @@ public class faqBoardController extends HttpServlet{
 		int total = faqDao.getfaqCount(search);
 		int nowpage = 1 ;
 		if(request.getParameter("nowpage") !=null) nowpage = Integer.parseInt(request.getParameter("nowpage"));
-		int pagesize = 10 ;
+		int pagesize = 5 ;
 		int startrow = (nowpage-1)*pagesize;
 		int endrow = pagesize;
 		int totalpage = total/pagesize + (total%pagesize==0?0:1);
