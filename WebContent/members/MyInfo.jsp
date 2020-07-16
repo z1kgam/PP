@@ -27,12 +27,14 @@
 	<!-- Daum postcode API -->
 	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 	<link href="../css/custom" rel="stylesheet">
+	
+	<jsp:include page="../include/header.jsp" />
 
 </head>
   <body>
   
   
-  <jsp:include page="../include/subheader.jsp" />
+  
   
   
   

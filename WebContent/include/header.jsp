@@ -4,14 +4,18 @@
 <!-- JSTL 사용을 위해 선언 -->    
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
+<!-- <link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
 
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+ER" rel="stylesheet">
 
 
-    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet"> -->
+    
+<!--     <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="../css/animate.css">
@@ -55,7 +59,9 @@
 <style>
 body {
 	background: #eeeeee;
-	font-family: 'Varela Round', sans-serif;
+/* 	font-family: 'Varela Round', sans-serif; */
+/* 	font-family: 'Noto Sans KR', sans-serif; */
+	font-family: 'Nanum Gothic Coding', monospace;
 }
 .navbar {
 	color: #fff;
@@ -162,7 +168,7 @@ body {
 	color: #777 !important;
 	padding: 8px 20px;
 	line-height: normal;
-	font-size: 15px;
+	font-size: 12px;
 }
 .navbar .dropdown-menu a:hover, .navbar .dropdown-menu a:focus {
 	color: #333 !important;
@@ -175,7 +181,7 @@ body {
 }
 .navbar .navbar-nav .user-action {
 	padding: 9px 15px;
-	font-size: 15px;
+	font-size: 12px;
 }
 .navbar .navbar-toggle {
 	border-color: #fff;
@@ -239,7 +245,7 @@ body {
 
 </head> 
 <body>
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark" style="background: linear-gradient( to right, #EB008B, #00E7D6 ) !important;">
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark" style="background: linear-gradient( to right, #EB008B, #00E7D6 ) !important; height: 55px;">
 	 		
 	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 		<span class="navbar-toggler-icon"></span>
@@ -252,34 +258,75 @@ body {
 				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
 			</div>
 		</form>
-		<div class="navbar-nav ml-auto">
-			
-			<div class="nav-item dropdown">
-				<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" style="color: #000;"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar" style="border-radius: 50%;
-	width: 36px;
-	height: 36px;
-	margin-right: 10px;"> Antonio Moreno <b class="caret"></b></a>
-				<div class="dropdown-menu">
-				<c:if test="${id != null}">
-					<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
-				</c:if>
-				<c:if test="${id == null}">
-					<a href="${contextPath}/member/login.do" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
-					<a href="${contextPath}/member/join.do" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
-				</c:if>
-				<c:if test="${id != null}">
-					<c:if test="${is_admin == 1}">
-						<a href="${contextPath}/admin/adminPage.do" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
-					</c:if>
-					<a href="${contextPath}/Order/cartList.do" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
-					<div class="divider dropdown-divider"></div>
-					<a href="${contextPath}/member/logout.do" class="dropdown-item"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
-				</c:if>
-				</div>
-			</div>
+		
+<!-- 드랍메뉴 -->	
+
+<!-- 로그인상태라면 -->
+<c:choose>
+<c:when test="${id!=null}"> 
+
+<div class="navbar-nav ml-auto">
+	
+	<div class="nav-item dropdown" style="margin-right: 0;">
+		
+		<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" style="color: #000; font-size: 12px !important; margin-right: 0;">
+		
+		<!-- 프사 없으면 기본 있으면 내가 정한 사진으로 -->
+		<c:choose>    	
+    	 <c:when test="${!empty profile_img }">
+	       <img src="${contextPath}/upload/${profile_img}" 
+			 class="avatar" alt="Avatar" style="border-radius: 50%; width: 36px; height: 36px; margin-right: 10px;"> 
+    	 </c:when>
+     
+   		 <c:when test="${empty profile_img}">
+			<img src="${contextPath}/images/icon.png" 
+			 class="avatar" alt="Avatar" style="border-radius: 50%; width: 36px; height: 36px; margin-right: 10px;">
+  		 </c:when>
+  		 </c:choose>
+
+		${id}님 로그인중..
+		<c:if test="${is_admin == 1}">	<!-- 관리자모드이면 -->
+		<b class="caret"></b></a>
+		<div class="dropdown-menu">
+			<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item" style="font-size: 12px;"><i class="fa fa-user-o"></i> 마이페이지</a>
+			<a href="${contextPath}/admin/adminPage.do" class="dropdown-item" style="font-size: 12px;"><i class="fa fa-gears"></i>관리자 페이지</a>
+			<div class="divider dropdown-divider"></div>
+			<a href="${contextPath}/member/logout.do" class="dropdown-item" style="font-size: 12px;"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
 		</div>
+		</c:if>
+		
+		<c:if test="${is_admin != 1}">	<!-- 일반회원이면 -->
+		<b class="caret"></b></a>
+		<div class="dropdown-menu">
+			<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item" style="font-size: 12px;"><i class="fa fa-user-o"></i> 마이페이지</a>
+ 			<a href="${contextPath}/member/updateProfile.do" class="dropdown-item"><i class="fa fa-calendar-o"></i>프로필변경</a>
+			<a href="${contextPath}/member/join.do" class="dropdown-item"><i class="fa fa-sliders"></i>더넣을거있음하세요</a> 
+ 			<a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
+			<div class="divider dropdown-divider"></div>
+			<a href="${contextPath}/member/logout.do" class="dropdown-item" style="font-size: 12px;"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
+		</div>
+		</c:if>
+		
+	</div>
+</div>
 	</div>
 </nav>
+
+  </c:when>  
+  
+
+  <c:otherwise> 
+  
+  <!-- 로그인 안한 상태라면 -->
+  <div class="navbar-nav ml-auto"> 
+	<div style="display: contents;">
+	<a href="${contextPath}/member/login.do" class="dropdown-item" style="font-size: 12px;"><i class="fa fa-calendar-o"></i> 로그인</a>
+	<a href="${contextPath}/member/join.do" class="dropdown-item" style="font-size: 12px;"><i class="fa fa-sliders"></i> 회원가입</a>
+	</div>
+  </div>
+</nav>
+  </c:otherwise>
+ </c:choose>
 
 
 <!-------------------------------------------------------- 내비바 끝 ---------------------------------------------------------------->
@@ -291,67 +338,15 @@ body {
   	
 <!--------------------------------------------------- 메뉴바 ------------------------------------------------------->
   	
-  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" style="background-color: #FFF !important;">
+  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" style="background-color: #FFF !important; height: 200px;">
   		<div class="container" >
   			<div class="row m-auto">
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
-  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px;"><img src="../images/tclogo.png"" alt="tlogo" style=" max-height: 110px; margin-top: 20px; margin-bottom: 20px;"></a> 
   					
   					
-  					
- <%--  	<table style="width:300px; height: 100px;  border-collapse: separate;	
-    border-spacing: 1px; margin: 100px; text-align: center; float: right; margin-top: -100px; font-size: 12px;">
-    
-  <c:if test="${id!=null}">
-     <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px;
-    		padding: 10px; font-weight: bold;">
-        <td rowspan="3" align = "center" bgcolor="#FFB5B5" width="100px;">
-   <c:choose>   	
-     <c:when test="${!empty profile_img }">
-	       <img src="${contextPath}/upload/${profile_img}" alt="프로필 이미지" style="max-width: 100px;">
-     </c:when>
-     
-    <c:when test="${empty profile_img}">
-			<img src="${contextPath}/images/icon.png" width="100px" height="100px">
-  	</c:when>
-  </c:choose>	
-        </td>
-	<td colspan="2"> 장바구니
-			<span style="color:white; size:16;" class="icon icon-shopping-cart" size="25"> </span> 
-			: <a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}" class="ah">
-			<c:if test="${empty cartList}">				
-				0
-			</c:if>
-			
-			<c:if test="${!empty cartList}">				
-				${sessionScope.cartcount}
-			</c:if>
-			</a>
-		</td>
-	
-    </tr>
-    <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
-		<td colspan="2">
-	
-		<c:if test="${id!=null}">
-  					${id}님 로그인중..
-  		</c:if>
-		</td>
-        </tr>
-        
-        <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
-		    <c:if test="${id!=null}">
-		        <td><a href="${contextPath}/member/logout.do" style="color: #fff;">로그아웃</a></td>
-				<td><a href="${contextPath}/mycon/mypageForm.do" style="color: #fff;">마이 페이지</a></td>
-			</c:if>	
-        </tr>
-
-</c:if>
-</table> --%>
-  					
-	
-  					
+  		
   					
 			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 			        <span class="oi oi-menu"></span> Menu
@@ -364,21 +359,25 @@ body {
 
   				  				
   				<!-- 회원가입o, 로그인 페이지o -->
-  				<div class="col-12 w-100 text-center" style="margin-top: -20px;">
+  				<div class="col-12 w-100 text-center" style="margin-top: -100px;">
   					<div class="collapse navbar-collapse" id="ftco-nav">
 			        <ul class="navbar-nav m-auto">
-			          <li class="nav-item active"><a href="${contextPath}" class="nav-link" style="font-size: 18px; font-family:나눔고딕">메인</a></li>
-			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공연&상품 페이지</a></li>
-			          <li class="nav-item"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
-			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 18px; font-family:나눔고딕;">###</a></li>
-			     <c:if test="${is_admin == 1}">     
-			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕;">관리자 페이지</a></li>
-			     </c:if>
-					  <li class="nav-item"><a href="${contextPath}/blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕;">예매하기</a></li>
-			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕;">공지사항</a></li>
-			     <c:if test="${id==null}">
-			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕;">로그인</a></li>
-			     </c:if>  
+
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">콘서트</a></li>
+
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">뮤지컬/연극</a></li>
+			         
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">클래식</a></li>
+<%-- 			     <c:if test="${is_admin == 1}"> --%>     
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">전시/행사</a></li>
+<%-- 			     </c:if> --%>
+					  <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">공연/전시소식</a></li>
+					  
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">이벤트</a></li>
+<%-- 			     <c:if test="${id==null}"> --%>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">랭킹</a></li>
+<%-- 			     </c:if> --%>  
+					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">공지사항</a></li>
 			        </ul>
 			      </div>
   				</div>
@@ -386,6 +385,4 @@ body {
   		</div>
 	  </nav>
     <!-- END nav -->
- <!-- Header END -->
- 
  <!-- Header END -->

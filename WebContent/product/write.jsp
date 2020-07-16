@@ -76,7 +76,7 @@ input {
 
 <body>
 
-<jsp:include page="../include/subheader.jsp" />
+<jsp:include page="../include/header.jsp" />
 
 
 <article style="padding-top: 50px; padding-bottom: 100px; padding-left: 650px;">
