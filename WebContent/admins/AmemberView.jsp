@@ -45,7 +45,6 @@ button#formbutton {
 </style>
 
 <script type="text/javascript">
-
 //포인트 입력 박스
 function te3(t) {
 	
@@ -263,7 +262,7 @@ function updatePoint() {
 									<div class="card-footer">
 										<ul class="nav">
 											<li class="nav-item"><a class="btn btn-default btn-link" href="#"><i class="la la-history"></i> History</a></li>
-											<li class="nav-item ml-auto"><a class="btn btn-default btn-link" onclick="updatePoint()"><i class="la la-refresh"></i> 충전하기</a></li>
+											<li class="nav-item ml-auto"><a class="btn btn-default btn-link" onclick="updatePoint()"><i class="la la-heart"></i> 충전하기</a></li>
 											<li class="nav-item ml-auto"><a class="btn btn-default btn-link" href="#" onclick="te3(2)"><i class="la la-refresh"></i> Refresh</a></li>
 										</ul>
 									</div>

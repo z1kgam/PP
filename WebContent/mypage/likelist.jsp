@@ -67,7 +67,18 @@
 	
 </style>
 <body>
-<div class="container">
+
+<jsp:include page="../include/header.jsp" /> 
+
+<div class="container" style="width: 70%; padding-bottom: 50px;">
+
+<div class="page-header" style="margin-top: 50px;">
+          
+        <h1 style="font-size: 40px;">Like List</h1>
+        </div>
+      
+        
+        
 	 	<div class="row">
 	 		<table class="table table-striped" style="text-align:center; border: 1px solid #dddddd">
 	 			<thead>
@@ -103,11 +114,11 @@
 			</c:if>
 	 			</tbody>
 	 		</table>
-	 		<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right">메인으로</button>
+	 		<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; margin-bottom: 50px;">메인으로</button>
 	 	</div>
 	 </div>
 	 <div class="page_wrap">
-	 	<div class="page_nation">
+	 	<div class="page_nation" style="position: relative; right: -50px; top: -20px;">
 	 		<c:if test="${nowPage>blockSize}">
 	 			<a href="location.href='${contextPath}/mycon/likelistForm.do?nowPage=${blockFirst-blockSize}'" class="arrow prev" ></a>
 	 		</c:if>
@@ -134,5 +145,8 @@
     <!-- 부트스트랩 자바스크립트 추가하기 -->
 
     <script src="${contextPath}/mypage/js/bootstrap.js"></script>
+    
+    <jsp:include page="../include/footer.jsp" />
+    
 </body>
 </html>

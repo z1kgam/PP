@@ -27,7 +27,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-	<jsp:include page="../include/header.jsp"></jsp:include>
+	<jsp:include page="../include/subheader.jsp"></jsp:include>
     <!-- END nav -->
 </head>
 <body>

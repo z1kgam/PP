@@ -843,7 +843,7 @@ public class OrderDAO {
 		PreparedStatement pstmt = null;
 		String sql = "";
 		ResultSet rs = null;
-		List<OrderVO> selectseat = new ArrayList<>();
+		List<OrderVO> selectseat = new ArrayList<OrderVO>();
 		try {
 			con = getConnection();
 			sql = "SELECT * FROM PAYMENT WHERE TODAY = ? AND DETAILNUM = ?";

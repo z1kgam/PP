@@ -44,11 +44,11 @@ function checkAuthNum(){
 </head>
 <body>
 
-<jsp:include page="../include/header.jsp" />
+<jsp:include page="../include/subheader.jsp" />
 
 
 
-      <article class="container">
+      <article class="container" style="width: 70%;">
       
       <div class="page-header" style="margin-top: 50px;">
           
@@ -67,7 +67,7 @@ function checkAuthNum(){
             
             <div class="form-group">
              	<label for="username">인증번호를 입력해주세요.</label>
-             	<input type="text" name="authNum" id="authNum" placeholder="인증번호를 입력하세요" class="form-control">             	
+             	<input type="text" name="authNum" id="authNum" placeholder="Enter The Code" class="form-control">             	
             </div>
             <div class="form-group text-center" style="margin-top:50px; margin-bottom: 100px;">
               <button type="button" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;" onclick="checkAuthNum()">확인</button>
