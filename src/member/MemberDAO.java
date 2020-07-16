@@ -259,6 +259,11 @@ public class MemberDAO {
 				memberBean.setProfile_img(rs.getString("profile_img"));
 				memberBean.setPoint(rs.getInt("point"));
 				memberBean.setIs_admin(rs.getInt("is_admin"));
+				memberBean.setStatus(rs.getInt("status"));
+				memberBean.setLaddress1(rs.getString("Laddress1"));
+				memberBean.setLaddress2(rs.getString("Laddress2"));
+				memberBean.setLzipcode(rs.getString("Lzipcode"));
+				memberBean.setN_status(rs.getInt("n_status"));
 			}
 		} catch (Exception e) {
 			System.out.println("getMember Inner Err : " + e);

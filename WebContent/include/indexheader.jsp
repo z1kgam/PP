@@ -261,13 +261,21 @@ body {
 	height: 36px;
 	margin-right: 10px;"> Antonio Moreno <b class="caret"></b></a>
 				<div class="dropdown-menu">
+				<c:if test="${id != null}">
 					<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
-					<a href="#" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
+				</c:if>
+				<c:if test="${id == null}">
+					<a href="${contextPath}/member/login.do" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
+					<a href="${contextPath}/member/join.do" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
+				</c:if>
+				<c:if test="${id != null}">
+					<c:if test="${is_admin == 1}">
+						<a href="${contextPath}/admin/adminPage.do" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
+					</c:if>
+					<a href="${contextPath}/Order/cartList.do" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
 					<div class="divider dropdown-divider"></div>
-					<a href="#" class="dropdown-item"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
+					<a href="${contextPath}/member/logout.do" class="dropdown-item"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
+				</c:if>	
 				</div>
 			</div>
 		</div>
@@ -364,10 +372,6 @@ body {
 			     </c:if>     
 			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">예매하기</a></li>
 			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">고객센터</a></li>
-			     <c:if test="${id==null}">
-			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">로그인</a></li>
-			          <li class="nav-item"><a href="${contextPath}/member/join.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">회원가입</a></li>
-			     </c:if>
 			        </ul>
 			      </div>
   				</div>
