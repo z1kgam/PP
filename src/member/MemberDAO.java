@@ -111,7 +111,7 @@ public class MemberDAO {
 				if(con != null) con.close();
 				if(pstmt != null) pstmt.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println("insertMember2 메소드 내부에서 오류 : " + e);
 			}
 		}
 	} // INSERTMEMBER2 END
