@@ -708,24 +708,34 @@ textarea.form-control {
 
         <div class="col-lg-9 col-md-8 col-sm-8" style="position: relative; top: 150px; left: 100px;">
             <div class="main-box clearfix">
+            		<c:if test="${user.n_status == 1}">
+                    
+                                                            네이버 로그인시 초기비밀번호는 "ID + 1234" 입니다.
+                          
+                                ${user.id}+1234
+                   
+         </c:if>
                 <div class="profile-header">
                     <h3><span>User Info</span></h3>
-                    
                 </div>
-
-
-              
-
-
+				
                 <div class="row profile-user-info">
                     <div class="col-sm-8">
+                    
                         <div class="profile-user-details clearfix">
                             <div class="profile-user-details-label">
                                                                         이름
                             </div>
-                            <div class="profile-user-details-value">
+                        <c:if test="${!empty user.name}">
+                        	<div class="profile-user-details-value">
                                 ${user.name}
                             </div>
+                        </c:if>
+                        <c:if test="${empty user.name}">
+                        	<div class="profile-user-details-value">
+                                해당 정보가 없습니다.
+                            </div>
+                        </c:if>    
                         </div>
 
 
@@ -733,36 +743,64 @@ textarea.form-control {
 				   <div class="profile-user-details-label">
 				 ID
 				   </div>
+				   <c:if test="${!empty user.id}">
 				   <div class="profile-user-details-value">
 				                       ${user.id}
 				   </div>
+				   </c:if>
+				   <c:if test="${empty user.id}">
+				   <div class="profile-user-details-value">
+				                       해당 정보가 없습니다.
+				   </div>
+				   </c:if>
 				 </div>
                         <div class="profile-user-details clearfix">
                             <div class="profile-user-details-label">
                                 주소
                             </div>
+                            <c:if test="${!empty user.zipcode}">
                             <div class="profile-user-details-value">
                                 ${user.zipcode}&nbsp;&nbsp;&nbsp;${user.address1}
                                 <br> ${user.address2}
                             </div>
+                            </c:if>
+                            <c:if test="${empty user.zipcode}">
+                            <div class="profile-user-details-value">
+                                해당 정보가 없습니다.
+                            </div>
+                            </c:if>
                         </div>
                         
                         <div class="profile-user-details clearfix">
                             <div class="profile-user-details-label">
                                 Email
                             </div>
+                            <c:if test="${!empty user.email}">
                             <div class="profile-user-details-value">
                                 ${user.email}
                             </div>
+                            </c:if>
+                            <c:if test="${empty user.email}">
+                            <div class="profile-user-details-value">
+                                해당 정보가 없습니다.
+                            </div>
+                            </c:if>
                         </div>
                         
                         <div class="profile-user-details clearfix">
                             <div class="profile-user-details-label">
                                 전화번호
                             </div>
+                            <c:if test="${!empty user.phone }">
                             <div class="profile-user-details-value">
                                 ${user.phone}
                             </div>
+                            </c:if>
+                            <c:if test="${empty user.phone }">
+                            <div class="profile-user-details-value">
+                                해당 정보가 없습니다.
+                            </div>
+                            </c:if>
                         </div>
                         
                             <div class="profile-user-details clearfix">
@@ -786,9 +824,16 @@ textarea.form-control {
                             <div class="profile-user-details-label">
                                 포인트
                             </div>
+                            <c:if test="${!empty user.point}">
                             <div class="profile-user-details-value">
                                 ${user.point}
                             </div>
+                            </c:if>
+                            <c:if test="${empty user.point}">
+                            <div class="profile-user-details-value">
+                                해당 정보가 없습니다.
+                            </div>
+                            </c:if>
                         </div>
                         
                         
