@@ -23,7 +23,7 @@
 <jsp:include page="../include/header.jsp"></jsp:include>
 
 </head>
-<body>
+<body style="font-family: 'Nanum Gothic Coding', monospace;">
 
   <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
 		<div class="container">

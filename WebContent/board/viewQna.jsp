@@ -25,16 +25,16 @@ request.setCharacterEncoding("UTF-8");
 	<script src="../js/bootstrap.min.js"></script>
 	
 </head>
-<body>
+<body style="font-family: 'Nanum Gothic Coding', monospace;">
 
 <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
 		<div class="container">
-			<div class="row block-9">
+			<div class="row block-9" style="margin-top: 50px;">
 			
 			<div class="col-md-10">		
 
 <!-- 탭메뉴 -->	
-<ul class="nav nav-tabs" style="font-size: 20px;">
+<ul class="nav nav-tabs" style="font-size: 14px;">
   <li class="nav-item" style="margin-right: 0;">
     <a class="nav-link active"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 85px 15px 85px;">
    	 공지사항

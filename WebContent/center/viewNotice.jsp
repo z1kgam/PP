@@ -19,7 +19,7 @@
 	<script src="../js/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body style="font-family: 'Nanum Gothic Coding', monospace;">
 
 
 <%--  	<section>

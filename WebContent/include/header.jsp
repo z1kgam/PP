@@ -4,14 +4,18 @@
 <!-- JSTL 사용을 위해 선언 -->    
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
+<!-- <link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
 
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+ER" rel="stylesheet">
 
 
-    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet"> -->
+    
+<!--     <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="../css/animate.css">
@@ -55,7 +59,9 @@
 <style>
 body {
 	background: #eeeeee;
-	font-family: 'Varela Round', sans-serif;
+/* 	font-family: 'Varela Round', sans-serif; */
+/* 	font-family: 'Noto Sans KR', sans-serif; */
+	font-family: 'Nanum Gothic Coding', monospace;
 }
 .navbar {
 	color: #fff;
@@ -357,21 +363,21 @@ body {
   					<div class="collapse navbar-collapse" id="ftco-nav">
 			        <ul class="navbar-nav m-auto">
 
-			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 14px; font-family:나눔고딕; margin-top: 65px;">콘서트</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">콘서트</a></li>
 
-			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family:나눔고딕; margin-top: 65px;">뮤지컬/연극</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">뮤지컬/연극</a></li>
 			         
-			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family:나눔고딕; margin-top: 65px;">클래식</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">클래식</a></li>
 <%-- 			     <c:if test="${is_admin == 1}"> --%>     
-			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family:나눔고딕; margin-top: 65px;">전시/행사</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">전시/행사</a></li>
 <%-- 			     </c:if> --%>
-					  <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family:나눔고딕; margin-top: 65px;">공연/전시소식</a></li>
+					  <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">공연/전시소식</a></li>
 					  
-			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 14px; font-family:나눔고딕; margin-top: 65px;">이벤트</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">이벤트</a></li>
 <%-- 			     <c:if test="${id==null}"> --%>
-			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 14px; font-family:나눔고딕; margin-top: 65px;">랭킹</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">랭킹</a></li>
 <%-- 			     </c:if> --%>  
-					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 14px; font-family:나눔고딕; margin-top: 65px;">공지사항</a></li>
+					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">공지사항</a></li>
 			        </ul>
 			      </div>
   				</div>

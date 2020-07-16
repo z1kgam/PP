@@ -26,7 +26,7 @@ request.setCharacterEncoding("UTF-8");
 <script src="../js/jquery-3.4.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="font-family: 'Nanum Gothic Coding', monospace;">
 
 
   <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
