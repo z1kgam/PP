@@ -60,11 +60,10 @@ public class MyPageController extends HttpServlet{
 		OrderVO orderVO = new OrderVO();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
+		int checkPage =0;
 		String action =request.getPathInfo();
 		String nextPage = "";
 		System.out.println(action);
-		int check = 0;
 		if(action.equals("/mypageForm.do")) { //마이페이지폼 이동
 			qnaDao QnaDAO = new qnaDao();
 			String id = (String)session.getAttribute("id");
@@ -135,7 +134,7 @@ public class MyPageController extends HttpServlet{
 			nextPage = "/Proser/content.do?num="+num;
 			
 		}else if(action.equals("/addpointForm.do")){ // 포인트충전 페이지로 이동
-
+			
 			nextPage= "/mypage/point.jsp";
 			
 		}else if(action.equals("/addpoint.do")) { //입금확인요청 버튼을 눌렀을 때
@@ -143,13 +142,14 @@ public class MyPageController extends HttpServlet{
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
 			int point = Integer.parseInt(request.getParameter("point"));
-			
+			checkPage = 1;
 			MemberBean pointBean = new MemberBean();
 			MemberDAO memberDAO = new MemberDAO();
 			
 			memberDAO.addpoint1(id, name, point); //입금확인 요청시 point테이블에 insert
 			request.setAttribute("point", point);
-			nextPage = "/pointCom.jsp";
+			
+			nextPage = "/mycon/mypageForm.do";
 			
 		}else if(action.equals("/addpointCom.do")) {   //입금확인완료 버튼 클릭 시 해당 id의 포인트를 추가시킴
 			String id = (String)session.getAttribute("id");
@@ -203,7 +203,7 @@ public class MyPageController extends HttpServlet{
 			
 		}
 		
-		if(check == 0) {
+		if(checkPage == 0) {
 			request.getRequestDispatcher(nextPage).forward(request, response);
 		}else {
 			response.sendRedirect(request.getContextPath()+nextPage);
