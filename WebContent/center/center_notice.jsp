@@ -23,15 +23,18 @@
   </script>
   
   
-    <title>Meditative - Free Bootstrap 4 Template by Colorlib</title>
+    <title>공지사항</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-	<jsp:include page="../include/subheader.jsp"></jsp:include>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/lux/bootstrap.min.css">
+<!-- 부트스트랩 -->
+    
+	<jsp:include page="../include/header.jsp"></jsp:include>
     <!-- END nav -->
 </head>
-<body>
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+<body style="font-family: 'Nanum Gothic Coding', monospace;">
+ <!--    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 			<div class="container">
         		<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
@@ -42,10 +45,12 @@
 				</div>
 			</div>
 	</section>
-    <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
+ -->   
+ 
+  <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
 		<div class="container">
-			<div class="row block-9">
-				<div class="col-md-2 contact-info ftco-animate p-4 w-100 h-500">
+			<div class="row block-9" style="margin-top: 50px;">
+				<%-- <div class="col-md-2 contact-info ftco-animate p-4 w-100 h-500">
 					<div class="row">      
 		            	<div class="col-md-12 mb-3">
 							<p><a href="${contextPath}/notice/listNotice.do"><span>공지사항</span></a></p>
@@ -67,11 +72,63 @@
 			            	</c:choose>
 		            	</div>
 	            	</div>
-				</div>
+				</div> --%>
 			<div class="col-md-10">
 			
-				<p>공지사항 </p>
-			<div>
+			
+<!-- 탭메뉴 -->
+
+<ul class="nav nav-tabs" style="font-size: 14px;">
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 85px 15px 85px;">
+   	 공지사항
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active" href="${contextPath}/board/info2.jsp" style="padding: 15px 85px 15px 85px;">
+	 이용안내
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 100px 15px 100px;">
+    FAQ
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+  
+	  <c:choose>
+	   	<c:when test="${id != null}">
+	    		<a class="nav-link active"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 70px 15px 70px;">
+	    		나의 문의 내역
+	    		</a>
+	  		</c:when>
+	  		<c:when test="${id == null}">
+	  			<a class="nav-link active"  href="${contextPath}/member/login.do" style="padding: 15px 70px 15px 70px;">
+	  			나의 문의 내역
+	  			</a>
+	  		</c:when>
+	  	</c:choose>
+
+  </li>
+</ul>			
+			
+
+
+<!-- 셀렉트 박스 -->
+ <div class="form-group" style="clear: both; margin: 30px 0 0 0;">
+ 	<form action="#" name=f method="post">
+        <select class="form-control" id="exampleSelect1" onchange="location.href=this.value" name="n_cate">
+        <option>항목을 선택하세요</option>
+        <option value="${contextPath}/notice/listNotice.do?n_cate=서비스 소식">서비스 소식</option>
+        <option value="${contextPath}/notice/listNotice.do?n_cate=서비스 점검">서비스 점검</option>
+        <option value="${contextPath}/notice/listNotice.do?n_cate=안내">안내</option>
+      </select>
+      </form>
+    </div>
+
+
+<%-- 
+			<div style="clear: both;">
 				<form action="#" name=f method="post">
 				<select onchange="location.href=this.value" name="n_cate">
 					<option>항목을 선택하세요</option>
@@ -81,6 +138,11 @@
 				</select>
 				</form>
 			</div>
+
+ --%>			
+ 
+ 
+<!-- 공지사항 -->			
 			<form action="${contextPath}/notice/listNotice.do" method="get">
 				<div class="row">
   					<div class="col-md-10 col-md-offset-1">

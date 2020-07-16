@@ -16,22 +16,70 @@
 
 <html>
 <head>
-<title>FAQ작성</title>
-	<link rel="stylesheet" href="../css/bootstrap.min.css" />
-	<link rel="stylesheet" href="../css/style.css" />
-	
-	<script src="../js/jquery-3.4.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
+<title>FAQ수정</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/lux/bootstrap.min.css">
+<!-- 부트스트랩 -->
+    
+<jsp:include page="../include/header.jsp"></jsp:include>
+
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/style.css" />
+
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
+
+  <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
+		<div class="container">
+			<div class="row block-9" style="margin-top: 50px;">
+			
+			<div class="col-md-10">
+			
+<!-- 탭메뉴 -->	
+<ul class="nav nav-tabs" style="font-size: 14px;">
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 85px 15px 85px;">
+ 	공지사항
+ 	</a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/board/info2.jsp" style="padding: 15px 85px 15px 85px;">
+ 	이용안내
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 100px 15px 100px;">
+    FAQ
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+  
+	  <c:choose>
+	   	<c:when test="${id != null}">
+	    		<a class="nav-link active"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 70px 15px 70px;">
+	    		나의 문의 내역
+	    		</a>
+	  		</c:when>
+	  		<c:when test="${id == null}">
+	  			<a class="nav-link active"  href="${contextPath}/member/login.do" style="padding: 15px 70px 15px 70px;">
+	  			나의 문의 내역
+	  			</a>
+	  		</c:when>
+	  	</c:choose>
+
+  </li>
+</ul>
+
+
+
 
 
 
 <section class="container body-container py-5">
 <div class="row">
-	<div class="col-12">
-		<h2>FAQ 수정</h2>
-	</div>
+
 </div>
 <!-- 게시판 -->
 <article class="mt-3">
@@ -61,7 +109,7 @@
 					<label for="poolAddress1" class="m-0">제목</label>
 				</th>
 				<td>
-					<input type="text" class="form-control" name="title" value="${faqUpdate.faq_title}" id="poolAddress1" maxlength="50">
+					<input type="text" class="form-control" name="title" value="${faqUpdate.faq_title}" id="poolAddress1" maxlength="50" style="width: 100%;">
 				</td>
 			</tr>
 			
@@ -70,7 +118,7 @@
 					<label for="contents" class="m-0">내용</label>
 				</th>
 				<td>
-					<textarea class="form-control" name="contents" id="poolContent" cols="40" rows="13" required>${faqUpdate.faq_contents}</textarea>
+					<textarea class="form-control" name="contents" id="poolContent" cols="40" rows="13" required style="width: 100%;">${faqUpdate.faq_contents}</textarea>
 				</td>
 			</tr>
 		</table>
@@ -84,6 +132,13 @@
 </article>
 <!-- 게시판 -->
 </section>
+
+			</div>
+        </div>
+	</div>
+</section>
+
+<jsp:include page="../include/footer.jsp"/>
 
 </body>
 </html>

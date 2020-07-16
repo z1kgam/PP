@@ -54,12 +54,16 @@
 <script src="../js/jquery-3.4.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/lux/bootstrap.min.css">
+<!-- 부트스트랩 -->
+
 <jsp:include page="../include/header.jsp"/>
 
 
 </head>
-<body style="text-align: center;">
-
+<body style="text-align: center; font-family: 'Nanum Gothic Coding', monospace;">
+<!-- 
    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 			<div class="container">
@@ -71,10 +75,11 @@
 				</div>
 			</div>
 	</section>
-	<section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
+ -->	
+ 	<section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
 		<div class="container">
-			<div class="row block-9">
-				<div class="col-md-2 contact-info ftco-animate p-4 w-100 h-500">
+			<div class="row block-9" style="margin-top: 50px;">
+<%-- 				<div class="col-md-2 contact-info ftco-animate p-4 w-100 h-500">
 					<div class="row">      
 		            	<div class="col-md-12 mb-3">
 							<p><a href="${contextPath}/notice/listNotice.do"><span>공지사항</span></a></p>
@@ -96,7 +101,7 @@
 			            	</c:choose>
 		            	</div>
 	            	</div>
-				</div>
+				</div> --%>
 			<div class="col-md-10">	
 	<c:forEach items="${list}" var="A">
 	<c:if test="${A.faq_num}>1">
@@ -105,9 +110,53 @@
 		
 	</c:forEach>
 	
+
+	
+<!-- 탭메뉴 -->	
+<ul class="nav nav-tabs" style="font-size: 14px;">
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 85px 15px 85px;">
+  	 공지사항
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/board/info2.jsp" style="padding: 15px 85px 15px 85px;">
+	이용안내
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 100px 15px 100px;">
+    FAQ
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+  
+	  <c:choose>
+	   	<c:when test="${id != null}">
+	    		<a class="nav-link active"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 70px 15px 70px;">
+	    		나의 문의 내역
+	    		</a>
+	  		</c:when>
+	  		<c:when test="${id == null}">
+	  			<a class="nav-link active"  href="${contextPath}/member/login.do" style="padding: 15px 70px 15px 70px;">
+	  			나의 문의 내역
+	  			</a>
+	  		</c:when>
+	  	</c:choose>
+
+  </li>
+</ul>
+
+	
+	
+<!-- 1:1문의버튼  -->			
+<button type="button" class="btn btn-outline-primary" style="float: right; margin: 30px 0 2px 0;"
+		onclick="location.href='${contextPath}/qboard/qwriteForm.do'">1:1문의하기</button>
+	
+	
 	
 <!-- 카테고리 클릭시 해당 카테고리 목록출력 -->
-   <div class="btn-group w-100" style="width: 50%!important">
+   <div class="btn-group w-100" style="width: 100%!important; clear: both;">
 		<a href="${contextPath}/fboard/faqlist.do" class="btn btn-dark btn-lg bt">전체</a> 
 		<a href="${contextPath}/fboard/faqlist.do?category=&search=티켓예매" class="btn btn-dark btn-lg bt">티켓예매</a> 
 		<a href="${contextPath}/fboard/faqlist.do?category=&search=취소/환불" class="btn btn-dark btn-lg bt">취소/환불</a> 
@@ -120,10 +169,10 @@
             
 	
 
-	<section class="container body-container py-5">
+	<section class="container body-container py-5" style="clear: both;">
 		<div class="row">
 			<div class="col-12 col-lg-4">
-				<h2> F A Q </h2>				
+<!-- 				<h2> F A Q </h2> -->				
 			</div>
 			<div class="col-12 col-lg-8 text-right mt-lg-3">
 				<small>클릭해서 상세정보를 확인하세요.</small>
@@ -149,10 +198,9 @@
 				</colgroup>
 				
 					<tr>
-						<th>NO.</th>
-						<th>처리상태</th>
-						<th>제목</th>
-						<th>등록일</th>
+						<th width="10%">NO.</th>
+						<th width="20%">분류</th>
+						<th width="80%">제목</th>
 					</tr>
 			 
 				<tbody>
@@ -160,7 +208,7 @@
 					<c:if test="${count > 0}">
 						<c:forEach var="articlesList" items="${articlesList}" varStatus="articlesNum">
 						<tr onclick="toggleContent(this)" style="cursor:pointer">
-							<td class="align-middle text-left">
+							<td class="align-middle text-left" style="text-align: center;">
 								${articlesList.faq_num}
 								<small class="d-block d-lg-none mt-1 text-muted">${articlesList.faq_num}</small>
 							</td>
@@ -172,7 +220,7 @@
 						</tr>
 						<tr class="poolcontent" style="display:none">
 							<td colspan="5" class="py-5">
-								<div class="text-left break-all">${articlesList.faq_contents}</div>
+								<div class="text-left break-all" style="padding: 0 120px 0 100px;">${articlesList.faq_contents}</div>
 								<%-- <%
 									if (userId != null && userId.equals("admin")) {
 								%>
