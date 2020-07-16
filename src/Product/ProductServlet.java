@@ -75,7 +75,15 @@ public class ProductServlet extends HttpServlet {
 
 				nextPage = "/product/imcontact.jsp";
 
-			} else if (action.equals("/write.do")) {
+			}else if (action.equals("/imcontact2.do")) {
+				String search = request.getParameter("sear");
+				
+				List<ProductBean> list = productService.getList(search);
+				request.setAttribute("List",list);
+
+				nextPage = "/product/imcontact2.jsp";
+				
+			}else if (action.equals("/write.do")) {
 				nextPage = "/product/write.jsp";
 			} else if (action.equals("/writePro.do")) {
 				String realFolder = request.getServletContext().getRealPath("consert");
@@ -330,10 +338,13 @@ public class ProductServlet extends HttpServlet {
 				nextPage = "/product/buyconnect.jsp";
 				
 			}else if(action.equals("/itemselect.do")) {
-
+				
 				String name = request.getParameter("name");
+				
+				String aa = request.getParameter("date");
+				
 				Date selectdate = Date.valueOf(request.getParameter("date"));
-
+				System.out.println(selectdate);
 				List<DetailBean> detList = productService.SelectByDate(selectdate,name);
 				
 				JSONObject result = new JSONObject();
@@ -361,6 +372,41 @@ public class ProductServlet extends HttpServlet {
 				out.print(jsonInfo);
 				
 				return;
+				
+			}else if(action.equals("/Allproduct.do")) {
+				List<ProductBean> List = productService.getList();
+				
+				JSONObject result = new JSONObject();
+
+				JSONArray Array = new JSONArray();
+				JSONObject Info;
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+				for(int i=0;i<List.size();i++) {
+					ProductBean vo = List.get(i);
+					Info = new JSONObject();
+					Info.put("num", Integer.toString(vo.getNum()));
+					Info.put("name", vo.getName());
+					Info.put("genre", vo.getGenre());
+					Info.put("cla", vo.getCla());
+					Info.put("runtime", Integer.toString(vo.getRuntime()));
+					Info.put("price", Integer.toString(vo.getPrice()));
+					Info.put("startdate", transFormat.format(vo.getStartdate()));
+					Info.put("enddate", transFormat.format(vo.getEnddate()));
+					Info.put("image", vo.getImage());
+					Info.put("content", vo.getContent());
+					Info.put("runstatus", Integer.toString(vo.getRunstatus()));
+					Array.add(Info);
+				}
+				result.put("List", Array);
+				PrintWriter out = response.getWriter();
+				
+				String jsonInfo = result.toString();
+				
+				out.print(jsonInfo);
+				
+				return;
+				
 				
 			}else if(action.equals("/Allitems.do")) {
 				String name = request.getParameter("name");

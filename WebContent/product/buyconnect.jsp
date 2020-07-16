@@ -47,6 +47,7 @@
 	<script src="../js/content.js"></script>
 		<script>
 		$(document).ready(function(){	
+			alert("aa");
 			//체크박스들이 변경되었을 때
 			$(":checkbox").change(function(){	
 				var cnt = $("#count").val();
@@ -101,6 +102,7 @@
  				}
 				
 			}); 
+		
 		});
 
 		</script>
@@ -315,7 +317,7 @@
 	<div>
 
 	</div>
-<jsp:include page="${contextPath}/include/footer.jsp" />    
+<jsp:include page="../include/footer.jsp" />    
   
   <script src="../js/jquery.min.js"></script>
   <script src="../js/jquery-migrate-3.0.1.min.js"></script>

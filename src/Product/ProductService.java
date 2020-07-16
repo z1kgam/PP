@@ -88,4 +88,9 @@ public class ProductService {
 		return detList;
 	}
 
+	public List<ProductBean> getList(String search) {
+		List<ProductBean> list = dao.getList(search);
+		return list;
+	}
+
 }
