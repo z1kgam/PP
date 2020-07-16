@@ -513,7 +513,7 @@ public class AdminController extends HttpServlet{
 		         int result = qnaDao.updateQnaBoard(qnaBean);
 		         System.out.println(result);
 		         
-		         nextPage = "/admin/Aqnaboardp.do";
+		         nextPage = "/admin/Aqnaboardp.do?status=1";
 		         
 		    //답변 수정 실행
 			} else if(action.equals("/AqnaAnswerMod.do")) {
