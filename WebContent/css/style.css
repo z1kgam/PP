@@ -8155,7 +8155,7 @@ a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
-  color: #ffb5b5; }
+/*   color: #ffb5b5;*/ } 
   a:hover, a:active, a:focus {
     color: #ffb5b5;
     outline: none !important;
@@ -9828,7 +9828,7 @@ textarea.form-control {
     opacity: 1; }
 
 .gallery-grid-item {
-  width: 50%;
+  width: 33.33%;
   padding: 8px; }
   .gallery-grid-item .caption {
     overflow: hidden;

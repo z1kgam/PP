@@ -92,11 +92,11 @@ input {
 			<td>장르</td>
 			<td>
 				<select name="genre" style="vertical-align: middle; text-align-last: center;">
+					<option>아이돌</option>
 					<option>트로트</option>
 					<option>힙합</option>
 					<option>락</option>
 					<option>발라드</option>
-					<option>국악</option>
 					<option>재즈</option>
 				</select>
 			</td>

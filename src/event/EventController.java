@@ -37,11 +37,11 @@ public class EventController extends HttpServlet{
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
+		String nextPage = "";
 		EventBean ebean = new EventBean();
 		EventDAO edao  = new EventDAO();
 		HttpSession session = request.getSession();
 		int checkPage = 0;
-		String nextPage = "";
 		String action = request.getPathInfo();
 		System.out.println("action:" + action);
 		
@@ -73,7 +73,7 @@ public class EventController extends HttpServlet{
 
 			nextPage = "/event/event.jsp";
 		
-		//이벤트 작성 페이지 이동
+		//이벤트 작성 페이지로 이동
 		}else if(action.equals("/eventForm.do")) {
 		
 			String check = request.getParameter("check");
@@ -96,22 +96,14 @@ public class EventController extends HttpServlet{
 			
 			Date e_startdate = Date.valueOf(multi.getParameter("e_startdate")); 
 			Date e_enddate = Date.valueOf(multi.getParameter("e_enddate"));
-
-//			 Enumeration e = multi.getFileNames();
-//			  
-//			 String name = "";
-//			 
-//			 while (e.hasMoreElements()) { name = (String)e.nextElement(); }
 			
 			ebean.setE_title(e_title);
 			ebean.setE_content(e_content);
 			ebean.setE_file(e_file);
 			ebean.setE_startdate(e_startdate);
 			ebean.setE_enddate(e_enddate);
-				
 			
 			edao.insertEvent(ebean);
-			
 			 
 			nextPage = "/ev/listEvent.do";
 
@@ -180,6 +172,7 @@ public class EventController extends HttpServlet{
 			nextPage = "/ev/viewEvent.do?e_num="+ e_num;
 		}
 		
+		//디스패치 방식으로 포워딩 (재요청)
 		if(checkPage == 0) {
 			request.getRequestDispatcher(nextPage).forward(request, response);
 		}else {
