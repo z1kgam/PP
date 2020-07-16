@@ -361,8 +361,8 @@
 										<tr>
 											<td>가격</td>
 											<td><fmt:formatNumber value="${Bean.price}" pattern="#,###" />원</td>
-											<td></td>
-											<td></td>
+											<td>공연장소</td>
+											<td>${detailList.place}</td>
 										</tr>
 										<tr>
 											<td>좋아요<span class="icon icon-heart"></span></td>
