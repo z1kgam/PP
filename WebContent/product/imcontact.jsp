@@ -77,16 +77,13 @@
 							</div>
 						</div>
 					</c:if>
-					</c:forEach>
+				</c:forEach>
 
 				</c:if>
         	</div>
         </div>
-    	
     </section>
-
-
-   <jsp:include page="../include/footer.jsp" />
+  <jsp:include page="../include/footer.jsp" />
  
   </body>
 </html>
