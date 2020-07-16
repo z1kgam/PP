@@ -30,9 +30,16 @@
 
 </head>
   <body>
-      <div class="container">
-        <div class="page-header">
-          <h1>내정보</h1>
+  
+  
+  <jsp:include page="../include/header.jsp" />
+  
+  
+  
+      <div class="container" style="width: 70%;">
+        <div class="page-header" style="margin-top: 50px;">
+          <h1 style="margin-bottom: 50px;">Information</h1>
+          <hr>
         </div>
         
         <div class="col-md-6 col-md-offset-3">
@@ -75,7 +82,7 @@
                <div class="input-group">
                 <input type="text" id="zip" name="zipcode" class="form-control" readonly value="${memberBean.zipcode}">
                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-success" id="search" onclick="daumPostcode()">우편번호 찾기<i class="fa fa-mail-forward spaceLeft"></i></button>
+                  <button type="button" class="btn btn-success" style="background-color: #EB008B; border-color: #EB008B; color: #fff; id="search" onclick="daumPostcode()" >우편번호 찾기<i class="fa fa-mail-forward spaceLeft"></i></button>
                  </span>
                 </div>
                 <input type="text" id="address1" name="address1" class="form-control" readonly value="${memberBean.address1}">
@@ -87,9 +94,9 @@
          
            </div>
 
-            <div class="form-group text-center">
-              <input type="submit" class="btn btn-info" value="정보수정">
-              <input type="reset" class="btn btn-warning" onclick="location.href='${contextPath}'" value="메인으로">
+            <div class="form-group text-center" style="position: relative; left: 350px; margin-top: 100px; margin-bottom: 100px;">
+              <input type="submit" class="btn btn-info" style="background-color: #00E7D6; border-color: #00E7D6; color: #fff;" value="정보수정">
+              <input type="reset" class="btn btn-warning" style="background-color: #A9FF7F; border-color: #A9FF7F; color: #fff;" onclick="location.href='${contextPath}'" value="메인으로">
             </div>
           </form>
         </div>
@@ -97,6 +104,9 @@
 
     <!--  Join -->
     <script src="../js/join.js"></script> 
-
+    
+    
+    
+	<jsp:include page="../include/footer.jsp" />
   </body>
 </html>

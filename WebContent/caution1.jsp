@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2 style="background-color:#ffb5b5;">예매취소 시 유의사항</h2>
+<h2 style="background-color:#EB008B; color: #fff;">예매취소 시 유의사항</h2>
 <br><br>
 
 

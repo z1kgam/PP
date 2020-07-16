@@ -74,23 +74,30 @@
 </style>
 </head>
 <body>
+
+<jsp:include page="../include/header.jsp" />
+<div class="page-header" style="margin-top: 50px;">
+          
+        <h1 style="margin-left: 400px;">Date</h1>
+        </div>
+
 <div style="clear: both;"></div>
 <div>
    	<input type="date" id="search" onchange="sel()">
    	<div id="partview"><table id="part" border="1"></table></div>
    	<div id="fullview">
-	<table id="import" border="1">
+	<table id="import"  border="1" id="table" style="text-align: center; border: 1px solid #dddddd; max-width: 80%; margin-top: -30px; margin-bottom: 70px;">
 			<tr>
-				<td>No.</td>
-				<td>공연명</td>
-				<td>공연날짜</td>
-				<td>시작시간</td>
-				<td>잔여좌석</td>
-				<td>좌석수</td>
-				<td>공연장</td>
-				<td>예약하기</td>
-				<td>수정하기</td>
-				<td>삭제하기</td>
+				<td style="background-color: #3d435c; text-align: center;"><b sty le="color: #fff;">No.</b></td>
+				<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">공연명</b></td>
+				<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">공연날짜</b></td>
+				<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">시작시간</b></td>
+				<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">잔여좌석</b></td>
+				<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">좌석수</b></td>
+				<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">공연장</b></td>
+				<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">예약하기</b></td>
+				<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">수정하기</b></td>
+				<td style="background-color: #3d435c; text-align: center;"><b style="color: #fff;">삭제하기</b></td>
 			</tr>
 			<c:choose>
 				<c:when test="${empty detail}">
@@ -124,5 +131,6 @@
 	<!-- <input type="text" id="testDatepicker" style="margin-left: 50%;"> -->
 </div>
 
+<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

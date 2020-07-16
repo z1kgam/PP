@@ -30,7 +30,7 @@ public class qnaDao {
 	}
 	
 	//자원해제
-	public void freeResource(){
+	private void freeResource(){
 	if(con != null){try{con.close();}catch(Exception err){}}
 	if(rs != null){try{rs.close();}catch(Exception err){}}
 	if(pstmt != null){try{con.close();}catch(Exception err){}}
@@ -54,6 +54,7 @@ public class qnaDao {
 				qbean.setQna_contents(rs.getString("qna_contents"));
 				qbean.setQna_date(rs.getDate("qna_date"));
 				qbean.setQna_status(rs.getInt("qna_status"));
+				qbean.setFile(rs.getString("file"));
 				
 				qnaList.add(qbean);
 			}		
@@ -86,6 +87,7 @@ public class qnaDao {
 				qbean.setQna_contents(rs.getString("qna_contents"));
 				qbean.setQna_date(rs.getDate("qna_date"));
 				qbean.setQna_status(rs.getInt("qna_status"));
+				qbean.setFile(rs.getString("file"));
 				
 				qnaList.add(qbean);
 			}		
@@ -96,6 +98,37 @@ public class qnaDao {
 		}
 		return qnaList;
 	}//qnaList()끝
+	
+	//관리자 고객 전체 문의사항 들고오기
+		public List<qnaBean> qnaList(int pageFirst, int pageSize, int status) {
+			List<qnaBean> qnaList = new ArrayList<qnaBean>();
+			try {
+				con = getConnection();
+				String query = "select * from qnaboard where qna_status = ? order by qna_num desc limit ?,?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, status);
+				pstmt.setInt(2, pageFirst);
+				pstmt.setInt(3, pageSize);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					qnaBean qbean = new qnaBean();
+					qbean.setQna_num(rs.getInt("qna_num"));
+					qbean.setid(rs.getString("id"));
+					qbean.setQna_cate(rs.getString("qna_cate"));
+					qbean.setQna_title(rs.getString("qna_title"));
+					qbean.setQna_contents(rs.getString("qna_contents"));
+					qbean.setQna_date(rs.getDate("qna_date"));
+					qbean.setQna_status(rs.getInt("qna_status"));
+					
+					qnaList.add(qbean);
+				}		
+			}catch (Exception e) {
+				System.out.println("qnaList에서 오류 : e");
+			}finally {
+				freeResource();
+			}
+			return qnaList;
+		}//qnaList()끝
 	
 
 	//QNA 글 작성 메소드
@@ -117,8 +150,8 @@ public class qnaDao {
 				faq_num = 1;
 			}
 			
-			sql = "insert into qnaboard(qna_num, id, qna_cate, qna_title, qna_contents, qna_date, qna_status)"
-				+ "values(?,?,?,?,?,now(),0)";
+			sql = "insert into qnaboard(qna_num, id, qna_cate, qna_title, qna_contents, qna_date, qna_status, answer, file, file2)"
+				+ "values(?,?,?,?,?,now(),0,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, faq_num);
@@ -126,6 +159,9 @@ public class qnaDao {
 			pstmt.setString(3, qnaBean.getQna_cate());
 			pstmt.setString(4, qnaBean.getQna_title());
 			pstmt.setString(5, qnaBean.getQna_contents());
+			pstmt.setString(6, qnaBean.getAnswer());
+			pstmt.setString(7, qnaBean.getFile());
+			pstmt.setString(8, qnaBean.getFile2());
 			
 			pstmt.executeUpdate();
 			
@@ -136,6 +172,8 @@ public class qnaDao {
 		}
 	}//insertfboard()끝
 
+	
+	
 	//모든 글 개수 가져오는 메소드
 	public int getAllQna() {
 		int count = 0;
@@ -163,7 +201,7 @@ public class qnaDao {
 		String sql = "";
 		try {
 			con = getConnection();
-			sql = "select * from qnaboard where id = ?";
+			sql = "select * from qnaboard where id = ? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -177,8 +215,27 @@ public class qnaDao {
 		}
 		return count;
 	}//getAllQna()끝
-
 	
+	//관리자 페이지 답변 상태 조회 
+	public int getAllQna(int status) {
+		int count = 0;
+		String sql = "";
+		try {
+			con = getConnection();
+			sql = "select * from qnaboard where qna_status = ? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, status);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				count ++;
+			}
+		} catch (Exception e) {
+			System.out.println("getAllQna()에서 예외발생 : " + e);
+		}finally {
+			freeResource();
+		}
+		return count;
+	}
 	//글 상세보기 메소드
 	public qnaBean viewQna(int qna_num){//1:1 문의 글 상세보기
 		qnaBean qbean = new qnaBean();
@@ -196,6 +253,7 @@ public class qnaDao {
 				qbean.setQna_contents(rs.getString("qna_contents"));
 				qbean.setQna_status(rs.getInt("qna_status"));
 				qbean.setAnswer(rs.getString("answer"));
+				qbean.setFile(rs.getString("file"));
 			}
 		} catch (Exception e) {
 			System.out.println("viewQna()에서 예외 발생 : " + e);

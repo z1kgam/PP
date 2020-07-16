@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.mysql.fabric.xmlrpc.base.Array;
 
 import Product.DetailBean;
 import Product.ProductBean;
@@ -54,26 +57,45 @@ public class OrderController extends HttpServlet{
 		String action = request.getPathInfo();
 		
 		if (action.equals("/order.do")) {			//장바구니에 추가하기
-			
+			String[] seat = request.getParameterValues("seat");
 			int detailnum = Integer.parseInt(request.getParameter("detailnum"));
 			int qty = Integer.parseInt(request.getParameter("count"));
 			int totalprice = Integer.parseInt(request.getParameter("totalprice"));
+			Date today = Date.valueOf(request.getParameter("today"));
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
-			System.out.println(name);
 			DetailBean DVO = Pservice.getdetails(detailnum);
+			
+			
+			//해당 공연에 대한 예약된 좌석정보리스트 가져와서 저장하기
+			List<OrderVO> selectseat = orderDAO.getSeat(today, detailnum);
+			String chseat="";
+			for(int j=0; j<selectseat.size();j++) {
+				chseat += selectseat.get(j).getSelectseat();
+				if(j!=selectseat.size()-1) {
+					chseat += ",";
+				}
+			}
+			System.out.println(chseat);
+			
+			
+			
 			checkPage = 1;
 			int sub = DVO.getTotalreserved() + qty;
-			
+			PrintWriter pw = response.getWriter();
+			String out = "";
+			for(int i=0; i<seat.length;i++) {
+				out += seat[i];
+				if(i!=seat.length-1)out+=",";
+				
+			}
 			Pservice.UpdateSeat(detailnum,sub);
 			
 			DetailBean Bean = Pservice.getdetails(detailnum);
 			
 			boolean checkproduct = orderDAO.checkproduct(id, name);
-			System.out.println(checkproduct);
 			
 			if(checkproduct == true) {			//이미 장바구니에 해당상품이 있는지 판별함
-				PrintWriter pw = response.getWriter();
 				pw.print("<script>");
 				pw.print("alert('이미 장바구니에 있는 상품입니다.');");
 				pw.print("history.back();");
@@ -82,7 +104,7 @@ public class OrderController extends HttpServlet{
 			}else {
 
 			OrderVO vo = new OrderVO();
-			
+			vo.setSelectseat(out);
 			vo.setName(Bean.getName());
 			vo.setGenre(Bean.getGenre());
 			vo.setCla(Bean.getCla());
@@ -103,8 +125,6 @@ public class OrderController extends HttpServlet{
 			vo.setTotalprice(totalprice);			
 			Orservice.insertOrder(vo);
 			session.setAttribute("cartList", vo);
-						
-			PrintWriter pw = response.getWriter();
 			pw.write("<script>");
 			pw.write("alert('장바구니에 추가되었습니다.');");
 			pw.write("location.href='"+request.getContextPath()+"/Order/cartList.do';");
@@ -117,12 +137,31 @@ public class OrderController extends HttpServlet{
 
 			String id = (String)session.getAttribute("id");
 			
-			List<OrderVO> cartList = orderDAO.getCartList(id);
 			int cartcount =orderDAO.getCountCartList(id);
 			int total = orderDAO.getTotalPrice(id);
+			
+			int pageSize = 5;
+			int nowPage = 1;
+			if(request.getParameter("nowPage") != null) {
+				nowPage = Integer.parseInt(request.getParameter("nowPage"));
+			}
+			int pageFirst = (nowPage - 1) * pageSize;
+			int totalPage = total / pageSize + (total % pageSize == 0 ? 0 : 1);
+			int blockSize = 10;
+			int blockFirst = (nowPage / blockSize - (nowPage % blockSize == 0? 1: 0)) * blockSize + 1 ;
+			int blockLast = blockFirst + blockSize - 1;
+			if(blockLast > totalPage) {
+				blockLast = totalPage;
+			}
+			List<OrderVO> cartList = orderDAO.getCartList(id, pageFirst, pageSize);
 			session.setAttribute("cartList", cartList);
 			session.setAttribute("cartcount", cartcount);
 			session.setAttribute("total", total);
+			request.setAttribute("blockSize", blockSize);
+			request.setAttribute("blockFirst", blockFirst);
+			request.setAttribute("blockLast", blockLast);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("nowPage", nowPage);
 			
 			nextPage = "/mypage/cartList.jsp";
 	
@@ -159,13 +198,10 @@ public class OrderController extends HttpServlet{
 		}else if(action.equals("/Payment.do")) {	//결제테이블에 하나의 선택한 장바구니상품 추가
 			String id = request.getParameter("id");
 			int num = Integer.parseInt(request.getParameter("num"));
-			System.out.println(num);
-			System.out.println(id);
 			
 			OrderVO payVO = orderDAO.getPayInfo(id, num);
 			
 			request.setAttribute("payVO", payVO);
-			System.out.println(payVO);
 			
 			nextPage = "/mypage/payment.jsp";
 			
@@ -176,10 +212,8 @@ public class OrderController extends HttpServlet{
 			OrderVO payVO = new OrderVO();
 			memberBean = memberDAO.getMember(id);
 			int point = memberBean.getPoint();
-			System.out.println(point);
 			payVO = orderDAO.getPayInfo(id, num);
 			int totalprice = payVO.getTotalprice();
-			System.out.println(totalprice);
 			
 			if(point < totalprice) {
 				pw.write("<script>");
@@ -189,9 +223,7 @@ public class OrderController extends HttpServlet{
 				return;
 			}else {
 				orderDAO.payResult(id, num, totalprice);
-				System.out.println("가진 포인트 - 총 결제금액");
 				orderDAO.addPayment(payVO);
-				System.out.println("추가완료");
 				orderDAO.delCart(num, id);
 				
 				nextPage = "/index/index.jsp";
@@ -200,10 +232,33 @@ public class OrderController extends HttpServlet{
 			
 		}else if(action.equals("/payList.do")) { // 내 결제내역보기
 			String id = (String)session.getAttribute("id");
-			List<OrderVO> paymentList = orderDAO.getPaymentList(id);
+			
+			int total = orderDAO.getCountPay(id); 
+			
+			int pageSize = 5;
+			int nowPage = 1;
+			if(request.getParameter("nowPage") != null) {
+				nowPage = Integer.parseInt(request.getParameter("nowPage"));
+			}
+			int pageFirst = (nowPage - 1) * pageSize;
+			int totalPage = total / pageSize + (total % pageSize == 0 ? 0 : 1);
+			int blockSize = 10;
+			int blockFirst = (nowPage / blockSize - (nowPage % blockSize == 0 ? 1 : 0)) * blockSize + 1;
+			int blockLast = blockFirst + blockSize - 1;
+			if(blockLast > totalPage) {
+				blockLast = totalPage;
+			}
+			
+			List<OrderVO> paymentList = orderDAO.getPaymentList(id, pageFirst, pageSize);
 			int totalpayprice = orderDAO.getTotalPayPrice(id);
 			request.setAttribute("paymentList", paymentList);
 			request.setAttribute("totalpayprice", totalpayprice);
+			request.setAttribute("blockSize", blockSize);
+			request.setAttribute("blockFirst", blockFirst);
+			request.setAttribute("blockLast", blockLast);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("nowPage", nowPage);
+			
 			nextPage = "/mypage/paymentList.jsp";
 			
 		}else if(action.equals("/paydel.do")) {	//결제내역에서 해당 id의 결제번호에 해당하는 내역 삭제
@@ -241,9 +296,7 @@ public class OrderController extends HttpServlet{
 			memberBean = memberDAO.getMember(id);
 			int point = memberBean.getPoint();		//내가 보유한 point 
 			OrderVO payVO = new OrderVO();
-			payVO = orderDAO.getPayInfo(id);		//해당id의 장바구니 전체 결제금액얻기
-			int totalprice = orderDAO.getTotalPrice(id); //  
-			System.out.println("총 결제금액 : " + totalprice);
+			int totalprice = orderDAO.getTotalPrice(id);  //해당id의 장바구니 전체 결제금액얻기 
 			if(point < totalprice) {
 				pw.write("<script>");
 				pw.write("alert('보유한 포인트가 결제금액보다 적습니다.');");
@@ -256,7 +309,7 @@ public class OrderController extends HttpServlet{
 				orderDAO.addAllPay(list);	//장바구니에 있는 내역 전체 결제			
 				
 				orderDAO.delAllCart(id);    //결제완료 후 장바구니 내역삭제
-				
+				point = memberBean.getPoint();	
 				System.out.println("결제후 내 포인트 : " + point);
 				
 				checkPage = 1;
@@ -267,8 +320,37 @@ public class OrderController extends HttpServlet{
 				
 				return;
 			}
+		}else if(action.equals("/kakaoOrder.do")) {
+			String id = (String)session.getAttribute("id");
+			int num = Integer.parseInt(request.getParameter("num"));
+			
+			OrderVO payVO = new OrderVO();
+			payVO = orderDAO.getPayInfo(id, num);
+			request.setAttribute("payVO", payVO);
+			nextPage = "/product/kakaoPay.jsp";
 			
 			
+		}else if(action.equals("/kakaoOrder2.do")) {
+			PrintWriter pw = response.getWriter();
+			String id = (String)session.getAttribute("id");
+			int num = Integer.parseInt(request.getParameter("num"));
+			OrderVO payVO = new OrderVO();
+			memberBean = memberDAO.getMember(id);
+			int point = memberBean.getPoint();
+			payVO = orderDAO.getPayInfo(id, num);
+			int totalprice = payVO.getTotalprice();
+			checkPage = 1;
+			orderDAO.addPayment(payVO);
+			orderDAO.delCart(num, id);
+			
+			request.setAttribute("msg", "결제가 완료되었습니다.");
+			
+			pw.write("<script>");
+			pw.write("alert('결제가 완료 되었습니다.');");
+			pw.write("location.href='"+request.getContextPath()+"/Order/payList.do';");
+			pw.write("</script>");
+			
+			return;
 		}
 		
 		if(checkPage == 0) {

@@ -22,8 +22,13 @@
 <body>
 
 
-      <article class="container">
-        <div class="page-header">
+<jsp:include page="../include/header.jsp" />
+
+      <article class="container" style="width: 70%;">
+       <div class="page-header" style="margin-top: 50px;">
+          
+        <h1>Check</h1>
+        </div>
         <hr/>
 
         <div class="col-md-6 col-md-offset-3">
@@ -32,12 +37,15 @@
               	아이디는 <input type="text" class="form-control" readonly value="${id}" > 입니다.
             </div>
             <div class="form-group text-center">
-              <input type="submit" class="btn btn-info" value="비밀번호 찾기">
-              <button type="button" class="btn btn-warning" onclick="location.href='${contextPath}/member/login.do'">로그인하러 가기</button>
+              <input type="submit" class="btn btn-info" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px;" value="비밀번호 찾기">
+              <button type="button" class="btn btn-warning" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; margin-bottom: 50px;" onclick="location.href='${contextPath}/member/login.do'">로그인하러 가기</button>
             </div>
           </form>
         </div>
       </article>
+
+
+<jsp:include page="../include/footer.jsp" />
 
 </body>
 </html>

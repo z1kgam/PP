@@ -15,11 +15,15 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <title>1:1문의하기</title>
+
+<jsp:include page="../include/header.jsp"></jsp:include>
+
 	<link rel="stylesheet" href="../css/bootstrap.min.css" />
 	<link rel="stylesheet" href="../css/style.css" />
 	
 	<script src="../js/jquery-3.4.1.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
+	
 </head>
 <body>
 
@@ -63,7 +67,20 @@ request.setCharacterEncoding("UTF-8");
 						<td>
 							${qna.qna_contents}  <br><br><br>
 						</td>
-					</tr>				
+					</tr>	
+					
+					
+					<tr>
+						<th class="align-middle">
+							<label for="contents" class="m-0">첨부이미지</label>
+						</th>
+						<td>
+							<img alt="img" src="${contextPath}/board/image/${qna.file}" height="400px" width="600px">  <br><br><br>
+						</td>
+					</tr>	
+					
+					
+								
 					
 				<c:if test="${qna.qna_status == 1}">					
 					<tr>
@@ -80,7 +97,7 @@ request.setCharacterEncoding("UTF-8");
 				<c:if test="${is_admin == 1}">	
 					<a href="${contextPath}/qboard/deleteQna.do?qna_num=${qna.qna_num}">
 						<input type="button" value="삭제하기">
-					</a>
+					</a> 
 					
 					<a href="${contextPath}/qboard/qnaUpdateForm.do?qna_num=${qna.qna_num}">
 						<input type="button" value="수정하기">
@@ -111,8 +128,8 @@ request.setCharacterEncoding("UTF-8");
 	</section>
 	
 	
-	
-<%-- 	<script src="${contextPath}/js/bs-custom-file-input.js"></script>
+<!--  	
+ 	<script src="${contextPath}/js/bs-custom-file-input.js"></script>
 	<script>
 		$(document).ready(function() {
 			bsCustomFileInput.init()
@@ -148,10 +165,10 @@ request.setCharacterEncoding("UTF-8");
 		}
 	</script>
 	
-	 --%>
+-->	
 	
 	
-	
+<jsp:include page="../include/footer.jsp"></jsp:include>	
 
 </body>
 </html>

@@ -1,11 +1,14 @@
 package Order;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -57,8 +60,8 @@ public class OrderDAO {
 			}
 			
 			sql ="insert into productorder(num,detailnum,name,genre,cla,runtime,price,startdate,enddate,image,content,"
-					+ "place,seat,totalreserved,today,starttime,id,qty,totalprice,orderdate)"
-					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+					+ "place,seat,totalreserved,today,starttime,id,qty,totalprice,orderdate,selectseat)"
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setInt(2, vo.getDetailnum());
@@ -79,6 +82,7 @@ public class OrderDAO {
 			pstmt.setString(17, vo.getId());
 			pstmt.setInt(18, vo.getQty());
 			pstmt.setInt(19, vo.getTotalprice());
+			pstmt.setString(20, vo.getSelectseat());
 			
 			pstmt.executeUpdate();
 			
@@ -89,8 +93,8 @@ public class OrderDAO {
 		}
 	}
 	
-	//해당 id의 전체 장바구니 내역 리스트조회
-	public ArrayList<OrderVO> getCartList(String id){
+	//해당 id의 전체 장바구니 내역 리스트조회 (페이징까지)
+	public ArrayList<OrderVO> getCartList(String id, int pageFirst, int pageSize){
 		ArrayList<OrderVO> cartList = new ArrayList<OrderVO>();
 		
 		Connection con = null;
@@ -99,9 +103,11 @@ public class OrderDAO {
 		ResultSet rs = null;
 		try {
 			con = getConnection();
-			sql = "SELECT * FROM PRODUCTORDER WHERE ID = ?";
+			sql = "SELECT * FROM PRODUCTORDER WHERE ID = ? ORDER BY NUM DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, pageFirst);
+			pstmt.setInt(3, pageSize);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				OrderVO orderVO = new OrderVO();
@@ -128,6 +134,47 @@ public class OrderDAO {
 		
 		return cartList;
 	}
+	
+	//해당 id의 전체 장바구니 내역 총개수
+		public ArrayList<OrderVO> getCartList(String id){
+			ArrayList<OrderVO> cartList = new ArrayList<OrderVO>();
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = "";
+			ResultSet rs = null;
+			try {
+				con = getConnection();
+				sql = "SELECT * FROM PRODUCTORDER WHERE ID = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					OrderVO orderVO = new OrderVO();
+					orderVO.setNum(rs.getInt("num"));
+					orderVO.setId(rs.getString("id"));
+					orderVO.setName(rs.getString("name"));
+					orderVO.setQty(rs.getInt("qty"));
+					orderVO.setTotalprice(rs.getInt("totalprice"));
+					orderVO.setOrderdate(rs.getDate("orderdate"));				
+					cartList.add(orderVO);
+				}
+				
+			} catch (Exception e) {
+				System.out.println("getCartList Inner Err : " + e);
+			} finally {
+				try {
+					if(rs!=null)rs.close();
+					if(pstmt!=null)pstmt.close();
+					if(con!=null)con.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			
+			return cartList;
+		}
+
 
 	//장바구니 내역삭제
 	public void delCart(int num, String id) {
@@ -331,6 +378,7 @@ public class OrderDAO {
 				vo.setQty(rs.getInt("qty"));
 				vo.setTotalprice(rs.getInt("totalprice"));
 				vo.setOrderdate(rs.getDate("orderdate"));
+				vo.setSelectseat(rs.getString("selectseat"));
 			}
 		} catch (Exception e) {
 			System.out.println("getPayInfo Inner Err : " + e);
@@ -379,6 +427,7 @@ public class OrderDAO {
 				vo.setQty(rs.getInt("qty"));
 				vo.setTotalprice(rs.getInt("totalprice"));
 				vo.setOrderdate(rs.getDate("orderdate"));
+				vo.setSelectseat(rs.getString("selectseat"));
 			}
 		} catch (Exception e) {
 			System.out.println("getPayInfo Inner Err : " + e);
@@ -414,13 +463,20 @@ public class OrderDAO {
 				p_num = 1;
 			}
 			
-			sql = "INSERT INTO payment(p_num, totalprice, qty, name, id, p_paydate) VALUES (?,?,?,?,?,now())";
+			sql = "INSERT INTO payment(p_num, totalprice, qty, name, id, p_paydate, selectseat, today,detailnum,genre,image,place,runtime) VALUES (?,?,?,?,?,now(),?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, p_num);
 			pstmt.setInt(2, payVO.getTotalprice());
 			pstmt.setInt(3, payVO.getQty());
 			pstmt.setString(4, payVO.getName());
 			pstmt.setString(5, payVO.getId());
+			pstmt.setString(6, payVO.getSelectseat());
+			pstmt.setDate(7, payVO.getToday());
+			pstmt.setInt(8, payVO.getDetailnum());
+			pstmt.setString(9, payVO.getGenre());
+			pstmt.setString(10, payVO.getImage());
+			pstmt.setString(11, payVO.getPlace());
+			pstmt.setInt(12, payVO.getRuntime());
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -514,6 +570,48 @@ public class OrderDAO {
 		
 		return paymentList;
 	}
+	
+	//해당 id의 결제내역 보기(페이징)
+		public ArrayList<OrderVO> getPaymentList(String id, int pageFirst, int pageSize) {
+			ArrayList<OrderVO> paymentList = new ArrayList<OrderVO>();
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = "";
+			ResultSet rs = null;
+			
+			try {
+				con = getConnection();
+				sql = "SELECT * FROM PAYMENT WHERE ID = ? ORDER BY p_seq_num DESC LIMIT ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setInt(2, pageFirst);
+				pstmt.setInt(3, pageSize);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					OrderVO paymentVO = new OrderVO();
+					paymentVO.setId(id);
+					paymentVO.setName(rs.getString("name"));
+					paymentVO.setQty(rs.getInt("qty"));
+					paymentVO.setP_seq_num(rs.getInt("p_seq_num"));
+					paymentVO.setP_num(rs.getInt("p_num"));
+					paymentVO.setTotalprice(rs.getInt("totalprice"));
+					paymentVO.setP_paydate(rs.getDate("p_paydate"));
+					paymentList.add(paymentVO);
+				}
+			} catch (Exception e) {
+				System.out.println("getPaymentList Inner Err : " + e);
+			} finally {
+				try {
+					if(rs!=null)rs.close();
+					if(pstmt!=null)pstmt.close();
+					if(con!=null)con.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			
+			return paymentList;
+		}
 	
 	//해당 id의 총 결제금액 
 	public int getTotalPayPrice(String id) {
@@ -626,7 +724,6 @@ public class OrderDAO {
 	public void addAllPay(List<OrderVO> list){
 		try {
 			con=getConnection();
-
 			int p_num = 0;
 			String sql = "SELECT MAX(p_num) FROM PAYMENT";
 			pstmt = con.prepareStatement(sql);
@@ -636,7 +733,7 @@ public class OrderDAO {
 			}else {
 				p_num = 1;
 			}
-			sql = "insert into payment (p_num,qty,p_paydate,totalprice,name,id) values ";
+			sql = "insert into payment (p_num,qty,p_paydate,totalprice,name,id,selectseat,today,detailnum,genre,image,place,runtime) values ";
 			for(int i = 0 ; i<list.size() ; i++) {
 				OrderVO vo =  list.get(i);
 				sql+="("+
@@ -644,14 +741,23 @@ public class OrderDAO {
 						","+vo.getQty()+
 						", now()" +
 						","+ vo.getTotalprice()+",'"+vo.getName() +
-						"','"+ vo.getId()+
-					  "')";
+						"','"+ vo.getId() +
+						"','"+vo.getSelectseat() + 
+						"','"+vo.getToday() + 
+						"',"+vo.getDetailnum() + 
+						",'"+vo.getGenre() + 
+						"','"+vo.getImage() +
+						"','"+vo.getPlace() +
+						"',"+vo.getRuntime() +
+					  ")";
+				System.out.println(vo.getSelectseat());
 				if(i!=list.size()-1) {
 					sql+=",";
 				}
 			}
 			pstmt=con.prepareStatement(sql);
 			System.out.println(pstmt);
+			System.out.println();
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("addAllPay Inner Err : "+ e);
@@ -680,12 +786,19 @@ public class OrderDAO {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				OrderVO vo = new OrderVO(
-										rs.getInt("totalprice"),
+										rs.getInt("detailnum"),
+										rs.getInt("runtime"),
 										rs.getInt("qty"),
+										rs.getInt("totalprice"),
 										p_num,
+										rs.getString("genre"),
+										rs.getString("image"),
+										rs.getString("place"),
+										id,
+										rs.getString("selectseat"),
 										rs.getString("name"),
-										id
-										);
+										rs.getDate("today")
+										); 
 				list.add(vo);
 			}
 		} catch (Exception e) {e.printStackTrace();}finally {resource();}
@@ -722,6 +835,52 @@ public class OrderDAO {
 		} finally {
 			resource();
 		}
+	}
+	
+	//선택한 콘서트의 예약된 좌석 구하기
+	public List<OrderVO> getSeat(Date today, int detailnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		ResultSet rs = null;
+		List<OrderVO> selectseat = new ArrayList<>();
+		try {
+			con = getConnection();
+			sql = "SELECT * FROM PAYMENT WHERE TODAY = ? AND DETAILNUM = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setDate(1, today);
+			pstmt.setInt(2, detailnum);
+			rs = pstmt.executeQuery();
+			//System.out.println(pstmt);
+			while(rs.next()) {
+				OrderVO vo = new OrderVO(
+										detailnum, 
+										rs.getInt("runtime"),
+										rs.getInt("qty"), 
+										rs.getInt("totalprice"),
+										rs.getInt("p_seq_num"),
+										rs.getString("genre"),
+										rs.getString("image"),
+										rs.getString("place"),
+										rs.getString("id"),
+										rs.getString("selectseat"),
+										rs.getString("name"),
+										today); 
+				selectseat.add(vo);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getSeat Inner Err :" + e);
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e2) {
+
+			}
+		}
+		return selectseat;
 	}
 	
 }

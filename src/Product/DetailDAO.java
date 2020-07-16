@@ -1,6 +1,7 @@
 package Product;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -49,26 +50,27 @@ public class DetailDAO {
 				detailnum = 1; 
 			}
 			
-			sql ="insert into details(detailnum,name,genre,cla,runtime,price,startdate,enddate,image,content,"
+			sql ="insert into details(detailnum,num,name,genre,cla,runtime,price,startdate,enddate,image,content,"
 					+ "place,seat,totalreserved,today,starttime) "
-					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, detailnum);
-			pstmt.setString(2, vo.getName());
-			pstmt.setString(3, vo.getGenre());
-			pstmt.setString(4, vo.getCla());
-			pstmt.setInt(5, vo.getRuntime());
-			pstmt.setInt(6, vo.getPrice());
-			pstmt.setDate(7, vo.getStartdate());
-			pstmt.setDate(8, vo.getEnddate());
-			pstmt.setString(9, vo.getImage());
-			pstmt.setString(10, vo.getContent());
-			pstmt.setString(11, vo.getPlace());
-			pstmt.setInt(12, vo.getSeat());
-			pstmt.setInt(13, vo.getTotalreserved());
-			pstmt.setDate(14, vo.getToday());
-			pstmt.setString(15, vo.getStarttime());
+			pstmt.setInt(2, vo.getNum());
+			pstmt.setString(3, vo.getName());
+			pstmt.setString(4, vo.getGenre());
+			pstmt.setString(5, vo.getCla());
+			pstmt.setInt(6, vo.getRuntime());
+			pstmt.setInt(7, vo.getPrice());
+			pstmt.setDate(8, vo.getStartdate());
+			pstmt.setDate(9, vo.getEnddate());
+			pstmt.setString(10, vo.getImage());
+			pstmt.setString(11, vo.getContent());
+			pstmt.setString(12, vo.getPlace());
+			pstmt.setInt(13, vo.getSeat());
+			pstmt.setInt(14, vo.getTotalreserved());
+			pstmt.setDate(15, vo.getToday());
+			pstmt.setString(16, vo.getStarttime());
 			
 			pstmt.executeUpdate();
 			
@@ -87,7 +89,7 @@ public class DetailDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from details where name=?";
+			sql = "select * from details where name=? order by today asc, starttime asc";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -111,6 +113,7 @@ public class DetailDAO {
 				vo.setTotalreserved(rs.getInt("totalreserved"));
 				vo.setToday(rs.getDate("today"));
 				vo.setStarttime(rs.getString("starttime"));
+				vo.setNum(rs.getInt("num"));
 				detail.add(vo);
 			}
 		} catch (Exception e) {
@@ -151,6 +154,7 @@ public class DetailDAO {
 				vo.setTotalreserved(rs.getInt("totalreserved"));
 				vo.setToday(rs.getDate("today"));
 				vo.setStarttime(rs.getString("starttime"));
+				vo.setNum(rs.getInt("num"));
 			}
 		} catch (Exception e) {
 			System.out.println("details메소드 에서 예외발생 : " + e);
@@ -200,5 +204,48 @@ public class DetailDAO {
 			resource();
 		}
 		
+	}
+
+	public List<DetailBean> SelectByDate(Date selectdate, String name) {
+		List<DetailBean> detList = new ArrayList<DetailBean>();
+		String sql = "";
+		
+		try {
+			con = getConnection();
+
+			sql = "select * from details where name=? and today=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setDate(2, selectdate);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				DetailBean vo = new DetailBean();
+				vo.setDetailnum(rs.getInt("detailnum"));
+				vo.setName(rs.getString("name"));
+				vo.setGenre(rs.getString("genre"));
+				vo.setCla(rs.getString("cla"));
+				vo.setRuntime(rs.getInt("runtime"));
+				vo.setPrice(rs.getInt("price"));
+				vo.setStartdate(rs.getDate("startdate"));
+				vo.setEnddate(rs.getDate("enddate"));
+				vo.setImage(rs.getString("image"));
+				vo.setContent(rs.getString("content"));
+				vo.setPlace(rs.getString("place"));
+				vo.setSeat(rs.getInt("seat"));
+				vo.setTotalreserved(rs.getInt("totalreserved"));
+				vo.setToday(rs.getDate("today"));
+				vo.setStarttime(rs.getString("starttime"));
+				vo.setNum(rs.getInt("num"));
+				detList.add(vo);
+			}
+		} catch (Exception e) {
+			System.out.println("SelectByDate메소드 에서 예외발생 : " + e);
+		}finally {
+			resource();
+		}
+		return detList;
 	}
 }

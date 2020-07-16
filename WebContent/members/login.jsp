@@ -7,13 +7,28 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+
+<style>
+#login:hover {color: #fff;}
+
+ 
+</style>
+
+
 <!DOCTYPE html>
 <html>
 <head>
+
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>bootstrap template</title>
+
+
+
+
+
 
      <!-- Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -25,6 +40,10 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<script src="../js/login.js"></script>
 	
+
+
+
+
 
 <script type="text/javascript">
 
@@ -81,14 +100,25 @@ $(document).ready(function(){
  
 </script>
 
+
+
+
+
+
+
+
+
+
+
+
 </head>
 <body>
 <jsp:include page="../include/header.jsp" />
-<div class="container">
+<div class="container" style="width: 70%;">
 
-	<div class="page-header">
+	<div class="page-header" style="padding-top: 50px;">
 	<hr/>
-		<h2>로그인 화면 </h2>
+		<h2 style="margin-bottom: 50px;">Login Page </h2>
 	</div>
 
 	<div class="col-md-6 col-md-offset-3">
@@ -105,10 +135,10 @@ $(document).ready(function(){
 			
 			<div class="form-group text-center">
 				<input type="checkbox" class="checkbox" id="idSaveCheck">아이디 기억하기	
-				<input type="submit" value="로그인" class="btn btn-primary">
+				<input type="submit" value="로그인" id="login" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important;">
 			</div>
-			<label for="username"><a href="${contextPath}/member/findId.do">아이디/비밀번호 찾기</a></label><br>
-			<label for="username"><a href="${contextPath}/member/join.do">회원가입 하러 가기</a></label>
+			<label for="username"><a href="${contextPath}/member/findId.do" style="color: #3d435c; "><b>아이디/비밀번호 찾기</b></a></label><br>
+			<label for="username" style=" padding-bottom: 50px;"><a href="${contextPath}/member/join.do" style="color: #3d435c;"><b>회원가입 하러 가기</b></a></label>
 	</form>
 
 </div>

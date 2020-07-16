@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h2 style="background-color:#ffb5b5;">환불안내</h2><br>
+<h2 style="background-color:#00E7D6; color: #fff;">환불안내</h2><br>
 
 <h3><신용카드 결제의 경우></h3><br>
 일반적으로 당사의 취소 처리가 완료되고 4~5일 후 카드사의 취소가 확인됩니다. (체크카드 동일)<br>

@@ -29,8 +29,8 @@ public class LikeDAO {
 		return con;
 	}
 	
-	// 사용자와 게시글
-	public int getTotal(int num, String id) {
+	// 해당 id의 총 좋아요 누른 개수
+	public int getTotal(String id) {
 		int count = 0;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -38,10 +38,9 @@ public class LikeDAO {
 		String sql="";
 		try {
 			con=getConnection();
-			sql="SELECT count(*) FROM likeboard WHERE num = ? and id = ?";
+			sql="SELECT count(*) FROM likeboard WHERE id = ?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			pstmt.setString(2, id);
+			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				count=rs.getInt(1);
@@ -70,17 +69,19 @@ public class LikeDAO {
 		
 		try {
 			con = getConnection();
-			sql = "SELECT * FROM likeboard WHERE id = ? ORDER BY likenum limit ?,?";
+			sql = "SELECT * FROM likeboard WHERE id = ? ORDER BY likenum desc limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setInt(1, pageFirst);
-			pstmt.setInt(2, pageSize);
+			pstmt.setInt(2, pageFirst);
+			pstmt.setInt(3, pageSize);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				LikeBean likeBean = new LikeBean();
 				likeBean.setId(rs.getString("id"));
 				likeBean.setNum(rs.getInt("num"));
 				likeBean.setLikenum(rs.getInt("likenum"));
+				likeBean.setName(rs.getString("name"));
+				likeBean.setImage(rs.getString("image"));
 				likeList.add(likeBean);
 				
 			}
@@ -99,17 +100,32 @@ public class LikeDAO {
 	}
 	
 	//찜하기
-	public void addLike(int num, String id) {
+	public void addLike(int num, String id, String name, String image) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql="";
+		int likenum = 0;
+		ResultSet rs = null;
 		try {
-			con=getConnection();
-			sql="INSERT INTO likeboard(num, id) VALUES (?, ?)";
-			pstmt=con.prepareStatement(sql);
 			
-			pstmt.setInt(1, num);			
-			pstmt.setString(2, id);
+			con=getConnection();
+			
+			sql = "SELECT MAX(likenum) FROM likeboard";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				likenum = rs.getInt("max(likenum)") + 1;
+			}else {
+				likenum = 1;
+			}
+			
+			sql = "INSERT INTO likeboard(likenum, num, id, name, image) VALUES (?, ?, ?, ?, ?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, likenum);
+			pstmt.setInt(2, num);			
+			pstmt.setString(3, id);
+			pstmt.setString(4, name);
+			pstmt.setString(5, image);
 			
 			pstmt.executeUpdate();
 			
@@ -210,4 +226,6 @@ public class LikeDAO {
 			}
 		return likeCount;		
 	} // getProductTotalLike END
+
+	
 }

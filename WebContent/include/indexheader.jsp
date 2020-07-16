@@ -6,7 +6,7 @@
 <!-- JSTL 사용을 위해 선언 -->    
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
 
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
@@ -240,8 +240,8 @@ body {
 
 </head> 
 <body>
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-	<a href="#" class="navbar-brand"><i class="fa fa-cube"></i>Ticketing</a>  		
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark" style="background: linear-gradient( to right, #EB008B, #00E7D6 ) !important;">
+	 		
 	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -249,20 +249,14 @@ body {
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
 		<form class="navbar-form form-inline">
 			<div class="input-group search-box">								
-				<input type="text" id="search" class="form-control" placeholder="검색하기..." style="height: 15px !important; margin-top: 10px;">
+				<input type="text" id="search" class="form-control" placeholder="Search..." style="height: 15px !important; margin-top: 10px;">
 				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
 			</div>
 		</form>
 		<div class="navbar-nav ml-auto">
-			<a href="#" class="nav-item nav-link active"><i class="fa fa-home"></i><span>홈으로</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-gears"></i><span>관리자 페이지</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-users"></i><span>고객센터</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-pie-chart"></i><span>이용안내</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-briefcase"></i><span>장바구니</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-envelope"></i><span>메세지</span></a>		
-			<a href="#" class="nav-item nav-link"><i class="fa fa-bell"></i><span>알림</span></a>
+			
 			<div class="nav-item dropdown">
-				<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar" style="border-radius: 50%;
+				<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" style="color: #000;"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar" style="border-radius: 50%;
 	width: 36px;
 	height: 36px;
 	margin-right: 10px;"> Antonio Moreno <b class="caret"></b></a>
@@ -270,6 +264,8 @@ body {
 					<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
 					<a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
 					<a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
+					<a href="#" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
+					<a href="#" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
 					<div class="divider dropdown-divider"></div>
 					<a href="#" class="dropdown-item"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
 				</div>
@@ -293,7 +289,7 @@ body {
   			<div class="row m-auto">
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
-  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 10px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-height: 120px;"></a> 
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-width: 80px;"></a> 
   					
   					
   					
@@ -320,19 +316,19 @@ body {
 
   				<div class="col-12 w-100 text-center" style="margin-top: -20px;">
   					<div class="collapse navbar-collapse" id="ftco-nav">
-			        <ul class="navbar-nav m-auto">
-			          <li class="nav-item" style="margin-left: 100px;"><a href="index/index.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕; ">메인</a></li>
-			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공연&상품 페이지</a></li>
-			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 18px; font-family:나눔고딕">###</a></li>
-			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
+			        <ul class="navbar-nav m-auto" style="margin-left: 10px;">
+			          <li class="nav-item"><a href="index/index.jsp" class="nav-link" style="font-size: 22px; font-family:나눔고딕; "><b>메인</b></a></li>
+			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>공연&상품 페이지</b></a></li>
+			          
+			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>이벤트</b></a></li>
 			     <c:if test="${is_admin == 1}">     
-			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">관리자 페이지</a></li>
+			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>관리자 페이지</b></a></li>
 			     </c:if>     
-			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">예매하기</a></li>
-			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공지사항</a></li>
+			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>예매하기</b></a></li>
+			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>고객센터</b></a></li>
 			     <c:if test="${id==null}">
-			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">로그인</a></li>
-			          <li class="nav-item"><a href="${contextPath}/member/join.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">회원가입</a></li>
+			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>로그인</b></a></li>
+			          <li class="nav-item"><a href="${contextPath}/member/join.do" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>회원가입</b></a></li>
 			     </c:if>
 			        </ul>
 			      </div>
@@ -349,6 +345,8 @@ body {
 <!------------------------------------------------ body ------------------------------------------------->
 
 
+
+<!-- 
     <section class="home-slider js-fullheight owl-carousel">
       <div class="slider-item js-fullheight" style="background-image:url(../images/mainimg.jpeg);">
       	<div class="overlay"></div>
@@ -378,19 +376,28 @@ body {
     </section>
     
     
+   -->  
+  
+  
+  <!-- -----------------------------------------------------------메인 이미지---------------------------------------------------------- -->  
     
     
     
     
     
+   
+ <!-------------------------------------------------- 캐로셀 ------------------------------------------------->
+    
+    
+    <div class="carousel1" style="margin-top: 100px;"> 
+	<jsp:include page="../include/carousel.jsp" />					
+	</div>				
+	  
     
     
     
     
-    
-    
-    
- <section class="ftco-section">  
+ <section class="ftco-section" style="margin-top: -200px;">  
  <div class="container">
  <div class="row">
  <div class="col-md-4" >     
@@ -420,9 +427,3 @@ body {
  </div>
  </section>
  
- 
- <!-------------------------------------------------- 캐로셀 ------------------------------------------------->
-    
-	<jsp:include page="../include/carousel.jsp" />					
-					
-	

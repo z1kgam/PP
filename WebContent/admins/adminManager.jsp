@@ -28,7 +28,6 @@
 	function del(id) {
 		
 		var did = id
-		alert(did);
 		if (confirm("정말 삭제 하시겠습니까??") == true){
 			window.location.href ='${contextPath}/admin/MemberDelete.do?id='+did+'&nowpage=${nowpage}';
 		} else {
@@ -42,11 +41,12 @@
 <body>
 	<jsp:include page="./include/top_navi.jsp" />
 			
-			<!-- 회원 정보 출력 테이블 -->
+			<!-- 바디영역 -->
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
 						<h4 class="page-title">회원 관리</h4>
+						<!-- 회원 정보 출력 테이블 -->
 						<table class="table table-hover">
 											<thead>
 												<tr align="center">
@@ -92,6 +92,7 @@
 											</c:choose>
 
 											<c:choose>
+											
 												<c:when test="${memberlist.is_admin == 1}">
 													<td><p class="text-primary">관리자</p></td>
 												</c:when>
@@ -112,7 +113,7 @@
 											<td>
 											<button type="button" data-toggle="tooltip" title="회원 삭제"
 												onclick="del('${memberlist.id}')" class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
-											<i class="la la-times"></i>
+											<i class="la la-trash"></i>
 											</button>
 											</td>
 											</div>

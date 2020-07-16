@@ -150,8 +150,9 @@
 				
 					<tr>
 						<th>NO.</th>
-						<th>분류</th>
+						<th>처리상태</th>
 						<th>제목</th>
+						<th>등록일</th>
 					</tr>
 			 
 				<tbody>

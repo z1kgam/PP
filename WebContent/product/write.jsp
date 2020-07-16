@@ -74,9 +74,12 @@ input {
 </style>
 </head>
 
-<body style="margin-left: 40%;">
+<body>
 
-<article>
+<jsp:include page="../include/subheader.jsp" />
+
+
+<article style="padding-top: 50px; padding-bottom: 100px; padding-left: 650px;">
 <h1>Register Product</h1>
 
 <form action="${contextPath}/Proser/writePro.do" method="post" enctype="multipart/form-data" name="f">
@@ -136,17 +139,26 @@ input {
 			<td id="del" colspan="2"></td>		
 		</tr>		
 	</table>
-	<div id="table_search">
-		<input type="submit" value="제품등록" class="btn">
-		<input type="reset" value="다시작성" class="btn">
-		<input type="button" value="제품목록" class="btn" onclick="location.href='${contextPath}/Proser/imcontact.do'">
+	<div id="table_search" style="position: relative; left: 1%; top: 70px; padding-bottom: 50px;">
+		<input type="submit" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important;" value="제품등록" class="btn">
+		<input type="reset" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;" value="다시작성" class="btn">
+		<input type="button" style="background-color: #EB008B !important; border-color: #EB008B !important; color: #fff !important;" value="제품목록" class="btn" onclick="location.href='${contextPath}/Proser/imcontact.do'">
 	</div>	
 </form>
 
 </article>
 
+
+<jsp:include page="../include/footer.jsp" />
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 

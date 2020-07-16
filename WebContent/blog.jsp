@@ -7,6 +7,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
+    
+   
+    
+    
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
@@ -30,24 +34,25 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
-<jsp:include page="include/header.jsp" />
+  <body style="background-color: #fff;">
+<jsp:include page="include/subheader.jsp" />
     <!-- END nav -->
+    
+    
+    
+    
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/concert.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-3 bread">Our Blog</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.jsp">Home</a></span> <span>Blog</span></p>
-          </div>
-        </div>
-      </div>
-    </section>
+   <div class="container" style="width: 70%;">
+	<div class="page-header" style="padding-top: 50px;">
+   
+    	<h1 style="margin-bottom: 50px;">Reservation</h1>
+    <hr/>
+    </div>
+    
+    
 
-    <section class="ftco-section">
-      <div class="container">
+    <section class="ftco-section" style="margin-top: -50px;">
+     
         <div class="row">
           <div>
           	<div class="row">
@@ -60,7 +65,7 @@
 		                  <div><a href="#">단독 판매</a></div>
 		                 
 		                </div>
-		                <h3 class="heading mt-2"><a href="#">콘서트 제목</a></h3>
+		                <h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">콘서트 제목</a></h3>
  <table style= "width: 700px;">
  
  <tr>
@@ -87,15 +92,22 @@
 
 
 </table>
-		                <p style="margin-top:70px;"><a href="#" class="btn btn-outline-primary">예매하기</a></p>
+		                <p style="margin-top:70px;"><a href="#" class="btn btn-outline-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px;">예매하기</a></p>
 		              </div>
 		            </div>
 		          </div>
 		          
 		          
-		          
-		              <jsp:include page="include/footer.jsp" />    
-    
+		       
+        	</div>
+        </div>
+    	
+    </section>
+
+
+   <jsp:include page="include/footer.jsp" />
+ 
+
   
 
  
