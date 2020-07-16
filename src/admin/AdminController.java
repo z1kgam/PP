@@ -29,6 +29,7 @@ import Product.DetailBean;
 import Product.DetailDAO;
 import Product.ProductBean;
 import Product.ProductDAO;
+import member.LikeBean;
 import member.MemberBean;
 import member.MemberDAO;
 import noticeboard.NoticeboardBean;
@@ -879,7 +880,7 @@ public class AdminController extends HttpServlet{
 				
 				nextPage = "/admins/AfaqWrite.jsp";
 				
-				
+			//FAQ 게시판 글 작성 	
 			} else if(action.equals("/AfaqWritepro.do")) {
 				
 				faqBean faqbean = new faqBean();
@@ -935,7 +936,7 @@ public class AdminController extends HttpServlet{
 				System.out.println(result);
 				
 				nextPage = "/admin/AfaqMain.do";
-				
+			//FAQ 게시글 삭제	
 			} else if(action.equals("/AfaqDel.do")) {
 				
 				faqBean faqbean = new faqBean();
@@ -947,7 +948,8 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("faqUpdate", faqbean);
 				
 				nextPage = "/admin/AfaqMain.do";
-				
+
+			//회원정보 페이지내 포인트 업데이트 (에이젝스)	
 			} else if(action.equals("/pointupdate.do")) {
 				
 				System.out.println(request.getParameter("addpoint"));
@@ -976,7 +978,138 @@ public class AdminController extends HttpServlet{
 				pw.print(memberInfo);
 				
 				return;
-			}
+			} else if(action.equals("/MemberPoint.do")) {
+				
+				 MemberDAO memberDAO = new MemberDAO();
+				  int total = memberDAO.getPointTotal();
+				  int pageSize = 5; 
+				  int nowPage = 1;
+				  if(request.getParameter("nowPage") != null) {
+					  nowPage = Integer.parseInt(request.getParameter("nowPage"));
+				  }
+				  int pageFirst = (nowPage - 1) * pageSize; 
+				  int totalPage = total / pageSize + (total % pageSize == 0 ? 0 : 1); 
+				  int blockSize = 10; 
+				  int blockFirst = (nowPage / blockSize- (nowPage%blockSize == 0 ? 1 : 0) ) * blockSize + 1; 
+				  int blockLast = blockFirst + blockSize -1;			  
+				  if(blockLast > totalPage) {blockLast = totalPage;}
+				
+				  List<LikeBean> pointList = memberDAO.getPointList(pageFirst, pageSize);
+				  request.setAttribute("blockSize", blockSize);
+				  request.setAttribute("blockFirst", blockFirst);
+				  request.setAttribute("blockLast", blockLast);
+				  request.setAttribute("totalPage", totalPage);
+				  request.setAttribute("nowPage", nowPage);
+				  request.setAttribute("pointList", pointList);
+				  
+				  nextPage = "/admins/MemberPoint.jsp";
+			//포인트 추가	
+			} else if(action.equals("/MemberPointAdd.do")) {
+				
+				String id = (String)request.getSession().getAttribute("id");
+				String name = (String)request.getSession().getAttribute("name");
+				int point = Integer.parseInt(request.getParameter("point"));
+				int num = Integer.parseInt(request.getParameter("num"));
+				MemberDAO memberDAO = new MemberDAO();
+				MemberBean memberBean = new MemberBean();
+				memberBean = memberDAO.getMember(id);
+				int totalpoint = memberBean.getPoint();
+				
+				memberDAO.updatePoint(id, point, num); 	//해당 id의 포인트에 충전할 포인트만큼 추가해줌
+				memberDAO.delPoint(id, num);
+				
+				nextPage = "/admin/MemberPoint.do";
+			//포인트 내역 삭제
+			} else if(action.equals("/MemberdelPoint.do")) {
+				
+				String id = request.getParameter("id");
+				int num = Integer.parseInt(request.getParameter("num"));
+				MemberDAO memberDAO = new MemberDAO();
+				MemberBean memberBean = new MemberBean();
+				 
+				memberDAO.delPoint(id,num);
+				
+				nextPage = "/admin/MemberPoint.do";
+			
+			//상품 상세 정보 조회
+			} else if(action.equals("/AproductInfo.do")) {
+				
+				ProductBean productBean = new ProductBean();
+				ProductDAO productdao = new ProductDAO();
+				DetailDAO detail = new DetailDAO();
+				
+				int num = Integer.parseInt(request.getParameter("num"));
+				String name = request.getParameter("name");
+				String id = (String)request.getSession().getAttribute("id");
+				productBean = productdao.getBoard(num);
+				
+				
+				System.out.println( "여기야" + name);
+				List<DetailBean> detList = detail.getdetail(name);
+				request.setAttribute("Bean", detList);
+				request.setAttribute("bean", productBean);
+				
+				nextPage = "/admins/AproductInfo.jsp";
+			
+			//네이버 로그인
+			} else if(action.equals("/NaverTest.do")) {
+				
+				MemberBean bean = new MemberBean();
+				MemberDAO dao = new MemberDAO();
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				int s = email.indexOf("@");
+				String id = email.substring(0, s);
+				String password = id+"1234";
+				int nst = Integer.parseInt(request.getParameter("nst"));
+				
+				
+				
+				//최초로그인 ? 체크
+				int check = dao.NaverUserCheck(id);
+				
+				
+				// check == 1 아이디있음 , check == 0 아이디 없음 
+				if(check == 1) {
+						System.out.println("아이디 체크");
+						request.getSession().setAttribute("id", id);
+						request.getSession().setAttribute("name",name);
+						PrintWriter pw = response.getWriter();
+						
+						nextPage = "/index/index.jsp";
+						
+				} else {
+					
+					System.out.println("아이디 없음");
+					bean.setId(id);
+					bean.setPassword(password);
+					bean.setName(name);
+					bean.setEmail(email);
+					
+					//아이디없을시 회원추가
+					dao.insertMember2(bean);
+					
+					//로그인 action
+					int check2 =dao.login(id, password); 
+					System.out.println(check2);
+					if(check2 == 1) {
+						System.out.println("아이디 있음");
+						
+						request.getSession().setAttribute("id", id);
+						request.getSession().setAttribute("name",name);
+						PrintWriter pw = response.getWriter();
+						
+						nextPage = "/index/index.jsp";
+					}
+					
+				}
+					
+				
+				
+			} 
+			
+			
+			
 			
 			//디스패치 방식으로 포워딩 (재요청)
 			if(checkPage == 0) {

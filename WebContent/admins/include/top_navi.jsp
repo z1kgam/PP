@@ -161,6 +161,13 @@
 							</a>
 						</li>
 						<li class="nav-item active">
+							<a href="${contextPath}/admin/MemberPoint.do">
+								<i class="la la-krw"></i>
+								<p>포인트 충전 관리</p>
+								<span class="badge badge-count">5</span>
+							</a>
+						</li>
+						<li class="nav-item active">
 							<a href="${contextPath}/admin/AproductMain.do">
 								<i class="la la-cart-plus"></i>
 								<p>공연 상품 관리</p>

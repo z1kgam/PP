@@ -240,8 +240,8 @@ body {
 
 </head> 
 <body>
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-	<a href="#" class="navbar-brand"><i class="fa fa-cube"></i>Ticketing</a>  		
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark" style="background: linear-gradient( to right, #EB008B, #00E7D6 ) !important;">
+	 		
 	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -249,27 +249,23 @@ body {
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
 		<form class="navbar-form form-inline">
 			<div class="input-group search-box">								
-				<input type="text" id="search" class="form-control" placeholder="검색하기..." style="height: 15px !important; margin-top: 10px;">
+				<input type="text" id="search" class="form-control" placeholder="Search..." style="height: 15px !important; margin-top: 10px;">
 				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
 			</div>
 		</form>
 		<div class="navbar-nav ml-auto">
-			<a href="#" class="nav-item nav-link active"><i class="fa fa-home"></i><span>홈으로</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-gears"></i><span>관리자 페이지</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-users"></i><span>고객센터</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-pie-chart"></i><span>이용안내</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-briefcase"></i><span>장바구니</span></a>
-			<a href="#" class="nav-item nav-link"><i class="fa fa-envelope"></i><span>메세지</span></a>		
-			<a href="#" class="nav-item nav-link"><i class="fa fa-bell"></i><span>알림</span></a>
+			
 			<div class="nav-item dropdown">
-				<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar" style="border-radius: 50%;
+				<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" style="color: #000;"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar" style="border-radius: 50%;
 	width: 36px;
 	height: 36px;
 	margin-right: 10px;"> Antonio Moreno <b class="caret"></b></a>
 				<div class="dropdown-menu">
-					<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
+					<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
 					<a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
 					<a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
+					<a href="#" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
+					<a href="#" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
 					<div class="divider dropdown-divider"></div>
 					<a href="#" class="dropdown-item"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
 				</div>
@@ -293,7 +289,7 @@ body {
   			<div class="row m-auto">
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
-  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-height: 120px;"></a> 
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
   					
   					
   					
@@ -349,19 +345,14 @@ body {
 </table> --%>
   					
 	
-  					
+  				
   					
 			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 			        <span class="oi oi-menu"></span> Menu
 			      </button>
   				</div>
-  				
-  				<c:if test="${id!=null}">
-  					${id}님 로그인중..
-  				</c:if>
-
-
   				<div class="col-12 w-100 text-center" style="margin-top: -20px;">
+  				
   					<div class="collapse navbar-collapse" id="ftco-nav">
 			        <ul class="navbar-nav m-auto" >
 			          <li class="nav-item"><a href="index/index.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕; ">메인</a></li>
@@ -372,7 +363,7 @@ body {
 			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">관리자 페이지</a></li>
 			     </c:if>     
 			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">예매하기</a></li>
-			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공지사항</a></li>
+			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">고객센터</a></li>
 			     <c:if test="${id==null}">
 			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">로그인</a></li>
 			          <li class="nav-item"><a href="${contextPath}/member/join.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">회원가입</a></li>
@@ -444,7 +435,7 @@ body {
     
     
     
- <section class="ftco-section" style="margin-top: -200px;">  
+ <section class="ftco-section" style="margin-top: -200px; background-color: #555;">  
  <div class="container">
  <div class="row">
  <div class="col-md-4" >     
@@ -474,4 +465,4 @@ body {
  </div>
  </section>
     
-	<jsp:include page="../include/carousel.jsp" />					
+	<%-- <jsp:include page="../include/carousel.jsp" />		 --%>			

@@ -15,6 +15,7 @@ import Order.OrderDAO;
 import Order.OrderVO;
 import Product.ProductBean;
 import Product.ProductDAO;
+import team.qnaboard.qnaDao;
 import util.Status;
 
 
@@ -65,15 +66,23 @@ public class MyPageController extends HttpServlet{
 		System.out.println(action);
 		int check = 0;
 		if(action.equals("/mypageForm.do")) { //마이페이지폼 이동
-			
+			qnaDao QnaDAO = new qnaDao();
 			String id = (String)session.getAttribute("id");
 			String name = (String)session.getAttribute("name");
+			int total = QnaDAO.getAllQna(id);
 			List<OrderVO> cartList = orderDAO.getCartList(id);
+			int likeCount = likeDAO.getTotal(id);
 			int payCount = orderDAO.getCountPay(id);
 			int cartCount = orderDAO.getCountCartList(id);
+			MemberBean user = new MemberBean();
+			MemberDAO memberDAO = new MemberDAO();
+			user = memberDAO.getMember(id);
 			session.setAttribute("cartList", cartList);
 			session.setAttribute("cartCount", cartCount);
 			request.setAttribute("payCount", payCount);
+			request.setAttribute("likeCount", likeCount);
+			request.setAttribute("total", total);
+			request.setAttribute("user", user);
 			nextPage="/mypage/mypage.jsp";
 			
 			/* check = 1; */

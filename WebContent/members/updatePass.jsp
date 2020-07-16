@@ -33,9 +33,9 @@
   <body>
   
   
-  <jsp:include page="../include/header.jsp" />
+  <jsp:include page="../include/subheader.jsp" />
 
-      <div class="container">
+      <div class="container" style="width: 70%;">
      
 	      		
       	<!-- START 모달창 -->
@@ -58,8 +58,8 @@
       	<!-- END 모달창 -->
 		<!-- 본문 START -->
 		<div class="page-header">
-          <hr/>
-          <h1>Password Edit</h1>
+          
+          <h1 style="margin-top: 100px;">Password Edit</h1>
         </div>
         <hr/>
           <form role="form" action="${contextPath}/member/updatePassAction.do" method="post" name="upForm" onsubmit="return checkForm2()">

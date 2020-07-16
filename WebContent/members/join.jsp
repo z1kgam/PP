@@ -31,8 +31,8 @@
 
   </head>
   <body>
-<jsp:include page="../include/header.jsp" />
-      <div class="container">
+<jsp:include page="../include/subheader.jsp" />
+      <div class="container" style="width: 70%;">
      
 	      		
       	<!-- START 모달창 -->
@@ -55,7 +55,7 @@
       	<!-- END 모달창 -->
 		<!-- 본문 START -->
 		<div class="page-header" style="margin-top: 50px;">
-          <hr/>
+          
           <h1>Sign Up</h1>
         </div>
         <hr/>

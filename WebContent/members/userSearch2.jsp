@@ -24,10 +24,10 @@
 <body>     		
 
  
- <jsp:include page="../include/header.jsp" />
+ <jsp:include page="../include/subheader.jsp" />
       	
 <!-- 본문 START -->
-<div class="container">
+<div class="container" style="width: 70%;">
 		<div class="page-header">
          
           <h1 style="margin-top: 50px;">Password Check</h1>
@@ -46,7 +46,7 @@
 			<input type="email" class="form-control" name="email" id="email2" placeholder="Ex) Admin@google.com">
 		</div>
 		
-		<div class="form-group text-center">
+		<div class="form-group text-center" style="margin-top: 50px;"> 
               <button type="button" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px;" id="searchBtn2" onclick="EmailCheck()">확인</button>
               <button type="button" class="btn btn-warning" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; margin-bottom: 50px;" onclick="location.href='${contextPath}'">메인으로</button>
         </div>

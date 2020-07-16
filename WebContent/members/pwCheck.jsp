@@ -30,17 +30,17 @@
   <body>
 
 
-<jsp:include page="../include/header.jsp" />
+<jsp:include page="../include/subheader.jsp" />
 
-      <article class="container">
+      <article class="container" style="width: 70%;">
         <div class="page-header">
         
           <h1 style="margin-top: 100px;">Password Check</h1>
          <hr/>
-         <h5>내정보를 보기위해 비밀번호를 입력해주세요.</h5>
+         <h5 style="font-family:나눔고딕;">내 정보를 보기위해 비밀번호를 입력해주세요.</h5>
         </div>
         
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3" style="margin-left: -10px;">
           <form role="form" action="${contextPath}/member/pwCheck.do" method="post" name="pwCheckForm">        
             <div class="form-group">
               <input type="password" class="form-control" id="InputPassword1" name="password">
