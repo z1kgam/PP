@@ -15,21 +15,65 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <title>1:1문의하기</title>
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/lux/bootstrap.min.css">
+<!-- 부트스트랩 -->
+    
 <jsp:include page="../include/header.jsp"></jsp:include>
 
-	<link rel="stylesheet" href="../css/bootstrap.min.css" />
-	<link rel="stylesheet" href="../css/style.css" />
-	
-	<script src="../js/jquery-3.4.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/style.css" />
+
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
 
+
+  <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
+		<div class="container">
+			<div class="row block-9">
+			
+			<div class="col-md-10">
+			
+<!-- 탭메뉴 -->	
+<ul class="nav nav-tabs" style="font-size: 20px;">
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 85px 15px 85px;">
+ 	공지사항
+ 	</a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/board/info2.jsp" style="padding: 15px 85px 15px 85px;">
+ 	이용안내
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 100px 15px 100px;">
+    FAQ
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+  
+	  <c:choose>
+	   	<c:when test="${id != null}">
+	    		<a class="nav-link"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 70px 15px 70px;">
+	    		나의 문의 내역
+	    		</a>
+	  		</c:when>
+	  		<c:when test="${id == null}">
+	  			<a class="nav-link"  href="${contextPath}/member/login.do" style="padding: 15px 70px 15px 70px;">
+	  			나의 문의 내역
+	  			</a>
+	  		</c:when>
+	  	</c:choose>
+
+  </li>
+</ul>			
+
+
+
 <section class="container body-container py-5">
 		<div class="row">
-			<div class="col-12">
-				<h2>1:1문의하기</h2>
-			</div>
 		</div>
 		<!-- 게시판 -->
 		<article class="mt-3">
@@ -60,7 +104,7 @@ request.setCharacterEncoding("UTF-8");
 							<label for="poolAddress1" class="m-0">제목</label>
 						</th>
 						<td>
-							<input type="text" class="form-control" name="title" id="poolAddress1" maxlength="50">
+							<input type="text" class="form-control" name="title" id="poolAddress1" maxlength="50" style="width: 100%;">
 						</td>
 					</tr>
 					
@@ -69,7 +113,7 @@ request.setCharacterEncoding("UTF-8");
 							<label for="contents" class="m-0">내용</label>
 						</th>
 						<td>
-							<textarea class="form-control" name="contents" id="poolContent" cols="40" rows="13" required></textarea>
+							<textarea class="form-control" name="contents" id="poolContent" cols="40" rows="13" required style="width: 100%;"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -81,16 +125,15 @@ request.setCharacterEncoding("UTF-8");
  					
 					<tr>
 						<th class="align-middle">
-							<label for="boardFile1" class="m-0">이미지 첨부1</label>
+							<label for="boardFile1" class="m-0">첨부이미지</label>
 						</th>
 						<td>
 							<div class="custom-file">
 								<input class="custom-file-input" type="file" name="boardFile1" id="boardFile1" onchange="readURL(this, 'image')" />
-								<label class="custom-file-label" for="boardFile1">${qna.file}</label>
+								<label class="custom-file-label" for="boardFile1">Choose file</label>
 							</div>
 						</td>
 					</tr>
-					
 					
 				</table>
 				<div class="text-center my-5">
@@ -104,6 +147,8 @@ request.setCharacterEncoding("UTF-8");
 	
 	
 	
+	
+	<!-- 이미지만 업로드 할 수 있도록 체크 -->
 	
  	<script src="${contextPath}/js/bs-custom-file-input.js"></script>
 	<script>
@@ -141,10 +186,14 @@ request.setCharacterEncoding("UTF-8");
 		}
 	</script>
 	
+			</div>
+       </div>
+</div>
+</section>
 	
 	
-<jsp:include page="../include/footer.jsp"></jsp:include>		
 	
+<jsp:include page="../include/footer.jsp"/>	
 
 </body>
 </html>

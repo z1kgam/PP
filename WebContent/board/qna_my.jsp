@@ -16,11 +16,14 @@ request.setCharacterEncoding("UTF-8");
 <meta charset="UTF-8">
 <title>1:1문의</title>
 
-<jsp:include page="../include/header.jsp"></jsp:include>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/lux/bootstrap.min.css">
+<!-- 부트스트랩 -->
+
+<jsp:include page="../include/header.jsp"/>
 
 </head>
 <body>
-   <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+<!--    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 			<div class="container">
         		<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
@@ -30,11 +33,11 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 				</div>
 			</div>
-	</section>
+	</section> -->
 	<section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
 		<div class="container">
-			<div class="row block-9">
-				<div class="col-md-2 contact-info ftco-animate p-4 w-100 h-500">
+			<div class="row block-9" style="margin-top: 50px;">
+				<%-- <div class="col-md-2 contact-info ftco-animate p-4 w-100 h-500">
 					<div class="row">      
 		            	<div class="col-md-12 mb-3">
 							<p><a href="${contextPath}/notice/listNotice.do"><span>공지사항</span></a></p>
@@ -56,12 +59,55 @@ request.setCharacterEncoding("UTF-8");
 			            	</c:choose>
 		            	</div>
 	            	</div>
-				</div>
-			<div class="col-md-10">				
+				</div> --%>
+			<div class="col-md-10">			
+			
+			
+<!-- 탭메뉴 -->	
+<ul class="nav nav-tabs" style="font-size: 14px;">
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 85px 15px 85px;">
+   	 공지사항
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/board/info2.jsp" style="padding: 15px 85px 15px 85px;">
+	이용안내
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 100px 15px 100px;">
+    FAQ
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+  
+	  <c:choose>
+	   	<c:when test="${id != null}">
+	    		<a class="nav-link"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 70px 15px 70px;">
+	    		나의 문의 내역
+	    		</a>
+	  		</c:when>
+	  		<c:when test="${id == null}">
+	  			<a class="nav-link"  href="${contextPath}/member/login.do" style="padding: 15px 70px 15px 70px;">
+	  			나의 문의 내역
+	  			</a>
+	  		</c:when>
+	  	</c:choose>
+
+  </li>
+</ul>			
+
+<!-- 1:1문의버튼  -->			
+<button type="button" class="btn btn-outline-primary" style="float: right; margin: 30px 0 0 0;"
+		onclick="location.href='${contextPath}/qboard/qwriteForm.do'">1:1문의하기</button>
+<%-- 
 			<div>
 				<button type="button" onclick="location.href='${contextPath}/qboard/qwriteForm.do'">1:1문의하기</button>
 			</div>
-			<form action="${contextPath}/qboard/qnaList.do" method="post">
+--%>
+			
+			<form action="${contextPath}/qboard/qnaList.do" method="post" style="clear: both;">
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
 <br><br>

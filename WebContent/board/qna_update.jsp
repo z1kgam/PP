@@ -14,6 +14,12 @@
 <html>
 <head>
 <title>1:1문의 수정</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/lux/bootstrap.min.css">
+<!-- 부트스트랩 -->
+    
+<jsp:include page="../include/header.jsp"></jsp:include>
+
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" href="../css/style.css" />
 
@@ -21,6 +27,49 @@
 <script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
+
+
+  <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
+		<div class="container">
+			<div class="row block-9">
+			
+			<div class="col-md-10">
+			
+<!-- 탭메뉴 -->	
+<ul class="nav nav-tabs" style="font-size: 20px;">
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 85px 15px 85px;">
+ 	공지사항
+ 	</a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link"  href="${contextPath}/board/info2.jsp" style="padding: 15px 85px 15px 85px;">
+ 	이용안내
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 100px 15px 100px;">
+    FAQ
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+  
+	  <c:choose>
+	   	<c:when test="${id != null}">
+	    		<a class="nav-link active"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 70px 15px 70px;">
+	    		나의 문의 내역
+	    		</a>
+	  		</c:when>
+	  		<c:when test="${id == null}">
+	  			<a class="nav-link active"  href="${contextPath}/member/login.do" style="padding: 15px 70px 15px 70px;">
+	  			나의 문의 내역
+	  			</a>
+	  		</c:when>
+	  	</c:choose>
+
+  </li>
+</ul>			
+
 
 	<section class="container body-container py-5">
 		<div class="row">
@@ -156,7 +205,13 @@
 	
 	 --%>
 
+			</div>
+        </div>
+	</div>
+</section>
 
+
+<jsp:include page="../include/footer.jsp"/>
 
 
 </body>
