@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />    
+    <!-- 회원 관리 페이지 -->
     
 <!DOCTYPE html>
 <html>
@@ -21,51 +24,27 @@
 </head>
 <body>
 
-	<jsp:include page="./include/top_navi.jsp" />
-	
-	
+<jsp:include page="./include/top_navi.jsp" />
+
+			
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h4 class="page-title">2 Ticket 관리자 페이지 </h4>
-						<br>
-						<h2>관리자님 반갑습니다 !!!</h2>
-						
-						<br><br><br>
-						
-						<div class="row">
-							<div class="col-md-4">
-								<div class="card">
-									<div class="card-header">
-										<h4 class="card-title">장르별 판매 현황</h4>
-										<p class="card-category">
-										콘서트 티켓 기준</p>
-									</div>
-									<div class="card-body">
-										<div id="monthlyChart" class="chart chart-pie"></div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-8">
-								<div class="card">
-									<div class="card-header">
-										<h4 class="card-title">전월 대비 콘서트 매출 그래프</h4>
-										<p class="card-category">
-										Number of products sold</p>
-									</div>
-									<div class="card-body">
-										<div id="salesChart" class="chart"></div>
-									</div>
-								</div>
-							</div>
-							
-							
-						</div>
+						<h4 class="page-title">Dashboard</h4>
+			
+						<h1>공사중 입니다.....</h1>
+			
+						<img alt="뭐요 ?" src="${contextPath}/upload/sp.jpg" style=" width: 500; height: 500;">
+			
+			
+			
+			
+				
 					</div>
 				</div>
-				
 			</div>
-		</div>
+			
+			
 	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdatePro" aria-hidden="true">
@@ -74,7 +53,7 @@
 				<div class="modal-header bg-primary">
 					<h6 class="modal-title"><i class="la la-frown-o"></i> Under Development</h6>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span> 
 					</button>
 				</div>
 				<div class="modal-body text-center">									

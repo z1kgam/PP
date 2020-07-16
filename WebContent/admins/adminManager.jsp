@@ -57,6 +57,7 @@
 													<th scope="col">휴대폰 번호</th>
 													<th scope="col">포인트</th>
 													<th scope="col">회원 상태</th>
+													<th scope="col">접속 경로</th>
 													<th scope="col">관리자 권한</th>
 													<th scope="col">가입일</th>
 													<th scope="col">정보 수정</th>
@@ -90,7 +91,13 @@
 													<td><p class="text-danger">이용 정지</p></td>
 												</c:when>
 											</c:choose>
-
+											<c:if test="${memberlist.n_status == 0 }">
+												<td><p class="text-muted">2티켓 가입 회원</p></td>
+											</c:if>	
+											<c:if test="${memberlist.n_status == 1 }">
+												<td><p class="text-muted">네이버 회원</p></td>
+											</c:if>	
+												
 											<c:choose>
 											
 												<c:when test="${memberlist.is_admin == 1}">

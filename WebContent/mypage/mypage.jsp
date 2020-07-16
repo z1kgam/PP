@@ -812,7 +812,7 @@ textarea.form-control {
                         <i class="fa fa-pencil-square fa-lg"></i> 정보 수정
                     </a>
                 </div>
-               
+               <br><br><br><br><br><br><br><br><br><br>
     </div>
 </div>
 
