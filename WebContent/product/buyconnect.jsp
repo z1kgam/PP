@@ -319,8 +319,7 @@
 	<div>
 
 	</div>
-	<jsp:include page="../include/footer.jsp" />    
-    
+<jsp:include page="${contextPath}/include/footer.jsp" />    
   
   <script src="../js/jquery.min.js"></script>
   <script src="../js/jquery-migrate-3.0.1.min.js"></script>

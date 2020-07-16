@@ -372,7 +372,7 @@
 										</tr>
 									</table>
 
-									<p style="margin-top: 70px; margin-left: 300px;">
+									<p style="margin-top: 70px;">
 										<a href="${contextPath}/Proser/details.do?num=${Bean.num}" class="btn btn-outline-primary" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important;">상세등록</a> 
 										<a href="${contextPath}/Proser/delete.do?num=${Bean.num}&path=consert&image=${Bean.image}&content=${Bean.content}" class="btn btn-outline-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;">삭제하기</a>
 										<a href="${contextPath}/Proser/imcontact.do" class="btn btn-outline-primary" style="background-color: #EB008B !important; border-color: #EB008B !important; color: #fff !important;">목록보기</a>					
@@ -397,7 +397,7 @@
 		</div>
 	</section>
 	<section>
-		<nav style="margin-left: 150px; margin-top: -300px;">
+		<nav style="width: 1500px; height:60px; position: relative; top: -200px; right: -100px;">
 			<ul style="	list-style:none; font-family: verdana,Geneba,sans-serif;">
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 16px;" onclick="explanation()">상세정보</a></li>
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 16px;" onclick="reply()">관람후기</a></li>

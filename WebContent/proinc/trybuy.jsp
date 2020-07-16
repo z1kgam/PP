@@ -101,7 +101,6 @@ function sel() {
 </head>
 <body>
 
-<jsp:include page="../include/header.jsp" />
 <div style="clear: both;"></div>
 
 <div class="page-header" style="margin-top: 50px;">
@@ -117,6 +116,5 @@ function sel() {
    	<input type="hidden" value="${Bean.name}" id="name">
    	<div id="partview"><table id="part" border="1"></table></div>
 
-<jsp:include page="../include/footer.jsp" />
 </body>
 </html>
