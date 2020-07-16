@@ -120,16 +120,7 @@
  --%>
 
 <!-- 마이 페이지 테이블 -->
-<<<<<<< HEAD
 
-
-
-
-
-
-
-=======
->>>>>>> 8f79b196a0031ac52bbfed9ea457bf957a328884
 <!DOCTYPE html>
 <html>
   <head>
@@ -224,15 +215,7 @@ margin: 10px;}
   </head> 
   <body>
 <jsp:include page="../include/indexheader.jsp" />
-<<<<<<< HEAD
 
- 
-
-
-
-
-=======
->>>>>>> 8f79b196a0031ac52bbfed9ea457bf957a328884
 <section class="ftco-section bg-light" style="position: relative; top: 50px;">
       <div class="container"  style="position: relative; left: 50px; ">
         <div class="row justify-content-center mb-5 pb-3">
