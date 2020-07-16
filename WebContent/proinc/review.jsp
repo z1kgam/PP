@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-123456
+
+	
 <div id="map" style="width:50%;height:400px; margin-left: 25%;"></div>
 <div id="map2" style="width:50%; height:400px;"></div>
 
@@ -128,7 +129,7 @@
 </div>
 <div style="margin-left: 800px; margin-top: -30px;">
 	<a href="#" onclick="te3(2)"><input type="button" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 100px; width: 100px;" value="부산" id="busan"></a>
-</div>
-
+</div>	
+	
 </body>
 </html>

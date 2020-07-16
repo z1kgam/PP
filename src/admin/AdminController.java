@@ -948,12 +948,10 @@ public class AdminController extends HttpServlet{
 				request.setAttribute("faqUpdate", faqbean);
 				
 				nextPage = "/admin/AfaqMain.do";
-<<<<<<< HEAD
-				
-=======
+
 
 			//회원정보 페이지내 포인트 업데이트 (에이젝스)	
->>>>>>> 552514952e1b0d79e8a802f23210f0b7647827fe
+
 			} else if(action.equals("/pointupdate.do")) {
 				
 				System.out.println(request.getParameter("addpoint"));

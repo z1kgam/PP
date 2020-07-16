@@ -43,24 +43,6 @@
 	<script src="../js/content.js"></script> 
 	
 	<script>
-// 	function review() {
-		
-// 		var place = $("#place").val();
-		
-// 		$.ajax({
-// 		    type: "post",
-// 		    async: false,
-// 		    url: "${contextPath}/Proser/.do",
-// 		    data: { place : place },               
-// 		    dataType: "json",
-// 		    success : function(data) {
-		    	
-		    	
-// 		    }
-			
-// 		});
-// 	}
-	
 	
 	function trybuy() {
 		
@@ -120,7 +102,7 @@
 		}); 
 		document.getElementById("explanation").style.display = "none";
 		document.getElementById("reply").style.display = "none";
-		document.getElementById("location").style.display = "none";
+		document.getElementById("review").style.display = "none";
 		document.getElementById("trybuy").style.display = "block";
 	}
 	
@@ -209,7 +191,7 @@
 		
 		document.getElementById("explanation").style.display = "none";
 		document.getElementById("reply").style.display = "block";
-		document.getElementById("location").style.display = "none";
+		document.getElementById("review").style.display = "none";
 		document.getElementById("trybuy").style.display = "none";
 	}
 	
@@ -419,18 +401,15 @@
 			<ul style="	list-style:none; font-family: verdana,Geneba,sans-serif;">
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="explanation()">상세정보</a></li>
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="reply()">관람후기</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="location()">공연장정보</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="review()">공연장정보</a></li>
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="trybuy()">티켓예매</a></li>
 			</ul>
 		</nav>
 		<hr style="width: 1500px; margin: auto;">
+
 		<div class="detail" id="explanation" style="display: none;"><jsp:include page="../proinc/explanation.jsp" /></div>
 		<div class="detail" id="reply"><jsp:include page="../proinc/reply.jsp" /></div>
-<<<<<<< HEAD
-		<div class="detail" id="review" style="display: none;"></div>
-=======
-		<div class="detail" id="location" style="display: none;"><jsp:include page="../proinc/location.jsp" /></div>
->>>>>>> 552514952e1b0d79e8a802f23210f0b7647827fe
+		<div class="detail" id="review" style="display: none;"><jsp:include page="../proinc/review.jsp" /></div>
 		<div class="detail" id="trybuy" style="display: none;"><jsp:include page="../proinc/trybuy.jsp" /></div>
 	</section>
 
