@@ -300,7 +300,6 @@ body {
 		<div class="dropdown-menu">
 			<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item" style="font-size: 12px;"><i class="fa fa-user-o"></i> 마이페이지</a>
  			<a href="${contextPath}/member/updateProfile.do" class="dropdown-item"><i class="fa fa-calendar-o"></i>프로필변경</a>
-			<a href="${contextPath}/member/join.do" class="dropdown-item"><i class="fa fa-sliders"></i>더넣을거있음하세요</a> 
  			<a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
 			<div class="divider dropdown-divider"></div>
 			<a href="${contextPath}/member/logout.do" class="dropdown-item" style="font-size: 12px;"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>

@@ -9,7 +9,13 @@
 <html>
 <head>
 <title>공지사항 글쓰기</title>
-    
+<%--로그인유무 확인 --%>
+<c:if test="${user.is_admin != 1}">
+   <script>
+      	alert("권한이 없습니다.");
+      	location.href="${contextPath}";
+   </script>
+</c:if>    
 <!--     <script type="text/javascript">
  		 function backToList(obj){ //아래의 <form>요소전체가 매개변수로 넘어온다.
 		 

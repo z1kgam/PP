@@ -5,7 +5,12 @@
 <%@page import="Product.ProductBean"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
+<c:if test="${user.is_admin != 1}">
+   <script>
+      	alert("권한이 없습니다.");
+      	location.href="${contextPath}";
+   </script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
