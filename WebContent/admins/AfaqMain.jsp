@@ -127,19 +127,19 @@
 											
 												<c:if test="${nowpage > blocksize}">
 											<a class="page-link"
-												href="${contextPath}/admin/AfaqMain.do?nowPage=${blockfirst-blocksize}&search=${search}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+												href="${contextPath}/admin/AfaqMain.do?nowpage=${blockfirst-blocksize}&search=${search}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 												<!-- <span class="sr-only">Previous</span> -->
 											</a>
 											 </c:if>
 												</li>
 												<c:forEach var="i" begin="${blockfirst}" end="${blocklast}" step="1">
 												<li class="page-item active">
-												<a class="page-link" href="${contextPath }/admin/AfaqMain.do?nowPage=${i}">${i}</a>
+												<a class="page-link" href="${contextPath }/admin/AfaqMain.do?nowpage=${i}">${i}</a>
 												</li>
 												</c:forEach>
 												<c:if test="${blocklast != totalpage}">
 												<li class="page-item">
-													<a class="page-link" href="${contextPath}/admin/admin/AfaqMain.do?nowPage=${blocklast+1}&search=${search}" aria-label="Next">
+													<a class="page-link" href="${contextPath}/admin/admin/AfaqMain.do?nowpage=${blocklast+1}&search=${search}" aria-label="Next">
 														<span aria-hidden="true">&raquo;</span>
 														<span class="sr-only">Next</span>
 													</a>

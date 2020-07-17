@@ -25,11 +25,13 @@ import org.json.simple.JSONObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import Order.OrderDAO;
 import Product.DetailBean;
 import Product.DetailDAO;
 import Product.ProductBean;
 import Product.ProductDAO;
 import member.LikeBean;
+import member.LikeDAO;
 import member.MemberBean;
 import member.MemberDAO;
 import noticeboard.NoticeboardBean;
@@ -161,16 +163,27 @@ public class AdminController extends HttpServlet{
 				
 			} else if(action.equals("/AMemberView.do")) {
 				
+				qnaDao qnadao = new qnaDao();
+				OrderDAO orderDAO = new OrderDAO();
+				LikeDAO likeDAO = new LikeDAO();
+				
 				String id =request.getParameter("id");
 				String nowpage = request.getParameter("nowpage"); 
 //				System.out.println(nowpage);
 //				System.out.println(id);
 				adminBean = adminDAO.MemberView(id);
-				
+				int total = qnadao.getAllQna(id);
+				int cartcount =orderDAO.getCountCartList(id);
+				int liketotal = likeDAO.getTotal(id); 
 //				System.out.println(adminBean.getEmail());
 //				System.out.println(adminBean.getId());
 				request.setAttribute("memberInfo", adminBean);
 				request.setAttribute("nowpage", nowpage);
+				request.setAttribute("total", total);
+				request.setAttribute("cartcount", cartcount);
+				request.setAttribute("liketotal", liketotal);
+				
+				
 				nextPage = "/admins/AmemberView.jsp";
 			
 			//회원 정보 수정 관리 요청
@@ -842,7 +855,7 @@ public class AdminController extends HttpServlet{
 				int total = faqdao.getfaqCount(search);
 				int nowpage = 1 ;
 				if(request.getParameter("nowpage") !=null) nowpage = Integer.parseInt(request.getParameter("nowpage"));
-				int pagesize = 5 ;
+				int pagesize = 10 ;
 				int startrow = (nowpage-1)*pagesize;
 				int endrow = pagesize;
 				int totalpage = total/pagesize + (total%pagesize==0?0:1);
@@ -1106,7 +1119,11 @@ public class AdminController extends HttpServlet{
 					
 				
 				
-			} 
+			} else if(action.equals("/BBiBBOBBiBBo.do")) {
+				
+				nextPage = "/admins/BBiBBOBBiBBo.jsp";
+				
+			}
 			
 			
 			

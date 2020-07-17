@@ -118,6 +118,7 @@ public class AdminDAO {
 					aBean.setPhone(rs.getString("phone"));
 					aBean.setPoint(rs.getInt("point"));
 					aBean.setReg_date(rs.getTimestamp("reg_date"));
+					aBean.setN_status(rs.getInt("n_status"));
 					memberlist.add(aBean);
 				}
 				
@@ -328,24 +329,7 @@ public class AdminDAO {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
 
 
