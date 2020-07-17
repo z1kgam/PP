@@ -1021,7 +1021,7 @@ public class AdminController extends HttpServlet{
 			//포인트 추가	
 			} else if(action.equals("/MemberPointAdd.do")) {
 				
-				String id = (String)request.getSession().getAttribute("id");
+				String id = request.getParameter("id");
 				String name = (String)request.getSession().getAttribute("name");
 				
 				int point = Integer.parseInt(request.getParameter("point"));

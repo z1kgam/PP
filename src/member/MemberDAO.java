@@ -635,7 +635,6 @@ public class MemberDAO {
 			sql = "select max(p_status) from point"; 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
 			int p_status =0;
 			if(rs.next()) {
 				p_status =  rs.getInt("max(p_status)") - 1;		 
