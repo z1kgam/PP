@@ -47,6 +47,7 @@
 	<script src="../js/content.js"></script>
 		<script>
 		$(document).ready(function(){	
+			alert("aa");
 			//체크박스들이 변경되었을 때
 			$(":checkbox").change(function(){	
 				var cnt = $("#count").val();
@@ -101,6 +102,7 @@
  				}
 				
 			}); 
+		
 		});
 
 		</script>

@@ -172,7 +172,7 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from product order by startdate desc";
+			sql = "select * from product order by name asc";
 			
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -263,6 +263,43 @@ public class ProductDAO {
 		}
 		
 		return count;
+	}
+
+	public List<ProductBean> getList(String search) {
+		String sql = "";
+		List<ProductBean> List = new ArrayList<ProductBean>();
+		
+		try {
+			con = getConnection();
+
+			sql = "select * from product where name LIKE '%"+search+"%' order by name asc";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				ProductBean Bean = new ProductBean();
+				Bean.setNum(rs.getInt("num"));
+				Bean.setName(rs.getString("name"));
+				Bean.setGenre(rs.getString("genre"));
+				Bean.setCla(rs.getString("cla"));
+				Bean.setRuntime(rs.getInt("runtime"));
+				Bean.setPrice(rs.getInt("price"));
+				Bean.setStartdate(rs.getDate("startdate"));
+				Bean.setEnddate(rs.getDate("enddate"));
+				Bean.setImage(rs.getString("image"));
+				Bean.setContent(rs.getString("content"));
+				Bean.setRunstatus(rs.getInt("runstatus"));
+				List.add(Bean);
+			}
+		} catch (Exception e) {
+			System.out.println("getList메소드에서 예외발생 : " + e);
+		}finally {
+			resource();
+		}
+		
+		return List;
 	}
 
 }
