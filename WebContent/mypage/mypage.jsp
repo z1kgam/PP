@@ -702,10 +702,10 @@ textarea.form-control {
                     
                 </div>
 
-                <div class="profile-details">
+                <div class="profile-details" style="width:230px;">
                     <ul class="fa-ul">
                         <li><i class="fa-li fa fa-truck"></i><a href="${contextPath}/member/address.do">배송지 관리</a></li>
-                        <li><i class="fa-li fa fa-comment"></i>좋아요 리스트: <a href="${contextPath}/mycon/likelistForm.do">${requestScope.likeCount}</a></li>
+                        <li><i class="fa-li fa fa-comment"></i>좋아요 리스트: <span><a href="${contextPath}/mycon/likelistForm.do">${requestScope.likeCount}</a></span></li>
                         <li><i class="fa-li fa fa-briefcase"></i>장바구니: <span><a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}">${sessionScope.cartCount}</a></span></li>
                         <li><i class="fa-li fa fa-gears"></i>결제내역: <span><a href="${contextPath}/Order/payList.do?id=${sessionScope.id}">${requestScope.payCount}</a></span></li>
                     	<li><i class="fa-li fa fa-gears"></i><a href="${contextPath}/mycon/addpointForm.do">포인트충전</a></li>
