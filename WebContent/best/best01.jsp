@@ -63,7 +63,7 @@
       <td>${VO.name}</td>
       <td>${VO.startdate}</td>
       <td>${VO.place}</td>
-      <td><button>예매하기</button></td>
+      <td><button onclick="location.href='${contextPath}/Proser/content.do?num=${VO.detailnum}&name=${VO.name}'">예매하기</button></td>
     </tr>
     
     </c:forEach>

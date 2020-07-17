@@ -406,6 +406,7 @@
 			</ul>
 		</nav>
 		<hr style="width: 1500px; margin: auto;">
+
 		<div class="detail" id="explanation" style="display: none;"><jsp:include page="../proinc/explanation.jsp" /></div>
 		<div class="detail" id="reply"><jsp:include page="../proinc/reply.jsp" /></div>
 		<div class="detail" id="location" style="display: none;"><jsp:include page="../proinc/location.jsp" /></div>

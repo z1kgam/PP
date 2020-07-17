@@ -6,7 +6,13 @@
 //한글처리
 request.setCharacterEncoding("UTF-8");
 %>
-
+<%--로그인유무 확인 --%>
+<c:if test="${sessionScope.id == null}">
+   <script>
+      	alert("로그인 후 이용가능합니다.");
+      	location.href="${contextPath}/member/login.do";
+   </script>
+</c:if>
 <%--컨텍스트 주소 얻기 --%>    
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
    

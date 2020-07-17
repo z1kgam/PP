@@ -264,6 +264,7 @@ public class MemberDAO {
 				memberBean.setLaddress2(rs.getString("Laddress2"));
 				memberBean.setLzipcode(rs.getString("Lzipcode"));
 				memberBean.setN_status(rs.getInt("n_status"));
+				memberBean.setReg_date(rs.getTimestamp("reg_date"));
 			}
 		} catch (Exception e) {
 			System.out.println("getMember Inner Err : " + e);
