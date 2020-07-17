@@ -4,6 +4,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%--로그인유무 확인 --%>
+<c:if test="${sessionScope.id == null}">
+   <script>
+      	alert("로그인 후 이용가능합니다.");
+      	location.href="${contextPath}/member/login.do";
+   </script>
+</c:if>
 
 <!DOCTYPE html>
 <html>
@@ -679,14 +686,11 @@ textarea.form-control {
                 
                 <c:choose>    	
 			    	 <c:when test="${!empty profile_img }">
-<<<<<<< HEAD
-				       <img src="${contextPath}/upload/ice.jpg" alt="프로필 이미지" class="profile-img img-responsive center-block" >
-=======
-				       <img src="${contextPath}/upload/${user.profile_img}" alt="프로필 이미지" class="profile-img img-responsive center-block" style="">
->>>>>>> 9603f6d2aadd5803a66dcaea3ad3b4b3ed5b760d
+
+				       <img src="${contextPath}/upload/${user.profile_img}" alt="프로필 이미지" class="profile-img img-responsive center-block" style="max-width: 200px;">
 			    	 </c:when>
 			   		 <c:when test="${empty profile_img}">
-						<img src="${contextPath}/images/icon.png" class="profile-img img-responsive center-block">
+						<img src="${contextPath}/images/icon.png" class="profile-img img-responsive center-block" style="max-width: 200px;">
 			  		 </c:when>
 			   </c:choose>
                 <div class="profile-label">
@@ -694,7 +698,7 @@ textarea.form-control {
                 </div>
 
                 <div class="profile-since">
-                    Member since: 
+                    Member since: <br>
                     <fmt:formatDate value="${user.reg_date}" pattern="yyyy-MM-dd" />
                     
                 </div>
@@ -702,11 +706,10 @@ textarea.form-control {
                 <div class="profile-details">
                     <ul class="fa-ul">
                         <li><i class="fa-li fa fa-truck"></i><a href="${contextPath}/member/address.do">배송지 관리</a></li>
-                        <li><i class="fa-li fa fa-comment"></i>좋아요 리스트: <span><a href="${contextPath}/mycon/likelistForm.do">${requestScope.likeCount}</a></span></li>
+                        <li><i class="fa-li fa fa-comment"></i>좋아요 리스트: <a href="${contextPath}/mycon/likelistForm.do">${requestScope.likeCount}</a></li>
                         <li><i class="fa-li fa fa-briefcase"></i>장바구니: <span><a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}">${sessionScope.cartCount}</a></span></li>
                         <li><i class="fa-li fa fa-gears"></i>결제내역: <span><a href="${contextPath}/Order/payList.do?id=${sessionScope.id}">${requestScope.payCount}</a></span></li>
                     	<li><i class="fa-li fa fa-gears"></i><a href="${contextPath}/mycon/addpointForm.do">포인트충전</a></li>
-                    	
                     </ul>
                 </div>
 

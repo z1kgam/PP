@@ -4,7 +4,13 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-
+<%--로그인유무 확인 --%>
+<c:if test="${sessionScope.id != null}">
+   <script>
+      	alert("이미 로그인 중입니다.");
+      	location.href="${contextPath}";
+   </script>
+</c:if>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>

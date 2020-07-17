@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%--로그인유무 확인 --%>
+<c:if test="${sessionScope.id == null}">
+   <script>
+      	alert("로그인 후 이용가능합니다.");
+      	location.href="${contextPath}/member/login.do";
+   </script>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>

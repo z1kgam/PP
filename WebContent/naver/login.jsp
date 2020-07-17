@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
+<%--로그인유무 확인 --%>
+<c:if test="${sessionScope.id != null}">
+   <script>
+      	alert("이미 로그인 중입니다.");
+      	location.href="${contextPath}";
+   </script>
+</c:if>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
