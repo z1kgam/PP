@@ -64,10 +64,9 @@ width: 500px;
 			<input type="button" value="삭제하기" onclick="location.href='${contextPath}/coupon/eventDelete.do?event_num=${couponBean.event_num}'">
 			<input type="button" value="수정하기" onclick="location.href='${contextPath}/coupon/eventUpdateForm.do?event_num=${couponBean.event_num}'">
 		</c:if>
-			<input type="button" value="목록보기" onclick="location.href='${contextPath}/coupon/events.do'">
 		</td>
 	</tr>
-	
+
 
 </table>
 </section>
@@ -75,6 +74,9 @@ width: 500px;
 
 </section>
 
+	<div class="text-center my-5">
+		<button type="button" class="btn btn-secondary" onclick="history.back()">돌아가기</button>
+	</div>	
 
 
 <!-- footer -->

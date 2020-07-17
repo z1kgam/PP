@@ -18,6 +18,9 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import coupon.CouponBean;
+import coupon.CouponDAO;
+
 @WebServlet("/ev/*")
 public class EventController extends HttpServlet{
 	
@@ -40,6 +43,8 @@ public class EventController extends HttpServlet{
 		String nextPage = "";
 		EventBean ebean = new EventBean();
 		EventDAO edao  = new EventDAO();
+		CouponBean couponBean = new CouponBean();
+		CouponDAO couponDAO = new CouponDAO();
 		HttpSession session = request.getSession();
 		int checkPage = 0;
 		String action = request.getPathInfo();
@@ -65,6 +70,19 @@ public class EventController extends HttpServlet{
 			List<EventBean> eventList = edao.eventList(pageFirst, pageSize);
 
 			request.setAttribute("eventList", eventList);
+			request.setAttribute("blockSize", blockSize);
+			request.setAttribute("blockFirst", blockFirst);
+			request.setAttribute("blockLast", blockLast);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("nowPage", nowPage);
+			
+			int total1 = couponDAO.getAllEvent();
+			
+			
+			if(blockLast>totalPage) blockLast = totalPage;
+			
+			List<CouponBean> list = couponDAO.getList(pageFirst, pageSize);
+			request.setAttribute("list", list);
 			request.setAttribute("blockSize", blockSize);
 			request.setAttribute("blockFirst", blockFirst);
 			request.setAttribute("blockLast", blockLast);

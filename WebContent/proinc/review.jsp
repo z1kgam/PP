@@ -15,121 +15,56 @@
 
 
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed9791d0d9caeff08abc43ebd08003f0" ></script>
+<div id="map" style="width:40%;height:400px;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed9791d0d9caeff08abc43ebd08003f0&libraries=services"></script>
 <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-	    mapOption = { 
-	        center: new kakao.maps.LatLng(37.557717, 127.000502), // 지도의 중심좌표
-	        level: 7 // 지도의 확대 레벨
-	    };
-	
-	var mapContainer2 = document.getElementById('map2'), // 지도를 표시할 div  
-		mapOption2 = { 
-		    center: new kakao.maps.LatLng(35.145842, 129.072631), // 지도의 중심좌표
-		    level: 7 // 지도의 확대 레벨
-		};
-	
-	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-	var map2 = new kakao.maps.Map(mapContainer2, mapOption2); // 지도를 생성합니다
-	 
-	// 마커를 표시할 위치와 title 객체 배열입니다 
-	var positions = [
-	    {
-	        title: '서울문화회관 대극장', 
-	        latlng: new kakao.maps.LatLng(37.572451, 126.975812)
-	    },
-	    {
-	        title: '충무 아트센터', 
-	        latlng: new kakao.maps.LatLng(37.565965, 127.014642)
-	    },
-	    {
-	        title: '국립극장', 
-	        latlng: new kakao.maps.LatLng(37.552505, 126.999641)
-	    },
-	    {
-	        title: '홍익대학교 대학로 아트센터',
-	        latlng: new kakao.maps.LatLng(37.576480, 127.001426)
-	    }
-	];
-	
-	var positions2 = [
-	    {
-	        title: '부산 시민회관', 
-	        latlng: new kakao.maps.LatLng(35.138752, 129.065271)
-	    },
-	    {
-	        title: '부산 문화회관', 
-	        latlng: new kakao.maps.LatLng(35.127237, 129.093500)
-	    },
-	    {
-	        title: '영화의 전당', 
-	        latlng: new kakao.maps.LatLng(35.171064, 129.127110)
-	    },
-	    {
-	        title: 'KBS 부산홀',
-	        latlng: new kakao.maps.LatLng(35.145050, 129.109045)
-	    }
-	];
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
 
-	// 마커 이미지의 이미지 주소입니다
-	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-		for (var i = 0; i < positions.length; i ++) {
-		    // 마커 이미지의 이미지 크기 입니다
-		    var imageSize = new kakao.maps.Size(24, 35); 
-		    // 마커 이미지를 생성합니다    
-		    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-		    // 마커를 생성합니다
-		    var marker = new kakao.maps.Marker({
-		        map : map, // 마커를 표시할 지도
-		        position : positions[i].latlng, // 마커를 표시할 위치
-		        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-		        image : markerImage // 마커 이미지 
-		    });
-		} 
-		for (var i = 0; i < positions2.length; i ++) {
-		    // 마커 이미지의 이미지 크기 입니다
-		    var imageSize = new kakao.maps.Size(24, 35); 
-		    // 마커 이미지를 생성합니다    
-		    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-		    // 마커를 생성합니다
-		    var marker = new kakao.maps.Marker({
-		        map : map2, // 마커를 표시할 지도
-		        position : positions2[i].latlng, // 마커를 표시할 위치
-		        title : positions2[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-		        image : markerImage // 마커 이미지 
-		    });    
-		}	
-</script>
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-<script type="text/javascript">
-	(function(){
-		var x = document.getElementById("map2");
-		    x.style.display = "none"; 
-		  }());
-	function te3(t) {
-		if(t == 1) {
-			var z = document.getElementById("map");
-		    z.style.display = "block";
-		  	var x = document.getElementById("map2");
-		 	    x.style.display = "none"; 
-		 }	
-		if(t == 2) {	
-			var z = document.getElementById("map");
-				z.style.display = "none";
-	
-			var x = document.getElementById("map2");
-			 	x.style.display = "block";	
-		}
-	}
-</script>
+var a = "서울 서초구 서초동 산144-4";
+
+console.log(a);
 
 
-<div style="margin-left: 650px; margin-top: 100px;">	
-	<a href="#" onclick="te3(1)"><input type="button" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; width: 100px;" value="서울" id="seoul"></a>
-</div>
-<div style="margin-left: 800px; margin-top: -30px;">
-	<a href="#" onclick="te3(2)"><input type="button" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 100px; width: 100px;" value="부산" id="busan"></a>
-</div>	
+// 지도 확대 축소를 제어할 수 있는 줌 커트롤을 생성합니다
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('서울 서초구 서초동 산144-4',  function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">예술의 전당</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+</script>	
 	
 </body>
 </html>

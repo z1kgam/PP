@@ -10,7 +10,7 @@
 %>
 
 <%-- <jsp:useBean id="event" class="event.EventBean"/> --%>
-<<jsp:useBean id="coupon" class="coupon.CouponBean"/>
+<jsp:useBean id="coupon" class="coupon.CouponBean"/>
 
 <%-- 컨텍스트 주소 얻기 --%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -37,6 +37,7 @@
 				</div>
 			</div>
 	</section>
+
 	<section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
 		<div class="container">
 
@@ -95,6 +96,7 @@
     </section>
     </section>
     </div>
+ 	</section>
  	 
 	
 <!-- footer -->

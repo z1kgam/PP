@@ -49,7 +49,7 @@ public class CouponController extends HttpServlet{
 		//디스패처 방식, 리다이렉트 방식 결정
 		int checkPage = 0;
 		
-		//이벤트 메인 페이지
+		//쿠폰 메인 페이지
 		if(action.equals("/events.do")) { 
 			
 			int total = couponDAO.getAllEvent();
