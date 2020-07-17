@@ -47,7 +47,7 @@ public class bestDao {
 		try {
 			
 			con = getConnection();
-			sql = "select * from details order by totalreserved desc limit 0, 10";
+			sql = "select * from details order by totalreserved asc limit 0, 10";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
