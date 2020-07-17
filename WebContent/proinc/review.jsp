@@ -8,14 +8,10 @@
 </head>
 <body>
 
-	
-<div id="map" style="width:50%;height:400px; margin-left: 25%;"></div>
-<div id="map2" style="width:50%; height:400px;"></div>
 
 
 
-
-<div id="map" style="width:40%;height:400px;"></div>
+<div id="map" style="width:400px;height:400px; margin: 0 auto"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed9791d0d9caeff08abc43ebd08003f0&libraries=services"></script>
 <script>
@@ -56,7 +52,7 @@ geocoder.addressSearch('서울 서초구 서초동 산144-4',  function(result, 
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">예술의 전당</div>'
+            content: '<div style="width:150px;text-align:center;padding:0px 0;">예술의 전당</div>'
         });
         infowindow.open(map, marker);
 

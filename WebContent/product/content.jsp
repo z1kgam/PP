@@ -407,9 +407,13 @@
 		</nav>
 		<hr style="width: 1500px; margin: auto;">
 
-		<div class="detail" id="explanation" style="display: none;"><jsp:include page="../proinc/explanation.jsp" /></div>
-		<div class="detail" id="reply"><jsp:include page="../proinc/reply.jsp" /></div>
-		<div class="detail" id="review" style="display: none;"><jsp:include page="../proinc/review.jsp" /></div>
+		<div class="detail" id="explanation"><jsp:include page="../proinc/explanation.jsp" /></div>
+		<div class="detail" id="reply"  style="display: none;"><jsp:include page="../proinc/reply.jsp" /></div>
+		<div class="detail" id="review" style="overflow:hidden;position:relative;width:0;height:0">
+			<div style="position:absolute;">
+				<jsp:include page="../proinc/review.jsp" />
+			</div>
+		</div>
 		<div class="detail" id="trybuy" style="display: none;"><jsp:include page="../proinc/trybuy.jsp" /></div>
 	</section>
 

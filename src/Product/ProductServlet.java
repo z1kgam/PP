@@ -148,7 +148,7 @@ public class ProductServlet extends HttpServlet {
 				DetailDAO ddao = new DetailDAO();
 				DetailBean dbean = new DetailBean();
 				
-				dbean = ddao.getdetails(num);
+				dbean = ddao.getdetails2(num);
 				
 				request.setAttribute("detailList", dbean);
 				
