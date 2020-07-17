@@ -487,7 +487,7 @@ body {
  <div class="row">
  <div class="col-md-4" >     
  <div class="classes w-100 ftco-animate">  			
- <iframe class="img w-100 mb-3" src="https://www.youtube.com/embed/N5Dz7azrIVI" frameborder="0" allow="accelerometer; 
+ <iframe class="w-100 mb-3" src="https://www.youtube.com/embed/N5Dz7azrIVI" frameborder="0" allow="accelerometer; 
  autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
  </div> 
  </div>

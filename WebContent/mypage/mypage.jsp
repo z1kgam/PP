@@ -686,6 +686,7 @@ textarea.form-control {
                 
                 <c:choose>    	
 			    	 <c:when test="${!empty profile_img }">
+
 				       <img src="${contextPath}/upload/${user.profile_img}" alt="프로필 이미지" class="profile-img img-responsive center-block" style="max-width: 200px;">
 			    	 </c:when>
 			   		 <c:when test="${empty profile_img}">

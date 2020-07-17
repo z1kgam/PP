@@ -5,12 +5,11 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
-
 	request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-    <!-- 공지 사항 관리 페이지 -->
+    <!-- 회원 관리 페이지 -->
     
 <!DOCTYPE html>
 <html>
@@ -23,133 +22,81 @@
 	<link rel="stylesheet" href="${contextPath}/admins/assets/css/ready.css">
 	<link rel="stylesheet" href="${contextPath}/assets/css/demo.css">
 	
-	
 	<script type="text/javascript">
 	
 	function del(n_num) {
 		
 		var dn_num = n_num
 		if (confirm("정말 삭제 하시겠습니까??") == true){
-			window.location.href='${contextPath}/admin/AdeleteNotice.do?n_num='+ dn_num;
+			window.location.href='${contextPath}/admin/AdeleteEvent.do?e_num='+ dn_num;
 			
 		} else {
 			return false;
 		}
 	}
 	
-	function te() {
-		window.location.href = '${contextPath}/admin/Writepage.do';
-	}
-	
-	function test31(t) {
-		
-		var cate = t
-		window.location.href = '${contextPath}/admin/ANoticeMain.do?n_cate='+t;
-		
-	}
 	
 	
 	</script>
 	
 </head>
 <body>
-	<jsp:include page="./include/top_navi.jsp" />
+
+<jsp:include page="./include/top_navi.jsp" />
+
 			
-			<!-- 회원 정보 출력 테이블 -->
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h4 class="page-title">공지 사항 관리</h4>
-						
-				<form action="#" name=f method="post">
-				<div>
-				
-				<c:if test="${catecheck == '0' }">
-							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
-							<option>항목을 선택하세요</option>
-							<option value="서비스 소식" >서비스 소식</option>
-							<option value="서비스 점검" >서비스 점검</option>
-							<option value="안내">안내</option>
-						</c:if>	
-				
-				<c:if test="${catecheck == '1' }">
-							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
-							<option value="전체">전체</option>
-							<option value="서비스 소식" selected="selected">서비스 소식</option>
-							<option value="서비스 점검">서비스 점검</option>
-							<option value="안내">안내</option>
-						</c:if>	
-						<c:if test="${catecheck == '2' }">
-							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
-							<option value="전체">전체</option>
-							<option value="서비스 소식">서비스 소식</option>
-							<option value="서비스 점검" selected="selected">서비스 점검</option>
-							<option value="안내">안내</option>
-						</c:if>		
-						<c:if test="${catecheck == '3' }">
-							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
-							<option value="전체">전체</option>
-							<option value="서비스 소식">서비스 소식</option>
-							<option value="서비스 점검">서비스 점검</option>
-							<option value="안내" selected="selected">안내</option>
-						</c:if>
-						<c:if test="${catecheck == '4' }">
-							<select onchange="test31(this.value);" class="form-control input-square" id="squareSelect" name= "n_cate" style="width: 10%;">
-							<option>항목을 선택하세요</option>
-							<option value="서비스 소식">서비스 소식</option>
-							<option value="서비스 점검">서비스 점검</option>
-							<option value="안내">안내</option>
-						</c:if>
-				</select>
-				
-				</div>	
-				<div align="right" style="margin-right: 60px; margin-bottom: 10px; float: right;">
-					<button type="button" onclick="te()" class="btn btn-warning">글쓰기</button>
-					</div>
-				</form>
-				
-				
-						<table class="table table-hover">
+						<h4 class="page-title">이벤트 관리 페이지</h4>
+			
+			<div align="right"
+					style="margin-right: 60px; margin-bottom: 10px; float: right;">
+					<button type="button" onclick="location.href='${contextPath}/admin/AeventWrite.do'" class="btn btn-warning">이벤트 등록</button>
+				</div>
+			
+					<table class="table table-hover">
 											<thead>
 												<tr align="center">
-													<th scope="col"><b>분류</b></th>
-													<th scope="col"><b>제목</b></th>
-													<th scope="col"><b>작성자</b></th>
-													<th scope="col"><b>날짜</b></th>
-													<th scope="col">글 수정</th>
-													<th scope="col">글 삭제</th>
+													<th scope="col">이벤트 번호</th>
+													<th scope="col">이벤트 명</th>
+													<th scope="col">이벤트 썸네일</th>
+													<th scope="col">이벤트 시작날짜</th>
+													<th scope="col">이벤트 종료날짜</th>
+													<th scope="col">이벤트 수정</th>
+													<th scope="col">이벤트 삭제</th>
 												</tr>
 											</thead>
 											<tbody>
 											<c:choose>
-											 <c:when test="${noticeList == null }">
+											 <c:when test="${eventList == null}">
 											 <tr>
-											 <td colspan="12" align="center">등록된 글이 없습니다.</td>
+											 <td colspan="8" align="center">등록된 이벤트가 없습니다.</td>
 											 </tr>
 											 </c:when>
-										<c:when test="${noticeList != null }">
-											<c:forEach var="notice" items="${noticeList}" varStatus="membersNum">
-											<fmt:formatDate var="parseDate" value="${notice.n_date}" pattern="yyyy-MM-dd"/>
+										<c:when test="${eventList != null}">
+											<c:forEach var="event" items="${eventList}" varStatus="status">
 										<tr align="center">
-											<td><p class="text-muted">${notice.n_cate}</p></td>
-											<td align="left">
-											<p class="text-muted">${notice.n_title}</p>
-											</td>
-											<td>관리자</td>
-											<td><p class="text-muted">${parseDate}</p></td>
+											<td><p class="text-muted">${event.e_num}</p></td>
+											<td><p class="text-muted">${event.e_title}</p></td>
+											<td><a href="${contextPath}/ev/viewEvent.do?e_num=${event.e_num}">
+	 										<img src="${contextPath}/event/image/${event.e_file}" style="width: 200px; height: 100px;"><br>
+											</a></td>
+											<td><p class="text-muted">${event.e_startdate}</p></td>
+											<td><p class="text-muted">${event.e_enddate}</p></td>
+											
 											<!-- 버튼 -->
 											<div class="form-button-action">
 											<td>
-											<button type="button" data-toggle="tooltip" title="글 수정" 
-												onclick="location.href='${contextPath}/admin/AmodNoticePage.do?n_num=${notice.n_num}'" 
+											<button type="button" data-toggle="tooltip" title="이벤트 수정" 
+												onclick="location.href='${contextPath}/admin/AmodEventForm.do?e_num=${event.e_num}'" 
 												class="btn btn-link <btn-simple-primary" style=" font-size: 17px; ">
-												<i class="la la-edit"></i>
+												<i class="la la-smile-o"></i>
 											</button>
 											</td>
 											<td>
-											<button type="button" data-toggle="tooltip" title="글 삭제"
-												onclick="del('${notice.n_num}')"
-												class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
+											<button type="button" data-toggle="tooltip" title="이벤트 삭제"
+												onclick="del('${event.e_num}')" class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
 											<i class="la la-trash"></i>
 											</button>
 											</td>
@@ -161,9 +108,8 @@
             							</c:choose>	
 											</tbody>
 										</table>
-						<!-- 회원 정보 출력 테이블 -->
 					
-									<!-- 페이징 -->
+										<!-- 페이징 -->
 									
 									<div align="center">
 									<div class="card-body">
@@ -173,7 +119,7 @@
 											
 										<c:if test="${blockFirst!=1}">
 											<a class="page-link"
-												href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockFirst-blockSize}"
+												href="${contextPath}/admin/AeventMain.do?nowPage=${blockFirst-blockSize}"
 												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 												<!-- <span class="sr-only">Previous</span> -->
 											</a>
@@ -181,12 +127,12 @@
 												</li>
 												<c:forEach var="i" begin="${blockFirst}" end="${blockLast}" step="1">
 												<li class="page-item active">
-												<a class="page-link" href="${contextPath }/admin/ANoticeMain.do?nowPage=${i}">${i}</a>
+												<a class="page-link" href="${contextPath }/admin/AeventMain.do?nowPage=${i}">${i}</a>
 												</li>
 												</c:forEach>
 												<c:if test="${blockLast != totalPage }">
 												<li class="page-item">
-													<a class="page-link" href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockLast+1}" aria-label="Next">
+													<a class="page-link" href="${contextPath}/admin/AeventMain.do?nowPage=${blockLast+1}" aria-label="Next">
 														<span aria-hidden="true">&raquo;</span>
 														<span class="sr-only">Next</span>
 													</a>
@@ -197,12 +143,16 @@
 										</p>
 									</div>
 									</div>
-									<!-- 페이징 -->		
+									<!-- 페이징 -->	
+			
+			
+			
 				
-						</div>
+					</div>
 				</div>
 			</div>
-			<!-- 회원 정보 출력 테이블 -->
+			
+			
 	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdatePro" aria-hidden="true">

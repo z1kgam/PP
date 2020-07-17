@@ -30,6 +30,10 @@ import Product.DetailBean;
 import Product.DetailDAO;
 import Product.ProductBean;
 import Product.ProductDAO;
+import coupon.CouponBean;
+import coupon.CouponDAO;
+import event.EventBean;
+import event.EventDAO;
 import member.LikeBean;
 import member.LikeDAO;
 import member.MemberBean;
@@ -1118,11 +1122,313 @@ public class AdminController extends HttpServlet{
 				}
 					
 				
-				
+			//회원신고 관리 페이지 이동	
 			} else if(action.equals("/BBiBBOBBiBBo.do")) {
 				
 				nextPage = "/admins/BBiBBOBBiBBo.jsp";
+			
+			//이벤트 페이지 이동	
+			} else if(action.equals("/AeventMain.do")) {
 				
+				EventDAO edao = new EventDAO();
+				
+				int total = edao.getAllEvent();
+				System.out.println(total);
+				
+				int pageSize = 10;
+				int nowPage = 1;
+				if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+				
+				int pageFirst = (nowPage-1) * pageSize;
+				int totalPage = total/pageSize + (total%pageSize == 0?0:1);
+				int blockSize = 10;
+				int blockFirst = (nowPage/blockSize-(nowPage%blockSize == 0?1:0)) * blockSize + 1;
+				int blockLast = blockFirst + blockSize -1;
+				
+				if(blockLast > totalPage) blockLast = totalPage;
+				
+				List<EventBean> eventList = edao.eventList(pageFirst, pageSize);
+
+				request.setAttribute("eventList", eventList);
+				request.setAttribute("blockSize", blockSize);
+				request.setAttribute("blockFirst", blockFirst);
+				request.setAttribute("blockLast", blockLast);
+				request.setAttribute("totalPage", totalPage);
+				request.setAttribute("nowPage", nowPage);
+				
+				nextPage = "/admins/AeventMain.jsp";
+			//이벤트 등록 페이지 이동
+			} else if(action.equals("/AeventWrite.do")) {
+				
+				String check = request.getParameter("check");
+				
+				request.setAttribute("check", check);
+				
+				nextPage = "/admins/AeventWrite.jsp";
+			
+			//이벤트 등록
+			} else if(action.equals("/AinsertEvent.do")) {
+				
+				EventBean ebean = new EventBean();
+				EventDAO edao = new EventDAO();
+				
+				
+				checkPage = 1;	
+				ServletContext ctx = getServletContext();	
+				String realPath = ctx.getRealPath("/event/image/");
+				int max = 10 * 1024 * 1024;
+		  		MultipartRequest multi = new MultipartRequest(request, realPath, max, "UTF-8", new DefaultFileRenamePolicy());
+				
+				String e_title = multi.getParameter("e_title");;
+				String e_content = multi.getParameter("e_content");
+				String e_file = multi.getFilesystemName("e_file");
+				
+				Date e_startdate = Date.valueOf(multi.getParameter("e_startdate")); 
+				Date e_enddate = Date.valueOf(multi.getParameter("e_enddate"));
+				
+				ebean.setE_title(e_title);
+				ebean.setE_content(e_content);
+				ebean.setE_file(e_file);
+				ebean.setE_startdate(e_startdate);
+				ebean.setE_enddate(e_enddate);
+				
+				edao.insertEvent(ebean);
+				
+				nextPage = "/admin/AeventMain.do";
+			
+			//이벤트 수정페이지 이동
+			} else if(action.equals("/AmodEventForm.do")) {
+				
+
+				 EventBean ebean = new EventBean();
+				 EventDAO edao = new EventDAO();
+				
+				 String e_num = request.getParameter("e_num");
+		         ebean = edao.viewEvent(Integer.parseInt(e_num));
+		         
+		        
+					
+					nextPage = "/admins/AmodEventForm.jsp";	
+		         
+		         
+		      //이벤트 수정	
+			} else if(action.equals("/AmodEvent.do")) {
+				
+				EventBean ebean = new EventBean();
+				EventDAO edao = new EventDAO();
+				
+				int e_num = Integer.parseInt(request.getParameter("e_num"));
+				
+				ServletContext ctx = getServletContext();	
+				String realPath = request.getServletContext().getRealPath("/event/image/");
+				int max = 10 * 1024 * 1024;
+		  		MultipartRequest multi = new MultipartRequest(request, realPath, max, "UTF-8", new DefaultFileRenamePolicy());			
+				
+		  		String e_title = multi.getParameter("e_title");
+				
+				Date e_startdate = Date.valueOf(multi.getParameter("e_startdate"));
+				
+				Date e_enddate = Date.valueOf(multi.getParameter("e_enddate"));
+				
+				String e_file = multi.getFilesystemName("e_file");
+				
+				String e_content = multi.getParameter("e_content");
+				
+				EventBean evbean = new EventBean();
+				evbean.setE_num(e_num);
+				evbean.setE_title(e_title);
+				evbean.setE_startdate(e_startdate);
+				evbean.setE_enddate(e_enddate);
+				evbean.setE_file(e_file);
+				evbean.setE_content(e_content);
+			
+				edao.modEvent(evbean);
+				
+				nextPage = "/admin/AeventMain.do";
+			
+			//이벤트 삭제
+			} else if(action.equals("/AdeleteEvent.do")) {
+				
+				EventBean ebean = new EventBean();
+				EventDAO edao = new EventDAO();
+				
+				int e_num = Integer.parseInt(request.getParameter("e_num"));
+				edao.deleteEvent(e_num);
+				
+				nextPage = "/admin/AeventMain.do";
+			//쿠폰 메인 페이지 이동	
+			} else if(action.equals("/AcouponMain.do")) {
+				
+				CouponDAO couponDAO = new CouponDAO();
+				
+				
+				int total = couponDAO.getAllEvent();
+				
+				int pageSize = 10;
+				int nowPage = 1;
+				if(request.getParameter("nowPage") != null) nowPage = Integer.parseInt(request.getParameter("nowPage"));
+				
+				int pageFirst = (nowPage-1) * pageSize;
+				int totalPage = total/pageSize + (total%pageSize==0?0:1);
+				int blockSize = 10;
+				int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+				int blockLast = blockFirst + blockSize -1;
+				
+				if(blockLast>totalPage) blockLast = totalPage;
+				
+				List<CouponBean> list = couponDAO.getList(pageFirst, pageSize);
+				request.setAttribute("list", list);
+				request.setAttribute("blockSize", blockSize);
+				request.setAttribute("blockFirst", blockFirst);
+				request.setAttribute("blockLast", blockLast);
+				request.setAttribute("totalPage", totalPage);
+				request.setAttribute("nowPage", nowPage);
+				
+				nextPage = "/admins/AcouponMain.jsp";
+				
+			//쿠폰 등록 페이지 이동	
+			} else if(action.equals("/AcouponWrite.do")) {
+				
+				String check = request.getParameter("check");
+		         
+		        request.setAttribute("check", check);
+				
+				nextPage = "/admins/AcouponWrite.jsp";
+				
+			//쿠폰 등록 하기	
+			} else if(action.equals("/AinsertCoupon.do")) { 
+				
+				CouponBean couponBean = new CouponBean();
+				CouponDAO couponDAO = new CouponDAO();
+				
+				checkPage = 1;
+				String realFolder = request.getServletContext().getRealPath("upload");
+				int max = 100 * 1024 * 1024;
+
+				MultipartRequest multi = new MultipartRequest(request, realFolder, max, "UTF-8",
+						new DefaultFileRenamePolicy());
+
+				Enumeration<String> e = multi.getFileNames();
+
+				ArrayList<String> saveFiles = new ArrayList<String>();
+
+				ArrayList<String> originFiles = new ArrayList<String>();
+
+				while (e.hasMoreElements()) {
+					String filename = (String) e.nextElement();
+
+					saveFiles.add(multi.getFilesystemName(filename));
+
+					originFiles.add(multi.getOriginalFileName(filename));
+
+				}
+				
+				String title = multi.getParameter("title");
+				Date startdate = Date.valueOf(multi.getParameter("startdate"));
+				Date enddate = Date.valueOf(multi.getParameter("enddate"));
+				String content = multi.getParameter("content");
+				String image = "";
+				String timage = "";
+				if(saveFiles != null) {
+					for (int i = 0; i < saveFiles.size(); i++) {
+						if (i == 0) {
+							timage = (String) saveFiles.get(i);
+						} else {
+							image = (String) saveFiles.get(i);
+						}
+					}
+				}
+							
+				couponBean.setEvent_title(title);
+				couponBean.setEvent_startdate(startdate);
+				couponBean.setEvent_enddate(enddate);
+				couponBean.setEvent_content(content);
+				couponBean.setEvent_image(image);
+				couponBean.setEvent_timage(timage);
+				
+				couponDAO.insertevent(couponBean);
+				
+				nextPage = "/admin/AcouponMain.do";
+				
+			//쿠폰 글 수정 페이지 이동
+			} else if(action.equals("/AmodcouponForm.do")) {
+				
+				CouponBean couponBean = new CouponBean();
+				CouponDAO couponDAO = new CouponDAO();
+				
+				int event_num = Integer.parseInt(request.getParameter("event_num"));
+				
+				couponBean = couponDAO.getEventNum(event_num);
+				
+				request.setAttribute("couponBean", couponBean);
+				
+				nextPage = "/admins/AmodcouponForm.jsp";
+			//쿠폰 수정 	
+			} else if(action.equals("/AmodCoupon.do")) {
+				
+				CouponBean couponBean = new CouponBean();
+				CouponDAO couponDAO = new CouponDAO();
+				
+				int event_num = Integer.parseInt(request.getParameter("event_num"));
+				
+				String realFolder = request.getServletContext().getRealPath("upload");
+				int max = 100 * 1024 * 1024;
+
+				MultipartRequest multi = new MultipartRequest(request, realFolder, max, "UTF-8",
+						new DefaultFileRenamePolicy());
+
+				Enumeration<String> e = multi.getFileNames();
+
+				ArrayList<String> saveFiles = new ArrayList<String>();
+
+				ArrayList<String> originFiles = new ArrayList<String>();
+
+				while (e.hasMoreElements()) {
+					String filename = (String) e.nextElement();
+
+					saveFiles.add(multi.getFilesystemName(filename));
+
+					originFiles.add(multi.getOriginalFileName(filename));
+
+				}
+				
+				String title = multi.getParameter("title");
+				Date startdate = Date.valueOf(multi.getParameter("startdate"));
+				Date enddate = Date.valueOf(multi.getParameter("enddate"));
+				String content = multi.getParameter("content");
+				String image = "";
+				String timage = "";
+				if(saveFiles != null) {
+					for (int i = 0; i < saveFiles.size(); i++) {
+						if (i == 0) {
+							timage = (String) saveFiles.get(i);
+						} else {
+							image = (String) saveFiles.get(i);
+						}
+					}
+				}
+							
+				couponBean.setEvent_num(event_num);
+				couponBean.setEvent_title(title);
+				couponBean.setEvent_startdate(startdate);
+				couponBean.setEvent_enddate(enddate);
+				couponBean.setEvent_content(content);
+				couponBean.setEvent_image(image);
+				couponBean.setEvent_timage(timage);
+				
+				couponDAO.eventUpdateProc(couponBean);
+				
+				nextPage = "/admin/AcouponMain.do";
+				
+			} else if(action.equals("/AdeleteCoupon.do")) {
+				
+				CouponDAO couponDAO = new CouponDAO();
+				int event_num = Integer.parseInt(request.getParameter("event_num"));
+				
+				
+				couponDAO.eventDelete(event_num);
+				
+				nextPage = "/admin/AcouponMain.do";
 			}
 			
 			
@@ -1133,7 +1439,7 @@ public class AdminController extends HttpServlet{
 				request.getRequestDispatcher(nextPage).forward(request, response);
 			}else {
 				response.sendRedirect(request.getContextPath()+nextPage); //물어보기 이 상태로 request에 보낸값들 들고 갈수있는지
-			}
+			} 
 			
 		}// doHandle END
 			

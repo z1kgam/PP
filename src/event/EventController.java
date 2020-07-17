@@ -87,7 +87,7 @@ public class EventController extends HttpServlet{
 			checkPage = 1;	
 			ServletContext ctx = getServletContext();	
 			String realPath = ctx.getRealPath("/event/image/");
-			int max = 10 * 1024 * 1024;
+			int max = 20 * 1024 * 1024;
 	  		MultipartRequest multi = new MultipartRequest(request, realPath, max, "UTF-8", new DefaultFileRenamePolicy());
 			
 			String e_title = multi.getParameter("e_title");;

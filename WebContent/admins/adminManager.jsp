@@ -114,13 +114,13 @@
 											<button type="button" data-toggle="tooltip" title="정보 수정" 
 												onclick="location.href='${contextPath}/admin/AMemberView.do?id=${memberlist.id}&nowpage=${nowpage}'" 
 												class="btn btn-link <btn-simple-primary" style=" font-size: 17px; ">
-												<i class="la la-edit"></i>
+												<i class="la la-user"></i>
 											</button>
 											</td>
 											<td>
 											<button type="button" data-toggle="tooltip" title="회원 삭제"
 												onclick="del('${memberlist.id}')" class="btn btn-link btn-simple-danger" style=" font-size: 17px; ">
-											<i class="la la-trash"></i>
+											<i class="la la-user-times"></i>
 											</button>
 											</td>
 											</div>
