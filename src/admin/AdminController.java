@@ -969,9 +969,7 @@ public class AdminController extends HttpServlet{
 			//회원정보 페이지내 포인트 업데이트 (에이젝스)	
 			} else if(action.equals("/pointupdate.do")) {
 				
-				System.out.println(request.getParameter("addpoint"));
-			    System.out.println(request.getParameter("totalpoint"));
-				System.out.println(request.getParameter("id"));
+				
 			    int addpoint = Integer.parseInt(request.getParameter("addpoint"));
 			    int totalpoint = Integer.parseInt(request.getParameter("totalpoint"));
 			    String id = request.getParameter("id");
@@ -1025,6 +1023,7 @@ public class AdminController extends HttpServlet{
 				
 				String id = (String)request.getSession().getAttribute("id");
 				String name = (String)request.getSession().getAttribute("name");
+				
 				int point = Integer.parseInt(request.getParameter("point"));
 				int num = Integer.parseInt(request.getParameter("num"));
 				MemberDAO memberDAO = new MemberDAO();
