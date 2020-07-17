@@ -89,8 +89,9 @@
 					<div class="container-fluid" style="width: 70%;">
 						<h4 class="page-title">쿠폰 등록</h4>
 			
-						<form action="${contextPath}/admin/AmodCoupon.do" enctype="multipart/form-data" method="post">
+						<form action="${contextPath}/admin/AmodCoupon.do?event_num=${couponBean.event_num}" enctype="multipart/form-data" method="post">
 						<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
+						
 											<thead>
 												<tr align="center">
 													<th scope="col" colspan="4"><b>쿠폰 등록</b></th>
@@ -100,7 +101,7 @@
 												<tr align="center">
 													<td style="width: 15%"><b>쿠폰 명</b></td>
 													<td colspan="3">
-													<input type="text" name="title" class="form-control" id="email" value="${couponBean.event_title } placeholder="이벤트 명" style="width: 75%">
+													<input type="text" name="title" class="form-control" id="email" value="${couponBean.event_title }" placeholder="이벤트 명" style="width: 75%">
 													</td>
 												</tr>
 												<tr align="center">
