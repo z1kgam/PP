@@ -11,7 +11,7 @@
 
 
 
-<div id="map" style="width:400px;height:400px; margin: 0 auto"></div>
+<div id="map" style="width:650px;height:400px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed9791d0d9caeff08abc43ebd08003f0&libraries=services"></script>
 <script>

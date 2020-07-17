@@ -13,8 +13,9 @@ function review() {
 	document.getElementById("explanation").style.display = "none";
 	document.getElementById("reply").style.display = "none";
 	//document.getElementById("review").style.display = "block";
-	document.getElementById("review").style.width = "400px";
+	document.getElementById("review").style.width = "650px";
 	document.getElementById("review").style.height = "400px";
+	document.getElementById("review").style.margin = "0 auto";
 	document.getElementById("trybuy").style.display = "none";
 }
 
