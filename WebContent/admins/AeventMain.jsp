@@ -91,7 +91,7 @@
 											<button type="button" data-toggle="tooltip" title="이벤트 수정" 
 												onclick="location.href='${contextPath}/admin/AmodEventForm.do?e_num=${event.e_num}'" 
 												class="btn btn-link <btn-simple-primary" style=" font-size: 17px; ">
-												<i class="la la-krw"></i>
+												<i class="la la-smile-o"></i>
 											</button>
 											</td>
 											<td>
@@ -109,7 +109,41 @@
 											</tbody>
 										</table>
 					
-			
+										<!-- 페이징 -->
+									
+									<div align="center">
+									<div class="card-body">
+										<p class="demo">
+											<ul class="pagination pg-primary">
+												<li class="page-item">
+											
+										<c:if test="${blockFirst!=1}">
+											<a class="page-link"
+												href="${contextPath}/admin/AeventMain.do?nowPage=${blockFirst-blockSize}"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+												<!-- <span class="sr-only">Previous</span> -->
+											</a>
+											 </c:if>
+												</li>
+												<c:forEach var="i" begin="${blockFirst}" end="${blockLast}" step="1">
+												<li class="page-item active">
+												<a class="page-link" href="${contextPath }/admin/AeventMain.do?nowPage=${i}">${i}</a>
+												</li>
+												</c:forEach>
+												<c:if test="${blockLast != totalPage }">
+												<li class="page-item">
+													<a class="page-link" href="${contextPath}/admin/AeventMain.do?nowPage=${blockLast+1}" aria-label="Next">
+														<span aria-hidden="true">&raquo;</span>
+														<span class="sr-only">Next</span>
+													</a>
+												</li>
+											</c:if>		
+												
+											</ul>
+										</p>
+									</div>
+									</div>
+									<!-- 페이징 -->	
 			
 			
 			

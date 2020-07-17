@@ -26,40 +26,12 @@
 	
 
 	function URL1(input){
-		
-// 		var z = document.getElementById("te7");
-// 		  if (z.style.display === "none") {
-// 			  alert("와쓰");
-// 		    z.style.display = "block";
-// 		  } else {
-// 		    z.style.display = "none";
-// 		  }
-		  
-// 		  var z2 = document.getElementById("sun");
-// 		  if (z2.style.display === "none") {
-// 		    z2.style.display = "block";
-// 		  } else {
-// 		    z2.style.display = "none";
-// 		  }  
-		
-// 		  var z1 = document.getElementById("te8");
-// 		  if (z1.style.display === "none") {
-// 			  alert("와쓰");
-// 		    z1.style.display = "block";
-// 		  } else {
-// 		    z1.style.display = "none";
-// 		  }
-		  
-// 		  var z3 = document.getElementById("del");
-// 		  if (z3.style.display === "none") {
-// 		    z3.style.display = "block";
-// 		  } else {
-// 		    z3.style.display = "none";
-// 		  }    
 		  
 		  
 		if(input.files && input.files[0]){
 
+			$('#fileinput1').text($('#e_file1')[0].files[0].name);
+			
 			$("#sun").html("<img id='sunpreview' src='#' width=400 height=400 />");
 
 			var reader = new FileReader();
@@ -73,18 +45,15 @@
 			}
 			
 		}		
-		
-		
-		
 	} 
+
 
 	function URL2(input){
 		
-		
-		
-		
 		if(input.files && input.files[0]){
-
+			
+			$('#fileinput2').text($('#e_file2')[0].files[0].name);
+			
 			$("#del").html("<img id='delpreview' src='#' width=400 height=400 />");
 
 			var reader = new FileReader();
@@ -99,6 +68,7 @@
 			
 		}			
 	} 
+	
 
 	
 	
@@ -117,57 +87,72 @@
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid" style="width: 70%;">
-						<h4 class="page-title">이벤트 등록</h4>
+						<h4 class="page-title">쿠폰 등록</h4>
 			
-						<form action="${contextPath}/admin/AinsertEvent.do" enctype="multipart/form-data" method="post">
+						<form action="${contextPath}/admin/AinsertCoupon.do" enctype="multipart/form-data" method="post">
 						<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
 											<thead>
 												<tr align="center">
-													<th scope="col" colspan="4"><b>이벤트 등록</b></th>
+													<th scope="col" colspan="4"><b>쿠폰 등록</b></th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr align="center">
-													<td style="width: 15%"><b>이벤트 명</b></td>
+													<td style="width: 15%"><b>쿠폰 명</b></td>
 													<td colspan="3">
-													<input type="text" name="e_title" class="form-control" id="email" placeholder="이벤트 명" style="width: 75%">
+													<input type="text" name="title" class="form-control" id="email" placeholder="이벤트 명" style="width: 75%">
 													</td>
 												</tr>
 												<tr align="center">
 												<td><b>내용</b></td>
-												<td colspan="4"><textarea name="e_content" class="form-control" id="comment" rows="20"></textarea></td>
+												<td colspan="4"><textarea name="content" class="form-control" id="comment" rows="20"></textarea></td>
 												</tr>
 												<tr align="center">
 												<td><b>이벤트 기간</b></td>
 												<td colspan="4" align="center">
-												<input type="date" name="e_startdate" style="width: 30%;">
+												<input type="date" name="startdate" style="width: 30%;">
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="date" name="e_enddate" style="width: 30%;">
+												<input type="date" name="enddate" style="width: 30%;">
 												</td>
 												</tr>
 												<tr align="center">
 												
-											   	 <td><b>이미지 업로드</b></td>
+											   	 <td><b>썸네일 이미지 업로드</b></td>
 											   	 
 												 <td colspan="3">
 												 <div class="custom-file">
-												 <input class="custom-file-input" type="file" id="e_file"name="e_file" onchange="URL2(this)">
-												 <label class="custom-file-label" for="e_file" id="fileinput">이미지를 첨부하세요</label>
+												 <input class="custom-file-input" type="file" id="e_file1" name="timage" onchange="URL1(this)" accept="image/*">
+												 <label class="custom-file-label" for="e_file1" id="fileinput1">이미지를 첨부하세요</label>
 												 </div>
 												 </td>
 												</tr>
 												<tr align="center">
-													<td id="sun" colspan="1" >이벤트 이미지</td>	
-													<td id="del" colspan="2" ></td>	
+													<td>쿠폰 썸네일 이미지</td>
+													<td id="sun" colspan="2" >썸네일 이미지</td>	
+												</tr>
+												<tr align="center">
+												
+											   	 <td><b>내용 이미지 업로드</b></td>
+											   	 
+												 <td colspan="3">
+												 <div class="custom-file">
+												 <input class="custom-file-input" type="file" id="e_file2"name="image" onchange="URL2(this)" accept="image/*">
+												 <label class="custom-file-label" for="e_file2" id="fileinput2">이미지를 첨부하세요</label>
+												 </div>
+												 </td>
+												</tr>
+												<tr align="center">
+													<td>쿠폰 내용 이미지</td>
+													<td id="del" colspan="2" >내용 이미지</td>	
 												</tr>
 												</tbody>
 										</table>
 										<div align="center">
-											<button type="submit" class="btn btn-success">이벤트 등록</button>
+											<button type="submit" class="btn btn-success">쿠폰 등록</button>
 											<button type="reset" class="btn btn-warning">취소</button>
 											<button
-												onclick="location.href='${contextPath}/admin/AeventMain.do'"
+												onclick="location.href='${contextPath}/admin/AqouponMain.do'"
 												type="button" class="btn btn-danger">목록 으로</button>
 										</div>
 										</form>

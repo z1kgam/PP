@@ -27,9 +27,8 @@
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h4 class="page-title">2 Ticket 관리자 페이지 </h4>
-						<br>
-						<h2>관리자님 반갑습니다 !!!</h2>
+						<div align="center"> <img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-width: 90px;">&nbsp;&nbsp;&nbsp;</div>
+						<br><h4 class="page-title" align="center"> 관리자 페이지 </h4>
 						
 						<br><br><br>
 						

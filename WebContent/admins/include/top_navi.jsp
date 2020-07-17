@@ -110,7 +110,7 @@
 				<div class="scrollbar-inner sidebar-wrapper">
 					<div class="user">
 						<div class="photo">
-							<img src="${contextPath}/admins/assets/img/profile.jpg">
+							<img src="${contextPath}/images/ad2.PNG">
 						</div>
 						<div class="info">
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -181,6 +181,12 @@
 								
 							</a>
 						</li>
+						<li class="nav-item active">
+							<a href="${contextPath}/admin/AcouponMain.do">
+								<i class="la la-ticket"></i>
+								<p>쿠폰 등록 관리</p>
+							</a>
+						</li>
 						
 						  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted te" >
         			  <span style="font-size: 12px;">고객 센터 관리</span>
@@ -207,7 +213,6 @@
 							<a href="${contextPath}/admin/Aqnaboardp.do?status=0">
 								<i class="la la-vimeo-square la-vine la-vk la-volume-down la-volume-off la-volume-up la-warning la-wechat"></i>
 								<p>문의 내역 답변 관리</p>
-								<
 							</a>
 						</li>
 						<li class="nav-item active">
