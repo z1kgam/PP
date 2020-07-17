@@ -60,8 +60,9 @@
 
 						
 						<div class="form-group">
-						<button type="button" class="btn btn-warning" onclick="status(0)" id="t1">답변 대기중</button>
-						<button type="button" class="btn btn-success" onclick="status(1)" id="t2">답변 완료</button>
+						<button type="button" class="btn btn-success pull-right" onclick="status(1)" id="t2">답변 완료</button>&nbsp;&nbsp;
+						<button type="button" class="btn btn-warning pull-right" onclick="status(0)" id="t1" style="margin-right: 5px;">답변 대기중</button>&nbsp;&nbsp;
+						
 						</div>
 						
 						

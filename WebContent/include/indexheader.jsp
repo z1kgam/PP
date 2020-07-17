@@ -410,7 +410,7 @@ body {
 <%-- 			     </c:if> --%>
 					  <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">공연/전시소식</a></li>
 					  
-			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">이벤트</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">이벤트</a></li>
 <%-- 			     <c:if test="${id==null}"> --%>
 			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">랭킹</a></li>
 <%-- 			     </c:if> --%>  
@@ -487,7 +487,7 @@ body {
  <div class="row">
  <div class="col-md-4" >     
  <div class="classes w-100 ftco-animate">  			
- <iframe class="img w-100 mb-3" src="https://www.youtube.com/embed/N5Dz7azrIVI" frameborder="0" allow="accelerometer; 
+ <iframe class="w-100 mb-3" src="https://www.youtube.com/embed/N5Dz7azrIVI" frameborder="0" allow="accelerometer; 
  autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
  </div> 
  </div>

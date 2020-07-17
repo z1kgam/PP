@@ -236,6 +236,7 @@ public class qnaDao {
 		}
 		return count;
 	}
+	
 	//글 상세보기 메소드
 	public qnaBean viewQna(int qna_num){//1:1 문의 글 상세보기
 		qnaBean qbean = new qnaBean();
