@@ -467,20 +467,20 @@ color:#ff0;
 			      </button>
   				</div>
 		  				
-  				<div class="col-12 w-100 text-center" style="margin-top: -20px;">
+  				<div class="col-20 w-140 text-center" style="margin-top: -100px;">
   					<div class="collapse navbar-collapse" id="ftco-nav">
 			        <ul class="navbar-nav m-auto">
-			          <li class="nav-item"><a href="${contextPath}" class="nav-link" style="font-size: 18px; font-family:나눔고딕 ;" >메인</a></li>
-			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공연&상품 페이지</a></li>
-			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 18px; font-family:나눔고딕">###</a></li>
-			          <li class="nav-item"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
+			          <li class="nav-item"><a href="${contextPath}" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 50px;" >메인</a></li>
+			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 50px;">공연&상품 페이지</a></li>
+			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 50px;">###</a></li>
+			          <li class="nav-item"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 50px;">이벤트</a></li>
 			     <c:if test="${is_admin == 1}">     
-			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">관리자 페이지</a></li>
+			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 50px;">관리자 페이지</a></li>
 			     </c:if> 
-			          <li class="nav-item"><a href="${contextPath}/blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">예매하기</a></li>
-			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">공지사항</a></li>
+			          <li class="nav-item"><a href="${contextPath}/blog.jsp" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 50px;">예매하기</a></li>
+			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 50px;">공지사항</a></li>
 			     <c:if test="${id==null}">
-			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">로그인</a></li>
+			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 50px;">로그인</a></li>
 			     </c:if>   
 			        </ul>
 			      </div>
