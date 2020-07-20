@@ -18,14 +18,24 @@ public class AdminBean {
 	private String profile_img;
 	private Timestamp reg_date;
 	private String gender;
-	
+	private int n_status;
 	//getter, setter 메소드
+	
+	
+	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
+	public int getN_status() {
+		return n_status;
+	}
+	public void setN_status(int n_status) {
+		this.n_status = n_status;
+	}
+	
 	public String getPassword() {
 		return password;
 	}

@@ -126,7 +126,7 @@
 					</div>
 					<br><br>
 					<div align="center">
-					<button type="submit" class="btn btn-success" >글 수정</button>
+					<button type="submit" class="btn btn-success" >답변 등록</button>
 					<button type="reset" class="btn btn-warning">다시 쓰기</button>
 					<button onclick="location.href='${contextPath}/admin/Aqnaboardp.do?status=0'" type="reset" class="btn btn-danger">목록 으로</button>
 					</div>

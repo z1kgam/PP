@@ -133,10 +133,11 @@
 	 		</table>
 	 		총 결제금액 : <fmt:formatNumber pattern="###,###,###" value="${totalpayprice}"/>
 	 		<button onclick="location.href='${contextPath}/index.jsp'" class="btn btn-primary pull-right" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px; margin-left: 20px; margin-left: 450px; margin-top: 100px;">메인으로</button>
-	 		<button type="button" onclick="btnPayAlldel()" class="btn btn-primary pull-right" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; margin-bottom: 50px; margin-left: 20px; margin-left: 50px; margin-top: 100px;">결제내역 삭제하기</button>			
+	<button type="button" onclick="btnPayAlldel()" class="btn btn-primary pull-right" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important; margin-bottom: 50px; margin-left: 20px; margin-left: 50px; margin-top: 100px;">결제내역 삭제하기</button>
 	 	</div>
 	 </div>
-	<div class="page_wrap">
+	 
+	 <div class="page_wrap">
 		<div class="page_nation">
 			<c:if test="${nowPage > blockSize }">
 				<a href="location.href='${contextPath}/Order/payList.do?nowPage=${blockFirst-blockSize}'" class="arrow prev"></a>
@@ -156,9 +157,10 @@
 			<c:if test="${blockLast != totalPage}">
 				<a href="location.href='${contextPath}/Order/payList.do?nowPage=${blockLast+1}'" class="arrow next"></a>
 			</c:if>
+		
 		</div>
 	</div>
-
+				
 
 
    <!-- 제이쿼리 자바스크립트 추가하기 -->

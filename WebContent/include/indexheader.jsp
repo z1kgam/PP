@@ -253,35 +253,70 @@ body {
 				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
 			</div>
 		</form>
-		<div class="navbar-nav ml-auto">
-			
-			<div class="nav-item dropdown">
-				<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" style="color: #000;"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar" style="border-radius: 50%;
-	width: 36px;
-	height: 36px;
-	margin-right: 10px;"> Antonio Moreno <b class="caret"></b></a>
-				<div class="dropdown-menu">
-				<c:if test="${id != null}">
-					<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item"><i class="fa fa-user-o"></i> 마이페이지</a>
-				</c:if>
-				<c:if test="${id == null}">
-					<a href="${contextPath}/member/login.do" class="dropdown-item"><i class="fa fa-calendar-o"></i> 로그인</a>
-					<a href="${contextPath}/member/join.do" class="dropdown-item"><i class="fa fa-sliders"></i> 회원가입</a>
-				</c:if>
-				<c:if test="${id != null}">
-					<c:if test="${is_admin == 1}">
-						<a href="${contextPath}/admin/adminPage.do" class="dropdown-item"><i class="fa fa-gears"></i>관리자 페이지</a>
-					</c:if>
-					<a href="${contextPath}/Order/cartList.do" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
-					<div class="divider dropdown-divider"></div>
-					<a href="${contextPath}/member/logout.do" class="dropdown-item"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
-				</c:if>	
-				</div>
-			</div>
+	<c:choose>
+<c:when test="${id!=null}"> 
+
+<div class="navbar-nav ml-auto">
+	
+	<div class="nav-item dropdown" style="margin-right: 0;">
+		
+		<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" style="color: #000; font-size: 12px !important; margin-right: 0;">
+		
+		<!-- 프사 없으면 기본 있으면 내가 정한 사진으로 -->
+		<c:choose>    	
+    	 <c:when test="${!empty profile_img }">
+	       <img src="${contextPath}/upload/${profile_img}" 
+			 class="avatar" alt="Avatar" style="border-radius: 50%; width: 36px; height: 36px; margin-right: 10px;"> 
+    	 </c:when>
+     
+   		 <c:when test="${empty profile_img}">
+			<img src="${contextPath}/images/icon.png" 
+			 class="avatar" alt="Avatar" style="border-radius: 50%; width: 36px; height: 36px; margin-right: 10px;">
+  		 </c:when>
+  		 </c:choose>
+
+		${id}님 로그인중..
+		<c:if test="${is_admin == 1}">	<!-- 관리자모드이면 -->
+		<b class="caret"></b></a>
+		<div class="dropdown-menu">
+			<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item" style="font-size: 12px;"><i class="fa fa-user-o"></i> 마이페이지</a>
+			<a href="${contextPath}/admin/adminPage.do" class="dropdown-item" style="font-size: 12px;"><i class="fa fa-gears"></i>관리자 페이지</a>
+			<div class="divider dropdown-divider"></div>
+			<a href="${contextPath}/member/logout.do" class="dropdown-item" style="font-size: 12px;"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
 		</div>
+		</c:if>
+		
+		<c:if test="${is_admin != 1}">	<!-- 일반회원이면 -->
+		<b class="caret"></b></a>
+		<div class="dropdown-menu">
+			<a href="${contextPath}/mycon/mypageForm.do" class="dropdown-item" style="font-size: 12px;"><i class="fa fa-user-o"></i> 마이페이지</a>
+ 			<a href="${contextPath}/member/updateProfile.do" class="dropdown-item"><i class="fa fa-calendar-o"></i>프로필변경</a>
+ 			<a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}" class="dropdown-item"><i class="fa fa-briefcase"></i>장바구니</a>
+			<div class="divider dropdown-divider"></div>
+			<a href="${contextPath}/member/logout.do" class="dropdown-item" style="font-size: 12px;"><i class="material-icons" style="min-width: 100px !important;">&#xE8AC;</i> 로그아웃</a>
+		</div>
+		</c:if>
+		
+	</div>
+</div>
 	</div>
 </nav>
 
+  </c:when>  
+  
+
+  <c:otherwise> 
+  
+  <!-- 로그인 안한 상태라면 -->
+  <div class="navbar-nav ml-auto"> 
+	<div style="display: contents;">
+	<a href="${contextPath}/member/login.do" class="dropdown-item" style="font-size: 12px;"><i class="fa fa-calendar-o"></i> 로그인</a>
+	<a href="${contextPath}/member/join.do" class="dropdown-item" style="font-size: 12px;"><i class="fa fa-sliders"></i> 회원가입</a>
+	</div>
+  </div>
+</nav>
+  </c:otherwise>
+ </c:choose>	
 
 <!-------------------------------------------------------- 내비바 끝 ---------------------------------------------------------------->
   	
@@ -298,6 +333,7 @@ body {
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
 
+
   					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-width: 80px;"></a> 
 
   					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
@@ -309,11 +345,21 @@ body {
   					
 	
   					
+
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 30px; margin-top: 20px;" ><img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
+  					
+  					
+  					
+ 				
+
+
+
   					
 			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 			        <span class="oi oi-menu"></span> Menu
 			      </button>
   				</div>
+
 
   				
   				<c:if test="${id!=null}">
@@ -351,6 +397,29 @@ body {
 			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">예매하기</a></li>
 			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">고객센터</a></li>
 
+
+  				  				
+  				<!-- 회원가입o, 로그인 페이지o -->
+  				<div class="col-20 w-140 text-center" style="margin-top: -100px;">
+  					<div class="collapse navbar-collapse" id="ftco-nav">
+			        <ul class="navbar-nav m-auto" >
+
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 50px;">콘서트</a></li>
+
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">뮤지컬/연극</a></li>
+			         
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">클래식</a></li>
+<%-- 			     <c:if test="${is_admin == 1}"> --%>     
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">전시/행사</a></li>
+<%-- 			     </c:if> --%>
+					  <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">공연/전시소식</a></li>
+					  
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">이벤트</a></li>
+<%-- 			     <c:if test="${id==null}"> --%>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">랭킹</a></li>
+<%-- 			     </c:if> --%>  
+					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">공지사항</a></li>
+
 			        </ul>
 			      </div>
   				</div>
@@ -360,7 +429,18 @@ body {
     <!-- END nav -->
     
     
+
  
+
+    
+
+    
+<!------------------------------------------------ body ------------------------------------------------->
+
+
+
+    
+
    
  <!-------------------------------------------------- 캐로셀 ------------------------------------------------->
     
@@ -376,13 +456,13 @@ body {
  <section class="ftco-section" style="margin-top: -200px;">  
  <div class="container">
  <div class="row">
- <div class="col-md-4" >     
- <div class="classes w-100 ftco-animate">  			
- <iframe class="img w-100 mb-3" src="https://www.youtube.com/embed/N5Dz7azrIVI" frameborder="0" allow="accelerometer; 
- autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
- </div> 
- </div>
-    
+ 
+ <div class="col-md-4" >  
+ <div  class="classes w-100 ftco-animate">
+ <iframe class="img w-100 mb-3" src="https://www.youtube.com/embed/N5Dz7azrIVI" 
+ frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ </div>   
+ </div>   
     
  <div class="col-md-4" >  
  <div  class="classes w-100 ftco-animate">

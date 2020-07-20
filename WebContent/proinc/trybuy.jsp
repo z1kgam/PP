@@ -8,10 +8,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+
 <script>
 
 function sel() {
-	var selectdate = $("#search").val();
+	var selectdate = $("#sear").val();
 	var name = $("#name").val();
 	
  	$.ajax({
@@ -103,14 +104,7 @@ function sel() {
 
 <div style="clear: both;"></div>
 
-<div class="page-header" style="margin-top: 50px;">
-          
-        <h1 style="margin-left: 300px;">Date</h1>
-        </div>
-        
-
-
-   	<label id="label">날짜 검색</label><input type="date" id="search" onchange="sel()">
+   	<label id="label">날짜 검색</label><input type="date" id="sear" onchange="sel()" />
 
    	<input type="button" value="전체보기" onclick="trybuy()">
    	<input type="hidden" value="${Bean.name}" id="name">

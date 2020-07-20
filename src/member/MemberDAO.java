@@ -264,6 +264,7 @@ public class MemberDAO {
 				memberBean.setLaddress2(rs.getString("Laddress2"));
 				memberBean.setLzipcode(rs.getString("Lzipcode"));
 				memberBean.setN_status(rs.getInt("n_status"));
+				memberBean.setReg_date(rs.getTimestamp("reg_date"));
 			}
 		} catch (Exception e) {
 			System.out.println("getMember Inner Err : " + e);
@@ -634,7 +635,6 @@ public class MemberDAO {
 			sql = "select max(p_status) from point"; 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
 			int p_status =0;
 			if(rs.next()) {
 				p_status =  rs.getInt("max(p_status)") - 1;		 

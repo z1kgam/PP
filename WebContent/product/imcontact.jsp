@@ -30,6 +30,14 @@
     <link rel="stylesheet" href="${contextPath}/css/flaticon.css">
     <link rel="stylesheet" href="${contextPath}/css/icomoon.css">
     <link rel="stylesheet" href="${contextPath}/css/style.css">
+    
+    <script type="text/javascript">
+    	function sub() {
+			document.getElementById("searchfrom").submit();
+		}
+    </script>
+ 
+    
   </head>
   <body>
   	<jsp:include page="../include/header.jsp" />
@@ -44,13 +52,13 @@
     	<div class="page-header" style="margin-top: 50px;">
           
         <h1>Check</h1>
-        </div>
-        <hr/>
-    	
-    	<p>제품 등록 페이지입니다.</p>
-    	
-    	<input type="button" class="submit" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; margin-bottom: 50px;" value="제품등록" onclick="location.href='${contextPath}/Proser/write.do'">
-        <div class="row">
+        <form action="${contextPath}/Proser/imcontact2.do" method="post" id="searchfrom">
+        	<input type="text" name="sear" placeholder="search....">
+        	<i class="material-icons" onclick="sub()">&#xE8B6;</i>
+        </form>
+        <hr>
+
+			<div class="row" id="row">
 				<c:if test="${List != null}">
 					<c:forEach var="VO" items="${List}">
 					<c:if test="${VO.runstatus == 0}">
@@ -68,9 +76,9 @@
 						</div>
 					</c:if>
 				</c:forEach>
-
 				</c:if>
         	</div>
+        </div>
         </div>
     </section>
   <jsp:include page="../include/footer.jsp" />
