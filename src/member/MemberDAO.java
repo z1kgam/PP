@@ -156,7 +156,7 @@ public class MemberDAO {
 		int check = 0;
 		try {
 			con=getConnection();
-			sql = "SELECT password FROM USERS WHERE ID = ?";
+			sql = "SELECT password, status FROM USERS WHERE ID = ?";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setString(1, id);
@@ -165,7 +165,13 @@ public class MemberDAO {
 			
 			if(rs.next()) {
 				if(rs.getString("password").equals(password)) {
-					check = 1; // 로그인성공
+					
+					if(rs.getInt("status") == 1) {
+						check = 1 ; //로그인 성공
+					}else {
+						check = -2; // 이용정지상태	
+					}
+					
 				}else {
 					check = 0; // 비밀번호 틀림
 				}
