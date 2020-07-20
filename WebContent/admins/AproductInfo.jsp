@@ -172,11 +172,11 @@
 													<td style="width: 15%">
 													<c:if test="${bean.genre == '트로트' }">
 													<select class="form-control input-fixed" id="notify_state" name="genre">
+														<option value="아이돌">아이돌</option>
 														<option value="트로트" selected="selected">트로트</option>
 														<option value="힙합">힙합</option>
 														<option value="락">락</option>
 														<option value="발라드">발라드</option>
-														<option value="국악">국악</option>
 														<option value="재즈">재즈</option>
 													</select>
 													</c:if>
@@ -186,7 +186,7 @@
 														<option value="힙합">힙합</option>
 														<option value="락">락</option>
 														<option value="발라드">발라드</option>
-														<option value="국악">국악</option>
+														<option value="아이돌">아이돌</option>
 														<option value="재즈" selected="selected">재즈</option>
 													</select>
 													</c:if>
@@ -206,7 +206,7 @@
 														<option value="힙합">힙합</option>
 														<option value="락" selected="selected">락</option>
 														<option value="발라드">발라드</option>
-														<option value="국악">국악</option>
+														<option value="아이돌">아이돌</option>
 														<option value="재즈">재즈</option>
 													</select>
 													</c:if>
@@ -216,17 +216,17 @@
 														<option value="힙합">힙합</option>
 														<option value="락">락</option>
 														<option value="발라드" selected="selected">발라드</option>
-														<option value="국악">국악</option>
+														<option value="아이돌">아이돌</option>
 														<option value="재즈">재즈</option>
 													</select>
 													</c:if>
-													<c:if test="${bean.genre == '국악' }">
+													<c:if test="${bean.genre == '아이돌' }">
 													<select class="form-control input-fixed" id="notify_state" name="genre">
 														<option value="트로트">트로트</option>
 														<option value="힙합">힙합</option>
 														<option value="락">락</option>
 														<option value="발라드">발라드</option>
-														<option value="국악" selected="selected">국악</option>
+														<option value="아이돌" selected="selected">아이돌</option>
 														<option value="재즈">재즈</option>
 													</select>
 													</c:if>

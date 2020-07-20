@@ -68,9 +68,9 @@ public class qnaBoardController extends HttpServlet{
       
       }else if(action.equals("/qnaWrite.do")) { //1:1문의 글작성
           
-          checkPage = 1;
+         checkPage = 1;
           
-          ServletContext ctx = getServletContext();
+         ServletContext ctx = getServletContext();
   		 String realPath = ctx.getRealPath("/board/image/");
   		
   		 int max = 10 * 1024 * 1024;
@@ -165,7 +165,8 @@ public class qnaBoardController extends HttpServlet{
          nextPage = "/board/qna_update.jsp";
          
       } else if(action.equals("/qnaUpdate.do")) { //1:1문의하기 수정
-         
+		 checkPage = 1;
+
          int qna_num = Integer.parseInt(request.getParameter("qna_num"));
          
          int status = Integer.parseInt(request.getParameter("status"));

@@ -129,7 +129,7 @@ public class faqBoardController extends HttpServlet{
 			nextPage = "/board/qna_faqUpdate.jsp";
 			
 		}else if(action.equals("/faqUpdate.do")) { //FAQ게시판 글 수정
-			
+			checkPage = 1;
 			int faq_num = Integer.parseInt(request.getParameter("faq_num"));
 			
 			String Rcate = request.getParameter("cate");
