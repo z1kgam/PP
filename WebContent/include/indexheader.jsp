@@ -297,11 +297,11 @@ body {
   			<div class="row m-auto">
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
-<<<<<<< HEAD
+
   					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="../images/tclogo.png"" alt="tlogo" style=" max-width: 80px;"></a> 
-=======
+
   					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
->>>>>>> 80cd2a0d72e457840e9c2c5e98e42ceb2521b055
+
   					
   					
   					
@@ -314,7 +314,7 @@ body {
 			        <span class="oi oi-menu"></span> Menu
 			      </button>
   				</div>
-<<<<<<< HEAD
+
   				
   				<c:if test="${id!=null}">
   					${id}님 로그인중..
@@ -323,9 +323,9 @@ body {
   				
   				
 
-=======
+
   				<div class="col-12 w-100 text-center" style="margin-top: -20px;">
->>>>>>> 80cd2a0d72e457840e9c2c5e98e42ceb2521b055
+
   				
 
 
@@ -340,17 +340,17 @@ body {
 			     <c:if test="${is_admin == 1}">     
 			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>관리자 페이지</b></a></li>
 			     </c:if>     
-<<<<<<< HEAD
+
 			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>예매하기</b></a></li>
 			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>고객센터</b></a></li>
 			     <c:if test="${id==null}">
 			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>로그인</b></a></li>
 			          <li class="nav-item"><a href="${contextPath}/member/join.do" class="nav-link" style="font-size: 22px; font-family:나눔고딕"><b>회원가입</b></a></li>
 			     </c:if>
-=======
+
 			          <li class="nav-item"><a href="../blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">예매하기</a></li>
 			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">고객센터</a></li>
->>>>>>> 80cd2a0d72e457840e9c2c5e98e42ceb2521b055
+
 			        </ul>
 			      </div>
   				</div>
@@ -360,52 +360,7 @@ body {
     <!-- END nav -->
     
     
-    
-
-    
-<!------------------------------------------------ body ------------------------------------------------->
-
-
-
-<!-- 
-    <section class="home-slider js-fullheight owl-carousel">
-      <div class="slider-item js-fullheight" style="background-image:url(../images/mainimg.jpeg);">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
-          <div class="col-md-10 text ftco-animate text-center">
-            <h1 class="mb-4">Discover Your Inner Sanctuary</h1>
-            <h3 class="subheading">Everyday We Bring Hope and Smile to the Patient We Serve</h3>
-            <p><a href="#" class="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
-          </div>
-        </div>
-        </div>
-      </div>
-
-      <div class="slider-item js-fullheight" style="background-image:url(../images/mainimg2.jpeg);">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
-          <div class="col-md-10 text ftco-animate text-center">
-            <h1 class="mb-4">Lighting Your Heart &amp; Mind</h1>
-            <h3 class="subheading">Your Health is Our Top Priority with Comprehensive, Affordable medical.</h3>
-            <p><a href="#" class="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
-          </div>
-        </div>
-        </div>
-      </div>
-    </section>
-    
-    
-   -->  
-  
-  
-  <!-- -----------------------------------------------------------메인 이미지---------------------------------------------------------- -->  
-    
-    
-    
-    
-    
+ 
    
  <!-------------------------------------------------- 캐로셀 ------------------------------------------------->
     
