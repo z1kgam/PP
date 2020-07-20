@@ -5,8 +5,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Meditative - Free Bootstrap 4 Template by Colorlib</title>
-    
+    <title>공연목록</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -41,20 +40,10 @@
     
   </head>
   <body>
-  	<jsp:include page="../include/subheader.jsp" />
+  	<jsp:include page="../include/header.jsp" />
     <!-- END nav -->
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('${contextPath}/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-3 bread">Class Program</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="${contextPath}">Home</a></span> <span>Classes</span></p>
-          </div>
-        </div>
-      </div>
-    </section>
+ 
 
     <section class="ftco-section">
     	<div class="container">

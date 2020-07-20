@@ -69,10 +69,6 @@ public class MemberController extends HttpServlet {
 				
 				nextPage = "/members/join.jsp";
 				
-			}else if(action.equals("/index.do")) {
-				
-				nextPage = "/index/index.jsp";
-				
 			}else if(action.equals("/login.do")) {
 				
 				nextPage = "/members/login.jsp";
@@ -128,12 +124,17 @@ public class MemberController extends HttpServlet {
 					pw.print("<script>" + "alert('로그인에 성공했습니다.');" + "location.href='"+request.getContextPath()+ "/index/index.jsp';" + "</script>");
 					return;
 					
+				}else if(check == -2) {					
+					PrintWriter pw = response.getWriter();
+					pw.print("<script>" + "alert('이용정지 상태입니다.');" + "location.href='" + request.getContextPath()+ "/members/login.jsp';" + "</script>");
+					
+					return;
+					
 				}else if(check == 0) {					
 					PrintWriter pw = response.getWriter();
 					pw.print("<script>" + "alert('비밀번호가 틀립니다.');" + "location.href='" + request.getContextPath()+ "/members/login.jsp';" + "</script>");
 					
 					return;
-					
 				}else {
 					PrintWriter pw = response.getWriter();
 					pw.print("<script>" + "alert('아이디가 존재하지 않습니다.');" + "location.href='" + request.getContextPath() +  "/members/join.jsp';" + "</script>");
@@ -153,14 +154,14 @@ public class MemberController extends HttpServlet {
 				
 				session.invalidate();
 								
-				nextPage = "/index/index.jsp";
+				nextPage = "/main/main.do";
 				
 			}else if(action.equals("/logout.do")) {
 				String id = (String)session.getAttribute("id");
 				OrderDAO orderDAO = new OrderDAO();				
 				session.invalidate();
 				orderDAO.delAllCart(id);
-				nextPage = "/index/index.jsp";
+				nextPage = "/main/main.do";
 				
 			}else if(action.equals("/myInfo.do")) {
 				
@@ -384,7 +385,7 @@ public class MemberController extends HttpServlet {
 				session.removeAttribute(profile_img);
 				session.setAttribute("profile_img",fileName);
 				System.out.println("프로필 이미지 : "+fileName);
-				nextPage = "../index/index.jsp";
+				nextPage = "/main/main.do";
 				
 			}else if(action.equals("/address.do")) {
 				
@@ -423,7 +424,7 @@ public class MemberController extends HttpServlet {
 				}
 					
 				
-				nextPage = "/index/index.jsp";
+				nextPage = "/main/main.do";
 				
 			}else if(action.equals("/NaddressAction.do")) {
 								
@@ -435,7 +436,7 @@ public class MemberController extends HttpServlet {
 				
 				memberDAO.updateNewAddress(memberBean);
 				
-				nextPage = "/index/index.jsp";
+				nextPage = "/main/main.do";
 			}
 				
 			request.getRequestDispatcher(nextPage).forward(request, response);

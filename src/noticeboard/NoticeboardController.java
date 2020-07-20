@@ -135,6 +135,7 @@ public class NoticeboardController extends HttpServlet{
 			nextPage = "/notice/listNotice.do"; 
 		//공지사항 글 수정
 		}else if(action.equals("/modNotice.do")) {
+			checkPage = 1;
 			int n_num = Integer.parseInt(request.getParameter("n_num"));
 			System.out.println(n_num);
 			
@@ -179,6 +180,6 @@ public class NoticeboardController extends HttpServlet{
 		}else {
 			response.sendRedirect(request.getContextPath()+nextPage);
 		}
-		}
 	}
+}
 

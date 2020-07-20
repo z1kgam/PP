@@ -7,6 +7,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%--로그인유무 확인 --%>
+<c:if test="${sessionScope.id == null}">
+   <script>
+      	alert("로그인 후 이용가능합니다.");
+      	location.href="${contextPath}/member/login.do";
+   </script>
+</c:if>
 
 <!DOCTYPE html>
 <html>
@@ -131,7 +138,7 @@
 </script>
 </head>
   <body>
-<jsp:include page="../include/subheader.jsp" />
+<jsp:include page="../include/header.jsp" />
     <!-- END nav -->
     
 
@@ -333,8 +340,6 @@
   <script src="../js/bootstrap-datepicker.js"></script>
   <script src="../js/jquery.timepicker.min.js"></script>
   <script src="../js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="../js/google-map.js"></script>
   <script src="../js/main.js"></script>
     
   </body>

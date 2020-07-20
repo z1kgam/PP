@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:if test="${user.is_admin != 1}">
+   <script>
+      	alert("권한이 없습니다.");
+      	location.href="${contextPath}";
+   </script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +82,7 @@ input {
 
 <body>
 
-<jsp:include page="../include/subheader.jsp" />
+<jsp:include page="../include/header.jsp" />
 
 
 <article style="padding-top: 50px; padding-bottom: 100px; padding-left: 650px;">

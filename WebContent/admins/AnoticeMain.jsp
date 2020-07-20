@@ -170,33 +170,8 @@
 										<p class="demo">
 											<ul class="pagination pg-primary">
 												<li class="page-item">
-											<c:choose>
-										     <c:when test="${requestScope.n_cate != null}">
-										      <c:if test="${blockFirst!=1}">
-											<a class="page-link"
-												href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockFirst-blockSize}&n_cate=${n_cate}"
-												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-												<!-- <span class="sr-only">Previous</span> -->
-											</a>
-											 </c:if>
-												</li>
-												<c:forEach var="i" begin="${blockFirst}" end="${blockLast}" step="1">
-												<li class="page-item active">
-												<a class="page-link" href="${contextPath }/admin/ANoticeMain.do?nowPage=${i}&n_cate=${n_cate}">${i}</a>
-												</li>
-												</c:forEach>
-												<c:if test="${blockLast != totalPage }">
-												<li class="page-item">
-													<a class="page-link" href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockLast+1}&n_cate=${n_cate}" aria-label="Next">
-														<span aria-hidden="true">&raquo;</span>
-														<span class="sr-only">Next</span>
-													</a>
-												</li>
-												</c:if>
-											  </c:when>
-											  
-											  <c:otherwise>
-												<c:if test="${blockFirst!=1}">
+											
+										<c:if test="${blockFirst!=1}">
 											<a class="page-link"
 												href="${contextPath}/admin/ANoticeMain.do?nowPage=${blockFirst-blockSize}"
 												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -216,9 +191,8 @@
 														<span class="sr-only">Next</span>
 													</a>
 												</li>
-												</c:if>			  
-											  </c:otherwise>   
-										</c:choose>
+											</c:if>		
+												
 											</ul>
 										</p>
 									</div>

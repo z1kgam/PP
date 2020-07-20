@@ -153,6 +153,14 @@ public class ProductServlet extends HttpServlet {
 				String name = request.getParameter("name");
 				String id = (String)session.getAttribute("id");
 				productBean = productService.getBoard(num);
+				DetailDAO ddao = new DetailDAO();
+				DetailBean dbean = new DetailBean();
+				
+				dbean = ddao.getdetails2(num);
+				
+				request.setAttribute("detailList", dbean);
+				
+				
 				LikeDAO likeDAO = new LikeDAO();
 				boolean checkZ = likeDAO.checkLike(num, id);
 				int likeCount = likeDAO.getProductTotalLike(num);

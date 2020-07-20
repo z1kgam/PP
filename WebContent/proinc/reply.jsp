@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,9 @@
 </head>
 <body>
 	<input type="hidden" id="contextPath" value="${contextPath}">
-	<input type="button" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;" value="댓글쓰기" class="submit" onclick="openreply()" style="margin-left: 65%;margin-top: 30px;">
+	<c:if test="${sessionScope.id != null}">
+	<input type="button" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;" value="댓글쓰기" class="submit" onclick="openreply()" style="margin-left: 65%; margin-top: 30px;">
+	</c:if>
 	<form action="${contextPath}/Proser/reply.do" name="frmReply" method="post">
 		<input type="hidden" name="pronum" value="${Bean.num}">
 		<input type="hidden" name="parentsnum">

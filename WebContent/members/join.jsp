@@ -8,7 +8,13 @@
 %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<%--로그인유무 확인 --%>
+<c:if test="${sessionScope.id != null}">
+   <script>
+      	alert("이미 로그인 중입니다.");
+      	location.href="${contextPath}";
+   </script>
+</c:if>
 <!DOCTYPE html>
 <html>
   <head>
@@ -31,7 +37,7 @@
 
   </head>
   <body>
-<jsp:include page="../include/subheader.jsp" />
+<jsp:include page="../include/header.jsp" />
       <div class="container" style="width: 70%;">
      
 	      		

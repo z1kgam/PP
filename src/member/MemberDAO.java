@@ -156,7 +156,7 @@ public class MemberDAO {
 		int check = 0;
 		try {
 			con=getConnection();
-			sql = "SELECT password FROM USERS WHERE ID = ?";
+			sql = "SELECT password, status FROM USERS WHERE ID = ?";
 			pstmt=con.prepareStatement(sql);
 			
 			pstmt.setString(1, id);
@@ -165,7 +165,13 @@ public class MemberDAO {
 			
 			if(rs.next()) {
 				if(rs.getString("password").equals(password)) {
-					check = 1; // 로그인성공
+					
+					if(rs.getInt("status") == 1) {
+						check = 1 ; //로그인 성공
+					}else {
+						check = -2; // 이용정지상태	
+					}
+					
 				}else {
 					check = 0; // 비밀번호 틀림
 				}
@@ -264,6 +270,7 @@ public class MemberDAO {
 				memberBean.setLaddress2(rs.getString("Laddress2"));
 				memberBean.setLzipcode(rs.getString("Lzipcode"));
 				memberBean.setN_status(rs.getInt("n_status"));
+				memberBean.setReg_date(rs.getTimestamp("reg_date"));
 			}
 		} catch (Exception e) {
 			System.out.println("getMember Inner Err : " + e);
@@ -634,7 +641,6 @@ public class MemberDAO {
 			sql = "select max(p_status) from point"; 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
 			int p_status =0;
 			if(rs.next()) {
 				p_status =  rs.getInt("max(p_status)") - 1;		 

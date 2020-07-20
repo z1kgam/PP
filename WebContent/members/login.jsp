@@ -4,7 +4,13 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-
+<%--로그인유무 확인 --%>
+<c:if test="${sessionScope.id != null}">
+   <script>
+      	alert("이미 로그인 중입니다.");
+      	location.href="${contextPath}";
+   </script>
+</c:if>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
@@ -123,7 +129,7 @@ $(document).ready(function(){
  <script type="text/javascript">
   	var naver_id_login = new naver_id_login("8pLz7wxFRYdPZEaM8Wsq", "http://localhost:8090/PP/naver/logincom.jsp");
   	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setButton("white", 3,60);
   	naver_id_login.setDomain("http://localhost:8090/PP/members/login.jsp");
   	naver_id_login.setState(state);
 //   	naver_id_login.setPopup();

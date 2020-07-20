@@ -110,7 +110,7 @@
 				<div class="scrollbar-inner sidebar-wrapper">
 					<div class="user">
 						<div class="photo">
-							<img src="${contextPath}/admins/assets/img/profile.jpg">
+							<img src="${contextPath}/images/ad2.PNG">
 						</div>
 						<div class="info">
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -150,35 +150,41 @@
 							<a href="${contextPath}/admin/adminPage.do">
 								<i class="la la-dashboard"></i>
 								<p>메인 페이지</p>
-								<span class="badge badge-count">5</span>
+							
 							</a>
 						</li>
 						<li class="nav-item active">
 							<a href="${contextPath}/admin/MemberManager.do">
 								<i class="la la-group"></i>
 								<p>회원 관리</p>
-								<span class="badge badge-count">5</span>
+								
 							</a>
 						</li>
 						<li class="nav-item active">
 							<a href="${contextPath}/admin/MemberPoint.do">
 								<i class="la la-krw"></i>
 								<p>포인트 충전 관리</p>
-								<span class="badge badge-count">5</span>
+								
 							</a>
 						</li>
 						<li class="nav-item active">
 							<a href="${contextPath}/admin/AproductMain.do">
 								<i class="la la-cart-plus"></i>
 								<p>공연 상품 관리</p>
-								<span class="badge badge-count">5</span>
+								
 							</a>
 						</li>
 						<li class="nav-item active">
-							<a href="#">
+							<a href="${contextPath}/admin/AeventMain.do">
 								<i class="la la-gift"></i>
 								<p>이벤트 관리</p>
-								<span class="badge badge-count">5</span>
+								
+							</a>
+						</li>
+						<li class="nav-item active">
+							<a href="${contextPath}/admin/AcouponMain.do">
+								<i class="la la-ticket"></i>
+								<p>쿠폰 등록 관리</p>
 							</a>
 						</li>
 						
@@ -192,14 +198,14 @@
 							<a href="${contextPath}/admin/AfaqMain.do">
 								<i class="la la-clipboard"></i>
 								<p>FAQ 관리</p>
-								<span class="badge badge-count">5</span>
+								
 							</a>
 						</li>
        				 	<li class="nav-item active">
 							<a href="${contextPath}/admin/ANoticeMain.do">
 								<i class="la la-bullhorn"></i>
 								<p>공지 사항 관리</p>
-								<span class="badge badge-count">5</span>
+								
 							</a>
 						</li>
 						<li class="nav-item active">
@@ -207,14 +213,13 @@
 							<a href="${contextPath}/admin/Aqnaboardp.do?status=0">
 								<i class="la la-vimeo-square la-vine la-vk la-volume-down la-volume-off la-volume-up la-warning la-wechat"></i>
 								<p>문의 내역 답변 관리</p>
-								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 						<li class="nav-item active">
-							<a href="#">
+							<a href="BBiBBOBBiBBo.do">
 								<i class="la la-gavel"></i>
 								<p>회원 신고 관리</p>
-								<span class="badge badge-count">5</span>
+								
 							</a>
 						</li>
 					

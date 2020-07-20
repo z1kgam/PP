@@ -213,8 +213,8 @@ function updatePoint() {
 										</div>
 										<div class="col-7 d-flex align-items-center">
 											<div class="numbers">
-												<p class="card-category">ID님의 작성 글</p>
-												<h4 class="card-title">1303</h4>
+												<p class="card-category">${memberInfo.id}님의 문의 글</p>
+												<h4 class="card-title">${total}</h4>
 											</div>
 										</div>
 									</div>
@@ -233,7 +233,7 @@ function updatePoint() {
 										<div class="col-7 d-flex align-items-center">
 											<div class="numbers">
 												<p class="card-category">주문 현황</p>
-												<h4 class="card-title">1</h4>
+												<h4 class="card-title">${cartcount}</h4>
 											</div>
 										</div>
 									</div>
@@ -337,7 +337,7 @@ function updatePoint() {
 											<div class="col-7 d-flex align-items-center">
 												<div class="numbers">
 													<p class="card-category">찜한 목록</p>
-													<h4 class="card-title">+45K</h4>
+													<h4 class="card-title"><a href="${contextPath}/mycon/likelistForm.do">${liketotal}</a></h4>
 												</div>
 											</div>
 										</div>

@@ -6,6 +6,13 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
+<%--로그인유무 확인 --%>
+<c:if test="${sessionScope.id == null}">
+   <script>
+      	alert("로그인 후 이용가능합니다.");
+      	location.href="${contextPath}/member/login.do";
+   </script>
+</c:if>
  
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -39,11 +46,12 @@
 
 	
 </script>
+<jsp:include page="../include/header.jsp" />
 
-  </head>
-  <body>
+</head>
+<body>
 
-<jsp:include page="../include/subheader.jsp" />
+
 
 
       <div class="container" style="width: 70%;">
