@@ -16,7 +16,6 @@ import Order.OrderVO;
 import Product.ProductBean;
 import Product.ProductDAO;
 import team.qnaboard.qnaDao;
-import util.Status;
 
 
 @WebServlet("/mycon/*")
