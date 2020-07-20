@@ -62,7 +62,7 @@ geocoder.addressSearch('서울 서초구 서초동 산144-4',  function(result, 
 });    
 </script>
 
-<%
+<%--
 	JSONObject json = new JSONObject();
 
 	json.put("resultpoint", "<div id='map' style='width:40%;height:400px;'></div>");
@@ -71,6 +71,6 @@ geocoder.addressSearch('서울 서초구 서초동 산144-4',  function(result, 
 	pw.print(json);
 	
 	
-%>
+--%>
 </body>
 </html>

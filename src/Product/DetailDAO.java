@@ -164,6 +164,47 @@ public class DetailDAO {
 			
 		return vo;
 	}
+	//content 페이지 공연장소 조회 메소드 (오버로딩)
+	public DetailBean getdetails2(int num) {
+		DetailBean vo = new DetailBean();
+		String sql="";
+		
+		try {
+			con = getConnection();
+
+			sql = "select * from details where num=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				vo.setDetailnum(rs.getInt("detailnum"));
+				vo.setName(rs.getString("name"));
+				vo.setGenre(rs.getString("genre"));
+				vo.setCla(rs.getString("cla"));
+				vo.setRuntime(rs.getInt("runtime"));
+				vo.setPrice(rs.getInt("price"));
+				vo.setStartdate(rs.getDate("startdate"));
+				vo.setEnddate(rs.getDate("enddate"));
+				vo.setImage(rs.getString("image"));
+				vo.setContent(rs.getString("content"));
+				vo.setPlace(rs.getString("place"));
+				vo.setSeat(rs.getInt("seat"));
+				vo.setTotalreserved(rs.getInt("totalreserved"));
+				vo.setToday(rs.getDate("today"));
+				vo.setStarttime(rs.getString("starttime"));
+				vo.setNum(rs.getInt("num"));
+			}
+		} catch (Exception e) {
+			System.out.println("details메소드 에서 예외발생 : " + e);
+		}finally {
+			resource();
+		}
+			
+		return vo;
+	}
 
 	public void UpdateSeat(int num, int sub) {
 		String sql = "";

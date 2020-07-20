@@ -102,7 +102,7 @@
 		}); 
 		document.getElementById("explanation").style.display = "none";
 		document.getElementById("reply").style.display = "none";
-		document.getElementById("location").style.display = "none";
+		document.getElementById("review").style.display = "none";
 		document.getElementById("trybuy").style.display = "block";
 	}
 	
@@ -191,7 +191,7 @@
 		
 		document.getElementById("explanation").style.display = "none";
 		document.getElementById("reply").style.display = "block";
-		document.getElementById("location").style.display = "none";
+		document.getElementById("review").style.display = "none";
 		document.getElementById("trybuy").style.display = "none";
 	}
 	
@@ -361,8 +361,8 @@
 										<tr>
 											<td>가격</td>
 											<td><fmt:formatNumber value="${Bean.price}" pattern="#,###" />원</td>
-											<td></td>
-											<td></td>
+											<td>공연장소</td>
+											<td>${detailList.place}</td>
 										</tr>
 										<tr>
 											<td>좋아요<span class="icon icon-heart"></span></td>
@@ -401,15 +401,19 @@
 			<ul style="	list-style:none; font-family: verdana,Geneba,sans-serif;">
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="explanation()">상세정보</a></li>
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="reply()">관람후기</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="location()">공연장정보</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="review()">공연장소</a></li>
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="trybuy()">티켓예매</a></li>
 			</ul>
 		</nav>
 		<hr style="width: 1500px; margin: auto;">
 
-		<div class="detail" id="explanation" style="display: none;"><jsp:include page="../proinc/explanation.jsp" /></div>
-		<div class="detail" id="reply"><jsp:include page="../proinc/reply.jsp" /></div>
-		<div class="detail" id="location" style="display: none;"><jsp:include page="../proinc/location.jsp" /></div>
+		<div class="detail" id="explanation"><jsp:include page="../proinc/explanation.jsp" /></div>
+		<div class="detail" id="reply"  style="display: none;"><jsp:include page="../proinc/reply.jsp" /></div>
+		<div class="detail" id="review" style="overflow:hidden;position:relative;width:0;height:0">
+			<div style="position:absolute;">
+				<jsp:include page="../proinc/review.jsp" />
+			</div>
+		</div>
 		<div class="detail" id="trybuy" style="display: none;"><jsp:include page="../proinc/trybuy.jsp" /></div>
 	</section>
 
@@ -430,8 +434,6 @@
   <script src="../js/bootstrap-datepicker.js"></script>
   <script src="../js/jquery.timepicker.min.js"></script>
   <script src="../js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="../js/google-map.js"></script>
   <script src="../js/main.js"></script>
     
   </body>

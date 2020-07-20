@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <%@page import="java.sql.Date"%> 
+=======
+<%@page import="java.sql.Date"%>
+>>>>>>> 32d2fcf6bd7ec51c1038d1f13459ee49e1e0b0ee
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -140,7 +144,15 @@
     <c:set var="j" value="3" />
     <table border="1" style="">    
 <%--     	<c:forEach var="eventBean" items="${list}"> --%>
-    	<c:forEach var="couponBean" items="${list}">	
+
+    	<c:forEach var="couponBean" items="${list}">
+<!--     	<c:choose>
+    		<c:when test="${empty list}">
+    			<tr>
+    				<td>등록된 이벤트가 없습니다.</td>
+    			</tr>
+    		</c:when>  
+    		<c:when test="${!empty list}">    -->		
     			<c:if test="${i%j == 0}">
     				<tr>
     			</c:if>	    					
@@ -159,6 +171,8 @@
     			</c:if>
     			<c:set var="i" value="${i+1}" />	
     			
+    <!--		</c:when>
+    </c:choose> --> 	
     	</c:forEach>
     </table>
     </div>

@@ -217,39 +217,32 @@ margin: 10px;}
 <jsp:include page="../include/indexheader.jsp" />
 
 <section class="ftco-section bg-light" style="position: relative; top: 50px;">
-      <div class="container"  style="position: relative; left: 50px; ">
-        <div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate text-center">
-            <h2 class="mb-1" style="position: relative; left: -50px;">Recent Posts</h2>
-          </div>
+	<div class="container"  style="position: relative; left: 50px; ">
+		<div class="row justify-content-center mb-5 pb-3">
+        	<div class="col-md-7 heading-section ftco-animate text-center">
+            	<h2 class="mb-1" style="position: relative; left: -50px;">Recent Posts</h2>
+        	</div>
         </div>
         <div class="row d-flex">
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              
-              
-              <div class="text w-100 mt-3">
-              	<div class="meta">
-                  <div><a href="#">July. 14, 2019</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">공연/전시 소식</a></h3>
-				    <div class="news" >	
-				
-					<div class="news1" >
-							<c:forEach var="i" items="${list}">
-								${i}
-							</c:forEach>
+        	<div class="col-md-4 d-flex ftco-animate">
+          		<div class="blog-entry justify-content-end">
+              		<div class="text w-100 mt-3">
+              			<div class="meta">
+                  			<div><a href="#">July. 14, 2019</a></div>
+                  			<div><a href="#">Admin</a></div>
+                  			<div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                		</div>
+                		<h3 class="heading mt-2"><a href="${contextPath}/main/news.do" style="font-family:나눔고딕;">공연/전시 소식</a></h3>
+						<div class="news" >	
+							<div class="news1" >
+								<c:forEach var="i" items="${list}">
+									${i}
+								</c:forEach>
+							</div>
 						</div>
-					</div>
-                <table align="center" font-size="30px"  style="width:100%; border-collapse: separate;
-    border-spacing: 1px;" >
-                
-                </table>
-              
-              </div>
-            </div>
+             	   		<table align="center" font-size="30px"  style="width:100%; border-collapse: separate;border-spacing: 1px;" ></table>
+             	   </div>
+          		</div>
           </div>
           <div class="col-md-4 d-flex ftco-animate" >
           	<div class="blog-entry justify-content-end">
