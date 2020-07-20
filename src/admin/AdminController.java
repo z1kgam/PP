@@ -966,7 +966,9 @@ public class AdminController extends HttpServlet{
 				
 				nextPage = "/admin/AfaqMain.do";
 
+
 			//회원정보 페이지내 포인트 업데이트 (에이젝스)	
+
 			} else if(action.equals("/pointupdate.do")) {
 				
 				

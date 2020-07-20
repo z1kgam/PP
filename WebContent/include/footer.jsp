@@ -110,8 +110,6 @@
   <script src="${contextPath}/js/bootstrap-datepicker.js"></script>
   <script src="${contextPath}/js/jquery.timepicker.min.js"></script>
   <script src="${contextPath}/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="${contextPath}/js/google-map.js"></script>
   <script src="${contextPath}/js/main.js"></script>
 
     

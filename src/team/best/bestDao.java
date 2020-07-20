@@ -77,10 +77,9 @@ public class bestDao {
 			}
 			
 		} catch (Exception e) {
-			
-			if(con != null){try{con.close();}catch(Exception err){}}
-			if(rs != null){try{rs.close();}catch(Exception err){}}
-			if(pstmt != null){try{con.close();}catch(Exception err){}}
+			System.out.println("getBestList Inner Err : " + e);
+		} finally {
+			freeResource();
 		}
 		
 		

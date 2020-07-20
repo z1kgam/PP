@@ -252,12 +252,7 @@ body {
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
-		<form class="navbar-form form-inline">
-			<div class="input-group search-box">								
-				<input type="text" id="search" class="form-control" placeholder="Search..." style="height: 15px !important; margin-top: 10px;">
-				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-			</div>
-		</form>
+		
 		
 <!-- 드랍메뉴 -->	
 
@@ -447,7 +442,11 @@ body {
 			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">랭킹</a></li>
 <%-- 			     </c:if> --%>  
 					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">공지사항</a></li>
+<<<<<<< HEAD
 >>>>>>> 80cd2a0d72e457840e9c2c5e98e42ceb2521b055
+=======
+
+>>>>>>> 0a68a597c6b27b0e39cf0da1ef414e5e21efcd9c
 			        </ul>
 			      </div>
   				</div>

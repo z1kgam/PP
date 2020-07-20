@@ -247,12 +247,7 @@ body {
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
-		<form class="navbar-form form-inline">
-			<div class="input-group search-box">								
-				<input type="text" id="search" class="form-control" placeholder="Search..." style="height: 15px !important; margin-top: 10px;">
-				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-			</div>
-		</form>
+		
 	<c:choose>
 <c:when test="${id!=null}"> 
 
@@ -418,7 +413,11 @@ body {
 <%-- 			     <c:if test="${id==null}"> --%>
 			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">랭킹</a></li>
 <%-- 			     </c:if> --%>  
+<<<<<<< HEAD
 					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">공지사항</a></li>
+=======
+					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">공지사항</a></li>
+>>>>>>> 0a68a597c6b27b0e39cf0da1ef414e5e21efcd9c
 
 			        </ul>
 			      </div>
