@@ -4,6 +4,6 @@
         <wb-resource deploy-path="/WEB-INF/classes/" source-path="/ImportedClasses"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <property name="context-root" value="PP"/>
-        <property name="java-output-path" value="/PP정/build/classes"/>
+        <property name="java-output-path" value="/PP/build/classes"/>
     </wb-module>
 </project-modules>
