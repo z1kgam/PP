@@ -112,7 +112,6 @@
 		var id = document.getElementById("proid").value;
 		var admin = Number(document.getElementById("proadmin").value);
 		
-		
 		$.ajax({
 			type : "post",
 			async: false,
@@ -148,7 +147,7 @@
 							info +="<td width='200' align='center'>"+List[i].content+"</td>";
 							info +="<td width='100' align='center'>"+List[i].uploaddate+"</td>";
 							info +="<td width='100' align='center'>"
-							if(List[i].content != message){
+							if(List[i].content != message && id != ""){
 								info +="<a onclick='doublereply("+replynum+")'>댓글쓰기</a><br>";
 								if(id == List[i].id){
 									info +="<a onclick='updatereply("+replynum+")'>댓글수정</a><br>";
@@ -179,7 +178,7 @@
 									info +="<td width='200' align='center'>"+List[j].content+"</td>";
 									info +="<td width='100' align='center'>"+List[j].uploaddate+"</td>";
 									info +="<td width='100' align='center'>";
-									if(List[j].content != message){
+									if(List[j].content != message && id != ""){
 										if(id == List[i].id){
 											info +="<a onclick='updatereply("+doreply+")'>댓글수정</a><br>";
 											info +="<a onclick='fatedelete("+doreply+")'>댓글삭제</a><br>";
