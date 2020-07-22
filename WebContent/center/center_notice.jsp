@@ -34,45 +34,11 @@
     <!-- END nav -->
 </head>
 <body style="font-family: 'Nanum Gothic Coding', monospace;">
- <!--    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-			<div class="container">
-        		<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
-          			<div class="col-md-9 ftco-animate text-center">
-						<h1 class="mb-3 bread">Contact Us</h1>
-						<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>
-					</div>
-				</div>
-			</div>
-	</section>
- -->   
  
   <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
 		<div class="container">
 			<div class="row block-9" style="margin-top: 50px;">
-				<%-- <div class="col-md-2 contact-info ftco-animate p-4 w-100 h-500">
-					<div class="row">      
-		            	<div class="col-md-12 mb-3">
-							<p><a href="${contextPath}/notice/listNotice.do"><span>공지사항</span></a></p>
-						</div>
-						<div class="col-md-12 mb-3">
-							<p><span>이용안내</span> <a href="tel://1234567920"></a></p>
-						</div>
-						<div class="col-md-12 mb-3">
-							<p><a href="${contextPath}/fboard/faqlist.do"><span>F&Q</span></a></p>
-			            </div>
-		            	<div class="col-md-12 mb-3">
-			            	<c:choose>
-				            	<c:when test="${id != null}">
-			              				<p><a href="${contextPath}/qboard/qnaList.do"><span>나의 문의 내역</span></a> </p>
-			            		</c:when>
-			            		<c:when test="${id == null}">
-			            				<p><a href="${contextPath}/member/login.do"><span>나의 문의 내역</span></a>	</p>
-			            		</c:when>
-			            	</c:choose>
-		            	</div>
-	            	</div>
-				</div> --%>
+
 			<div class="col-md-10">
 			
 			
@@ -115,7 +81,19 @@
 
 
 <!-- 셀렉트 박스 -->
- <div class="form-group" style="clear: both; margin: 30px 0 0 0;">
+  <div class="form-group" style="clear: both; margin: 30px 0 0 0;">
+ 	<form action="#" method="post" name="f">
+        <select class="form-control" name="n_cate" id="exampleSelect1" onchange="test(this.form)">
+	        <option>항목을 선택하세요</option>
+	        <option ${(param.n_cate == "서비스 소식")?"selected":""} value="서비스 소식">서비스 소식</option>
+	        <option ${(param.n_cate == "서비스 점검")?"selected":""} value="서비스 점검">서비스 점검</option>
+	        <option ${(param.n_cate == "안내")?"selected":""} value="안내">안내</option>
+		</select>
+      </form>
+    </div> 
+
+
+ <%--  <div class="form-group" style="clear: both; margin: 30px 0 0 0;">
  	<form action="#" name=f method="post">
         <select class="form-control" id="exampleSelect1" onchange="location.href=this.value" name="n_cate">
         <option>항목을 선택하세요</option>
@@ -124,23 +102,7 @@
         <option value="${contextPath}/notice/listNotice.do?n_cate=안내">안내</option>
       </select>
       </form>
-    </div>
-
-
-<%-- 
-			<div style="clear: both;">
-				<form action="#" name=f method="post">
-				<select onchange="location.href=this.value" name="n_cate">
-					<option>항목을 선택하세요</option>
-					<option value="${contextPath}/notice/listNotice.do?n_cate=서비스 소식">서비스 소식</option>
-					<option value="${contextPath}/notice/listNotice.do?n_cate=서비스 점검">서비스 점검</option>
-					<option value="${contextPath}/notice/listNotice.do?n_cate=안내">안내</option>
-				</select>
-				</form>
-			</div>
-
- --%>			
- 
+    </div>  --%>
  
 <!-- 공지사항 -->			
 			<form action="${contextPath}/notice/listNotice.do" method="get">
