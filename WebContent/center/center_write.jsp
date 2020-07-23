@@ -24,23 +24,55 @@
 	<!--  header -->
 	<jsp:include page="../include/header.jsp" />
 	<!--  header -->	
+	
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-	        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
-	          	<div class="col-md-9 ftco-animate text-center">
-	            	<h1 class="mb-3 bread">Class Program</h1>
-	            	<p class="breadcrumbs"><span class="mr-2"><a href="../index.jsp">Home</a></span> <span>Classes</span></p>
-	          	</div>
-	        </div>
-		</div>
-    </section>
-    <section>
-    	<div class="col-md-6 ftco-animate py-md-5">
+  <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
+		<div class="container" style="margin-top: 50px;">
+
+<!-- 탭메뉴 -->	
+<ul class="nav nav-tabs" style="font-size: 14px;">
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 110px 15px 110px;">
+   	 공지사항
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/board/info2.jsp" style="padding: 15px 110px 15px 110px;">
+	이용안내
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+    <a class="nav-link active"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 125px 15px 125px;">
+    FAQ
+    </a>
+  </li>
+  <li class="nav-item" style="margin-right: 0;">
+  
+	  <c:choose>
+	   	<c:when test="${id != null}">
+	    		<a class="nav-link active"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 90px 15px 90px;">
+	    		나의 문의 내역
+	    		</a>
+	  		</c:when>
+	  		<c:when test="${id == null}">
+	  			<a class="nav-link active"  href="${contextPath}/member/login.do" style="padding: 15px 90px 15px 90px;">
+	  			나의 문의 내역
+	  			</a>
+	  		</c:when>
+	  	</c:choose>
+
+  </li>
+</ul>			
+
+
+
+
+
+    <section class="container body-container py-5">
+    	<!-- <div class="col-md-6 ftco-animate py-md-5"> -->
 			<form action="${contextPath}/notice/insertNotice.do" class="center_writeForm" method="post">
               	<div class="form-group">
-                	<input type="text" name="n_title" class="form-control" placeholder="제목">
+                	<input type="text" name="n_title" class="form-control" placeholder="제목" style="width: 100%;">
               	</div>
               	<div class="form-group">
               		<a>분류 : </a>
@@ -51,14 +83,18 @@
                 	</select>
               	</div>              
               	<div class="form-group">
-               	 	<textarea name="n_content" cols="30" rows="7" class="form-control" placeholder="글 내용"></textarea>
+               	 	<textarea name="n_content" cols="30" rows="7" class="form-control" placeholder="글 내용" style="width: 100%;"></textarea>
               	</div>
               	<div class="form-group">
-                	<input type="submit" value="작성하기"  class="btn btn-primary py-3 px-5">
-                	<input type="button" value="취소하기" class="btn btn-primary py-3 px-5" onclick="history.back();">
+                	<input type="submit" value="작성하기"  class="btn btn-primary py-2 px-5" style="background-color: fff; color: 000;">
+                	<input type="button" value="취소하기" class="btn btn-primary py-2 px-5" onclick="history.back();">
 				</div>
 			</form>
+ 		<!-- </div> -->
+ 		
+ 		</section>
  		</div>
+ 		
 	</section>
 <!-- footer -->	
 <jsp:include page="../include/footer.jsp"></jsp:include>

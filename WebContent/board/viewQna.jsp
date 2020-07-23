@@ -28,25 +28,25 @@ request.setCharacterEncoding("UTF-8");
 <body style="font-family: 'Nanum Gothic Coding', monospace;">
 
 <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
-		<div class="container">
-			<div class="row block-9" style="margin-top: 50px;">
+		<div class="container" style="margin-top: 50px;">
+<!-- 			<div class="row block-9" style="margin-top: 50px;">
 			
-			<div class="col-md-10">		
+			<div class="col-md-10">		 -->
 
 <!-- 탭메뉴 -->	
 <ul class="nav nav-tabs" style="font-size: 14px;">
   <li class="nav-item" style="margin-right: 0;">
-    <a class="nav-link active"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 85px 15px 85px;">
+    <a class="nav-link active"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 110px 15px 110px;">
    	 공지사항
     </a>
   </li>
   <li class="nav-item" style="margin-right: 0;">
-    <a class="nav-link active"  href="${contextPath}/board/info2.jsp" style="padding: 15px 85px 15px 85px;">
+    <a class="nav-link active"  href="${contextPath}/board/info2.jsp" style="padding: 15px 110px 15px 110px;">
 	이용안내
     </a>
   </li>
   <li class="nav-item" style="margin-right: 0;">
-    <a class="nav-link active"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 100px 15px 100px;">
+    <a class="nav-link active"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 125px 15px 125px;">
     FAQ
     </a>
   </li>
@@ -54,12 +54,12 @@ request.setCharacterEncoding("UTF-8");
   
 	  <c:choose>
 	   	<c:when test="${id != null}">
-	    		<a class="nav-link"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 70px 15px 70px;">
+	    		<a class="nav-link"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 90px 15px 90px;">
 	    		나의 문의 내역
 	    		</a>
 	  		</c:when>
 	  		<c:when test="${id == null}">
-	  			<a class="nav-link"  href="${contextPath}/member/login.do" style="padding: 15px 70px 15px 70px;">
+	  			<a class="nav-link"  href="${contextPath}/member/login.do" style="padding: 15px 90px 15px 90px;">
 	  			나의 문의 내역
 	  			</a>
 	  		</c:when>
@@ -67,13 +67,6 @@ request.setCharacterEncoding("UTF-8");
 
   </li>
 </ul>			
-
-
-
-
-
-
-
 
 <section class="container body-container py-5">
 		<div class="row">
@@ -149,20 +142,7 @@ request.setCharacterEncoding("UTF-8");
 						<input type="button" value="수정하기">
 					</a>
 				</c:if>	
-<!-- 					
-					<tr>
-						<th class="align-middle">
-							<label for="boardFile1" class="m-0">이미지 첨부1</label>
-						</th>
-						<td>
-							<div class="custom-file">
-								<input class="custom-file-input" type="file" name="boardFile1" id="boardFile1" onchange="readURL(this, 'image')" />
-								<label class="custom-file-label" for="boardFile1">Choose file</label>
-							</div>
-						</td>
-					</tr>
-					 -->
-					
+
 					
 				</table>
 				<div class="text-center my-5">
@@ -173,49 +153,10 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 	</section>
 	
-	
-<!--  	
- 	<script src="${contextPath}/js/bs-custom-file-input.js"></script>
-	<script>
-		$(document).ready(function() {
-			bsCustomFileInput.init()
-		})
-		
-		function readURL(obj, allowType){
-			var $preview  = $(obj).parent().siblings(".preview");
-
-			if($preview.length){
-				$preview.remove();
-			}
-			
-			if(obj.files && obj.files[0]){
-				var fileType = obj.files[0].type.split("/")[0];
-				
-				if(fileType=="image"){
-					$preview = $("<div class='preview' />");
-					$preview.appendTo($(obj).parent().parent());
-					
-					var reader = new FileReader();				
-					reader.readAsDataURL(obj.files[0]);
-					
-					reader.onload = function(ProgressEvent){
-						$preview.css("background-image", "url(" + ProgressEvent.target.result + ")");
-					}
-				}else{
-					if(allowType=="image"){
-						alert("이미지 파일만 첨부하실 수 있습니다.");
-						obj.value = "";
-					}
-				}
-			}
-		}
-	</script>
-	
--->	
 
 			</div>
-		</div>
-	</div>
+<!-- 		</div>
+	</div> -->
 </section>
 	
 	

@@ -31,9 +31,9 @@
 
  <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
 	<div class="container">
-		<div class="row block-9">
+<!-- 		<div class="row block-9"> -->
 		
-		<div class="col-md-10">
+<!-- 		<div class="col-md-10"> -->
 		
 		
 <div class="col">
@@ -220,7 +220,8 @@
 <!-- 탭 끝 -->
 			</div>
         </div>
-	</div>
+<!-- 	</div>
+	</div> -->
 </section>
 
 <jsp:include page="../include/footer.jsp"/>

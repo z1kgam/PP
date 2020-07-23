@@ -30,25 +30,25 @@ request.setCharacterEncoding("UTF-8");
 
 
   <section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
-		<div class="container">
-			<div class="row block-9">
+		<div class="container" style="margin-top: 50px;">
+<!-- 			<div class="row block-9">
 			
-			<div class="col-md-10">
+			<div class="col-md-10"> -->
 			
 <!-- 탭메뉴 -->	
 <ul class="nav nav-tabs" style="font-size: 20px;">
   <li class="nav-item" style="margin-right: 0;">
-    <a class="nav-link active"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 85px 15px 85px;">
+    <a class="nav-link active"  href="${contextPath}/notice/listNotice.do" style="padding: 15px 110px 15px 110px;">
  	공지사항
  	</a>
   </li>
   <li class="nav-item" style="margin-right: 0;">
-    <a class="nav-link active"  href="${contextPath}/board/info2.jsp" style="padding: 15px 85px 15px 85px;">
+    <a class="nav-link active"  href="${contextPath}/board/info2.jsp" style="padding: 15px 110px 15px 110px;">
  	이용안내
     </a>
   </li>
   <li class="nav-item" style="margin-right: 0;">
-    <a class="nav-link active"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 100px 15px 100px;">
+    <a class="nav-link active"  href="${contextPath}/fboard/faqlist.do" style="padding: 15px 125px 15px 125px;">
     FAQ
     </a>
   </li>
@@ -56,12 +56,12 @@ request.setCharacterEncoding("UTF-8");
   
 	  <c:choose>
 	   	<c:when test="${id != null}">
-	    		<a class="nav-link"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 70px 15px 70px;">
+	    		<a class="nav-link"  href="${contextPath}/qboard/qnaList.do" style="padding: 15px 90px 15px 90px;">
 	    		나의 문의 내역
 	    		</a>
 	  		</c:when>
 	  		<c:when test="${id == null}">
-	  			<a class="nav-link"  href="${contextPath}/member/login.do" style="padding: 15px 70px 15px 70px;">
+	  			<a class="nav-link"  href="${contextPath}/member/login.do" style="padding: 15px 90px 15px 90px;">
 	  			나의 문의 내역
 	  			</a>
 	  		</c:when>
@@ -187,8 +187,8 @@ request.setCharacterEncoding("UTF-8");
 	</script>
 	
 			</div>
-       </div>
-</div>
+<!--        </div>
+</div> -->
 </section>
 	
 	

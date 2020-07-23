@@ -73,7 +73,7 @@ public class MainController extends HttpServlet{
 			
 			bestList = bestdao.getBestList();
 			request.setAttribute("bestList", bestList);
-					
+
 			
 			pageNext = "/index/index.jsp";
 			
