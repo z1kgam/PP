@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>예매취소 시 유의사항</title>
 
-<jsp:include page="/include/header.jsp"></jsp:include>
+<jsp:include page="../include/header.jsp"></jsp:include>
 
 </head>
 <body>
@@ -19,7 +19,7 @@
 		<div class="col-md-10">
 
 
-<h2 style="background-color:#ffb5b5;">예매취소 시 유의사항</h2>
+<h2 style="background-color:#d8ff55;">예매취소 시 유의사항</h2>
 <br><br>
 
 
@@ -58,7 +58,7 @@
 	</div>
 </section>
  
-<jsp:include page="/include/footer.jsp"/>
+<jsp:include page="../include/footer.jsp"/>
 
 </body>
 </html>

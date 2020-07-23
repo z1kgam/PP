@@ -1,7 +1,9 @@
 package main;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import Product.DetailBean;
+import team.best.bestDao;
 
 @WebServlet("/main/*")
 public class MainController extends HttpServlet{
@@ -35,6 +40,9 @@ public class MainController extends HttpServlet{
 		response.setContentType("text/html;charset=utf-8");
 		String action = request.getPathInfo();
 		String pageNext = "";
+		
+		DetailBean detailBean = new DetailBean();
+		bestDao bestdao = new bestDao();
 		
 		//메인 페이지 요청(공연/전시 소식 크롤링)
 		if(action.equals("/main.do")) {
@@ -59,6 +67,14 @@ public class MainController extends HttpServlet{
 				element.next();
 			}
 			request.setAttribute("list", list);		
+			
+			
+			List<DetailBean> bestList = new ArrayList<DetailBean>();
+			
+			bestList = bestdao.getBestList();
+			request.setAttribute("bestList", bestList);
+					
+			
 			pageNext = "/index/index.jsp";
 			
 		}else if(action.equals("/news.do")) {

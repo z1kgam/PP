@@ -18,6 +18,7 @@ import Product.DetailBean;
 @WebServlet("/btboard/*")
 public class bestController extends HttpServlet{
 	DetailBean Dbean;
+	
 		
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,14 +53,16 @@ public class bestController extends HttpServlet{
 		
 
 		if(action.equals("/bestList.do")) { 
-			List<DetailBean> bestList = new ArrayList<DetailBean>();	
+			List<DetailBean> bestList = new ArrayList<DetailBean>();
+			
 			bestList = bestdao.getBestList();
 			request.setAttribute("bestList", bestList);
 			nextPage = "/best/best01.jsp";
 				
 			
 		}else if(action.equals("/mainBest.do")) {
-			List<DetailBean> bestList = new ArrayList<DetailBean>();	
+			List<DetailBean> bestList = new ArrayList<DetailBean>();
+			
 			bestList = bestdao.getBestList();
 			request.setAttribute("bestList", bestList);
 			nextPage = "/best/mainBest.jsp";

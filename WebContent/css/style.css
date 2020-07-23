@@ -2325,8 +2325,8 @@ fieldset:disabled a.btn {
   border-color: #FFB5B5; }
   .btn-outline-success:hover {
     color: #fff;
-    background-color: #FFB5B5;
-    border-color: #FFB5B5; }
+    background-color: #ccc;
+    border-color: #ccc; }
   .btn-outline-success:focus, .btn-outline-success.focus {
     -webkit-box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); }

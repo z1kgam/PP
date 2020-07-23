@@ -282,20 +282,39 @@ margin: 10px;}
                   <div><a href="#">Admin</a></div>
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                 </div>
-                <h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">랭킹</a></h3>
+<!--                 <h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">랭킹</a></h3> -->
+				<h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">랭킹</a>
+				<span style="font-family:나눔고딕; margin-left: 66px;"><a href="${contextPath}/btboard/bestList.do">더보기 ></a></span></h3>
                 <table align="center" font-size="30px"  style="width:100%; border-collapse: separate;
     border-spacing: 1px;" >
                 
-                <tr height="10" align="center" bgcolor="#D8FF54" style="width: 155px;
-    padding: 10px; font-weight: bold; color: #fff;">
-                <th>
-               	1. 오패라 하우스 
-               	
-               	 
-                </th>
+                 <c:forEach items="${bestList}" var="VO" begin="1" end="3" varStatus="num">
+                
+                <tr height="10" align="center" style="width: 155px;
+    padding: 10px; font-weight: bold; color: #000;">
+    			<tr>
+    				<td rowspan="3">${num.count}</td>
+	                <td rowspan="3">
+	                <img alt="rank" src="${contextPath}/consert/${VO.image}" width="70px" height="90px">
+	                </td>
+	                <td>
+	               	${VO.name}
+	                </td>
+	            </tr>
+                <tr>
+	                <td style="font-size: 12px; color: #b7b7b7;">
+	                ${VO.startdate}
+	                </td>
+	            </tr>
+                <tr>
+	                <td style="font-size: 12px; color: #b7b7b7;">
+	                ${VO.place}
+	                </td>
                 </tr>
                 
-                <tr height="10" align="center" bgcolor="#D8FF54" style="width: 155px;
+                </c:forEach>	
+                
+<!--                 <tr height="10" align="center" bgcolor="#D8FF54" style="width: 155px;
     padding: 10px; font-weight: bold; color: #fff;">
                 <th>
                	2. 레배카
@@ -309,7 +328,7 @@ margin: 10px;}
                	3. 헤드윅
                	 
                 </th>
-                </tr>
+                </tr> -->
      
                 </table>
               </div>

@@ -14,7 +14,7 @@
 <head>
 
 
-<meta charset="UTF-8">
+<meta charset="">
 <title>이용안내</title>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/lux/bootstrap.min.css">
