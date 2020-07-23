@@ -109,6 +109,8 @@
 	function reply() {
 		
 		var pronum = ${Bean.num};
+		var id = document.getElementById("proid").value;
+		var admin = Number(document.getElementById("proadmin").value);
 		
 		$.ajax({
 			type : "post",
@@ -145,12 +147,18 @@
 							info +="<td width='200' align='center'>"+List[i].content+"</td>";
 							info +="<td width='100' align='center'>"+List[i].uploaddate+"</td>";
 							info +="<td width='100' align='center'>"
-							if(List[i].content != message){
+							if(List[i].content != message && id != ""){
 								info +="<a onclick='doublereply("+replynum+")'>댓글쓰기</a><br>";
-								info +="<a onclick='updatereply("+replynum+")'>댓글수정</a><br>";
-								info +="<a onclick='fatedelete("+replynum+")'>댓글삭제</a><br>";
+								if(id == List[i].id){
+									info +="<a onclick='updatereply("+replynum+")'>댓글수정</a><br>";
+									info +="<a onclick='fatedelete("+replynum+")'>댓글삭제</a><br>";
+								}
 							}
-							info +="<a onclick='alldelete("+replynum+")'>댓글삭제</a></td></tr>";
+							
+							if(admin == 1){
+								
+								info +="<a onclick='alldelete("+replynum+")'>댓글삭제</a></td></tr>";
+							}
 							for(var j in List){
 								var doreply = Number(List[j].replynum);
 								var doparents = Number(List[j].parentsnum);
@@ -170,11 +178,15 @@
 									info +="<td width='200' align='center'>"+List[j].content+"</td>";
 									info +="<td width='100' align='center'>"+List[j].uploaddate+"</td>";
 									info +="<td width='100' align='center'>";
-									if(List[j].content != message){
-										info +="<a onclick='updatereply("+doreply+")'>댓글수정</a><br>";
-										info +="<a onclick='fatedelete("+doreply+")'>댓글삭제</a><br>";
+									if(List[j].content != message && id != ""){
+										if(id == List[i].id){
+											info +="<a onclick='updatereply("+doreply+")'>댓글수정</a><br>";
+											info +="<a onclick='fatedelete("+doreply+")'>댓글삭제</a><br>";
+										}
 									}
-									info +="<a onclick='replydelete("+doreply+")'>댓글삭제</a></td></tr>";
+									if(admin == 1){
+										info +="<a onclick='replydelete("+doreply+")'>댓글삭제</a></td></tr>";
+									}
 								}
 							}
 						}
@@ -316,7 +328,8 @@
       </div>
     </section>
      -->
-
+	<input type="hidden" id="proid" value="${sessionScope.id}">
+	<input type="hidden" id="proadmin" value="${sessionScope.is_admin}">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
@@ -373,8 +386,12 @@
 									</table>
 
 									<p style="margin-top: 70px;">
-										<a href="${contextPath}/Proser/details.do?num=${Bean.num}" class="btn btn-outline-primary" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important;">상세등록</a> 
-										<a href="${contextPath}/Proser/delete.do?num=${Bean.num}&path=consert&image=${Bean.image}&content=${Bean.content}" class="btn btn-outline-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;">삭제하기</a>
+									<c:choose>
+										<c:when test="${sessionScope.is_admin+0 == 1+0}">
+											<a href="${contextPath}/Proser/details.do?num=${Bean.num}" class="btn btn-outline-primary" style="background-color: #A9FF7F !important; border-color: #A9FF7F !important; color: #fff !important;">상세등록</a> 
+											<a href="${contextPath}/Proser/delete.do?num=${Bean.num}&path=consert&image=${Bean.image}&content=${Bean.content}" class="btn btn-outline-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;">삭제하기</a>
+										</c:when>
+									</c:choose>
 										<a href="${contextPath}/Proser/imcontact.do" class="btn btn-outline-primary" style="background-color: #EB008B !important; border-color: #EB008B !important; color: #fff !important;">목록보기</a>					
 									<!-- 좋아요 판별부분  checkZ 값이 false이면 찜하기 버튼이 보이고 true이면 찜한 상품이라고 표시된다  -->
 									<c:if test="${sessionScope.id != null}">      
@@ -400,12 +417,13 @@
 		<nav style="width: 1500px; height:60px; position: relative; top: -200px; right: -100px;">
 			<ul style="	list-style:none; font-family: verdana,Geneba,sans-serif;">
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="explanation()">상세정보</a></li>
-				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="reply()">관람후기</a></li>
+				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="reply('${sessionScope.id}','${sessionScope.is_admin}')">관람후기</a></li>
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="review()">공연장소</a></li>
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="trybuy()">티켓예매</a></li>
 			</ul>
 		</nav>
 		<hr style="width: 1500px; margin: auto;">
+
 
 		<div class="detail" id="explanation"><jsp:include page="../proinc/explanation.jsp" /></div>
 		<div class="detail" id="reply"  style="display: none;"><jsp:include page="../proinc/reply.jsp" /></div>

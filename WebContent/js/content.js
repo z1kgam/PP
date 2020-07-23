@@ -35,6 +35,7 @@ function doublereply(num) {
 	var form = document.frmReply;
 	var contextPath = document.getElementById("contextPath").value;
 	form.parentsnum.value = num;
+	form.content.value="";
 	document.getElementById("write").style.display = "block";
 }
 
