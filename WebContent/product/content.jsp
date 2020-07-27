@@ -134,14 +134,14 @@
 						var productnum = Number(List[i].productnum);
 						var message = "관리자나 본인에 의해 삭제된 댓글입니다.";
 						if(parentsnum == 0){
-							info +="<td width='100' align='center' style='background-color: palegreen;'>ID</td>";
-							info +="<td width='200' align='center' style='background-color: palegreen;'>내용</td>";
+							info +="<td width='100' align='center' style='background-color: #eeeeee;'>ID</td>";
+							info +="<td width='200' align='center' style='background-color: #eeeeee;'>내용</td>";
 							if(List[i].content == message){
-								info +="<td width='100' align='center' style='background-color: palegreen;'>삭제한 날짜</td>";
+								info +="<td width='100' align='center' style='background-color: #eeeeee;'>삭제한 날짜</td>";
 							}else{
-								info +="<td width='100' align='center' style='background-color: palegreen;'>업로드 날짜</td>";
+								info +="<td width='100' align='center' style='background-color: #eeeeee;'>업로드 날짜</td>";
 							}
-							info +="<td width='100' align='center' style='background-color: palegreen;'></td></tr>";
+							info +="<td width='100' align='center' style='background-color: #eeeeee;'></td></tr>";
 							info +="<tr>";
 							info +="<td width='100' align='center'>"+List[i].id+"</td>";
 							info +="<td width='200' align='center'>"+List[i].content+"</td>";
