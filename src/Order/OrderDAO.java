@@ -882,5 +882,148 @@ public class OrderDAO {
 		}
 		return selectseat;
 	}
+
+	public OrderVO selectNum(int num) {
+		
+		OrderVO vo = new OrderVO();
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			sql = "select * from productorder where num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				vo.setNum(rs.getInt("num"));
+				vo.setDetailnum(rs.getInt("detailnum"));
+				vo.setName(rs.getString("name"));
+				vo.setGenre(rs.getString("genre"));
+				vo.setCla(rs.getString("cla"));
+				vo.setRuntime(rs.getInt("runtime"));
+				vo.setPrice(rs.getInt("price"));
+				vo.setStartdate(rs.getDate("startdate"));
+				vo.setEnddate(rs.getDate("enddate"));
+				vo.setImage(rs.getString("image"));
+				vo.setContent(rs.getString("content"));
+				vo.setPlace(rs.getString("place"));
+				vo.setSeat(rs.getInt("seat"));
+				vo.setTotalreserved(rs.getInt("totalreserved"));
+				vo.setToday(rs.getDate("today"));
+				vo.setStarttime(rs.getString("starttime"));
+				vo.setId(rs.getString("id"));
+				vo.setQty(rs.getInt("qty"));
+				vo.setTotalprice(rs.getInt("totalprice"));
+				vo.setOrderdate(rs.getDate("orderdate"));
+				vo.setSelectseat(rs.getString("selectseat"));
+				
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("selectNum메소드에서 예외발생 : " + e);
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e2) {
+
+			}
+		}
+		
+		
+		return vo;
+		
+		
+		
+		
+		
+	}
+
+	public void deletoder(int num) {
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			sql = "delete from productorder where num = ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println("deleteoder 메소드 내부에서 오류 :" + e); 
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e2) {
+
+			}
+		}
+		
+	}
+
+	public List<OrderVO> selectId(String id) {
+		
+	List<OrderVO> orderList = new ArrayList<OrderVO>();
+	
+	String sql = "";
+	
+	try {
+		con = getConnection();
+		sql = "select * from productorder where id = ?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, id);
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			OrderVO vo = new OrderVO();
+			vo.setNum(rs.getInt("num"));
+			vo.setDetailnum(rs.getInt("detailnum"));
+			vo.setName(rs.getString("name"));
+			vo.setGenre(rs.getString("genre"));
+			vo.setCla(rs.getString("cla"));
+			vo.setRuntime(rs.getInt("runtime"));
+			vo.setPrice(rs.getInt("price"));
+			vo.setStartdate(rs.getDate("startdate"));
+			vo.setEnddate(rs.getDate("enddate"));
+			vo.setImage(rs.getString("image"));
+			vo.setContent(rs.getString("content"));
+			vo.setPlace(rs.getString("place"));
+			vo.setSeat(rs.getInt("seat"));
+			vo.setTotalreserved(rs.getInt("totalreserved"));
+			vo.setToday(rs.getDate("today"));
+			vo.setStarttime(rs.getString("starttime"));
+			vo.setId(rs.getString("id"));
+			vo.setQty(rs.getInt("qty"));
+			vo.setTotalprice(rs.getInt("totalprice"));
+			vo.setOrderdate(rs.getDate("orderdate"));
+			vo.setSelectseat(rs.getString("selectseat"));
+			orderList.add(vo);
+			
+		}
+		
+	} catch (Exception e) {
+		System.out.println("selectId 메소드 내부에서 오류 :" + e);
+	} finally {
+		try {
+			if(rs!=null)rs.close();
+			if(pstmt!=null)pstmt.close();
+			if(con!=null)con.close();
+		} catch (Exception e2) {
+
+		}
+	}
+		
+		
+		return orderList;
+	}
 	
 }

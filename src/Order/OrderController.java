@@ -170,6 +170,16 @@ public class OrderController extends HttpServlet{
 			int num = Integer.parseInt(request.getParameter("num"));
 			String id = (String)session.getAttribute("id");
 			
+			OrderDAO orderdao = new OrderDAO();
+			
+			OrderVO vo = orderdao.selectNum(num);
+			
+			DetailBean bean = Pservice.getdetails(vo.getDetailnum());
+			
+			int sub = bean.getTotalreserved() - vo.getQty();
+			
+			Pservice.UpdateSeat(bean.getDetailnum(), sub);
+			
 			orderDAO.delCart(num, id); 
 			
 			PrintWriter pw = response.getWriter();
@@ -183,6 +193,21 @@ public class OrderController extends HttpServlet{
 		}else if(action.equals("/delAllCart.do")) {					//장바구니 전체삭제
 			
 			String id = (String)session.getAttribute("id");
+			
+			OrderDAO orderdao = new OrderDAO();
+			
+			List<OrderVO> orderList = orderdao.selectId(id);
+			
+			for(int i =0; i<orderList.size(); i++) {
+				OrderVO vo = orderList.get(i);
+				
+				DetailBean bean = Pservice.getdetails(vo.getDetailnum());
+				
+				int sub = bean.getTotalreserved() - vo.getQty();
+				
+				Pservice.UpdateSeat(bean.getDetailnum(), sub);
+			}
+			
 			
 			orderDAO.delAllCart(id);
 			

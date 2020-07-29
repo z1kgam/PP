@@ -153,6 +153,7 @@
 													<td style="width: 15%">
 													<select class="form-control input-fixed" id="notify_state" name="cla">
 														<option value="전체">전체</option>
+														<option value="12세 이상">8세 이상</option>
 														<option value="12세 이상">12세 이상</option>
 														<option value="15세 이상">15세 이상</option>
 														<option value="19세 이상">19세 이상</option>

@@ -25,7 +25,7 @@
 
 
 
-    <div id="carousel" style="position: relative; top: 170px; background-color: #555;">
+    <div id="carousel" style="position: relative; top: 170px; margin-top: 120px;">
  
        <div class="hideLeft">
         <img src="../images/headmu.jpg">

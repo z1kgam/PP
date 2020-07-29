@@ -262,11 +262,11 @@
 					</form>
 				</div>
 				<div class="col-12 col-lg-4 mt-3 mt-lg-0">
-				
+					<c:if test="${is_admin == 1}">
 						<div class="form-group text-center text-lg-right">
 							<button type="button" class="btn btn-secondary" onclick="location.href='${contextPath}/fboard/fwriteForm.do'">글쓰기</button>
 						</div>
-					
+					</c:if>
 				</div>
 			</div>
 			<div class="row">

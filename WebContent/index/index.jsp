@@ -140,7 +140,7 @@ margin: 10px;}
     margin-right: 17px }
 
 </style>
-    <title>Meditative - Free Bootstrap 4 Template by Colorlib</title>
+    <title>2Ticket</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -214,35 +214,71 @@ margin: 10px;}
   
   </head> 
   <body>
-<jsp:include page="../include/indexheader.jsp" />
+<jsp:include page="../include/header.jsp" />
 
-<section class="ftco-section bg-light" style="position: relative; top: 50px;">
-	<div class="container"  style="position: relative; left: 50px; ">
-		<div class="row justify-content-center mb-5 pb-3">
-        	<div class="col-md-7 heading-section ftco-animate text-center">
-            	<h2 class="mb-1" style="position: relative; left: -50px;">Recent Posts</h2>
-        	</div>
+<jsp:include page="../include/carousel.jsp" />		
+
+
+ <section class="ftco-section" style="padding: 10em 0;">  
+ <div class="container">
+ <div class="row">
+ <div class="col-md-4" >     
+ <div class="classes w-100 ftco-animate">  			
+ <iframe class="img w-100 mb-3" src="https://www.youtube.com/embed/N5Dz7azrIVI" frameborder="0" allow="accelerometer; 
+ autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ </div> 
+ </div>
+    
+    
+ <div class="col-md-4" >  
+ <div  class="classes w-100 ftco-animate">
+ <iframe class="img w-100 mb-3" src="https://www.youtube.com/embed/dr9xhEPIoWc" 
+ frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ </div>   
+ </div>
+
+    
+ <div class="col-md-4" >  
+ <div  class="classes w-100 ftco-animate">
+ <iframe class="img w-100 mb-3" src="https://www.youtube.com/embed/oYQZZnOw5Fs" frameborder="0" allow="accelerometer; autoplay; 
+ encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ </div>   
+ </div>
+
+
+<section class="ftco-section bg-light" style="position: relative; top: 20px; padding: 0">
+      <div class="container"  style="position: relative; left: 50px; ">
+        <div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate text-center">
+<!--             <h2 class="mb-1" style="position: relative; left: -50px;">Recent Posts</h2> -->
+          </div>
         </div>
         <div class="row d-flex">
-        	<div class="col-md-4 d-flex ftco-animate">
-          		<div class="blog-entry justify-content-end">
-              		<div class="text w-100 mt-3">
-              			<div class="meta">
-                  			<div><a href="#">July. 14, 2019</a></div>
-                  			<div><a href="#">Admin</a></div>
-                  			<div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                		</div>
-                		<h3 class="heading mt-2"><a href="${contextPath}/main/news.do" style="font-family:나눔고딕;">공연/전시 소식</a></h3>
-						<div class="news" >	
-							<div class="news1" >
-								<c:forEach var="i" items="${list}">
-									${i}
-								</c:forEach>
-							</div>
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              
+              
+              <div class="text w-100 mt-3">
+              	<div class="meta">
+                  <div><a href="#">July. 14, 2019</a></div>
+                  <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                </div>
+                <h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">공연/전시 소식</a></h3>
+				    <div class="news" >	
+				
+					<div class="news1" >
+							<c:forEach var="i" items="${list}">
+								${i}
+							</c:forEach>
 						</div>
-             	   		<table align="center" font-size="30px"  style="width:100%; border-collapse: separate;border-spacing: 1px;" ></table>
-             	   </div>
-          		</div>
+					</div>
+                <table align="center" font-size="30px"  style="width:100%; border-collapse: separate;
+    border-spacing: 1px;" >
+                </table>
+              
+              </div>
+            </div>
           </div>
           <div class="col-md-4 d-flex ftco-animate" >
           	<div class="blog-entry justify-content-end">
@@ -275,34 +311,37 @@ margin: 10px;}
                   <div><a href="#">Admin</a></div>
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                 </div>
-                <h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">랭킹</a></h3>
+<!--                 <h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">랭킹</a></h3> -->
+				<h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">랭킹</a>
+				<span style="font-family:나눔고딕; margin-left: 66px;"><a href="${contextPath}/btboard/bestList.do">더보기 ></a></span></h3>
                 <table align="center" font-size="30px"  style="width:100%; border-collapse: separate;
     border-spacing: 1px;" >
                 
-                <tr height="10" align="center" bgcolor="#D8FF54" style="width: 155px;
-    padding: 10px; font-weight: bold; color: #fff;">
-                <th>
-               	1. 오패라 하우스 
-               	
-               	 
-                </th>
+                 <c:forEach items="${bestList}" var="VO" begin="0" end="3" varStatus="num">
+                
+                <tr height="10" align="center" style="width: 155px;
+    padding: 10px; font-weight: bold; color: #000;">
+    			<tr>
+    				<td rowspan="3">${num.count}</td>
+	                <td rowspan="3">
+	                <img alt="rank" src="${contextPath}/consert/${VO.image}" width="70px" height="90px">
+	                </td>
+	                <td>
+	               	<a href="${contextPath}/Proser/content.do?num=${VO.num}&name=${VO.name}">${VO.name}</a>
+	                </td>
+	            </tr>
+                <tr>
+	                <td style="font-size: 12px; color: #b7b7b7;">
+	                ${VO.startdate}
+	                </td>
+	            </tr>
+                <tr>
+	                <td style="font-size: 12px; color: #b7b7b7;">
+	                ${VO.place}
+	                </td>
                 </tr>
                 
-                <tr height="10" align="center" bgcolor="#D8FF54" style="width: 155px;
-    padding: 10px; font-weight: bold; color: #fff;">
-                <th>
-               	2. 레배카
-               	 
-                </th>
-                </tr>
-                
-                <tr height="10" align="center" bgcolor="#D8FF54" style="width: 155px;
-    padding: 10px; font-weight: bold; color: #fff;">
-                <th>
-               	3. 헤드윅
-               	 
-                </th>
-                </tr>
+                </c:forEach>	
      
                 </table>
               </div>
@@ -312,77 +351,6 @@ margin: 10px;}
       </div>
     </section>
 
-
-<!-- 
-    <section class="ftco-section" style="position: relative; top: -300px;">
-    	<div class="container">
-    	
-        
-            <div class="col-md-12 heading-section ftco-animate text-center" style="margin-bottom: 100px;">
-            <h2 class="mb-1">예매하기</h2>
-            </div>
-          
-          
-        <div class="row">
-        	<div class="col-md-3">
-        		<div class="classes w-100 ftco-animate">
-        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/con1.jpg); height: 350px;"></a>
-        			<div class="text w-100 text-center">
-        				<h3><a href="#">2020 서울 파크 뮤직 페스티벌</a></h3>
-        				
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-3">
-        		<div class="classes w-100 ftco-animate">
-        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/opera.jpg); height: 350px;"></a>
-        			<div class="text w-100 text-center">
-        				<h3><a href="#">오페라 하우스</a></h3>
-        			
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-3">
-        		<div class="classes w-100 ftco-animate">
-        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/cats.jpg); height: 350px;"></a>
-        			<div class="text w-100 text-center">
-        				<h3><a href="#">캣츠</a></h3>
-        				
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-3">
-        		<div class="classes w-100 ftco-animate">
-        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/hodu.jpg); height: 350px;"></a>
-        			<div class="text w-100 text-center">
-        				<h3><a href="#">호두깎이 인형</a></h3>
-        				
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-3">
-        		<div class="classes w-100 ftco-animate">
-        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/headmu.jpg); height: 350px;"></a>
-        			<div class="text w-100 text-center">
-        				<h3><a href="#">헤드윅</a></h3>
-        				
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-3">
-        		<div class="classes w-100 ftco-animate">
-        			<a href="#" class="img w-100 mb-3" style="background-image: url(../images/rebeca.jpg); height: 350px;"></a>
-        			<div class="text w-100 text-center">
-        				<h3><a href="#">레베카</a></h3>
-        			'
-        			</div>	
-        		</div>
-        	</div>
-        </div>
-    	</div>
-    </section>
-
-     -->  
 <jsp:include page="../include/footer.jsp" />
 		
 	

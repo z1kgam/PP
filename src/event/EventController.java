@@ -54,6 +54,17 @@ public class EventController extends HttpServlet{
 		if(action.equals("/listEvent.do")) {
 			int total = edao.getAllEvent();
 			System.out.println(total);
+			//이벤트 버튼 호출 : 0 , 쿠폰 버튼 호출 : 1
+			
+			String pcheck;
+			
+			if(request.getParameter("pcheck") == null) {
+				pcheck = "0";
+			} else {
+				pcheck = request.getParameter("pcheck");
+			}
+			System.out.println(pcheck);
+			
 			
 			int pageSize = 8;
 			int nowPage = 1;
@@ -75,6 +86,7 @@ public class EventController extends HttpServlet{
 			request.setAttribute("blockLast", blockLast);
 			request.setAttribute("totalPage", totalPage);
 			request.setAttribute("nowPage", nowPage);
+			request.setAttribute("pcheck", pcheck);
 			
 			int total1 = couponDAO.getAllEvent();
 			
@@ -89,7 +101,7 @@ public class EventController extends HttpServlet{
 			request.setAttribute("totalPage", totalPage);
 			request.setAttribute("nowPage", nowPage);
 
-			nextPage = "/event/event.jsp";
+			nextPage = "/event/event2.jsp";
 		
 		//이벤트 작성 페이지로 이동
 		}else if(action.equals("/eventForm.do")) {

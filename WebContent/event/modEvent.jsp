@@ -7,12 +7,7 @@
 	//한글처리
 	request.setCharacterEncoding("UTF-8");
 %>
-<c:if test="${user.is_admin != 1}">
-   <script>
-      	alert("권한이 없습니다.");
-      	location.href="${contextPath}";
-   </script>
-</c:if>
+
 <%--컨텍스트 주소 얻기 --%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
     

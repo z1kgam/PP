@@ -110,7 +110,7 @@ public class MyPageController extends HttpServlet{
 			  request.setAttribute("nowPage", nowPage);
 			
 			nextPage="/mypage/likelist.jsp";
-			
+			 
 		}else if(action.equals("/likeAction.do")) { //좋아요 판별 and 없으면 추가 있으면 삭제
 			
 			int num = Integer.parseInt(request.getParameter("num"));

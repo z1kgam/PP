@@ -25,6 +25,7 @@ public class ProductDAO {
 		Connection con = ds.getConnection();
 		
 		return con;
+		
 	}
 	
 	public void resource() {

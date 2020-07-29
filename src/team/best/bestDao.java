@@ -13,6 +13,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import Product.DetailBean;
+import member.LikeBean;
 
 
 public class bestDao {
@@ -47,15 +48,41 @@ public class bestDao {
 		try {
 			
 			con = getConnection();
-			sql = "select * from details group by name order by sum(totalreserved) desc limit 0, 10";
+			
+			sql = "select * from details";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+			int num = rs.getInt(2);
+			
+			/* sql = "select * from details order by totalreserved desc limit 0, 10"; */
+			/* sql = "select * from details group by name order by sum(totalreserved) desc limit 0, 10";*/
+			sql = "select d.name, d.num, sum(totalreserved) as totalreserved, d.image, d.today, d.place, d.startdate, (select count(*) from likeboard where num = ?) "
+				+ "as totallike from details d join likeboard l on d.num = l.num group by name order by sum(totalreserved) desc limit 0, 10";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			System.out.println(pstmt);
 			
 			while(rs.next()) {
 				
 				DetailBean Dbean = new DetailBean();
+				/* LikeBean Lbean = new LikeBean(); */
 				
+				Dbean.setNum(rs.getInt("num"));
+				Dbean.setImage(rs.getString("image"));
+				Dbean.setName(rs.getString("name"));
+				Dbean.setTotalreserved(rs.getInt("totalreserved"));
+				Dbean.setToday(rs.getDate("today"));
+				Dbean.setPlace(rs.getString("place"));
+				Dbean.setStartdate(rs.getDate("startdate"));
+				
+				
+/*				
 				Dbean.setDetailnum(rs.getInt("detailnum"));
+				Dbean.setNum(rs.getInt("num"));
 				Dbean.setName(rs.getString("name"));
 				Dbean.setGenre(rs.getString("genre"));
 				Dbean.setCla(rs.getString("cla"));
@@ -70,18 +97,21 @@ public class bestDao {
 				Dbean.setTotalreserved(rs.getInt("totalreserved"));
 				Dbean.setToday(rs.getDate("today"));
 				Dbean.setStarttime(rs.getString("starttime"));
-				
+*/				
 				
 				bestList.add(Dbean);
 				
 			}
+			}
 			
 		} catch (Exception e) {
-			System.out.println("getBestList Inner Err : " + e);
+			System.out.println("getBestList() 에서 예외발생" + e);
+			
 		} finally {
-			freeResource();
+			if(con != null){try{con.close();}catch(Exception err){}}
+			if(rs != null){try{rs.close();}catch(Exception err){}}
+			if(pstmt != null){try{con.close();}catch(Exception err){}}
 		}
-		
 		
 		return bestList;
 	}
