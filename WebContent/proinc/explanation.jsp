@@ -10,7 +10,7 @@
 	<table >
 		<tr>
 			<td colspan="4" rowspan="3" align="center"><img
-				style="width:700px; height: 1200px; margin-left: 80%;" src="../consert/${Bean.content}"></td>
+				style="width:700px; height: 1200px; margin-left: 90%;" src="../consert/${Bean.content}"></td>
 		</tr>
 	</table>
 </body>

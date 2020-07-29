@@ -40,7 +40,7 @@ public class ReplyDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from proreply where productnum=?";
+			sql = "select * from proreply where productnum=? order by replynum desc";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
