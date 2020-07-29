@@ -134,14 +134,14 @@
 						var productnum = Number(List[i].productnum);
 						var message = "관리자나 본인에 의해 삭제된 댓글입니다.";
 						if(parentsnum == 0){
-							info +="<td width='100' align='center' style='background-color: palegreen;'>ID</td>";
-							info +="<td width='200' align='center' style='background-color: palegreen;'>내용</td>";
+							info +="<td width='100' align='center' style='background-color: #002545; color: #fff;'>ID</td>";
+							info +="<td width='200' align='center' style='background-color: #002545; color: #fff;'>내용</td>";
 							if(List[i].content == message){
-								info +="<td width='100' align='center' style='background-color: palegreen;'>삭제한 날짜</td>";
+								info +="<td width='100' align='center' style='background-color: #002545; color: #fff;'>삭제한 날짜</td>";
 							}else{
-								info +="<td width='100' align='center' style='background-color: palegreen;'>업로드 날짜</td>";
+								info +="<td width='100' align='center' style='background-color: #002545; color: #fff;'>업로드 날짜</td>";
 							}
-							info +="<td width='100' align='center' style='background-color: palegreen;'></td></tr>";
+							info +="<td width='100' align='center' style='background-color: #002545; color: #fff;'></td></tr>";
 							info +="<tr>";
 							info +="<td width='100' align='center'>"+List[i].id+"</td>";
 							info +="<td width='200' align='center'>"+List[i].content+"</td>";
@@ -153,40 +153,44 @@
 									info +="<a onclick='updatereply("+replynum+")'>댓글수정</a><br>";
 									info +="<a onclick='fatedelete("+replynum+")'>댓글삭제</a><br>";
 								}
-							}
-							
-							if(admin == 1){
 								
-								info +="<a onclick='alldelete("+replynum+")'>댓글삭제</a></td></tr>";
+								if(admin == 1){
+									
+									info +="<a onclick='alldelete("+replynum+")'>댓글삭제</a>";
+								}
 							}
+							info +="</td></tr>"
+							
 							for(var j in List){
 								var doreply = Number(List[j].replynum);
 								var doparents = Number(List[j].parentsnum);
 								
 								if(replynum == doparents){
 									info +="<tr>";
-									info +="<td width='100' align='center' style='background-color: yellow;'>ID</td>";
-									info +="<td width='200' align='center' style='background-color: yellow;'>내용</td>";
+									info +="<td width='100' align='center' style='background-color: #e5e5e5;'>ID</td>";
+									info +="<td width='200' align='center' style='background-color: #e5e5e5;'>내용</td>";
 									if(List[j].content == message){
-										info +="<td width='100' align='center' style='background-color: yellow;'>삭제한 날짜</td>";
+										info +="<td width='100' align='center' style='background-color: #e5e5e5;'>삭제한 날짜</td>";
 									}else{
-										info +="<td width='100' align='center' style='background-color: yellow;'>업로드 날짜</td>";
+										info +="<td width='100' align='center' style='background-color: #e5e5e5;'>업로드 날짜</td>";
 									}
-									info +="<td width='100' align='center' style='background-color: yellow;'></td></tr>";
+									info +="<td width='100' align='center' style='background-color: #e5e5e5;'></td></tr>";
 									info +="<tr>";
 									info +="<td width='100' align='center'>"+List[j].id+"</td>";
 									info +="<td width='200' align='center'>"+List[j].content+"</td>";
 									info +="<td width='100' align='center'>"+List[j].uploaddate+"</td>";
 									info +="<td width='100' align='center'>";
 									if(List[j].content != message && id != ""){
-										if(id == List[i].id){
+										if(id == List[j].id){
 											info +="<a onclick='updatereply("+doreply+")'>댓글수정</a><br>";
 											info +="<a onclick='fatedelete("+doreply+")'>댓글삭제</a><br>";
 										}
+										
+										if(admin == 1){
+											info +="<a onclick='replydelete("+doreply+")'>댓글삭제</a>";
+										}
 									}
-									if(admin == 1){
-										info +="<a onclick='replydelete("+doreply+")'>댓글삭제</a></td></tr>";
-									}
+									info +="</td></tr>"
 								}
 							}
 						}
@@ -414,7 +418,7 @@
 		</div>
 	</section>
 	<section>
-		<nav style="width: 1500px; height:60px; position: relative; top: -200px; right: -100px;">
+		<nav style="width: 1500px; height:60px; position: relative; top: -100px; right: -300px;">
 			<ul style="	list-style:none; font-family: verdana,Geneba,sans-serif;">
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="explanation()">상세정보</a></li>
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="reply('${sessionScope.id}','${sessionScope.is_admin}')">관람후기</a></li>
@@ -422,17 +426,17 @@
 				<li style="float: left;margin-left: 175px;"><a style="text-decoration: none;color: #333;font-size: 25px;" onclick="trybuy()">티켓예매</a></li>
 			</ul>
 		</nav>
-		<hr style="width: 1500px; margin: auto;">
+		<hr style="width: 1200px; position: relative; top: -100px;">
 
 
 		<div class="detail" id="explanation"><jsp:include page="../proinc/explanation.jsp" /></div>
-		<div class="detail" id="reply"  style="display: none;"><jsp:include page="../proinc/reply.jsp" /></div>
+		<div class="detail" id="reply"  style="display: none; position: relative; top: -100px;"><jsp:include page="../proinc/reply.jsp"/></div>
 		<div class="detail" id="review" style="overflow:hidden;position:relative;width:0;height:0">
 			<div style="position:absolute;">
 				<jsp:include page="../proinc/review.jsp" />
 			</div>
 		</div>
-		<div class="detail" id="trybuy" style="display: none;"><jsp:include page="../proinc/trybuy.jsp" /></div>
+		<div class="detail" id="trybuy" style="display: none; position: relative; top: -100px;"><jsp:include page="../proinc/trybuy.jsp" /></div>
 	</section>
 
 	<jsp:include page="../include/footer.jsp" />    

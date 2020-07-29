@@ -12,7 +12,7 @@
 <body>
 	<input type="hidden" id="contextPath" value="${contextPath}">
 	<c:if test="${sessionScope.id != null}">
-	<input type="button" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important;" value="댓글쓰기" class="submit" onclick="openreply()" style="margin-left: 65%; margin-top: 30px;">
+	<input type="button" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important; color: #fff !important; position: relative; top:50px; left: 1300px;" value="댓글쓰기" class="submit" onclick="openreply()" style="margin-left: 65%; margin-top: 30px;">
 	</c:if>
 	<form action="${contextPath}/Proser/reply.do" name="frmReply" method="post">
 		<input type="hidden" name="pronum" value="${Bean.num}">
