@@ -410,7 +410,12 @@ color:#ff0;
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
-		
+		<form class="navbar-form form-inline">
+											
+				 <a href="${contextPath}/index/index.jsp" class="dropdown-item" style="font-size: 15px; color: #fff; padding-top: 10px;"><b>2 ticket</b></a>
+			
+			</div>
+		</form>
 		<div class="navbar-nav ml-auto">
 			
 			<div class="nav-item dropdown">
@@ -453,7 +458,7 @@ color:#ff0;
   	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" style="background-color: #FFF !important;">
   		<div class="container" >
   			<div class="row m-auto">
-  				<div class="col-12 w-100 text-center">
+  				<div class="col-12 w-100 text-center"z>
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
   					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
  			
@@ -462,20 +467,20 @@ color:#ff0;
 			      </button>
   				</div>
 		  				
-  				<div class="col-12 w-100 text-center" style="margin-top: -20px;">
+  				<div class="col-20 w-140 text-center" style="margin-top: -100px;">
   					<div class="collapse navbar-collapse" id="ftco-nav">
 			        <ul class="navbar-nav m-auto">
-			          <li class="nav-item"><a href="${contextPath}/main/main.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕 ;" >메인</a></li>
-			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">콘서트</a></li>
-			          <li class="nav-item"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">이벤트</a></li>
-			          <li class="nav-item"><a href="${contextPath}/coupon/events.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">쿠폰</a></li>
+			          <li class="nav-item"><a href="${contextPath}" class="nav-link" style="font-size: 20px; font-family:나눔고딕; margin: 83px 10px 0 50px;" >메인</a></li>
+			          <li class="nav-item"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 20px; font-family:나눔고딕; margin: 83px 10px 0 50px;">공연&상품 페이지</a></li>
+			          <li class="nav-item"><a href="#" class="nav-link" style="font-size: 20px; font-family:나눔고딕; margin: 83px 10px 0 50px;">###</a></li>
+			          <li class="nav-item"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 20px; font-family:나눔고딕; margin: 83px 10px 0 50px;">이벤트</a></li>
 			     <c:if test="${is_admin == 1}">     
-			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">관리자 페이지</a></li>
+			          <li class="nav-item"><a href="${contextPath}/admin/adminPage.do" class="nav-link" style="font-size: 20px; font-family:나눔고딕; margin: 83px 10px 0 50px;">관리자 페이지</a></li>
 			     </c:if> 
-			          <li class="nav-item"><a href="${contextPath}/blog.jsp" class="nav-link" style="font-size: 18px; font-family:나눔고딕">예매하기</a></li>
-			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">고객센터</a></li>
+			          <li class="nav-item"><a href="${contextPath}/blog.jsp" class="nav-link" style="font-size: 20px; font-family:나눔고딕; margin: 83px 10px 0 50px;">예매하기</a></li>
+			          <li class="nav-item"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 20px; font-family:나눔고딕; margin: 83px 10px 0 50px;">공지사항</a></li>
 			     <c:if test="${id==null}">
-			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 18px; font-family:나눔고딕">로그인</a></li>
+			          <li class="nav-item"><a href="${contextPath}/member/login.do" class="nav-link" style="font-size: 20px; font-family:나눔고딕; margin: 83px 10px 0 50px;">로그인</a></li>
 			     </c:if>   
 			        </ul>
 			      </div>

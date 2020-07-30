@@ -5,7 +5,28 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 
+
+
+<%-- css 수정본 --%>
+<%--로그인유무 확인 --%>
+<c:if test="${sessionScope.id != null}">
+
+
+<style>
+.username {color: #000 !important;}
+
+</style>
+
+
+   <script>
+      	alert("이미 로그인 중입니다.");
+      	location.href="${contextPath}";
+   </script>
+</c:if>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
+
+
 
 <!DOCTYPE html>
 <html>
@@ -85,59 +106,57 @@ $(document).ready(function(){
  
 </script>
 
-<style type="text/css">
-
-form {/* border: 1px solid red; */
-margin-left: 300px;	
-width: 500px; }
-
-</style>
-
 </head>
 <body>
 <jsp:include page="../include/header.jsp" />
 <div class="container">
 
-	<div class="page-header">
-	<hr/>
-		<h2 style="margin-left: 480px;">로그인 화면 </h2>
+	<div class="page-header" align="center">
+	
+		<h2 style="margin-top: 50px;">Login Page </h2>
+		<hr/>
 	</div>
 
-	<div class="col-md-offset-3">
+	<div class="col-md-6 col-md-offset-3">
 		<form action="${contextPath}/member/loginAction.do" method="post">
 			<div class="form-group">
 				<label for="username">아이디</label>
-				<input type="text" name="id" id="InputId" class="form-control" style="width: 500px;">
+				<input type="text" name="id" id="InputId" class="form-control">
 			</div>
 			
 			<div class="form-group">
 				<label for="username">비밀번호</label>
-				<input type="password" name="password" id="InputPassword" class="form-control" style="width: 500px;">
+				<input type="password" name="password" id="InputPassword" class="form-control">
 			</div>
 			
 			<div class="form-group text-center">
-				<input type="checkbox" class="checkbox" id="idSaveCheck">아이디 기억하기	
-				<input type="submit" value="로그인" class="btn btn-primary">
-				 <div id="naver_id_login"></div>
+				<input type="checkbox" class="checkbox" id="idSaveCheck" >아이디 기억하기	
+				<input type="submit" value="로그인" class="btn btn-primary" style="background-color: #00E7D6 !important; border-color: #00E7D6 !important;">
+				 <div id="naver_id_login" style="position: relative; top: -50px; left: 550px;"></div>
 			</div>
-			<label for="username"><a href="${contextPath}/member/findId.do">아이디/비밀번호 찾기</a></label><br>
-			<label for="username"><a href="${contextPath}/member/join.do">회원가입 하러 가기</a></label>
+			<label for="username" class="username"><a href="${contextPath}/member/findId.do"style="position: relative; top: -290px; left: 690px; color: #3d435c;">아이디/비밀번호 찾기</a></label><br>
+			<label for="username" class="username"><a href="${contextPath}/member/join.do"style="position: relative; top: -250px; left: 690px; color: #3d435c;">회원가입 하러 가기</a></label>
 	</form>
 
 </div>
 </div>
-<jsp:include page="../include/footer.jsp" />
+
 
  <script type="text/javascript">
   	var naver_id_login = new naver_id_login("8pLz7wxFRYdPZEaM8Wsq", "http://localhost:8090/PP/naver/logincom.jsp");
   	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setButton("white", 3,60);
   	naver_id_login.setDomain("http://localhost:8090/PP/members/login.jsp");
   	naver_id_login.setState(state);
 //   	naver_id_login.setPopup();
   	naver_id_login.init_naver_id_login();
 //   	182808912
   </script>
-
+  
+  
+  
+  
+  
+<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

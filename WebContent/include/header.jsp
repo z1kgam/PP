@@ -252,7 +252,12 @@ body {
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
-		
+		<form class="navbar-form form-inline">
+											
+				 <a href="${contextPath}/index/index.jsp" class="dropdown-item" style="font-size: 15px; color: #fff; padding-top: 10px;"><b>2 ticket</b></a>
+			
+			</div>
+		</form>
 		
 <!-- 드랍메뉴 -->	
 
@@ -332,47 +337,45 @@ body {
   	
 <!--------------------------------------------------- 메뉴바 ------------------------------------------------------->
   	
-  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" style="background-color: #FFF !important; height: 200px;">
+  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
   		<div class="container" >
   			<div class="row m-auto">
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
-  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px;"><img src="../images/tclogo.png"" alt="tlogo" style=" max-height: 110px; margin-top: 20px; margin-bottom: 20px;"></a> 
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 30px; margin-top: 20px;" ><img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
   					
   					
-  		
+  					
+ 				
+
+
   					
 			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 			        <span class="oi oi-menu"></span> Menu
 			      </button>
   				</div>
-  				
-  				<c:if test="${id!=null}">
-  					${id}님 로그인중..
-  				</c:if>
 
   				  				
   				<!-- 회원가입o, 로그인 페이지o -->
-  				<div class="col-12 w-100 text-center" style="margin-top: -100px;">
+  				<div class="col-20 w-140 text-center" style="margin-top: -100px;">
   					<div class="collapse navbar-collapse" id="ftco-nav">
-			        <ul class="navbar-nav m-auto">
+			        <ul class="navbar-nav m-auto" >
 
-			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">콘서트</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 50px;">콘서트</a></li>
 
-			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">뮤지컬/연극</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">뮤지컬/연극</a></li>
 			         
-			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">클래식</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">클래식</a></li>
 <%-- 			     <c:if test="${is_admin == 1}"> --%>     
-			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">전시/행사</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">전시/행사</a></li>
 <%-- 			     </c:if> --%>
-					  <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">공연/전시소식</a></li>
+					  <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">공연/전시소식</a></li>
 					  
-			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">이벤트</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">이벤트</a></li>
 <%-- 			     <c:if test="${id==null}"> --%>
-			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">랭킹</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">랭킹</a></li>
 <%-- 			     </c:if> --%>  
-					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">고객센터</a></li>
-
+					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">공지사항</a></li>
 			        </ul>
 			      </div>
   				</div>

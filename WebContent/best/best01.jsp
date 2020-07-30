@@ -69,7 +69,7 @@
   <thead>
     <tr>
       <th scope="col" style="width: 2%;">랭킹</th>
-      <th scope="col" style="width: 3%;"></th>
+      <th scope="col" style="width: 18%;"></th>
       <th scope="col" style="width: 40%;">공연명</th>
       <th scope="col" style="width: 23%;">공연일시</th>
       <th scope="col" style="width: 30%;">공연장소</th>

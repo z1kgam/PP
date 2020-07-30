@@ -247,7 +247,16 @@ body {
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
-		
+		<form class="navbar-form form-inline">
+			<!-- <div class="input-group search-box">								
+				<input type="text" id="search" class="form-control" placeholder="Search..." style="height: 15px !important; margin-top: 10px;">
+				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+			</div> -->
+			
+
+         <a href="${contextPath}/index/index.jsp" class="dropdown-item" style="font-size: 15px; color: #fff; padding-top: 10px;"><b>2 ticket</b></a>
+			
+		</form>
 	<c:choose>
 <c:when test="${id!=null}"> 
 
@@ -327,63 +336,13 @@ body {
   			<div class="row m-auto">
   				<div class="col-12 w-100 text-center">
   					<!-- <a class="navbar-brand w-100" href="index.jsp" style="float: left; margin-left: -400px;" >Ticketing</a> -->
-  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 40px; margin-top: 20px;" ><img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
+  					<a class="navbar-brand w-100" href="${contextPath}" style="float: left; margin-left: 30px; margin-top: 20px;" ><img src="${contextPath}/images/tclogo.png"" alt="tlogo" style=" max-width: 90px;"></a> 
   					
   					
   					
  				
-<%--  <table style="width:300px; height: 100px;  border-collapse: separate;	
-    border-spacing: 1px; margin: 100px; text-align: center; float: right; margin-top: -100px; font-size: 12px;">
-    
-  <c:if test="${id!=null}">
-     <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px;
-    		padding: 10px; font-weight: bold;">
-        <td rowspan="3" align = "center" bgcolor="#FFB5B5" width="100px;">
-   <c:choose>    	
-    	 <c:when test="${!empty profile_img }">
-	       <img src="${contextPath}/upload/${profile_img}" alt="프로필 이미지" style="max-width: 100px;">
-    	 </c:when>
-     
-   		 <c:when test="${empty profile_img}">
-			<img src="${contextPath}/images/icon.png" width="100px" height="100px">
-  		 </c:when>
-   </c:choose>
-        </td>
-	<td colspan="2"> 장바구니
-			<span style="color:white; size:16;" class="icon icon-shopping-cart" size="25"> </span> 
-			: <a href="${contextPath}/Order/cartList.do?id=${sessionScope.id}" class="ah">
-			<c:if test="${empty cartList}">				
-				0
-			</c:if>
-			
-			<c:if test="${!empty cartList}">				
-				${sessionScope.cartcount}
-			</c:if>
-			</a>
-		</td>
-	
-    </tr>
-    <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
-		<td colspan="2">
-	
-		<c:if test="${id!=null}">
-  					${id}님 로그인중..
-  		</c:if>
-		</td>
-        </tr>
-        
-        <tr height="10" align="center" bgcolor="#FFB5B5" style="width: 155px; padding: 10px; font-weight: bold;">
-		    <c:if test="${id!=null}">
-		        <td><a href="${contextPath}/member/logout.do" style="color: #fff;">로그아웃</a></td>
-				<td><a href="${contextPath}/mycon/mypageForm.do" style="color: #fff;">마이 페이지</a></td>
-			</c:if>	
-        </tr>
 
-</c:if>
-</table> --%>
-  					
-	
-  				
+
   					
 			      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 			        <span class="oi oi-menu"></span> Menu
@@ -391,26 +350,25 @@ body {
   				</div>
   				  				
   				<!-- 회원가입o, 로그인 페이지o -->
-  				<div class="col-12 w-100 text-center" style="margin-top: -100px;">
+  				<div class="col-20 w-140 text-center" style="margin-top: -100px;">
   					<div class="collapse navbar-collapse" id="ftco-nav">
-			        <ul class="navbar-nav m-auto">
+			        <ul class="navbar-nav m-auto" >
 
-			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">콘서트</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/Proser/imcontact.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 50px;">콘서트</a></li>
 
-			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">뮤지컬/연극</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">뮤지컬/연극</a></li>
 			         
-			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">클래식</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">클래식</a></li>
 <%-- 			     <c:if test="${is_admin == 1}"> --%>     
-			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">전시/행사</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">전시/행사</a></li>
 <%-- 			     </c:if> --%>
-					  <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">공연/전시소식</a></li>
+					  <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">공연/전시소식</a></li>
 					  
-			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">이벤트</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">이벤트</a></li>
 <%-- 			     <c:if test="${id==null}"> --%>
-			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">랭킹</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">랭킹</a></li>
 <%-- 			     </c:if> --%>  
-					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 14px; font-family: 'Nanum Gothic Coding', monospace; margin-top: 65px;">고객센터</a></li>
-
+					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">공지사항</a></li>
 			        </ul>
 			      </div>
   				</div>
@@ -427,44 +385,6 @@ body {
 
 
 
-<!-- 
-    <section class="home-slider js-fullheight owl-carousel">
-      <div class="slider-item js-fullheight" style="background-image:url(../images/mainimg.jpeg);">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
-          <div class="col-md-10 text ftco-animate text-center">
-            <h1 class="mb-4">Discover Your Inner Sanctuary</h1>
-            <h3 class="subheading">Everyday We Bring Hope and Smile to the Patient We Serve</h3>
-            <p><a href="#" class="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
-          </div>
-        </div>
-        </div>
-      </div>
-
-      <div class="slider-item js-fullheight" style="background-image:url(../images/mainimg2.jpeg);">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
-          <div class="col-md-10 text ftco-animate text-center">
-            <h1 class="mb-4">Lighting Your Heart &amp; Mind</h1>
-            <h3 class="subheading">Your Health is Our Top Priority with Comprehensive, Affordable medical.</h3>
-            <p><a href="#" class="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
-          </div>
-        </div>
-        </div>
-      </div>
-    </section>
-    
-    
-   -->  
-  
-  
-  <!-- -----------------------------------------------------------메인 이미지---------------------------------------------------------- -->  
-    
-    
-    
-    
     
    
  <!-------------------------------------------------- 캐로셀 ------------------------------------------------->
@@ -478,16 +398,16 @@ body {
     
     
     
- <section class="ftco-section" style="margin-top: -200px; background-color: #555;">  
+ <section class="ftco-section" style="margin-top: -200px;">  
  <div class="container">
  <div class="row">
- <div class="col-md-4" >     
- <div class="classes w-100 ftco-animate">  			
- <iframe class="w-100 mb-3" src="https://www.youtube.com/embed/N5Dz7azrIVI" frameborder="0" allow="accelerometer; 
- autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
- </div> 
- </div>
-    
+ 
+ <div class="col-md-4" >  
+ <div  class="classes w-100 ftco-animate">
+ <iframe class="img w-100 mb-3" src="https://www.youtube.com/embed/N5Dz7azrIVI" 
+ frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ </div>   
+ </div>   
     
  <div class="col-md-4" >  
  <div  class="classes w-100 ftco-animate">

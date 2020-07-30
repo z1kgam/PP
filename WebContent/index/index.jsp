@@ -11,6 +11,7 @@
 
 
 <!-- 챗봇 -->
+<!-- Channel Plugin Scripts -->
 <script>
   (function() {
     var w = window;
@@ -152,7 +153,7 @@ margin: 10px;}
   <!-- The Modal -->
     <div id="myModal" class="modal" style="display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
+            z-index: 10; /* Sit on top */
             left: 0;
             top: 0;
             width: 100%; /* Full width */
@@ -175,11 +176,11 @@ margin: 10px;}
                 
                
                 <!-- <img src="../images/concert2.jpg" alt="프로필 이미지" ><a href="../about.jsp">프로필 이미지</a> -->
-                <a href="../blog.jsp" ><img src="../images/concert2.jpg" alt="프로필 이미지" style="max-width: 100%; width: auto; height: 600px; display: table;"></a>
+                <a href="../product/content.jsp" ><img src="../images/concert2.jpg" alt="프로필 이미지" style="max-width: 100%; width: auto; height: 600px; display: table;"></a>
                 
 
            		<br>
-                <a href="../blog.jsp" ><p style="text-align: center; font-color: #000;" ><b>
+                <a href="../product/content.jsp" ><p style="text-align: center; font-color: #000;" ><b>
                 <span style="font-size: 24pt; color: #000;">예약하러가기</span></b></span></p></a>
                 <br>
                 <br>
