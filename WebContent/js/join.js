@@ -60,9 +60,10 @@ var idx = false;
 	 var pwd1 = $("#InputPassword1").val();
  	 var checkSpan = $("#checkPwd1");
  	 var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
- 	
+ 	 setTimeout("checkPwd()",0);
 	 if(!reg.test(pwd1)){
-		 checkSpan.html("<font color='red'><b>영문,특수문자,숫자 조합으로 8자 이상으로 작성하세요.</b></font>");		 
+		 checkSpan.html("<font color='red'><b>영문,특수문자,숫자 조합으로 8자 이상으로 작성하세요.</b></font>");
+		
 	 }else{
 		 checkSpan.html("<font color='blue'><b>사용가능한 비밀번호 입니다.</b></font>");
 		 result_pwd = true;
@@ -73,13 +74,16 @@ var idx = false;
 	   	var pwd1 = document.getElementById("InputPassword1").value;
 	    var pwd2 = document.getElementById("InputPassword2").value;
 	    var checkSpan = document.getElementById("checkPwd2");
+	    setTimeout("checkPwd2()",0);
 	    if(pwd2 != ""){
 		   	if(pwd2 == pwd1){
 		    	checkSpan.innerHTML = "<font color='blue'><b>비밀번호가 일치합니다.</b></font>";
 		    }else{
 		   		checkSpan.innerHTML = "<font color='red'><b>비밀번호가 일치하지 않습니다.</b></font>";
+		   		
 		   	}
 	    }
+	    
 }
  
  function checkPhone(){

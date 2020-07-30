@@ -122,7 +122,6 @@
 </head>
 <body>
 
-
 <jsp:include page="../include/header.jsp" />
 
  <div class="container" style="margin-top: 100px; margin-bottom: 10px;">

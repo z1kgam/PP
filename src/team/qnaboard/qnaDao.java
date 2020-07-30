@@ -150,8 +150,8 @@ public class qnaDao {
 				faq_num = 1;
 			}
 			
-			sql = "insert into qnaboard(qna_num, id, qna_cate, qna_title, qna_contents, qna_date, qna_status, answer, file, file2)"
-				+ "values(?,?,?,?,?,now(),0,?,?,?)";
+			sql = "insert into qnaboard(qna_num, id, qna_cate, qna_title, qna_contents, qna_date, qna_status, answer, file)"
+				+ "values(?,?,?,?,?,now(),0,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, faq_num);
@@ -161,7 +161,6 @@ public class qnaDao {
 			pstmt.setString(5, qnaBean.getQna_contents());
 			pstmt.setString(6, qnaBean.getAnswer());
 			pstmt.setString(7, qnaBean.getFile());
-			pstmt.setString(8, qnaBean.getFile2());
 			
 			pstmt.executeUpdate();
 			
@@ -255,6 +254,7 @@ public class qnaDao {
 				qbean.setQna_status(rs.getInt("qna_status"));
 				qbean.setAnswer(rs.getString("answer"));
 				qbean.setFile(rs.getString("file"));
+				
 			}
 		} catch (Exception e) {
 			System.out.println("viewQna()에서 예외 발생 : " + e);
