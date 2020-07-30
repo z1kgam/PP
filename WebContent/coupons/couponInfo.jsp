@@ -27,17 +27,7 @@ width: 500px;
 <!-- header -->
 <jsp:include page="../include/header.jsp"/>
 <!-- header -->
-   <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-			<div class="container">
-        		<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
-          			<div class="col-md-9 ftco-animate text-center">
-						<h1 class="mb-3 bread">Event</h1>
-						<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>
-					</div>
-				</div>
-			</div>
-	</section>
+
 	<section class="ftco-section contact-section ftco-no-pt ftco-no-pb">
 		<div class="container">
 

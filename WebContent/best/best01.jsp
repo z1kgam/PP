@@ -68,11 +68,11 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col" style="width: 2%;">랭킹</th>
-      <th scope="col" style="width: 18%;"></th>
+      <th scope="col" style="width: 7%;">랭킹</th>
+      <th scope="col" style="width: 15%;"></th>
       <th scope="col" style="width: 40%;">공연명</th>
-      <th scope="col" style="width: 23%;">공연일시</th>
-      <th scope="col" style="width: 30%;">공연장소</th>
+      <th scope="col" style="width: 21%;">공연일시</th>
+      <th scope="col" style="width: 47%;">공연장소</th>
       <th scope="col" style="width: 2%;">예매</th>
     </tr>
   </thead>
@@ -81,8 +81,8 @@
   <c:forEach items="${bestList}" var="VO" varStatus="num">
  
     <tr>
-      <td scope="row">${num.count}</td>
-      <td><img src="${contextPath}/consert/${VO.image}" width="80px" height="100px"></td>
+      <td scope="row" >${num.count}</td>
+      <td width="30%"><img src="${contextPath}/consert/${VO.image}" width="350px" height="300px"></td>
       <td>${VO.name}</td>
       <td>${VO.startdate}</td>
       <td>${VO.place}</td>
@@ -126,7 +126,7 @@
   
     <tr>
       <td scope="row">1</td>
-      <td><img src="${contextPath}/best/bestimg/01optimize.jpg" width="80px" height="100px"></td>
+      <td><img src="${contextPath}/best/bestimg/01optimize.jpg" width="500px" height="500px"></td>
       <td>뮤지컬 〈모차르트！〉 10주년 기념공연</td>
       <td>2020.07.20</td>
       <td>세종문화회관 대극장</td>
@@ -140,7 +140,7 @@
     
      <tr>
       <td scope="row">2</td>
-      <td><img src="${contextPath}/best/bestimg/02murder.jpg" width="80px" height="100px"></td>
+      <td><img src="${contextPath}/best/bestimg/02murder.jpg" width="500px" height="500px"></td>
       <td>뮤지컬〈머더 발라드</td>
       <td>2020.07.20</td>
       <td>세종문화회관 S씨어터</td>
@@ -181,7 +181,7 @@
   
     <tr>
       <td scope="row">1</td>
-      <td><img src="${contextPath}/best/bestimg/01shinbi.jpg" width="80px" height="100px"></td>
+      <td><img src="${contextPath}/best/bestimg/01shinbi.jpg" width="500px" height="500px"></td>
       <td>신비아파트 미디어 어드벤처：내가 구하리！</td>
       <td>2020.07.20</td>
       <td>서울숲 갤러리아포레 더 서울라이티움 2관</td>
@@ -196,7 +196,7 @@
     
     <tr>
       <td scope="row">2</td>
-      <td><img src="${contextPath}/best/bestimg/02asy.jpg" width="80px" height="100px"></td>
+      <td><img src="${contextPath}/best/bestimg/02asy.jpg" width="500px" height="500px"></td>
       <td>2020 아시아프 ＆ 히든아티스트 페스티벌</td>
       <td>2020.07.20</td>
       <td>홍익대학교 현대미술관</td>

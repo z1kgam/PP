@@ -112,9 +112,7 @@ else self.name = '';
 					<div class="row  my-5">
 						<div class="col-12 col-lg-8"></div>
 						<div class="col-12 col-lg-4 mt-3 mt-lg-0">
-						<div class="form-group text-center text-lg-right">
-							<button type="button" class="btn btn-secondary" onclick="location.href='${contextPath}/ev/eventForm.do'">글쓰기</button>
-						</div>
+					
 						</div>
 					</div>
 					<div class="row">
@@ -186,11 +184,7 @@ else self.name = '';
 					
 				</div>
 				<div class="col-12 col-lg-4 mt-3 mt-lg-0">
-				
-						<div class="form-group text-center text-lg-right">
-							<button type="button" class="btn btn-secondary" onclick="location.href='${contextPath}/coupon/eventWriteForm.do'">글쓰기</button>
-						</div>
-					
+						
 				</div>
 			</div> 
 		</article>

@@ -146,7 +146,7 @@ public class OrderController extends HttpServlet{
 				nowPage = Integer.parseInt(request.getParameter("nowPage"));
 			}
 			int pageFirst = (nowPage - 1) * pageSize;
-			int totalPage = total / pageSize + (total % pageSize == 0 ? 0 : 1);
+			int totalPage = cartcount / pageSize + (cartcount % pageSize == 0 ? 0 : 1);
 			int blockSize = 10;
 			int blockFirst = (nowPage / blockSize - (nowPage % blockSize == 0? 1: 0)) * blockSize + 1 ;
 			int blockLast = blockFirst + blockSize - 1;

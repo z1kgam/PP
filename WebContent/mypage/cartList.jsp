@@ -73,7 +73,6 @@
 		height: 28px;
 		line-height: 28px;
 		text-align: center;
-		background-color: #fff;
 		font-size: 13px;
 		color:#999999;
 		text-decoration: none;
@@ -168,8 +167,6 @@
 				</tr>
 			</c:if>
 				
-			
-
 	 			</tbody>
 	 		</table>
 	 		총 금액 : <fmt:formatNumber pattern="###,###,###" value="${total}" /> 
