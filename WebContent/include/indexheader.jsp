@@ -359,16 +359,14 @@ body {
 			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">뮤지컬/연극</a></li>
 			         
 			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">클래식</a></li>
-<%-- 			     <c:if test="${is_admin == 1}"> --%>     
-			          <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">전시/행사</a></li>
-<%-- 			     </c:if> --%>
-					  <li class="nav-item" style="margin-right: 0;"><a href="#" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">공연/전시소식</a></li>
+
+					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/main/news.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">공연/전시소식</a></li>
 					  
-			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">이벤트</a></li>
+			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/ev/listEvent.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">이벤트/쿠폰</a></li>
 <%-- 			     <c:if test="${id==null}"> --%>
 			          <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/btboard/bestList.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">랭킹</a></li>
 <%-- 			     </c:if> --%>  
-					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">공지사항</a></li>
+					  <li class="nav-item" style="margin-right: 0;"><a href="${contextPath}/notice/listNotice.do" class="nav-link" style="font-size: 21px; font-family:나눔고딕; margin: 83px 10px 0 10px;">고객센터</a></li>
 			        </ul>
 			      </div>
   				</div>

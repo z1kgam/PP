@@ -265,7 +265,7 @@ margin: 10px;}
                   <div><a href="#">Admin</a></div>
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                 </div>
-                <h3 class="heading mt-2"><a href="#" style="font-family:나눔고딕;">공연/전시 소식</a></h3>
+                <h3 class="heading mt-2"><a href="${contextPath}/main/news.do" style="font-family:나눔고딕;">공연/전시 소식</a></h3>
 				    <div class="news" >	
 				
 					<div class="news1" >
@@ -325,7 +325,7 @@ margin: 10px;}
     			<tr>
     				<td rowspan="3">${num.count}</td>
 	                <td rowspan="3">
-	                <img alt="rank" src="${contextPath}/consert/${VO.image}" width="70px" height="90px">
+	                <img alt="rank" src="${contextPath}/consert/${VO.image}" style="width: 70px;" height="auto;">
 	                </td>
 	                <td>
 	               	<a href="${contextPath}/Proser/content.do?num=${VO.num}&name=${VO.name}">${VO.name}</a>
